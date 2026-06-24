@@ -213,14 +213,14 @@ export const Button = React.forwardRef<View, ButtonProps>(function Button(props,
         : state.hovered
           ? styles.secondaryContainerHover.borderColor
           : styles.secondaryContainer.borderColor;
-      borderProps = { borderWidth: disabled ? 0 : 1, borderStyle: 'solid', borderColor };
+      borderProps = { borderWidth: 1, borderStyle: 'solid', borderColor };
     } else if (variant === 'danger') {
       const borderColor = disabled
         ? styles.dangerContainerDisabled.borderColor
         : state.hovered
           ? styles.dangerContainerHover.borderColor
           : styles.dangerContainer.borderColor;
-      borderProps = { borderWidth: disabled ? 0 : 1, borderStyle: 'solid', borderColor };
+      borderProps = { borderWidth: 1, borderStyle: 'solid', borderColor };
     }
 
     return {
