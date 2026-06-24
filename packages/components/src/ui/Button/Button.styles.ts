@@ -12,8 +12,6 @@ export const useStyles = makeStyles(({ text, color, spacing, radius }) => ({
     alignItems: 'center',
     flex: 1,
     gap: spacing('050'),
-    marginTop: 'auto',
-    marginBottom: 'auto',
     transitionProperty: 'all',
     transitionDuration: '150ms',
     transitionTimingFunction: 'ease',
