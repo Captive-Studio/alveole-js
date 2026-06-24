@@ -226,6 +226,7 @@ export const Button = React.forwardRef<View, ButtonProps>(function Button(props,
     return {
       ...radiusStyle,
       ...borderProps,
+      alignSelf: fullWidth ? 'auto' : 'flex-start',
       ...(fullWidth ? { width: '100%' } : {}),
     };
   };

@@ -60,7 +60,7 @@ export const ButtonIcon = (props: ButtonIconProps) => {
       else if (!!state.hovered) applicableStyles = { ...applicableStyles, ...styles.tertiaryContainerHover };
     }
 
-    return { ...applicableStyles, ...containerSize, ...(style ?? {}) };
+    return { ...applicableStyles, ...containerSize, alignSelf: 'flex-start', ...(style ?? {}) };
   };
 
   const iconStyle = (state: { hovered: boolean }): Omit<IconProps, 'name'> => {
