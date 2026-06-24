@@ -1,5 +1,5 @@
 import React, { CSSProperties } from 'react';
-import { ActivityIndicator, Platform, Pressable, PressableProps, PressableStateCallbackType, View } from 'react-native';
+import { ActivityIndicator, Pressable, PressableProps, PressableStateCallbackType, View } from 'react-native';
 import { Box, BoxProps, Typography } from '../../core';
 import { IconProps, LucideIcon } from '../LucideIcon';
 import { useStyles } from './Button.styles';
@@ -106,10 +106,11 @@ export const Button = React.forwardRef<View, ButtonProps>(function Button(props,
     return {
       ...applicableStyles,
       ...containerSize,
-      ...(fullWidth ? { width: '100%' } : {}),
       ...(noPadding ? noPaddingStyle : {}),
-      ...(borderNone ? { borderRadius: 0 } : {}),
       ...(leftAlign ? { justifyContent: 'left' } : {}),
+      borderWidth: 0,
+      borderColor: undefined,
+      borderStyle: undefined,
     };
   };
 
@@ -183,19 +184,50 @@ export const Button = React.forwardRef<View, ButtonProps>(function Button(props,
     return { size: iconSize };
   };
 
-  // Fix la bordure sur iOS pour le bouton secondaire
-  const pressableStyle = {
-    ...(Platform.OS === 'ios' && variant === 'secondary'
-      ? {
-          borderWidth: 1,
-          borderColor: styles.secondaryContainer.borderColor,
-          borderTopLeftRadius: styles.container.borderTopLeftRadius,
-          borderBottomLeftRadius: styles.container.borderBottomLeftRadius,
-          borderTopRightRadius: styles.container.borderTopRightRadius,
-          borderBottomRightRadius: styles.container.borderBottomRightRadius,
-        }
-      : {}),
-    ...(disabled ? { borderWidth: 0 } : {}),
+  const getPressableStyle = (state: CustomPressableState) => {
+    const sizeRadii =
+      size === 'xs' || size === 'sm'
+        ? {
+            borderTopLeftRadius: styles.xsContainer.borderTopLeftRadius,
+            borderBottomLeftRadius: styles.xsContainer.borderBottomLeftRadius,
+            borderTopRightRadius: styles.xsContainer.borderTopRightRadius,
+            borderBottomRightRadius: styles.xsContainer.borderBottomRightRadius,
+          }
+        : {
+            borderTopLeftRadius: styles.container.borderTopLeftRadius,
+            borderBottomLeftRadius: styles.container.borderBottomLeftRadius,
+            borderTopRightRadius: styles.container.borderTopRightRadius,
+            borderBottomRightRadius: styles.container.borderBottomRightRadius,
+          };
+
+    const radiusStyle = borderNone
+      ? { borderTopLeftRadius: 0, borderBottomLeftRadius: 0, borderTopRightRadius: 0, borderBottomRightRadius: 0 }
+      : sizeRadii;
+
+    let borderProps: any = {};
+    if (selected) {
+      borderProps = { borderWidth: 1, borderStyle: 'solid', borderColor: styles.selectedContainer.borderColor };
+    } else if (variant === 'secondary') {
+      const borderColor = disabled
+        ? styles.secondaryContainerDisabled.borderColor
+        : state.hovered
+          ? styles.secondaryContainerHover.borderColor
+          : styles.secondaryContainer.borderColor;
+      borderProps = { borderWidth: disabled ? 0 : 1, borderStyle: 'solid', borderColor };
+    } else if (variant === 'danger') {
+      const borderColor = disabled
+        ? styles.dangerContainerDisabled.borderColor
+        : state.hovered
+          ? styles.dangerContainerHover.borderColor
+          : styles.dangerContainer.borderColor;
+      borderProps = { borderWidth: disabled ? 0 : 1, borderStyle: 'solid', borderColor };
+    }
+
+    return {
+      ...radiusStyle,
+      ...borderProps,
+      ...(fullWidth ? { width: '100%' } : {}),
+    };
   };
 
   return (
@@ -204,9 +236,8 @@ export const Button = React.forwardRef<View, ButtonProps>(function Button(props,
       disabled={disabled}
       accessibilityRole="button"
       {...(type === 'submit' ? { 'aria-selected': true } : {})}
-      {...(fullWidth ? { style: { width: '100%' } } : {})}
       {...buttonProps}
-      style={[pressableStyle]}
+      style={(state: CustomPressableState) => getPressableStyle(state)}
     >
       {(state: CustomPressableState) => (
         <Box
