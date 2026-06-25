@@ -17,7 +17,7 @@
     "publish:package": "scripts/publish-package"
   },
   "devDependencies": {
-    "@swc/core": "^1.13.5",
+    "@swc/core": "^1.15.41",
     "@swc/jest": "^0.2.39",
     "@types/jest": "^30.0.0",
     "@types/react": "^19.2.9",
