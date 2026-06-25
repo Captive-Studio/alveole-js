@@ -230,6 +230,7 @@ export const Button = React.forwardRef<View, ButtonProps>(function Button(props,
     return {
       ...radiusStyle,
       ...borderProps,
+      overflow: 'hidden',
       ...(fullWidth ? { width: '100%' } : {}),
     };
   };
