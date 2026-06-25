@@ -19,6 +19,20 @@ const generateCSSVariables = (theme: Theme): string => {
   return `:root {\n${lines.join('\n')}\n}`;
 };
 
+export const injectFontSmoothingCSS = () => {
+  if (typeof document === 'undefined') return;
+
+  const styleId = 'theme-font-smoothing';
+  if (document.getElementById(styleId)) return;
+
+  const styleTag = document.createElement('style');
+  styleTag.id = styleId;
+  styleTag.innerHTML =
+    'body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }';
+
+  document.head.appendChild(styleTag);
+};
+
 export const injectVariableCSS = (theme: Theme) => {
   if (typeof document === 'undefined') return;
 

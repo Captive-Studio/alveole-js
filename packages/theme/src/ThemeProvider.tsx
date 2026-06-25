@@ -1,7 +1,7 @@
 import * as SystemUI from 'expo-system-ui';
 import React, { createContext, useContext, type PropsWithChildren } from 'react';
 import { Platform } from 'react-native';
-import { injectVariableCSS } from './helpers/injectVariableCSS';
+import { injectFontSmoothingCSS, injectVariableCSS } from './helpers/injectVariableCSS';
 import { CustomBuilder, useThemeBuilder } from './helpers/useThemeBuilder';
 import { ThemeProviderLoader } from './ThemeProviderLoader';
 import type { Theme } from './type';
@@ -29,7 +29,10 @@ export const ThemeProvider = (props: ThemeProviderProps) => {
 
   React.useEffect(() => {
     void SystemUI.setBackgroundColorAsync('white');
-    if (Platform.OS === 'web') injectVariableCSS(theme);
+    if (Platform.OS === 'web') {
+      injectVariableCSS(theme);
+      injectFontSmoothingCSS();
+    }
   }, []);
 
   React.useEffect(() => {
