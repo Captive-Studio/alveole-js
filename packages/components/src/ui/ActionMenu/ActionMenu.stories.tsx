@@ -1,4 +1,5 @@
 import React from 'react';
+import { Platform, ScrollView } from 'react-native';
 import { Box } from '../../core';
 import type { Story } from '../../type/Story';
 import { Button } from '../Button';
@@ -55,79 +56,92 @@ export const Default = () => {
   );
 };
 
-export const Filters = () => {
-  const epics = ['Refonte design', 'Onboarding', 'Facturation'];
-  const types = ['Bug', 'Story', 'Tâche'];
-  const filtresRapides = ['Assigné à moi', 'En cours', 'En retard'];
+type FilterId = 'epic' | 'type' | 'filtresRapides';
 
-  const [epicFilter, setEpicFilter] = React.useState<string | null>(null);
-  const [typeFilter, setTypeFilter] = React.useState<string | null>(null);
-  const [filtresRapidesFilter, setFiltresRapidesFilter] = React.useState<string[]>([]);
+export const Filters = () => {
+  const filters: { id: FilterId; title: string; options: string[]; multi?: boolean }[] = [
+    { id: 'epic', title: 'Epic', options: ['Refonte design', 'Onboarding', 'Facturation'] },
+    { id: 'type', title: 'Type', options: ['Bug', 'Story', 'Tâche'] },
+    {
+      id: 'filtresRapides',
+      title: 'Filtres rapides',
+      options: ['Assigné à moi', 'En cours', 'En retard'],
+      multi: true,
+    },
+  ];
+
+  const [openId, setOpenId] = React.useState<FilterId | null>(null);
+  const [singleSelected, setSingleSelected] = React.useState<Partial<Record<FilterId, string>>>({});
+  const [multiSelected, setMultiSelected] = React.useState<Partial<Record<FilterId, string[]>>>({});
 
   return (
-    <Box display="flex" flexDirection="row" gap="2" align-items="center">
-      <ActionMenu
-        placement="bottom-start"
-        scrollable={false}
-        renderTrigger={() => (
-          <Button variant="secondary" title="Epic" endIcon="ChevronDown" selected={epicFilter !== null} />
-        )}
-      >
-        <ActionMenu.Item title="Toutes les épics" selected={epicFilter === null} onPress={() => setEpicFilter(null)} />
-        {epics.map(epic => (
-          <ActionMenu.Item
-            key={epic}
-            title={epic}
-            selected={epicFilter === epic}
-            onPress={() => setEpicFilter(epicFilter === epic ? null : epic)}
-          />
-        ))}
-      </ActionMenu>
+    <ScrollView
+      horizontal
+      nestedScrollEnabled
+      directionalLockEnabled={Platform.OS === 'ios'}
+      showsHorizontalScrollIndicator={false}
+      contentContainerStyle={{ flexDirection: 'row', gap: 8, paddingHorizontal: 16 }}
+    >
+      {filters.map(filter => {
+        const isOpen = openId === filter.id;
+        const hasSelection = filter.multi
+          ? (multiSelected[filter.id]?.length ?? 0) > 0
+          : singleSelected[filter.id] != null;
 
-      <ActionMenu
-        placement="bottom-start"
-        scrollable={false}
-        renderTrigger={() => (
-          <Button variant="secondary" title="Type" endIcon="ChevronDown" selected={typeFilter !== null} />
-        )}
-      >
-        <ActionMenu.Item title="Tous les types" selected={typeFilter === null} onPress={() => setTypeFilter(null)} />
-        {types.map(type => (
-          <ActionMenu.Item
-            key={type}
-            title={type}
-            selected={typeFilter === type}
-            onPress={() => setTypeFilter(typeFilter === type ? null : type)}
-          />
-        ))}
-      </ActionMenu>
+        return (
+          <ActionMenu
+            key={filter.id}
+            placement="bottom-start"
+            scrollable={false}
+            open={isOpen}
+            setOpen={open => setOpenId(open ? filter.id : null)}
+            renderTrigger={() => (
+              <Button
+                variant="secondary"
+                title={filter.title}
+                endIcon={isOpen ? 'ChevronUp' : 'ChevronDown'}
+                size="sm"
+                selected={hasSelection}
+                active={isOpen}
+              />
+            )}
+          >
+            {filter.options.map(option => {
+              const isSelected = filter.multi
+                ? (multiSelected[filter.id] ?? []).includes(option)
+                : singleSelected[filter.id] === option;
 
-      <ActionMenu
-        placement="bottom-start"
-        scrollable={false}
-        renderTrigger={() => (
-          <Button
-            variant="secondary"
-            title="Filtres rapides"
-            endIcon="ChevronDown"
-            selected={filtresRapidesFilter.length > 0}
-          />
-        )}
-      >
-        {filtresRapides.map(filtre => (
-          <ActionMenu.Item
-            key={filtre}
-            title={filtre}
-            selected={filtresRapidesFilter.includes(filtre)}
-            onPress={() =>
-              setFiltresRapidesFilter(prev =>
-                prev.includes(filtre) ? prev.filter(f => f !== filtre) : [...prev, filtre],
-              )
-            }
-          />
-        ))}
-      </ActionMenu>
-    </Box>
+              return (
+                <ActionMenu.Item
+                  key={option}
+                  title={option}
+                  selected={isSelected}
+                  onPress={() => {
+                    if (filter.multi) {
+                      setMultiSelected(prev => {
+                        const current = prev[filter.id] ?? [];
+                        return {
+                          ...prev,
+                          [filter.id]: current.includes(option)
+                            ? current.filter(o => o !== option)
+                            : [...current, option],
+                        };
+                      });
+                    } else {
+                      setSingleSelected(prev => ({
+                        ...prev,
+                        [filter.id]: prev[filter.id] === option ? undefined : option,
+                      }));
+                      setOpenId(null);
+                    }
+                  }}
+                />
+              );
+            })}
+          </ActionMenu>
+        );
+      })}
+    </ScrollView>
   );
 };
 
