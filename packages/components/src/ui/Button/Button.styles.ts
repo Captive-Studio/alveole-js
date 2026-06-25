@@ -10,7 +10,6 @@ export const useStyles = makeStyles(({ text, color, spacing, radius }) => ({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    flex: 1,
     gap: spacing('050'),
     transitionProperty: 'all',
     transitionDuration: '150ms',
