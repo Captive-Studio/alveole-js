@@ -15,7 +15,7 @@ export default {
 } satisfies Story;
 
 export const Sizes = () => (
-  <Box display="flex" flexDirection="row" gap={4}>
+  <Box display="flex" flexDirection="row" alignItems="flex-start" gap={4}>
     <Button variant="secondary" size="sm" title="Bouton sm" />
     <Button variant="secondary" size="md" title="Bouton md" />
     <Button variant="secondary" size="lg" title="Bouton lg" />
@@ -82,7 +82,7 @@ export const Selected = () => (
 export const Active = () => (
   <Box display="flex" flexDirection="column" gap={4}>
     <Typography>Utilisé quand le bouton est actif (ex: quand un menu est ouvert)</Typography>
-    <Box>
+    <Box display="flex">
       <Button variant="secondary" title="Active" active />
     </Box>
   </Box>
