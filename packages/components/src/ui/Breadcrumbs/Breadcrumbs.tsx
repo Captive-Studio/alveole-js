@@ -5,7 +5,7 @@ import { useStyles } from './Breadcrumbs.styles';
 
 export type BreadcrumbItem = {
   label: string;
-  href: string;
+  href: string | null;
   isCurrent: boolean;
 };
 
@@ -27,9 +27,10 @@ export type BreadcrumbsProps = React.PropsWithChildren<{
   getLabel?: (segment: string, index: number, path: string) => string;
   /**
    * Personnalisation du lien pour un segment.
+   * Retourner null pour afficher le segment sans lien.
    * Par défaut : chemin reconstruit depuis l'URL courante.
    */
-  getHref?: (segment: string, index: number, path: string) => string;
+  getHref?: (segment: string, index: number, path: string) => string | null;
 }>;
 
 /**
@@ -73,7 +74,7 @@ export const Breadcrumbs = (props: BreadcrumbsProps) => {
       {items.map((item, index) => (
         <Box key={`${item.href}-${index}`} style={{ flexDirection: 'row', alignItems: 'center' }}>
           {index > 0 && <Typography style={styles.separator}> &gt; </Typography>}
-          {item.isCurrent ? (
+          {item.isCurrent || item.href === null ? (
             <Typography style={styles.current}>{item.label}</Typography>
           ) : (
             <A href={item.href as Href & string} style={styles.link} hoverStyle={styles.linkHover}>

@@ -56,6 +56,17 @@ export const WithCustomHref = () => (
   </Box>
 );
 
+export const WithNoLink = () => (
+  <Box p={4}>
+    <Breadcrumbs
+      getHref={(segment, _index, path) => {
+        const noLink = ['admin'];
+        return noLink.includes(segment) ? null : path;
+      }}
+    />
+  </Box>
+);
+
 export const WithSegmentsToSkip = () => (
   <Box p={4}>
     <Breadcrumbs
