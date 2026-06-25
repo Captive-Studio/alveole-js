@@ -1,19 +1,19 @@
 import { makeStyles } from '@alveole/theme';
 
-export const useStyles = makeStyles(({ color, spacing, text }) => ({
+export const useStyles = makeStyles(({ color, text, radius }) => ({
   container: {
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
   },
   pen: {
-    color: color.text['default-grey'],
+    color: color.light.text['default-grey'],
     backgroundColor: '#FFFFFF',
   },
   signatureWeb: {
-    borderColor: color.border['default-grey'],
+    borderColor: color.light.border['default-grey'],
     borderWidth: 2,
-    borderRadius: spacing('075'),
+    borderRadius: radius('lg'),
   },
 
   headerSignature: {
