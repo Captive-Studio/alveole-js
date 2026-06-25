@@ -15,7 +15,7 @@ export default {
 } satisfies Story;
 
 export const Sizes = () => (
-  <Box display="flex" flexDirection="row" align-items="flex-start" gap={4}>
+  <Box display="flex" flexDirection="row" style={{ alignItems: 'flex-start' }} gap={4}>
     <Button variant="secondary" size="sm" title="Bouton sm" />
     <Button variant="secondary" size="md" title="Bouton md" />
     <Button variant="secondary" size="lg" title="Bouton lg" />
