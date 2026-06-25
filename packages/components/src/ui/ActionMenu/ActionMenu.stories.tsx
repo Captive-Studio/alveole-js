@@ -1,3 +1,4 @@
+import React from 'react';
 import { Box } from '../../core';
 import type { Story } from '../../type/Story';
 import { Button } from '../Button';
@@ -50,6 +51,82 @@ export const Default = () => {
           <ActionMenu.Item title="Contenu de l'action menu" icon="Trash" />
         </ActionMenu>
       ))}
+    </Box>
+  );
+};
+
+export const Filters = () => {
+  const epics = ['Refonte design', 'Onboarding', 'Facturation'];
+  const types = ['Bug', 'Story', 'Tâche'];
+  const filtresRapides = ['Assigné à moi', 'En cours', 'En retard'];
+
+  const [epicFilter, setEpicFilter] = React.useState<string | null>(null);
+  const [typeFilter, setTypeFilter] = React.useState<string | null>(null);
+  const [filtresRapidesFilter, setFiltresRapidesFilter] = React.useState<string[]>([]);
+
+  return (
+    <Box display="flex" flexDirection="row" gap="2" align-items="center">
+      <ActionMenu
+        placement="bottom-start"
+        scrollable={false}
+        renderTrigger={() => (
+          <Button variant="secondary" title="Epic" endIcon="ChevronDown" selected={epicFilter !== null} />
+        )}
+      >
+        <ActionMenu.Item title="Toutes les épics" selected={epicFilter === null} onPress={() => setEpicFilter(null)} />
+        {epics.map(epic => (
+          <ActionMenu.Item
+            key={epic}
+            title={epic}
+            selected={epicFilter === epic}
+            onPress={() => setEpicFilter(epicFilter === epic ? null : epic)}
+          />
+        ))}
+      </ActionMenu>
+
+      <ActionMenu
+        placement="bottom-start"
+        scrollable={false}
+        renderTrigger={() => (
+          <Button variant="secondary" title="Type" endIcon="ChevronDown" selected={typeFilter !== null} />
+        )}
+      >
+        <ActionMenu.Item title="Tous les types" selected={typeFilter === null} onPress={() => setTypeFilter(null)} />
+        {types.map(type => (
+          <ActionMenu.Item
+            key={type}
+            title={type}
+            selected={typeFilter === type}
+            onPress={() => setTypeFilter(typeFilter === type ? null : type)}
+          />
+        ))}
+      </ActionMenu>
+
+      <ActionMenu
+        placement="bottom-start"
+        scrollable={false}
+        renderTrigger={() => (
+          <Button
+            variant="secondary"
+            title="Filtres rapides"
+            endIcon="ChevronDown"
+            selected={filtresRapidesFilter.length > 0}
+          />
+        )}
+      >
+        {filtresRapides.map(filtre => (
+          <ActionMenu.Item
+            key={filtre}
+            title={filtre}
+            selected={filtresRapidesFilter.includes(filtre)}
+            onPress={() =>
+              setFiltresRapidesFilter(prev =>
+                prev.includes(filtre) ? prev.filter(f => f !== filtre) : [...prev, filtre],
+              )
+            }
+          />
+        ))}
+      </ActionMenu>
     </Box>
   );
 };
