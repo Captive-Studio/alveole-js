@@ -25,6 +25,11 @@ export type BreadcrumbsProps = React.PropsWithChildren<{
    * Par défaut : capitalisation + remplacement des - et _ par des espaces.
    */
   getLabel?: (segment: string, index: number, path: string) => string;
+  /**
+   * Personnalisation du lien pour un segment.
+   * Par défaut : chemin reconstruit depuis l'URL courante.
+   */
+  getHref?: (segment: string, index: number, path: string) => string;
 }>;
 
 /**
@@ -35,7 +40,7 @@ export type BreadcrumbsProps = React.PropsWithChildren<{
  * Accueil > Admin > Missions > Détail
  */
 export const Breadcrumbs = (props: BreadcrumbsProps) => {
-  const { rootLabel = 'Accueil', segmentsToSkip, getLabel = segment => humanizeSegment(segment) } = props;
+  const { rootLabel = 'Accueil', segmentsToSkip, getLabel = segment => humanizeSegment(segment), getHref } = props;
 
   const pathname = usePathname();
   const styles = useStyles();
@@ -58,7 +63,7 @@ export const Breadcrumbs = (props: BreadcrumbsProps) => {
     },
     ...segmentItems.map(({ segment, index, path }) => ({
       label: getLabel(segment, index, path),
-      href: path,
+      href: getHref ? getHref(segment, index, path) : path,
       isCurrent: index === segments.length - 1,
     })),
   ];

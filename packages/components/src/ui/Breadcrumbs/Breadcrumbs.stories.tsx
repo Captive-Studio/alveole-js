@@ -43,6 +43,19 @@ export const WithCustomLabels = () => (
   </Box>
 );
 
+export const WithCustomHref = () => (
+  <Box p={4}>
+    <Breadcrumbs
+      getHref={(segment, _index, path) => {
+        const hrefs: Record<string, string> = {
+          missions: '/app/missions',
+        };
+        return hrefs[segment] ?? path;
+      }}
+    />
+  </Box>
+);
+
 export const WithSegmentsToSkip = () => (
   <Box p={4}>
     <Breadcrumbs
