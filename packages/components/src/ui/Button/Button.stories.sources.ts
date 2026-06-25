@@ -1,7 +1,7 @@
 // This file is generated. Do not edit manually.
 // Source: src/ui/Button/Button.stories.tsx
 
-export const Sizes = () => "export const Sizes = () => (\n  <Box display=\"flex\" flexDirection=\"row\" align-items=\"flex-start\" gap={4}>\n    <Button variant=\"secondary\" size=\"sm\" title=\"Bouton sm\" />\n    <Button variant=\"secondary\" size=\"md\" title=\"Bouton md\" />\n    <Button variant=\"secondary\" size=\"lg\" title=\"Bouton lg\" />\n  </Box>\n);";
+export const Sizes = () => "export const Sizes = () => (\n  <Box display=\"flex\" flexDirection=\"row\" style={{ alignItems: 'flex-start' }} gap={4}>\n    <Button variant=\"secondary\" size=\"sm\" title=\"Bouton sm\" />\n    <Button variant=\"secondary\" size=\"md\" title=\"Bouton md\" />\n    <Button variant=\"secondary\" size=\"lg\" title=\"Bouton lg\" />\n  </Box>\n);";
 
 export const Primary = () => "export const Primary = () => (\n  <Box display=\"flex\" flexDirection=\"row\" gap={4}>\n    <Button variant=\"primary\" title=\"Bouton primary\" />\n    <Button variant=\"primary\" title=\"Disabled\" disabled />\n  </Box>\n);";
 
@@ -19,7 +19,7 @@ export const FullWidth = () => "export const FullWidth = () => <Button variant=\
 
 export const Selected = () => "export const Selected = () => (\n  <Box display=\"flex\" flexDirection=\"row\" gap={4}>\n    <Button variant=\"secondary\" title=\"Selected\" selected />\n  </Box>\n);";
 
-export const Active = () => "export const Active = () => (\n  <Box display=\"flex\" flexDirection=\"column\" gap={4}>\n    <Typography>Utilisé quand le bouton est actif (ex: quand un menu est ouvert)</Typography>\n    <Box display=\"flex\">\n      <Button variant=\"secondary\" title=\"Active\" active />\n    </Box>\n  </Box>\n);";
+export const Active = () => "export const Active = () => (\n  <Box display=\"flex\" flexDirection=\"column\" gap={4}>\n    <Typography>Utilisé quand le bouton est actif (ex: quand un menu est ouvert)</Typography>\n    <Box display=\"block\">\n      <Button variant=\"secondary\" title=\"Active\" active />\n    </Box>\n  </Box>\n);";
 
 export const storySources = {
   Sizes,
