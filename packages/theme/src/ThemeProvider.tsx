@@ -1,7 +1,7 @@
 import * as SystemUI from 'expo-system-ui';
 import React, { createContext, useContext, type PropsWithChildren } from 'react';
 import { Platform } from 'react-native';
-import { injectFontSmoothingCSS, injectVariableCSS } from './helpers/injectVariableCSS';
+import { injectFontFaceCSS, injectFontSmoothingCSS, injectVariableCSS } from './helpers/injectVariableCSS';
 import { CustomBuilder, useThemeBuilder } from './helpers/useThemeBuilder';
 import { ThemeProviderLoader } from './ThemeProviderLoader';
 import type { Theme } from './type';
@@ -32,6 +32,7 @@ export const ThemeProvider = (props: ThemeProviderProps) => {
     if (Platform.OS === 'web') {
       injectVariableCSS(theme);
       injectFontSmoothingCSS();
+      injectFontFaceCSS();
     }
   }, []);
 

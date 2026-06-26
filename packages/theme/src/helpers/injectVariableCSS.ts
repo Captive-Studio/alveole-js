@@ -1,4 +1,5 @@
 import { Spacings } from '../constants';
+import { Font, FontWeightMap, FontsMap } from '../constants/Font';
 import { Theme } from '../type';
 
 const generateCSSVariables = (theme: Theme): string => {
@@ -17,6 +18,25 @@ const generateCSSVariables = (theme: Theme): string => {
   });
 
   return `:root {\n${lines.join('\n')}\n}`;
+};
+
+export const injectFontFaceCSS = () => {
+  if (typeof document === 'undefined') return;
+
+  const styleId = 'theme-font-faces';
+  if (document.getElementById(styleId)) return;
+
+  const rules = Object.entries(FontsMap)
+    .map(([key, src]) => {
+      const { family, weight } = FontWeightMap[key as Font];
+      return `@font-face {\n  font-family: '${family}';\n  src: url('${src}') format('truetype');\n  font-weight: ${weight};\n  font-style: normal;\n}`;
+    })
+    .join('\n');
+
+  const styleTag = document.createElement('style');
+  styleTag.id = styleId;
+  styleTag.innerHTML = rules;
+  document.head.appendChild(styleTag);
 };
 
 export const injectFontSmoothingCSS = () => {

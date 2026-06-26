@@ -1,5 +1,5 @@
 import { Platform } from 'react-native';
-import { Fonts } from './Font';
+import { fontStyle } from './Font';
 
 const userAgent = typeof navigator !== 'undefined' ? navigator.userAgent : '';
 
@@ -8,31 +8,31 @@ export const isMobile = Platform.OS !== 'web' || userAgent.includes('iPhone') ||
 export const CustomTypography = {
   'Titres alternatifs': {
     XS: {
-      fontFamily: Fonts['Barlow-Bold'],
+      ...fontStyle('Barlow-Bold'),
       fontSize: 48,
       lineHeight: 56,
       letterSpacing: 0,
     },
     SM: {
-      fontFamily: Fonts['Barlow-Bold'],
+      ...fontStyle('Barlow-Bold'),
       fontSize: 56,
       lineHeight: 64,
       letterSpacing: 0,
     },
     MD: {
-      fontFamily: Fonts['Barlow-Bold'],
+      ...fontStyle('Barlow-Bold'),
       fontSize: 64,
       lineHeight: 72,
       letterSpacing: 0,
     },
     LG: {
-      fontFamily: Fonts['Barlow-Bold'],
+      ...fontStyle('Barlow-Bold'),
       fontSize: 72,
       lineHeight: 80,
       letterSpacing: 0,
     },
     XL: {
-      fontFamily: Fonts['Barlow-Bold'],
+      ...fontStyle('Barlow-Bold'),
       fontSize: 80,
       lineHeight: 88,
       letterSpacing: 0,
@@ -43,42 +43,42 @@ export const CustomTypography = {
   Titres: {
     /** Font size: 18/20 */
     'H6 - XXS': {
-      fontFamily: Fonts['Inter-Bold'],
+      ...fontStyle('Inter-Bold'),
       fontSize: !isMobile ? 20 : 18,
       lineHeight: !isMobile ? 28 : 24,
       letterSpacing: 0,
     },
     /** Font size: 20/22 */
     'H5 - XS': {
-      fontFamily: Fonts['Inter-Bold'],
+      ...fontStyle('Inter-Bold'),
       fontSize: !isMobile ? 22 : 20,
       lineHeight: 28,
       letterSpacing: 0,
     },
     /** Font size: 22/24 */
     'H4 - SM': {
-      fontFamily: Fonts['Inter-Bold'],
+      ...fontStyle('Inter-Bold'),
       fontSize: !isMobile ? 24 : 22,
       lineHeight: !isMobile ? 32 : 28,
       letterSpacing: 0,
     },
     /** Font size: 24/28 */
     'H3 - MD': {
-      fontFamily: Fonts['Inter-Bold'],
+      ...fontStyle('Inter-Bold'),
       fontSize: !isMobile ? 28 : 24,
       lineHeight: !isMobile ? 36 : 32,
       letterSpacing: 0,
     },
     /** Font size: 28/32 */
     'H2 - LG': {
-      fontFamily: Fonts['Inter-Bold'],
+      ...fontStyle('Inter-Bold'),
       fontSize: !isMobile ? 32 : 28,
       lineHeight: !isMobile ? 36 : 32,
       letterSpacing: 0,
     },
     /** Font size: 40/48 */
     'H1 - XL': {
-      fontFamily: Fonts['Barlow-SemiBold'],
+      ...fontStyle('Barlow-SemiBold'),
       fontSize: !isMobile ? 40 : 32,
       lineHeight: !isMobile ? 48 : 40,
       letterSpacing: 0,
@@ -88,33 +88,33 @@ export const CustomTypography = {
   'Corps de texte': {
     XS: {
       Regular: {
-        fontFamily: Fonts['Inter-Regular'],
+        ...fontStyle('Inter-Regular'),
         fontSize: 12,
         lineHeight: 20,
         letterSpacing: 0,
       },
       Bold: {
-        fontFamily: Fonts['Inter-Bold'],
+        ...fontStyle('Inter-Bold'),
         fontSize: 12,
         lineHeight: 20,
         letterSpacing: 0,
       },
       Caps: {
-        fontFamily: Fonts['Inter-Regular'],
+        ...fontStyle('Inter-Regular'),
         fontSize: 12,
         lineHeight: 20,
         letterSpacing: 0,
         textTransform: 'uppercase',
       },
       CapsBold: {
-        fontFamily: Fonts['Inter-SemiBold'],
+        ...fontStyle('Inter-SemiBold'),
         fontSize: 12,
         lineHeight: 20,
         letterSpacing: 0,
         textTransform: 'uppercase',
       },
       SemiBold: {
-        fontFamily: Fonts['Inter-SemiBold'],
+        ...fontStyle('Inter-SemiBold'),
         fontSize: 12,
         lineHeight: 20,
         letterSpacing: 0,
@@ -122,31 +122,31 @@ export const CustomTypography = {
     },
     SM: {
       Regular: {
-        fontFamily: Fonts['Inter-Regular'],
+        ...fontStyle('Inter-Regular'),
         fontSize: 14,
         lineHeight: 20,
         letterSpacing: 0,
       },
       Medium: {
-        fontFamily: Fonts['Inter-Medium'],
+        ...fontStyle('Inter-Medium'),
         fontSize: 14,
         lineHeight: 20,
         letterSpacing: 0,
       },
       SemiBold: {
-        fontFamily: Fonts['Inter-SemiBold'],
+        ...fontStyle('Inter-SemiBold'),
         fontSize: 14,
         lineHeight: 20,
         letterSpacing: 0,
       },
       Bold: {
-        fontFamily: Fonts['Inter-Bold'],
+        ...fontStyle('Inter-Bold'),
         fontSize: 14,
         lineHeight: 20,
         letterSpacing: 0,
       },
       CapsBold: {
-        fontFamily: Fonts['Inter-SemiBold'],
+        ...fontStyle('Inter-SemiBold'),
         fontSize: 14,
         lineHeight: 20,
         letterSpacing: 0,
@@ -155,25 +155,25 @@ export const CustomTypography = {
     },
     MD: {
       Regular: {
-        fontFamily: Fonts['Inter-Regular'],
+        ...fontStyle('Inter-Regular'),
         fontSize: 16,
         lineHeight: 24,
         letterSpacing: 0,
       },
       Medium: {
-        fontFamily: Fonts['Inter-Medium'],
+        ...fontStyle('Inter-Medium'),
         fontSize: 16,
         lineHeight: 24,
         letterSpacing: 0,
       },
       SemiBold: {
-        fontFamily: Fonts['Inter-SemiBold'],
+        ...fontStyle('Inter-SemiBold'),
         fontSize: 16,
         lineHeight: 24,
         letterSpacing: 0,
       },
       Bold: {
-        fontFamily: Fonts['Inter-Bold'],
+        ...fontStyle('Inter-Bold'),
         fontSize: 16,
         lineHeight: 24,
         letterSpacing: 0,
@@ -181,19 +181,19 @@ export const CustomTypography = {
     },
     LG: {
       Regular: {
-        fontFamily: Fonts['Inter-Regular'],
+        ...fontStyle('Inter-Regular'),
         fontSize: 18,
         lineHeight: 28,
         letterSpacing: 0,
       },
       Medium: {
-        fontFamily: Fonts['Inter-Medium'],
+        ...fontStyle('Inter-Medium'),
         fontSize: 18,
         lineHeight: 28,
         letterSpacing: 0,
       },
       SemiBold: {
-        fontFamily: Fonts['Inter-SemiBold'],
+        ...fontStyle('Inter-SemiBold'),
         fontSize: 18,
         lineHeight: 28,
         letterSpacing: 0,
