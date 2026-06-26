@@ -21,17 +21,15 @@ export const AnchorHeading = ({ children, style }: AnchorHeadingProps) => {
   return (
     <div
       id={slug}
-      style={{ position: 'relative' }}
+      style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 6 }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
+      <Typography style={style}>{children}</Typography>
+
       <a
         href={`#${slug}`}
         style={{
-          position: 'absolute',
-          left: -24,
-          top: '50%',
-          transform: 'translateY(-50%)',
           opacity: hovered ? 1 : 0,
           transition: 'opacity 0.15s',
           display: 'flex',
@@ -46,8 +44,6 @@ export const AnchorHeading = ({ children, style }: AnchorHeadingProps) => {
           color={iconHovered ? color.light.system.focus : color.light.text['default-grey']}
         />
       </a>
-
-      <Typography style={style}>{children}</Typography>
     </div>
   );
 };
