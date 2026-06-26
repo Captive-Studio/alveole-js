@@ -48,7 +48,7 @@ export const WithCustomHref = () => (
     <Breadcrumbs
       getHref={(segment, _index, path) => {
         const hrefs: Record<string, string> = {
-          missions: '/app/missions',
+          components: '/ui-kit/components',
         };
         return hrefs[segment] ?? path;
       }}
@@ -60,7 +60,7 @@ export const WithNoLink = () => (
   <Box p={4}>
     <Breadcrumbs
       getHref={(segment, _index, path) => {
-        const noLink = ['admin'];
+        const noLink = ['components'];
         return noLink.includes(segment) ? null : path;
       }}
     />
