@@ -25,7 +25,7 @@ export default function App() {
 
 function Screen() {
   const { spacing } = useTheme();
-  return <Box style={{ margin: spacing('100') }}>Contenu</Box>;
+  return <Box style={{ margin: spacing('2W') }}>Contenu</Box>;
 }
 ```
 
@@ -35,8 +35,10 @@ function Screen() {
 // Exemple.styles.tsx
 import { makeStyles } from '@alveole/theme';
 
-export const useStyles = makeStyles(({ spacing }) => ({
-  container: { padding: spacing('150') },
+export const useStyles = makeStyles(({ spacing, text, color }) => ({
+  container: { padding: spacing('3W') },
+  title: text.Titres['H3 - MD'],
+  label: { color: color.Neutre[700] },
 }));
 ```
 
@@ -48,6 +50,118 @@ function Exemple() {
   const styles = useStyles();
   return <Box style={styles.container} />;
 }
+```
+
+## Spacing
+
+Les clés de spacing suivent une nomenclature `V` (verticals, multiples de 2px) et `W` (horizontals, multiples de 8px) :
+
+| Clé    | px  |
+|--------|-----|
+| `0V`   | 0   |
+| `0,5V` | 2   |
+| `1V`   | 4   |
+| `1,5V` | 6   |
+| `1W`   | 8   |
+| `3V`   | 12  |
+| `2W`   | 16  |
+| `3W`   | 24  |
+| `4W`   | 32  |
+| `5W`   | 40  |
+| `6W`   | 48  |
+| `8W`   | 64  |
+| `12W`  | 96  |
+| `15W`  | 120 |
+
+```tsx
+const { spacing, externalPadding } = useTheme();
+
+spacing('3W')       // 24
+externalPadding()   // 16 sur mobile, 24 sur desktop
+```
+
+## Typographies
+
+Les styles de texte sont organisés en trois catégories :
+
+```tsx
+const { text } = useTheme();
+
+// Titres alternatifs (Barlow Bold)
+text['Titres alternatifs'].XS   // 48px
+text['Titres alternatifs'].XL   // 80px
+
+// Titres (Inter Bold — tailles adaptées mobile/desktop)
+text.Titres['H1 - XL']          // Barlow SemiBold, 40px desktop / 32px mobile
+text.Titres['H3 - MD']          // 28px desktop / 24px mobile
+text.Titres['H6 - XXS']         // 20px desktop / 18px mobile
+
+// Corps de texte
+text['Corps de texte'].SM.Regular    // Inter Regular, 14px
+text['Corps de texte'].MD.SemiBold   // Inter SemiBold, 16px
+text['Corps de texte'].LG.Medium     // Inter Medium, 18px
+```
+
+## Fonts
+
+Les fonts sont chargées automatiquement par `ThemeProvider`. Deux familles sont disponibles : **Inter** (corps de texte) et **Barlow** (titres).
+
+Sur le web, les fonts sont injectées via des `@font-face` CSS standards (`font-family: Inter; font-weight: 500`). Sur native, elles utilisent le système expo-font.
+
+```tsx
+const { font } = useTheme();
+
+font['Inter-Regular']   // 'Inter-Regular' (native) ou utilisé via font-weight (web)
+font['Barlow-Bold']
+```
+
+### fontStyle helper
+
+Pour créer des styles typés avec la bonne font selon la plateforme :
+
+```tsx
+import { fontStyle } from '@alveole/theme';
+
+const style = {
+  ...fontStyle('Inter-SemiBold'),  // { fontFamily: 'Inter', fontWeight: '600' } sur web
+  fontSize: 16,                    // { fontFamily: 'Inter-SemiBold' } sur native
+};
+```
+
+## Radius
+
+```tsx
+const { radius } = useTheme();
+
+radius('sm')    // 4
+radius('md')    // 6
+radius('lg')    // 10
+radius('full')  // 99999
+```
+
+## Breakpoints & variante
+
+```tsx
+const { variant, isVariant } = useTheme();
+
+variant           // 'mobile' | 'tablet' | 'desktop'
+isVariant('mobile')  // boolean
+```
+
+| Variante  | Largeur         |
+|-----------|-----------------|
+| `mobile`  | < 768px         |
+| `tablet`  | 768px – 991px   |
+| `desktop` | ≥ 992px         |
+
+## Couleurs
+
+```tsx
+const { color } = useTheme();
+
+color.Neutre[700]
+color.Mandarine[50]
+color.alpha(color.Neutre[900], 0.5)  // 'rgba(55, 58, 63, 0.5)'
 ```
 
 ## Personnaliser la palette
@@ -63,7 +177,7 @@ function Exemple() {
 </ThemeProvider>
 ```
 
-> (Recommandé) Vous pouvez définir un fichier de configuration à la racine de votre projet `alveole.config.js` afin de surcharger les tokens du thème.
+> (Recommandé) Vous pouvez définir un fichier `alveole.config.js` à la racine pour centraliser la surcharge :
 
 ```js
 const { Colors } = require('@alveole/theme');
@@ -86,18 +200,17 @@ module.exports = { palette };
 
 // Utiliser dans le provider :
 // import config from '@/alveole.config.js';
-// ...
 // <ThemeProvider color={config.palette}>
 ```
 
 ## Variables CSS (web)
 
-Sur le web, les variables CSS sont injectées automatiquement si besoin par une lib web.
+Sur le web, `ThemeProvider` injecte automatiquement des variables CSS pour les couleurs, l'espacement et les fonts :
 
 ```css
 /* Spacing */
-var(--spacing-050)
-var(--spacing-150)
+var(--spacing-2W)
+var(--spacing-3W)
 
 /* Colors */
 var(--color-Neutre-200)
@@ -109,3 +222,6 @@ var(--color-Mandarine-50)
 - Typage du thème : `src/type/Theme.ts`
 - Palette : `src/constants/Palette.ts`
 - Typographies : `src/constants/Typography.ts`
+- Spacing : `src/constants/Spacing.ts`
+- Radius : `src/constants/Radius.ts`
+- Fonts : `src/constants/Font.ts`
