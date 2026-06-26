@@ -99,7 +99,7 @@ export const Filters = () => {
               <Button
                 variant="secondary"
                 title={filter.title}
-                endIcon={isOpen ? 'ChevronUp' : 'ChevronDown'}
+                endIcon="ChevronDown"
                 size="sm"
                 selected={hasSelection}
                 active={isOpen}
