@@ -1,4 +1,4 @@
-import { Box, Button, Divider, Page, Section, Typography } from '@alveole/components';
+import { AnchorHeading, Box, Button, Divider, Page, Section, Typography } from '@alveole/components';
 import { useTheme } from '@alveole/theme';
 import React from 'react';
 import { Linking, ScrollView } from 'react-native';
@@ -179,7 +179,7 @@ export const StoryDetailScreen = ({
           >
             {!isTemplate ? (
               <Box display="flex" gap={6}>
-                <Typography style={text.Titres['H5 - XS']}>{key}</Typography>
+                <AnchorHeading style={text.Titres['H5 - XS']}>{key}</AnchorHeading>
               </Box>
             ) : null}
 

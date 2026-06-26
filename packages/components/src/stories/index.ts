@@ -1,5 +1,6 @@
 // Core
 export * as AStory from '../core/A/A.stories';
+export * as AnchorHeadingStory from '../core/AnchorHeading/AnchorHeading.stories';
 export * as BoxStory from '../core/Box/Box.stories';
 export * as Highlight from '../core/Highlight/Highlight.stories';
 export * as ImageStory from '../core/Image/Image.stories';

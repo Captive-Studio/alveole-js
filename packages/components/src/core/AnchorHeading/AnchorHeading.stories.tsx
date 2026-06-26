@@ -1,0 +1,18 @@
+import { useTheme } from '@alveole/theme';
+import { Story } from '../../type';
+import { AnchorHeading } from './AnchorHeading';
+
+export default {
+  title: 'AnchorHeading',
+  tags: ['core'],
+  experimental: true,
+  webOnly: true,
+  description: 'Titre avec ancre navigable au survol — id slug généré automatiquement.',
+  component: AnchorHeading,
+  styleFn: () => ({}),
+} satisfies Story;
+
+export const Default = () => {
+  const { text } = useTheme();
+  return <AnchorHeading style={text.Titres['H5 - XS']}>Mon exemple de titre</AnchorHeading>;
+};

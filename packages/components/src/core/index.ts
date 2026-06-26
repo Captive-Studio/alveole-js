@@ -1,4 +1,5 @@
 export * from './A';
+export * from './AnchorHeading';
 export * from './Box';
 export * from './Highlight';
 export * from './Image';

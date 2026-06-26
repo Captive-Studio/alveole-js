@@ -1,0 +1,53 @@
+import { useTheme } from '@alveole/theme';
+import { useState } from 'react';
+import { LucideIcon } from '../../ui/LucideIcon';
+import { Typography } from '../Typography';
+import type { AnchorHeadingProps } from './AnchorHeading';
+
+const toSlug = (value: string) =>
+  value
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/[^a-z0-9-]/g, '');
+
+export const AnchorHeading = ({ children, style }: AnchorHeadingProps) => {
+  const { color } = useTheme();
+  const [hovered, setHovered] = useState(false);
+  const [iconHovered, setIconHovered] = useState(false);
+  const slug = toSlug(children);
+
+  return (
+    <div
+      id={slug}
+      style={{ position: 'relative' }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <a
+        href={`#${slug}`}
+        style={{
+          position: 'absolute',
+          left: -24,
+          top: '50%',
+          transform: 'translateY(-50%)',
+          opacity: hovered ? 1 : 0,
+          transition: 'opacity 0.15s',
+          display: 'flex',
+          alignItems: 'center',
+        }}
+        onMouseEnter={() => setIconHovered(true)}
+        onMouseLeave={() => setIconHovered(false)}
+      >
+        <LucideIcon
+          name="Link"
+          size="sm"
+          color={iconHovered ? color.light.system.focus : color.light.text['default-grey']}
+        />
+      </a>
+
+      <Typography style={style}>{children}</Typography>
+    </div>
+  );
+};
