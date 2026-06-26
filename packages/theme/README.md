@@ -57,7 +57,7 @@ function Exemple() {
 Les clés de spacing suivent une nomenclature `V` (verticals, multiples de 2px) et `W` (horizontals, multiples de 8px) :
 
 | Clé    | px  |
-|--------|-----|
+| ------ | --- |
 | `0V`   | 0   |
 | `0,5V` | 2   |
 | `1V`   | 4   |
@@ -76,8 +76,8 @@ Les clés de spacing suivent une nomenclature `V` (verticals, multiples de 2px) 
 ```tsx
 const { spacing, externalPadding } = useTheme();
 
-spacing('3W')       // 24
-externalPadding()   // 16 sur mobile, 24 sur desktop
+spacing('3W'); // 24
+externalPadding(); // 16 sur mobile, 24 sur desktop
 ```
 
 ## Typographies
@@ -88,18 +88,18 @@ Les styles de texte sont organisés en trois catégories :
 const { text } = useTheme();
 
 // Titres alternatifs (Barlow Bold)
-text['Titres alternatifs'].XS   // 48px
-text['Titres alternatifs'].XL   // 80px
+text['Titres alternatifs'].XS; // 48px
+text['Titres alternatifs'].XL; // 80px
 
 // Titres (Inter Bold — tailles adaptées mobile/desktop)
-text.Titres['H1 - XL']          // Barlow SemiBold, 40px desktop / 32px mobile
-text.Titres['H3 - MD']          // 28px desktop / 24px mobile
-text.Titres['H6 - XXS']         // 20px desktop / 18px mobile
+text.Titres['H1 - XL']; // Barlow SemiBold, 40px desktop / 32px mobile
+text.Titres['H3 - MD']; // 28px desktop / 24px mobile
+text.Titres['H6 - XXS']; // 20px desktop / 18px mobile
 
 // Corps de texte
-text['Corps de texte'].SM.Regular    // Inter Regular, 14px
-text['Corps de texte'].MD.SemiBold   // Inter SemiBold, 16px
-text['Corps de texte'].LG.Medium     // Inter Medium, 18px
+text['Corps de texte'].SM.Regular; // Inter Regular, 14px
+text['Corps de texte'].MD.SemiBold; // Inter SemiBold, 16px
+text['Corps de texte'].LG.Medium; // Inter Medium, 18px
 ```
 
 ## Fonts
@@ -111,8 +111,8 @@ Sur le web, les fonts sont injectées via des `@font-face` CSS standards (`font-
 ```tsx
 const { font } = useTheme();
 
-font['Inter-Regular']   // 'Inter-Regular' (native) ou utilisé via font-weight (web)
-font['Barlow-Bold']
+font['Inter-Regular']; // 'Inter-Regular' (native) ou utilisé via font-weight (web)
+font['Barlow-Bold'];
 ```
 
 ### fontStyle helper
@@ -123,8 +123,8 @@ Pour créer des styles typés avec la bonne font selon la plateforme :
 import { fontStyle } from '@alveole/theme';
 
 const style = {
-  ...fontStyle('Inter-SemiBold'),  // { fontFamily: 'Inter', fontWeight: '600' } sur web
-  fontSize: 16,                    // { fontFamily: 'Inter-SemiBold' } sur native
+  ...fontStyle('Inter-SemiBold'), // { fontFamily: 'Inter', fontWeight: '600' } sur web
+  fontSize: 16, // { fontFamily: 'Inter-SemiBold' } sur native
 };
 ```
 
@@ -133,10 +133,10 @@ const style = {
 ```tsx
 const { radius } = useTheme();
 
-radius('sm')    // 4
-radius('md')    // 6
-radius('lg')    // 10
-radius('full')  // 99999
+radius('sm'); // 4
+radius('md'); // 6
+radius('lg'); // 10
+radius('full'); // 99999
 ```
 
 ## Breakpoints & variante
@@ -144,24 +144,24 @@ radius('full')  // 99999
 ```tsx
 const { variant, isVariant } = useTheme();
 
-variant           // 'mobile' | 'tablet' | 'desktop'
-isVariant('mobile')  // boolean
+variant; // 'mobile' | 'tablet' | 'desktop'
+isVariant('mobile'); // boolean
 ```
 
-| Variante  | Largeur         |
-|-----------|-----------------|
-| `mobile`  | < 768px         |
-| `tablet`  | 768px – 991px   |
-| `desktop` | ≥ 992px         |
+| Variante  | Largeur       |
+| --------- | ------------- |
+| `mobile`  | < 768px       |
+| `tablet`  | 768px – 991px |
+| `desktop` | ≥ 992px       |
 
 ## Couleurs
 
 ```tsx
 const { color } = useTheme();
 
-color.Neutre[700]
-color.Mandarine[50]
-color.alpha(color.Neutre[900], 0.5)  // 'rgba(55, 58, 63, 0.5)'
+color.Neutre[700];
+color.Mandarine[50];
+color.alpha(color.Neutre[900], 0.5); // 'rgba(55, 58, 63, 0.5)'
 ```
 
 ## Personnaliser la palette
