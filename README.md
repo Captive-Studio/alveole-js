@@ -1,5 +1,7 @@
 # Alveole
 
+[![Npm package version](https://badgen.net/npm/v/@alveole/components)](https://npmjs.com/package/@alveole/components)
+
 ## Packages
 
 - `@alveole/theme` — thème partagé (tokens, typographies, helpers). Voir [packages/theme/README.md](./packages/theme/).
