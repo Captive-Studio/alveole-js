@@ -16,3 +16,5 @@ export const Default = () => {
   const { text } = useTheme();
   return <AnchorHeading style={text.Titres['H5 - XS']}>Mon exemple de titre</AnchorHeading>;
 };
+
+export * as Sources from './AnchorHeading.stories.sources';
