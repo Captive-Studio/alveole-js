@@ -11,27 +11,35 @@ export default {
   experimental: false,
   figmaURL: 'https://www.figma.com/design/xJz8Z6vfrnZPKTtRbuT2W8/Alveole---Composants?node-id=1736-931',
   description:
-    'En-tête statique avec une zone gauche (logo, titre) et une zone droite au contenu libre (navigation, boutons, etc.).',
+    "En-tête statique avec un logo carré et le titre de l'application à gauche, et un contenu libre à droite.",
   webOnly: true,
   component: Header,
   styleFn: useStyles,
 } satisfies Story;
 
-const Logo = () => {
-  const { color, text } = useTheme();
+const LogoPlaceholder = () => {
+  const { color, radius, text } = useTheme();
   return (
-    <Box display="flex" flexDirection="column" gap={2}>
-      <Typography style={text['Corps de texte'].SM.Bold}>Alveole</Typography>
-      <Typography style={{ ...text['Corps de texte'].XS.Regular, color: color.light.text['mention-grey'] }}>
-        UI Kit
-      </Typography>
+    <Box
+      style={{
+        width: 32,
+        height: 32,
+        borderRadius: radius('md'),
+        backgroundColor: color.light.background['action-high-primary'],
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Typography style={{ ...text['Corps de texte'].XS.Bold, color: '#fff' }}>A</Typography>
     </Box>
   );
 };
 
 export const Default = () => (
   <Header
-    left={<Logo />}
+    logo={<LogoPlaceholder />}
+    title="Nom de l'app"
     right={
       <>
         <Button variant="tertiary" title="Composants" size="sm" onPress={() => {}} />
@@ -42,17 +50,6 @@ export const Default = () => (
   />
 );
 
-export const SeulementGauche = () => <Header left={<Logo />} />;
-
-export const SeulementDroite = () => (
-  <Header
-    right={
-      <>
-        <Button variant="tertiary" title="Composants" size="sm" onPress={() => {}} />
-        <Button variant="primary" title="Documentation" size="sm" onPress={() => {}} />
-      </>
-    }
-  />
-);
+export const SansContenuDroite = () => <Header logo={<LogoPlaceholder />} title="Nom de l'app" />;
 
 export * as Sources from './Header.stories.sources';

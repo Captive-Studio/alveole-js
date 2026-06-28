@@ -1,6 +1,6 @@
 import { makeStyles } from '@alveole/theme';
 
-export const useStyles = makeStyles(({ color, spacing }) => ({
+export const useStyles = makeStyles(({ color, text, spacing }) => ({
   container: {
     backgroundColor: color.light.background['alt-grey'],
     borderBottomWidth: 1,
@@ -16,10 +16,15 @@ export const useStyles = makeStyles(({ color, spacing }) => ({
     paddingTop: spacing('2W'),
     paddingBottom: spacing('2W'),
   },
-  left: {
+  identity: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
+    gap: spacing('2W'),
+  },
+  titleText: {
+    ...text['Corps de texte'].SM.Bold,
+    color: color.light.text['title-grey'],
   },
   right: {
     display: 'flex',

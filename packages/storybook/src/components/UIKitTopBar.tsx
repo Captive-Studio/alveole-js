@@ -1,4 +1,4 @@
-import { ALVEOLE_COMPONENTS_VERSION, Box, Header, Typography } from '@alveole/components';
+import { Box, Header, Typography } from '@alveole/components';
 import { useTheme } from '@alveole/theme';
 import { Pressable } from 'react-native';
 
@@ -13,22 +13,27 @@ export type UIKitTopBarProps = {
   items: UIKitTopBarItem[];
 };
 
-export const UIKitTopBar = ({ activeKey, items }: UIKitTopBarProps) => {
+const AlveoleLogo = () => {
   const { color, radius, text } = useTheme();
-
-  const left = (
-    <Box display="flex" gap={2}>
-      <Typography style={text['Corps de texte'].SM.Bold}>Alveole • UI Kit</Typography>
-      <Typography
-        style={{
-          ...text['Corps de texte'].XS.Regular,
-          color: color.light.text['mention-grey'],
-        }}
-      >
-        Version {ALVEOLE_COMPONENTS_VERSION}
-      </Typography>
+  return (
+    <Box
+      style={{
+        width: 32,
+        height: 32,
+        borderRadius: radius('md'),
+        backgroundColor: color.light.background['action-high-primary'],
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Typography style={{ ...text['Corps de texte'].XS.Bold, color: '#fff' }}>A</Typography>
     </Box>
   );
+};
+
+export const UIKitTopBar = ({ activeKey, items }: UIKitTopBarProps) => {
+  const { color, radius, text } = useTheme();
 
   const right = (
     <Box display="flex" flexDirection="row" flexWrap="wrap" gap={8}>
@@ -73,5 +78,5 @@ export const UIKitTopBar = ({ activeKey, items }: UIKitTopBarProps) => {
     </Box>
   );
 
-  return <Header left={left} right={right} />;
+  return <Header logo={<AlveoleLogo />} title="Alveole UI Kit" right={right} />;
 };
