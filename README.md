@@ -2,6 +2,8 @@
 
 [![Npm package version](https://badgen.net/npm/v/@alveole/components)](https://npmjs.com/package/@alveole/components)
 
+**Documentation** : [https://captive-studio.github.io/alveole-js](https://captive-studio.github.io/alveole-js/)
+
 ## Packages
 
 - `@alveole/theme` — thème partagé (tokens, typographies, helpers). Voir [packages/theme/README.md](./packages/theme/).

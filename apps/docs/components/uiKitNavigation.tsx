@@ -4,7 +4,7 @@ import { useRouter } from 'expo-router';
 
 export const storyList = toStoryModules(Stories) as StorybookModule[];
 
-export const useUIKitTopBar = (activeKey: 'components' | 'colors' | 'typography' | 'constants') => {
+export const useUIKitTopBar = (activeKey: 'components' | 'colors' | 'typography' | 'constants' | 'philosophy') => {
   const router = useRouter();
 
   return (
@@ -15,6 +15,7 @@ export const useUIKitTopBar = (activeKey: 'components' | 'colors' | 'typography'
         { key: 'colors', label: 'Couleurs', onPress: () => router.replace('/theme/colors') },
         { key: 'typography', label: 'Typographies', onPress: () => router.replace('/theme/typographies') },
         { key: 'constants', label: 'Constantes', onPress: () => router.replace('/constants') },
+        { key: 'philosophy', label: 'Philosophie', onPress: () => router.replace('/philosophy') },
       ]}
     />
   );
