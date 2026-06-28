@@ -5,6 +5,9 @@ export const useStyles = makeStyles(({ color, text, spacing }) => ({
     backgroundColor: color.light.background['alt-grey'],
     borderBottomWidth: 1,
     borderBottomColor: color.light.border['default-grey'],
+    position: 'sticky',
+    top: 0,
+    zIndex: 100,
   },
   inner: {
     display: 'flex',
