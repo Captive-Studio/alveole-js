@@ -23,6 +23,7 @@ export * as CardStory from '../ui/Card/Card.stories';
 export * as DividerStory from '../ui/Divider/Divider.stories';
 export * as DocumentViewerStory from '../ui/DocumentViewer/DocumentViewer.stories';
 export * as EmptyStateStory from '../ui/EmptyState/EmptyState.stories';
+export * as HeaderStory from '../ui/Header/Header.stories';
 export * as ListItemStory from '../ui/ListItem/ListItem.stories';
 export * as LucideIconStory from '../ui/LucideIcon/LucideIcon.stories';
 export * as PageHeaderStory from '../ui/PageHeader/PageHeader.stories';
