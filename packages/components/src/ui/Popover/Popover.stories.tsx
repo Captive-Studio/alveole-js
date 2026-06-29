@@ -36,9 +36,11 @@ export const Default = () => {
       flexWrap="wrap"
       gap="1W"
       flexDirection="row"
-      justify-content="center"
-      align-items="center"
       width="100%"
+      style={{
+        justifyContent: "center",
+        alignItems: "center"
+      }}
     >
       {alignments.map(alignment => (
         <Popover
