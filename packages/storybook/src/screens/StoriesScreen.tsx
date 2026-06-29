@@ -22,6 +22,7 @@ export type StoriesScreenProps = {
   description?: string;
   emptyMessage?: string;
   beforeContent?: React.ReactNode;
+  footerContent?: React.ReactNode;
   createLabel?: string;
   onCreatePress?: () => void;
   onSelectStory?: (story: StorybookModule) => void;
@@ -33,6 +34,7 @@ export const StoriesScreen = ({
   description = 'Shared component catalog',
   emptyMessage = 'No story found.',
   beforeContent,
+  footerContent,
   createLabel,
   onCreatePress,
   onSelectStory,
@@ -194,6 +196,7 @@ export const StoriesScreen = ({
           </Section>
         ))
       )}
+      {footerContent}
     </Page>
   );
 };
