@@ -1,7 +1,9 @@
+import { useTheme } from '@alveole/theme';
 import React from 'react';
-import { Platform, ScrollView } from 'react-native';
+import { Platform, Pressable, ScrollView } from 'react-native';
 import { Box } from '../../core';
 import type { Story } from '../../type/Story';
+import { Avatar } from '../Avatar';
 import { Button } from '../Button';
 import { ActionMenu } from './ActionMenu';
 
@@ -142,6 +144,37 @@ export const Filters = () => {
         );
       })}
     </ScrollView>
+  );
+};
+
+export const AvatarMenu = () => {
+  const { color, radius } = useTheme();
+
+  return (
+    <Box style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 200 }}>
+      <ActionMenu
+        placement="bottom-end"
+        renderTrigger={({ open }) => (
+          <Pressable
+            style={
+              {
+                alignSelf: 'flex-start',
+                borderRadius: radius('sm'),
+                outline: open ? `1px solid ${color.light.system.focus}` : 'none',
+                backgroundColor: open ? `${color.light.system.focus}1A` : 'transparent',
+              } as any
+            }
+          >
+            <Avatar size="md" src="https://www.loremfaces.net/96/id/1.jpg" fallbackText="Clément Prod'homme" />
+          </Pressable>
+        )}
+      >
+        <ActionMenu.Item title="Mon profil" icon="User" />
+        <ActionMenu.Item title="Paramètres" icon="Settings" />
+        <ActionMenu.Item title="Aide" icon="Info" />
+        <ActionMenu.Item title="Déconnexion" icon="LogOut" />
+      </ActionMenu>
+    </Box>
   );
 };
 
