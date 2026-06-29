@@ -23,7 +23,19 @@ type Section = { title: string; entries: ColorEntry[]; deprecated?: boolean };
 
 function buildSections(): Section[] {
   const sections: Section[] = [];
-  const deprecatedKeys = ['primary', 'transparent', 'danger', 'info', 'success', 'warning', 'link', 'text', 'border', 'background', 'system'];
+  const deprecatedKeys = [
+    'primary',
+    'transparent',
+    'danger',
+    'info',
+    'success',
+    'warning',
+    'link',
+    'text',
+    'border',
+    'background',
+    'system',
+  ];
 
   // Semantic sections: light.*, dark.*
   for (const [modeKey, modeVal] of Object.entries(CustomPalette)) {
@@ -66,13 +78,17 @@ function isColorDark(hex: string): boolean {
   // Simple luminance check for hex colors
   const clean = hex.replace('#', '');
   if (clean.length !== 6 && clean.length !== 3) return false;
-  const expanded = clean.length === 3
-    ? clean.split('').map(c => c + c).join('')
-    : clean;
+  const expanded =
+    clean.length === 3
+      ? clean
+          .split('')
+          .map(c => c + c)
+          .join('')
+      : clean;
   const r = parseInt(expanded.substring(0, 2), 16);
   const g = parseInt(expanded.substring(2, 4), 16);
   const b = parseInt(expanded.substring(4, 6), 16);
-  return (0.299 * r + 0.587 * g + 0.114 * b) < 128;
+  return 0.299 * r + 0.587 * g + 0.114 * b < 128;
 }
 
 const ColorSwatch = ({ entry }: { entry: ColorEntry }) => {
