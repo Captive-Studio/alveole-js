@@ -78,7 +78,7 @@ export const CustomTypography = {
     },
     /** Font size: 40/48 */
     'H1 - XL': {
-      ...fontStyle('Barlow-SemiBold'),
+      ...fontStyle('Barlow-Bold'),
       fontSize: !isMobile ? 40 : 32,
       lineHeight: !isMobile ? 48 : 40,
       letterSpacing: 0,
@@ -106,15 +106,15 @@ export const CustomTypography = {
         letterSpacing: 0,
         textTransform: 'uppercase',
       },
+      ...fontStyle('Inter-Bold'),
       CapsBold: {
-        ...fontStyle('Inter-SemiBold'),
         fontSize: 12,
         lineHeight: 20,
         letterSpacing: 0,
         textTransform: 'uppercase',
       },
       SemiBold: {
-        ...fontStyle('Inter-SemiBold'),
+        ...fontStyle('Inter-Bold'),
         fontSize: 12,
         lineHeight: 20,
         letterSpacing: 0,
@@ -134,7 +134,7 @@ export const CustomTypography = {
         letterSpacing: 0,
       },
       SemiBold: {
-        ...fontStyle('Inter-SemiBold'),
+        ...fontStyle('Inter-Bold'),
         fontSize: 14,
         lineHeight: 20,
         letterSpacing: 0,
@@ -146,7 +146,7 @@ export const CustomTypography = {
         letterSpacing: 0,
       },
       CapsBold: {
-        ...fontStyle('Inter-SemiBold'),
+        ...fontStyle('Inter-Bold'),
         fontSize: 14,
         lineHeight: 20,
         letterSpacing: 0,
@@ -167,7 +167,7 @@ export const CustomTypography = {
         letterSpacing: 0,
       },
       SemiBold: {
-        ...fontStyle('Inter-SemiBold'),
+        ...fontStyle('Inter-Bold'),
         fontSize: 16,
         lineHeight: 24,
         letterSpacing: 0,
@@ -193,7 +193,7 @@ export const CustomTypography = {
         letterSpacing: 0,
       },
       SemiBold: {
-        ...fontStyle('Inter-SemiBold'),
+        ...fontStyle('Inter-Bold'),
         fontSize: 18,
         lineHeight: 28,
         letterSpacing: 0,

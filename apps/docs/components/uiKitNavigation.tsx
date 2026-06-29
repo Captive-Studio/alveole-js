@@ -1,10 +1,22 @@
-import { ALVEOLE_COMPONENTS_VERSION, Box, Button, Header, Typography } from '@alveole/components';
+import { ALVEOLE_COMPONENTS_VERSION, Box, Button, Header, LucideIcon, Typography } from '@alveole/components';
 import * as Stories from '@alveole/components/stories';
 import { toStoryModules, type StorybookModule } from '@alveole/storybook';
 import { useTheme } from '@alveole/theme';
 import { useRouter } from 'expo-router';
+import React from 'react';
+import { Pressable } from 'react-native';
 
 export const storyList = toStoryModules(Stories) as StorybookModule[];
+
+type ActiveKey = 'components' | 'colors' | 'typography' | 'constants' | 'philosophy';
+
+const NAV_ITEMS: { key: ActiveKey; label: string; path: string }[] = [
+  { key: 'components', label: 'Composants', path: '/' },
+  { key: 'colors', label: 'Couleurs', path: '/theme/colors' },
+  { key: 'typography', label: 'Typographies', path: '/theme/typographies' },
+  { key: 'constants', label: 'Constantes', path: '/constants' },
+  { key: 'philosophy', label: 'Philosophie', path: '/philosophy' },
+];
 
 const AlveoleLogo = () => {
   const { color, radius, text } = useTheme();
@@ -25,8 +37,59 @@ const AlveoleLogo = () => {
   );
 };
 
-export const useUIKitTopBar = (activeKey: 'components' | 'colors' | 'typography' | 'constants' | 'philosophy') => {
+const UIKitTopBar = ({ activeKey }: { activeKey: ActiveKey }) => {
   const router = useRouter();
+  const { isVariant, color, spacing } = useTheme();
+  const [menuOpen, setMenuOpen] = React.useState(false);
+
+  if (isVariant('mobile')) {
+    return (
+      <>
+        <Header
+          logo={<AlveoleLogo />}
+          right={
+            <Pressable onPress={() => setMenuOpen(v => !v)} style={{ padding: 8 }}>
+              <LucideIcon name={menuOpen ? 'X' : 'Menu'} size="md" color={color.light.text['title-grey']} />
+            </Pressable>
+          }
+        />
+        {menuOpen && (
+          <Box
+            style={{
+              position: 'fixed',
+              top: 64,
+              left: 0,
+              right: 0,
+              zIndex: 99,
+              backgroundColor: color.light.background['default-grey'],
+              borderBottomWidth: 1,
+              borderBottomColor: color.light.border['default-grey'],
+              paddingTop: spacing('2W'),
+              paddingBottom: spacing('2W'),
+              paddingLeft: spacing('2W'),
+              paddingRight: spacing('2W'),
+              display: 'flex',
+              flexDirection: 'column',
+              gap: spacing('050'),
+            }}
+          >
+            {NAV_ITEMS.map(item => (
+              <Button
+                key={item.key}
+                variant={activeKey === item.key ? 'primary' : 'tertiary'}
+                title={item.label}
+                size="sm"
+                onPress={() => {
+                  router.replace(item.path);
+                  setMenuOpen(false);
+                }}
+              />
+            ))}
+          </Box>
+        )}
+      </>
+    );
+  }
 
   return (
     <Header
@@ -34,41 +97,22 @@ export const useUIKitTopBar = (activeKey: 'components' | 'colors' | 'typography'
       title="Alveole UI Kit"
       right={
         <Box display="flex" flexDirection="row" flexWrap="wrap" gap={8}>
-          <Button
-            variant={activeKey === 'components' ? 'primary' : 'tertiary'}
-            title="Composants"
-            size="sm"
-            onPress={() => router.replace('/')}
-          />
-          <Button
-            variant={activeKey === 'colors' ? 'primary' : 'tertiary'}
-            title="Couleurs"
-            size="sm"
-            onPress={() => router.replace('/theme/colors')}
-          />
-          <Button
-            variant={activeKey === 'typography' ? 'primary' : 'tertiary'}
-            title="Typographies"
-            size="sm"
-            onPress={() => router.replace('/theme/typographies')}
-          />
-          <Button
-            variant={activeKey === 'constants' ? 'primary' : 'tertiary'}
-            title="Constantes"
-            size="sm"
-            onPress={() => router.replace('/constants')}
-          />
-          <Button
-            variant={activeKey === 'philosophy' ? 'primary' : 'tertiary'}
-            title="Philosophie"
-            size="sm"
-            onPress={() => router.replace('/philosophy')}
-          />
+          {NAV_ITEMS.map(item => (
+            <Button
+              key={item.key}
+              variant={activeKey === item.key ? 'primary' : 'tertiary'}
+              title={item.label}
+              size="sm"
+              onPress={() => router.replace(item.path)}
+            />
+          ))}
         </Box>
       }
     />
   );
 };
+
+export const useUIKitTopBar = (activeKey: ActiveKey) => <UIKitTopBar activeKey={activeKey} />;
 
 export const DocFooter = () => {
   const { color, text } = useTheme();

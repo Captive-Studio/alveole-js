@@ -123,8 +123,8 @@ Pour créer des styles typés avec la bonne font selon la plateforme :
 import { fontStyle } from '@alveole/theme';
 
 const style = {
-  ...fontStyle('Inter-SemiBold'), // { fontFamily: 'Inter', fontWeight: '600' } sur web
-  fontSize: 16, // { fontFamily: 'Inter-SemiBold' } sur native
+  ...fontStyle('Inter-Bold'), // { fontFamily: 'Inter', fontWeight: '600' } sur web
+  fontSize: 16, // { fontFamily: 'Inter-Bold' } sur native
 };
 ```
 
