@@ -36,4 +36,13 @@ config.resolver.extraNodeModules = {
   'react/jsx-dev-runtime': path.resolve(localNodeModules, 'react/jsx-dev-runtime'),
 };
 
+// Désactiver watchman (macOS Full Disk Access requis) — utiliser le watcher Node
+process.env.WATCHMAN_DISABLE_CACHING = '1';
+config.watcher = {
+  watchman: {
+    deferStates: [],
+  },
+  healthCheck: { enabled: false },
+};
+
 module.exports = config;
