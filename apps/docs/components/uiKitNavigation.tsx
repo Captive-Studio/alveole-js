@@ -56,7 +56,7 @@ const UIKitTopBar = ({ activeKey }: { activeKey: ActiveKey }) => {
         {menuOpen && (
           <Box
             style={{
-              position: 'fixed',
+              position: 'sticky',
               top: 64,
               left: 0,
               right: 0,
