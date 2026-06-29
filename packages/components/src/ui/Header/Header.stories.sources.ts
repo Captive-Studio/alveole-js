@@ -5,9 +5,13 @@ export const Default = () => "export const Default = () => (\n  <Header\n    log
 
 export const SansContenuDroite = () => "export const SansContenuDroite = () => <Header logo={<LogoPlaceholder />} title=\"Nom de l'app\" />;";
 
+export const MobileSimple = () =>
+  "export const MobileSimple = () => (\n  <Header\n    logo={<LogoPlaceholder />}\n    right={<Button variant=\"tertiary\" title=\"≡\" size=\"sm\" onPress={() => {}} />}\n  />\n);";
+
 export const storySources = {
   Default,
   SansContenuDroite,
+  MobileSimple,
 } as const;
 
 export type StorySourceName = keyof typeof storySources;

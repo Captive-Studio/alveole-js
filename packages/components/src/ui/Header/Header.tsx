@@ -5,8 +5,8 @@ import { useStyles } from './Header.styles';
 export type HeaderProps = {
   /** Logo carré affiché à gauche. */
   logo: React.ReactNode;
-  /** Titre de l'application affiché à côté du logo. */
-  title: string;
+  /** Titre de l'application affiché à côté du logo (masqué en version mobile). */
+  title?: string;
   /** Contenu libre affiché à droite (navigation, boutons, etc.). */
   right?: React.ReactNode;
 };

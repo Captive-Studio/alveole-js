@@ -52,4 +52,8 @@ export const Default = () => (
 
 export const SansContenuDroite = () => <Header logo={<LogoPlaceholder />} title="Nom de l'app" />;
 
+export const MobileSimple = () => (
+  <Header logo={<LogoPlaceholder />} right={<Button variant="tertiary" title="≡" size="sm" onPress={() => {}} />} />
+);
+
 export * as Sources from './Header.stories.sources';
