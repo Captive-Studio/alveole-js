@@ -122,6 +122,20 @@ const config = {
     flashList: flashListPlugin,
   },
   rules: {
+    'no-restricted-syntax': [
+      'error',
+      {
+        selector: 'JSXAttribute[name.name=/[a-z]-[a-z]/]',
+        message:
+          "Props JSX avec tiret interdite (ex: align-items). Passer par style={{ alignItems: '...' }}.",
+      },
+      {
+        selector:
+          'JSXAttribute[name.name=/^(justifyContent|justifyItems|justifySelf|alignItems|alignContent|alignSelf)$/]',
+        message:
+          "Cette prop CSS ne fonctionne pas directement sur Box. Passer par style={{ justifyContent: '...' }}.",
+      },
+    ],
     'no-redeclare': 'off',
     '@typescript-eslint/no-redeclare': ['error', { ignoreDeclarationMerge: true }],
     'flashList/prefer-flash-list': 'error',
