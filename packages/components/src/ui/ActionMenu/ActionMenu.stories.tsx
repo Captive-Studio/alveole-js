@@ -150,14 +150,13 @@ export const AvatarMenu = () => {
   const { color, radius } = useTheme();
 
   return (
-    <Box style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 200 }}>
+    <Box style={{ display: 'flex', alignItems: 'center', height: 200 }}>
       <ActionMenu
         placement="bottom-end"
         renderTrigger={({ open }) => (
           <Pressable
             style={
               {
-                alignSelf: 'flex-start',
                 borderRadius: radius('sm'),
                 outline: open ? `1px solid ${color.light.system.focus}` : 'none',
                 backgroundColor: open ? `${color.light.system.focus}1A` : 'transparent',
