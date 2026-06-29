@@ -13,7 +13,7 @@ export const PdfViewer = (props: PdfViewerProps) => {
         source={{ uri: source, headers }}
         startInLoadingState
         renderLoading={() => (
-          <Box flex={1} style={{ alignItems:"center", justifyContent: "center" }}>
+          <Box flex={1} style={{ alignItems: 'center', justifyContent: 'center' }}>
             <ActivityIndicator size="large" />
           </Box>
         )}

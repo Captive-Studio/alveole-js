@@ -38,8 +38,8 @@ export const Default = () => {
       flexDirection="row"
       width="100%"
       style={{
-        justifyContent: "center",
-        alignItems: "center"
+        justifyContent: 'center',
+        alignItems: 'center',
       }}
     >
       {alignments.map(alignment => (
