@@ -10,6 +10,7 @@ export type StoryDetailScreenProps = {
   story?: StorybookModule | null;
   notFoundMessage?: string;
   beforeContent?: React.ReactNode;
+  footerContent?: React.ReactNode;
 };
 
 type DetailPillProps = {
@@ -143,12 +144,18 @@ export const StoryDetailScreen = ({
   story,
   notFoundMessage = 'Story not found.',
   beforeContent,
+  footerContent,
 }: StoryDetailScreenProps) => {
   const { text, color, radius } = useTheme();
 
   if (!story) {
     return (
-      <Page title="Story not found" description={notFoundMessage} beforeContent={beforeContent}>
+      <Page
+        title="Story not found"
+        description={notFoundMessage}
+        beforeContent={beforeContent}
+        footerContent={footerContent}
+      >
         <Section withPaddingY>
           <Typography style={text['Corps de texte'].MD.Regular}>{notFoundMessage}</Typography>
         </Section>
@@ -206,7 +213,13 @@ export const StoryDetailScreen = ({
   );
 
   return (
-    <Page scrollable title={meta.title} description={meta.description} beforeContent={beforeContent}>
+    <Page
+      scrollable
+      title={meta.title}
+      description={meta.description}
+      beforeContent={beforeContent}
+      footerContent={footerContent}
+    >
       <Section withPaddingY>
         <Box display="flex" gap={20}>
           <Box

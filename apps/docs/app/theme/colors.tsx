@@ -2,7 +2,7 @@ import { Box, Typography, useToast } from '@alveole/components';
 import { CustomPalette, useTheme } from '@alveole/theme';
 import React from 'react';
 import { Pressable, ScrollView } from 'react-native';
-import { useUIKitTopBar } from '../../components/uiKitNavigation';
+import { DocFooter, useUIKitTopBar } from '../../components/uiKitNavigation';
 
 type ColorEntry = { path: string; value: string };
 
@@ -243,6 +243,7 @@ export default function ThemeColorsRoute() {
         {SECTIONS.map(section => (
           <ColorSection key={section.title} section={section} />
         ))}
+        <DocFooter />
       </ScrollView>
     </Box>
   );

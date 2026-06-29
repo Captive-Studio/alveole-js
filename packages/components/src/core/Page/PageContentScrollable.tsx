@@ -17,6 +17,7 @@ export const PageContentScrollable = React.forwardRef<PageContentScrollableHandl
   function PageContentScrollable(props, ref) {
     const {
       beforeContent,
+      footerContent,
       children,
       title,
       description,
@@ -60,6 +61,7 @@ export const PageContentScrollable = React.forwardRef<PageContentScrollableHandl
         <Box tag="page" {...boxProps} height="100%">
           {beforeContent}
           {children}
+          {footerContent}
         </Box>
       </ScrollView>
     );

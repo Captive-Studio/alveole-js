@@ -1,7 +1,7 @@
 import { Box, Page, Section, Typography } from '@alveole/components';
 import { useTheme } from '@alveole/theme';
 import React from 'react';
-import { useUIKitTopBar } from '../components/uiKitNavigation';
+import { DocFooter, useUIKitTopBar } from '../components/uiKitNavigation';
 
 type PhilosophySectionProps = {
   title: string;
@@ -24,7 +24,13 @@ export default function PhilosophyRoute() {
   const { text } = useTheme();
 
   return (
-    <Page scrollable title="Philosophie" description="Les principes qui guident Alveole" beforeContent={topBar}>
+    <Page
+      scrollable
+      title="Philosophie"
+      description="Les principes qui guident Alveole"
+      beforeContent={topBar}
+      footerContent={<DocFooter />}
+    >
       <Section withPaddingY>
         <Box display="flex" gap={0} maxWidth={720}>
           <PhilosophySection title="Objectif">

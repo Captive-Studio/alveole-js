@@ -18,6 +18,7 @@ export type PageProps = BoxProps & {
   scrollable?: boolean | 'mobile-only' | 'desktop-only';
   sidebar?: React.ReactNode;
   beforeContent?: React.ReactNode;
+  footerContent?: React.ReactNode;
   sideBarController?: SidebarController;
   statusBar?: PageStatusBarProps;
 

@@ -6,6 +6,7 @@ export type PageContentDefaultProps = PageProps;
 export const PageContentDefault = (props: PageContentDefaultProps) => {
   const {
     beforeContent,
+    footerContent,
     children,
     title,
     description,
@@ -22,6 +23,7 @@ export const PageContentDefault = (props: PageContentDefaultProps) => {
     <Box tag="page" {...pageProps} height="100%">
       {beforeContent}
       {children}
+      {footerContent}
     </Box>
   );
 };

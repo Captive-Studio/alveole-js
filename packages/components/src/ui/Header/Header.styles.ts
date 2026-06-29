@@ -25,7 +25,7 @@ export const useStyles = makeStyles(({ color, text, spacing, isVariant, shadows 
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    gap: spacing('2W'),
+    gap: spacing('1W'),
   },
   titleText: {
     ...text['Corps de texte'].SM.Bold,

@@ -8,6 +8,7 @@ export type ThemeConstantsScreenProps = {
   title?: string;
   description?: string;
   beforeContent?: React.ReactNode;
+  footerContent?: React.ReactNode;
   onSelectConstant?: (entry: { name: string; value: unknown }) => void;
 };
 
@@ -16,6 +17,7 @@ export const ThemeConstantsScreen = ({
   title = 'UI Kit - Constants',
   description = 'Theme constants',
   beforeContent,
+  footerContent,
   onSelectConstant,
 }: ThemeConstantsScreenProps) => {
   const { text } = useTheme();
@@ -31,7 +33,13 @@ export const ThemeConstantsScreen = ({
   );
 
   return (
-    <Page scrollable title={title} description={description} beforeContent={beforeContent}>
+    <Page
+      scrollable
+      title={title}
+      description={description}
+      beforeContent={beforeContent}
+      footerContent={footerContent}
+    >
       <Section withPaddingY>
         <Box display="flex" flexDirection="row" flexWrap="wrap" gap={16}>
           {entries.map(([name, value]) => (

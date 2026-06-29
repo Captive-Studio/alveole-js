@@ -1,7 +1,7 @@
 import { ThemeConstantsScreen } from '@alveole/storybook';
 import * as ThemeConstants from '@alveole/theme';
 import { useRouter } from 'expo-router';
-import { useUIKitTopBar } from '../../components/uiKitNavigation';
+import { DocFooter, useUIKitTopBar } from '../../components/uiKitNavigation';
 
 export default function ConstantsRoute() {
   const router = useRouter();
@@ -10,6 +10,7 @@ export default function ConstantsRoute() {
   return (
     <ThemeConstantsScreen
       beforeContent={topBar}
+      footerContent={<DocFooter />}
       constants={ThemeConstants}
       title="UI Kit - Constantes"
       description="Constantes exposées par le thème"

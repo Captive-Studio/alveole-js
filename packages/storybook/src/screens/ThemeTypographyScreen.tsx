@@ -8,6 +8,7 @@ export type ThemeTypographyScreenProps = {
   title?: string;
   description?: string;
   beforeContent?: React.ReactNode;
+  footerContent?: React.ReactNode;
 };
 
 export const ThemeTypographyScreen = ({
@@ -15,13 +16,20 @@ export const ThemeTypographyScreen = ({
   title = 'UI Kit - Theme typography',
   description = 'Theme text styles',
   beforeContent,
+  footerContent,
 }: ThemeTypographyScreenProps) => {
   const { text } = useTheme();
   const { width } = useWindowDimensions();
   const columns = width >= 1200 ? 3 : width >= 768 ? 2 : 1;
 
   return (
-    <Page scrollable title={title} description={description} beforeContent={beforeContent}>
+    <Page
+      scrollable
+      title={title}
+      description={description}
+      beforeContent={beforeContent}
+      footerContent={footerContent}
+    >
       <Section withPaddingY>
         <Box display="flex" flexDirection="row" flexWrap="wrap" gap={16}>
           {Object.entries(typography).map(([key, value]) => (

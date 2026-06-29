@@ -1,19 +1,26 @@
 import { Box, Page, Section, Typography } from '@alveole/components';
 import { useTheme } from '@alveole/theme';
+import React from 'react';
 import { JsonBlock } from '../components/JsonBlock';
 
 export type ThemeConstantDetailScreenProps = {
   name: string;
   value: unknown;
   beforeContent?: React.ReactNode;
+  footerContent?: React.ReactNode;
 };
 
-export const ThemeConstantDetailScreen = ({ name, value, beforeContent }: ThemeConstantDetailScreenProps) => {
+export const ThemeConstantDetailScreen = ({
+  name,
+  value,
+  beforeContent,
+  footerContent,
+}: ThemeConstantDetailScreenProps) => {
   const { text } = useTheme();
   const entries = typeof value === 'object' && value != null ? Object.entries(value) : [];
 
   return (
-    <Page scrollable title={name} description={name} beforeContent={beforeContent}>
+    <Page scrollable title={name} description={name} beforeContent={beforeContent} footerContent={footerContent}>
       <Section withPaddingY>
         <Box display="flex" gap={16}>
           {entries.length === 0 ? (
