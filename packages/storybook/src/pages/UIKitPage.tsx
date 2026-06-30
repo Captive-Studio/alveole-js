@@ -8,6 +8,7 @@ import { ThemeConstantsScreen } from '../screens/ThemeConstantsScreen';
 import { ThemePaletteScreen } from '../screens/ThemePaletteScreen';
 import { ThemeTypographyScreen } from '../screens/ThemeTypographyScreen';
 import { StorybookModule } from '../types';
+import { PhilosophyPage } from './PhilosophyPage';
 
 type BlankPage = {
   title?: string;
@@ -24,7 +25,8 @@ type UIKitRoute =
   | { name: 'theme-typography' }
   | { name: 'constants' }
   | { name: 'constant-detail'; constantName: string; constantValue: unknown }
-  | { name: 'blank' };
+  | { name: 'blank' }
+  | { name: 'philosophy' };
 
 export type UIKitPageProps = {
   stories: StorybookModule[];
@@ -80,6 +82,7 @@ const HomeScreen = ({
   onOpenTheme,
   onOpenConstants,
   onOpenBlank,
+  onOpenPhilosophy,
 }: {
   title: string;
   description: string;
@@ -88,6 +91,7 @@ const HomeScreen = ({
   onOpenTheme: () => void;
   onOpenConstants: () => void;
   onOpenBlank: () => void;
+  onOpenPhilosophy: () => void;
 }) => {
   return (
     <Page scrollable title={title} description={description}>
@@ -100,6 +104,11 @@ const HomeScreen = ({
           />
           <MenuCard title="Thème" description="Couleurs et typographies du design system." onPress={onOpenTheme} />
           <MenuCard title="Constantes" description="Constantes exposées par le thème." onPress={onOpenConstants} />
+          <MenuCard
+            title="Philosophie"
+            description="Les principes qui guident Alveole."
+            onPress={onOpenPhilosophy}
+          />
           {blankPage ? (
             <MenuCard
               title={blankPage.title ?? 'Page vierge'}
@@ -171,6 +180,7 @@ export const UIKitPage = ({
         onOpenTheme={() => push({ name: 'theme-home' })}
         onOpenConstants={() => push({ name: 'constants' })}
         onOpenBlank={() => push({ name: 'blank' })}
+        onOpenPhilosophy={() => push({ name: 'philosophy' })}
       />
     );
   }
@@ -245,6 +255,10 @@ export const UIKitPage = ({
     return (
       <ThemeConstantDetailScreen beforeContent={beforeContent} name={route.constantName} value={route.constantValue} />
     );
+  }
+
+  if (route.name === 'philosophy') {
+    return <PhilosophyPage beforeContent={beforeContent} />;
   }
 
   if (route.name === 'blank' && blankPage) {
