@@ -104,11 +104,7 @@ const HomeScreen = ({
           />
           <MenuCard title="Thème" description="Couleurs et typographies du design system." onPress={onOpenTheme} />
           <MenuCard title="Constantes" description="Constantes exposées par le thème." onPress={onOpenConstants} />
-          <MenuCard
-            title="Philosophie"
-            description="Les principes qui guident Alveole."
-            onPress={onOpenPhilosophy}
-          />
+          <MenuCard title="Philosophie" description="Les principes qui guident Alveole." onPress={onOpenPhilosophy} />
           {blankPage ? (
             <MenuCard
               title={blankPage.title ?? 'Page vierge'}
