@@ -34,7 +34,7 @@ const AlveoleLogo = () => {
 };
 
 export const UIKitTopBar = ({ activeKey, items }: UIKitTopBarProps) => {
-  const { color, radius, text, isVariant, spacing } = useTheme();
+  const { color, isVariant, spacing } = useTheme();
   const [menuOpen, setMenuOpen] = React.useState(false);
 
   if (isVariant('mobile')) {
@@ -88,44 +88,15 @@ export const UIKitTopBar = ({ activeKey, items }: UIKitTopBarProps) => {
 
   const right = (
     <Box display="flex" flexDirection="row" flexWrap="wrap" gap={8}>
-      {items.map(item => {
-        const isActive = item.key === activeKey;
-
-        return (
-          <Pressable key={item.key} accessibilityRole="link" onPress={item.onPress}>
-            {({ pressed }) => (
-              <Box
-                borderColor={isActive ? color.light.border['action-low-primary'] : color.light.border['default-grey']}
-                borderRadius={radius('full')}
-                borderWidth={1}
-                pl={'100'}
-                pr={'100'}
-                pt={'075'}
-                pb={'075'}
-                style={{
-                  backgroundColor: isActive
-                    ? color.light.background['action-low-primary']
-                    : pressed
-                      ? color.light.background['alt-grey']
-                      : color.light.background['default-grey'],
-                  transitionDuration: '150ms',
-                  transitionProperty: 'background-color, border-color, color',
-                  transitionTimingFunction: 'ease',
-                }}
-              >
-                <Typography
-                  style={{
-                    ...text['Corps de texte'].SM.Medium,
-                    color: isActive ? color.light.text['action-high-primary'] : color.light.text['default-grey'],
-                  }}
-                >
-                  {item.label}
-                </Typography>
-              </Box>
-            )}
-          </Pressable>
-        );
-      })}
+      {items.map(item => (
+        <Button
+          key={item.key}
+          variant={activeKey === item.key ? 'primary' : 'tertiary'}
+          title={item.label}
+          size="sm"
+          onPress={item.onPress}
+        />
+      ))}
     </Box>
   );
 
