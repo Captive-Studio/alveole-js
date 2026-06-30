@@ -1,5 +1,6 @@
-import { Box, Header, Typography } from '@alveole/components';
+import { Box, Button, Header, LucideIcon, Typography } from '@alveole/components';
 import { useTheme } from '@alveole/theme';
+import React from 'react';
 import { Pressable } from 'react-native';
 
 export type UIKitTopBarItem = {
@@ -33,7 +34,57 @@ const AlveoleLogo = () => {
 };
 
 export const UIKitTopBar = ({ activeKey, items }: UIKitTopBarProps) => {
-  const { color, radius, text } = useTheme();
+  const { color, radius, text, isVariant, spacing } = useTheme();
+  const [menuOpen, setMenuOpen] = React.useState(false);
+
+  if (isVariant('mobile')) {
+    return (
+      <>
+        <Header
+          logo={<AlveoleLogo />}
+          right={
+            <Pressable onPress={() => setMenuOpen(v => !v)} style={{ padding: 8 }}>
+              <LucideIcon name={menuOpen ? 'X' : 'Menu'} size="md" color={color.light.text['title-grey']} />
+            </Pressable>
+          }
+        />
+        {menuOpen && (
+          <Box
+            style={{
+              position: 'sticky',
+              top: 64,
+              left: 0,
+              right: 0,
+              zIndex: 99,
+              backgroundColor: color.light.background['default-grey'],
+              borderBottomWidth: 1,
+              borderBottomColor: color.light.border['default-grey'],
+              paddingTop: spacing('2W'),
+              paddingBottom: spacing('2W'),
+              paddingLeft: spacing('2W'),
+              paddingRight: spacing('2W'),
+              display: 'flex',
+              flexDirection: 'column',
+              gap: spacing('050'),
+            }}
+          >
+            {items.map(item => (
+              <Button
+                key={item.key}
+                variant={activeKey === item.key ? 'primary' : 'tertiary'}
+                title={item.label}
+                size="sm"
+                onPress={() => {
+                  item.onPress();
+                  setMenuOpen(false);
+                }}
+              />
+            ))}
+          </Box>
+        )}
+      </>
+    );
+  }
 
   const right = (
     <Box display="flex" flexDirection="row" flexWrap="wrap" gap={8}>

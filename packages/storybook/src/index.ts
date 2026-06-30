@@ -1,5 +1,7 @@
+export * from './components/DocFooter';
 export * from './components/JsonBlock';
 export * from './components/UIKitTopBar';
+export * from './pages/PhilosophyPage';
 export * from './pages/UIKitHomePage';
 export * from './pages/UIKitPage';
 export * from './pages/UIKitThemePage';
