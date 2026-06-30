@@ -14,6 +14,7 @@ export * as TypographyStory from '../core/Typography/Typography.stories';
 export * as VersionStory from '../core/Version/Version.stories';
 
 // UI
+export * as FormStory from '../core/Form/Form.stories';
 export * as ActionMenuStory from '../ui/ActionMenu/ActionMenu.stories';
 export * as AvatarStory from '../ui/Avatar/Avatar.stories';
 export * as BadgeStory from '../ui/Badge/Badge.stories';
@@ -23,6 +24,7 @@ export * as CardStory from '../ui/Card/Card.stories';
 export * as DividerStory from '../ui/Divider/Divider.stories';
 export * as DocumentViewerStory from '../ui/DocumentViewer/DocumentViewer.stories';
 export * as EmptyStateStory from '../ui/EmptyState/EmptyState.stories';
+export * as FormControlStory from '../ui/FormControl/FormControl.stories';
 export * as HeaderStory from '../ui/Header/Header.stories';
 export * as ListItemStory from '../ui/ListItem/ListItem.stories';
 export * as LucideIconStory from '../ui/LucideIcon/LucideIcon.stories';
