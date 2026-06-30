@@ -7,6 +7,7 @@ export * from './Card';
 export * from './Divider';
 export * from './DocumentViewer';
 export * from './EmptyState';
+export * from './FormControl';
 export * from './Header';
 export * from './ListItem';
 export * from './LucideIcon';
