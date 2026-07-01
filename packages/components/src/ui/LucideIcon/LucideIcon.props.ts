@@ -1,6 +1,6 @@
 import { Color, StyleValue } from '@alveole/theme';
 import * as LabIcons from '@lucide/lab';
-import * as LucideIcons from 'lucide-react-native/icons';
+import * as LucideIcons from 'lucide-react-native';
 import { z } from 'zod';
 
 export type LucideIconName = keyof typeof LucideIcons;
