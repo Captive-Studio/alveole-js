@@ -25,15 +25,19 @@ export default {
 
 export const WithTextInput = () => (
   <FormControl>
-    <FormControlLabel label="Adresse email" />
+    <Box display="flex" flexDirection="column" gap={4}>
+      <FormControlLabel label="Adresse email" />
+      <FormControlHint hint="Votre email professionnel" />
+    </Box>
     <TextInput placeholder="jean@exemple.fr" keyboardType="email-address" />
-    <FormControlHint hint="Votre email professionnel" />
   </FormControl>
 );
 
 export const WithError = () => (
   <FormControl>
-    <FormControlLabel label="Adresse email" error="Format invalide" />
+    <Box display="flex" flexDirection="column" gap={4}>
+      <FormControlLabel label="Adresse email" error="Format invalide" />
+    </Box>
     <TextInput placeholder="jean@exemple.fr" />
     <FormControlCaption error="Format invalide" />
   </FormControl>
@@ -41,7 +45,9 @@ export const WithError = () => (
 
 export const WithSuccess = () => (
   <FormControl>
-    <FormControlLabel label="Adresse email" success="Email valide" />
+    <Box display="flex" flexDirection="column" gap={4}>
+      <FormControlLabel label="Adresse email" success="Email valide" />
+    </Box>
     <TextInput placeholder="jean@exemple.fr" />
     <FormControlCaption success="Email valide" />
   </FormControl>
@@ -49,7 +55,9 @@ export const WithSuccess = () => (
 
 export const Multiline = () => (
   <FormControl>
-    <FormControlLabel label="Message" />
+    <Box display="flex" flexDirection="column" gap={4}>
+      <FormControlLabel label="Message" />
+    </Box>
     <TextInput placeholder="Votre message..." multiline numberOfLines={4} />
   </FormControl>
 );
@@ -58,7 +66,9 @@ export const MultilineWithModal = () => {
   const [text, setText] = useState('');
   return (
     <FormControl>
-      <FormControlLabel label="Description" />
+      <Box display="flex" flexDirection="column" gap={4}>
+        <FormControlLabel label="Description" />
+      </Box>
       <TextInput
         value={text}
         onChangeText={setText}
