@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Box, Typography } from '../../core';
 import { Story } from '../../type';
 import { Button } from '../Button';
+import { InputHeading } from '../InputHeading';
 import { FormControl } from './FormControl';
 import { useStyles } from './FormControl.styles';
 import { FormControlCaption } from './FormControlCaption';
@@ -25,19 +26,19 @@ export default {
 
 export const WithTextInput = () => (
   <FormControl>
-    <Box display="flex" flexDirection="column" gap={4}>
+    <InputHeading>
       <FormControlLabel label="Adresse email" />
       <FormControlHint hint="Votre email professionnel" />
-    </Box>
+    </InputHeading>
     <TextInput placeholder="jean@exemple.fr" keyboardType="email-address" />
   </FormControl>
 );
 
 export const WithError = () => (
   <FormControl>
-    <Box display="flex" flexDirection="column" gap={4}>
+    <InputHeading>
       <FormControlLabel label="Adresse email" error="Format invalide" />
-    </Box>
+    </InputHeading>
     <TextInput placeholder="jean@exemple.fr" />
     <FormControlCaption error="Format invalide" />
   </FormControl>
@@ -45,9 +46,9 @@ export const WithError = () => (
 
 export const WithSuccess = () => (
   <FormControl>
-    <Box display="flex" flexDirection="column" gap={4}>
+    <InputHeading>
       <FormControlLabel label="Adresse email" success="Email valide" />
-    </Box>
+    </InputHeading>
     <TextInput placeholder="jean@exemple.fr" />
     <FormControlCaption success="Email valide" />
   </FormControl>
@@ -55,9 +56,9 @@ export const WithSuccess = () => (
 
 export const Multiline = () => (
   <FormControl>
-    <Box display="flex" flexDirection="column" gap={4}>
+    <InputHeading>
       <FormControlLabel label="Message" />
-    </Box>
+    </InputHeading>
     <TextInput placeholder="Votre message..." multiline numberOfLines={4} />
   </FormControl>
 );
@@ -66,9 +67,9 @@ export const MultilineWithModal = () => {
   const [text, setText] = useState('');
   return (
     <FormControl>
-      <Box display="flex" flexDirection="column" gap={4}>
+      <InputHeading>
         <FormControlLabel label="Description" />
-      </Box>
+      </InputHeading>
       <TextInput
         value={text}
         onChangeText={setText}
@@ -127,11 +128,15 @@ export const NumberInput = () => {
   return (
     <Box display="flex" flexDirection="column" gap={12}>
       <FormControl>
-        <FormControlLabel label="Montant" />
+        <InputHeading>
+          <FormControlLabel label="Montant" />
+        </InputHeading>
         <FormControlNumberInput value={value} onChange={setValue} placeholder="0" />
       </FormControl>
       <FormControl>
-        <FormControlLabel label="Avec unites" />
+        <InputHeading>
+          <FormControlLabel label="Avec unites" />
+        </InputHeading>
         <FormControlNumberInput
           value={value}
           onChange={setValue}
@@ -148,7 +153,9 @@ export const NumberInput = () => {
         />
       </FormControl>
       <FormControl>
-        <FormControlLabel label="Desactive" />
+        <InputHeading>
+          <FormControlLabel label="Desactive" />
+        </InputHeading>
         <FormControlNumberInput value={42} onChange={() => {}} disabled />
       </FormControl>
     </Box>
@@ -162,15 +169,21 @@ export const DateInput = () => {
   return (
     <Box display="flex" flexDirection="column" gap={12}>
       <FormControl>
-        <FormControlLabel label="Date" />
+        <InputHeading>
+          <FormControlLabel label="Date" />
+        </InputHeading>
         <FormControlDateInput type="date" value={date} onChange={setDate} />
       </FormControl>
       <FormControl>
-        <FormControlLabel label="Heure" />
+        <InputHeading>
+          <FormControlLabel label="Heure" />
+        </InputHeading>
         <FormControlDateInput type="time" value={time} onChange={setTime} />
       </FormControl>
       <FormControl>
-        <FormControlLabel label="Mois" />
+        <InputHeading>
+          <FormControlLabel label="Mois" />
+        </InputHeading>
         <FormControlDateInput type="month" value={month} onChange={setMonth} />
       </FormControl>
     </Box>
@@ -182,15 +195,21 @@ export const FileInput = () => {
   return (
     <Box display="flex" flexDirection="column" gap={12}>
       <FormControl>
-        <FormControlLabel label="Piece jointe" />
+        <InputHeading>
+          <FormControlLabel label="Piece jointe" />
+        </InputHeading>
         <FormControlFileInput value={file} onChange={setFile} />
       </FormControl>
       <FormControl>
-        <FormControlLabel label="Plusieurs fichiers" />
+        <InputHeading>
+          <FormControlLabel label="Plusieurs fichiers" />
+        </InputHeading>
         <FormControlFileInput value={file} onChange={setFile} multiple />
       </FormControl>
       <FormControl>
-        <FormControlLabel label="Desactive" disabled />
+        <InputHeading>
+          <FormControlLabel label="Desactive" disabled />
+        </InputHeading>
         <FormControlFileInput value={null} onChange={() => {}} disabled />
       </FormControl>
     </Box>
@@ -201,7 +220,9 @@ export const OtpInput = () => {
   const [code, setCode] = useState('');
   return (
     <FormControl>
-      <FormControlLabel label="Code de verification" />
+      <InputHeading>
+        <FormControlLabel label="Code de verification" />
+      </InputHeading>
       <FormControlOtpInput numberOfDigits={6} onTextChange={setCode} />
       {code.length === 6 && <FormControlCaption success={`Code saisi : ${code}`} />}
     </FormControl>

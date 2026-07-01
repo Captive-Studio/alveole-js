@@ -9,6 +9,7 @@ export * from './DocumentViewer';
 export * from './EmptyState';
 export * from './FormControl';
 export * from './Header';
+export * from './InputHeading';
 export * from './ListItem';
 export * from './LucideIcon';
 export * from './PageHeader';

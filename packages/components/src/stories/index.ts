@@ -26,6 +26,7 @@ export * as DocumentViewerStory from '../ui/DocumentViewer/DocumentViewer.storie
 export * as EmptyStateStory from '../ui/EmptyState/EmptyState.stories';
 export * as FormControlStory from '../ui/FormControl/FormControl.stories';
 export * as HeaderStory from '../ui/Header/Header.stories';
+export * as InputHeadingStory from '../ui/InputHeading/InputHeading.stories';
 export * as ListItemStory from '../ui/ListItem/ListItem.stories';
 export * as LucideIconStory from '../ui/LucideIcon/LucideIcon.stories';
 export * as PageHeaderStory from '../ui/PageHeader/PageHeader.stories';
