@@ -11,7 +11,7 @@ export type IconProps = LucideIconProps;
 export const LucideIcon = (props: IconProps) => {
   const { style, size, color } = props;
 
-  const iconMap: Record<LucideIconName, Icon> = LucideIcons;
+  const iconMap = LucideIcons as unknown as Record<LucideIconName, Icon>;
 
   const sizeMap: Record<IconProps['size'], number> = {
     xs: 12,
