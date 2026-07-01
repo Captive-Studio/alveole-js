@@ -7,7 +7,7 @@ import { useStyles } from './Form.styles';
 
 export default {
   title: 'Form',
-  tags: ['Core'],
+  tags: ['core'],
   experimental: false,
   description:
     "Empêche le clavier de cacher les TextInput sur iOS et permet de quitter le clavier au clique sur l'écran. Doit être utilisé pour contenir tous les fomulaires (pas de <form> en React Native).",

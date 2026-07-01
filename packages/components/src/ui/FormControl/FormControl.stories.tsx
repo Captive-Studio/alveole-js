@@ -16,7 +16,7 @@ import { TextInput } from './TextInput';
 
 export default {
   title: 'FormControl',
-  tags: ['Core'],
+  tags: ['core'],
   experimental: false,
   description: 'Eléments de construction de champs de saisie (label, input, helper text).',
   component: FormControl,
