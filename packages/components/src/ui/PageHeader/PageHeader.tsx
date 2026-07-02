@@ -26,7 +26,11 @@ export const PageHeader = (props: PageHeaderProps) => {
         <Typography tag="h1" style={styles.title}>
           {title}
         </Typography>
-        {actions && <Box style={styles.actions}>{actions}</Box>}
+        {actions && (
+          <Box tag="page-header-actions" style={styles.actions}>
+            {actions}
+          </Box>
+        )}
       </Box>
     </Box>
   );
