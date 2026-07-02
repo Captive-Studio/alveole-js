@@ -1,4 +1,4 @@
-import { Box, Page, Section, Typography, useToast } from '@alveole/components';
+import { Box, Page, PageHeader, Section, Typography, useToast } from '@alveole/components';
 import { useTheme } from '@alveole/theme';
 import React from 'react';
 import { Pressable } from 'react-native';
@@ -201,14 +201,22 @@ export const ThemePaletteScreen = ({
       beforeContent={beforeContent}
       footerContent={footerContent}
     >
-      <Section withPaddingY>
-        <Typography style={{ fontSize: 14, color: color.light.text['mention-grey'], marginBottom: 24 }}>
-          {'Cliquez sur un swatch pour copier sa valeur dans le presse-papiers.'}
-        </Typography>
-        {sections.map(section => (
-          <ColorSectionView key={section.title} section={section} />
-        ))}
-      </Section>
+      <Box display="flex" gap={24} p="150">
+        <Section withPaddingY={false}>
+          <PageHeader
+            title={title}
+            breadcrumbsProps={{ getHref: (segment, _index, path) => (segment === 'theme' ? null : path) }}
+          />
+        </Section>
+        <Section withPaddingY={false}>
+          <Typography style={{ fontSize: 14, color: color.light.text['mention-grey'], marginBottom: 24 }}>
+            {'Cliquez sur un swatch pour copier sa valeur dans le presse-papiers.'}
+          </Typography>
+          {sections.map(section => (
+            <ColorSectionView key={section.title} section={section} />
+          ))}
+        </Section>
+      </Box>
     </Page>
   );
 };

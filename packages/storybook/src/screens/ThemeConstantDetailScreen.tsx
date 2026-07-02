@@ -1,4 +1,4 @@
-import { Box, Page, Section, Typography } from '@alveole/components';
+import { Box, Page, PageHeader, Section, Typography } from '@alveole/components';
 import { useTheme } from '@alveole/theme';
 import React from 'react';
 import { JsonBlock } from '../components/JsonBlock';
@@ -21,20 +21,25 @@ export const ThemeConstantDetailScreen = ({
 
   return (
     <Page scrollable title={name} description={name} beforeContent={beforeContent} footerContent={footerContent}>
-      <Section withPaddingY>
-        <Box display="flex" gap={16}>
-          {entries.length === 0 ? (
-            <JsonBlock value={value} />
-          ) : (
-            entries.map(([entryName, entryValue]) => (
-              <Box key={entryName} display="flex" gap={8}>
-                <Typography style={text.Titres['H6 - XXS']}>{entryName}</Typography>
-                <JsonBlock value={entryValue} />
-              </Box>
-            ))
-          )}
-        </Box>
-      </Section>
+      <Box display="flex" gap={24} p="150">
+        <Section withPaddingY={false}>
+          <PageHeader title={name} />
+        </Section>
+        <Section withPaddingY={false}>
+          <Box display="flex" gap={16}>
+            {entries.length === 0 ? (
+              <JsonBlock value={value} />
+            ) : (
+              entries.map(([entryName, entryValue]) => (
+                <Box key={entryName} display="flex" gap={8}>
+                  <Typography style={text.Titres['H6 - XXS']}>{entryName}</Typography>
+                  <JsonBlock value={entryValue} />
+                </Box>
+              ))
+            )}
+          </Box>
+        </Section>
+      </Box>
     </Page>
   );
 };

@@ -1,8 +1,7 @@
-import { Box, Button, Page, Section, Typography } from '@alveole/components';
+import { ActionMenu, Box, Button, Page, PageHeader, Section, Typography } from '@alveole/components';
 import { useTheme } from '@alveole/theme';
 import React from 'react';
-import { useWindowDimensions } from 'react-native';
-import { FilterBadge } from '../components/FilterBadge';
+import { Platform, ScrollView, useWindowDimensions } from 'react-native';
 import { SearchField } from '../components/SearchField';
 import { StoryCard } from '../components/StoryCard';
 import { StorybookFlag, StorybookModule } from '../types';
@@ -39,7 +38,7 @@ export const StoriesScreen = ({
   onCreatePress,
   onSelectStory,
 }: StoriesScreenProps) => {
-  const { text, color, radius } = useTheme();
+  const { text } = useTheme();
   const { width } = useWindowDimensions();
   const columns = width >= 1200 ? 3 : width >= 768 ? 2 : 1;
   const columnStyle =
@@ -52,6 +51,7 @@ export const StoriesScreen = ({
   const [query, setQuery] = React.useState('');
   const [selectedTag, setSelectedTag] = React.useState<string | null>(null);
   const [selectedFlag, setSelectedFlag] = React.useState<StorybookFlag['key'] | null>(null);
+  const [openFilter, setOpenFilter] = React.useState<'tags' | 'indicateurs' | null>(null);
 
   const allTags = React.useMemo(() => getAllStoryTags(stories), [stories]);
   const filteredStories = React.useMemo(
@@ -65,11 +65,6 @@ export const StoriesScreen = ({
     [stories, query, selectedTag, selectedFlag],
   );
   const groupedStories = React.useMemo(() => groupStoriesByTag(filteredStories, allTags), [filteredStories, allTags]);
-  const hasActiveFilters = query.trim().length > 0 || selectedTag !== null || selectedFlag !== null;
-  const activeFiltersCount = [query.trim().length > 0, selectedTag !== null, selectedFlag !== null].filter(
-    Boolean,
-  ).length;
-
   return (
     <Page
       scrollable
@@ -88,114 +83,103 @@ export const StoriesScreen = ({
         </>
       }
     >
-      <Section withPaddingY>
-        <Box
-          borderColor={color.light.border['default-grey']}
-          borderRadius={radius('lg')}
-          borderWidth={1}
-          display="flex"
-          gap={16}
-          p={'150'}
-          style={{
-            backgroundColor: color.light.background['alt-grey'],
-          }}
-        >
-          <Box
-            display="flex"
-            gap={12}
-            style={{
-              alignItems: width >= 1024 ? 'center' : 'stretch',
-              flexDirection: width >= 1024 ? 'row' : 'column',
-              justifyContent: 'space-between',
-            }}
-          >
-            <Box display="flex" gap={4}>
-              <Typography style={text.Titres['H5 - XS']}>Filtres</Typography>
-              <Typography style={text['Corps de texte'].SM.Regular}>
-                {filteredStories.length} composant{filteredStories.length > 1 ? 's' : ''}
-                {hasActiveFilters
-                  ? `, ${activeFiltersCount} filtre${activeFiltersCount > 1 ? 's' : ''} actif${activeFiltersCount > 1 ? 's' : ''}`
-                  : ''}
-              </Typography>
-            </Box>
-
-            {hasActiveFilters ? (
-              <Button
-                title="Réinitialiser"
-                variant="tertiary"
-                size="sm"
-                onPress={() => {
-                  setQuery('');
-                  setSelectedTag(null);
-                  setSelectedFlag(null);
-                }}
-              />
-            ) : null}
-          </Box>
-
-          <SearchField label="Recherche" placeholder="Button, Tabs, Card..." value={query} onChangeText={setQuery} />
-
-          <Box
-            display="flex"
-            gap={16}
-            style={{
-              alignItems: 'flex-start',
-              flexDirection: width >= 1024 ? 'row' : 'column',
-            }}
-          >
-            <Box display="flex" gap={8} style={{ flex: 1, width: '100%' }}>
-              <Typography style={text['Corps de texte'].XS.CapsBold}>Tags</Typography>
-              <Box display="flex" flexDirection="row" flexWrap="wrap" gap={8}>
-                <FilterBadge active={selectedTag === null} label="Tous" onPress={() => setSelectedTag(null)} />
-                {allTags.map(tag => (
-                  <FilterBadge
-                    key={tag}
-                    active={selectedTag === tag}
-                    label={tag}
-                    onPress={() => setSelectedTag(current => (current === tag ? null : tag))}
-                  />
-                ))}
-              </Box>
-            </Box>
-
-            <Box display="flex" gap={8} style={{ flex: 1, width: '100%' }}>
-              <Typography style={text['Corps de texte'].XS.CapsBold}>Indicateurs</Typography>
-              <Box display="flex" flexDirection="row" flexWrap="wrap" gap={8}>
-                <FilterBadge active={selectedFlag === null} label="Tous" onPress={() => setSelectedFlag(null)} />
-                {AVAILABLE_FLAGS.map(flag => (
-                  <FilterBadge
-                    key={flag.key}
-                    active={selectedFlag === flag.key}
-                    label={flag.label}
-                    onPress={() => setSelectedFlag(current => (current === flag.key ? null : flag.key))}
-                  />
-                ))}
-              </Box>
-            </Box>
-          </Box>
-        </Box>
-      </Section>
-
-      {groupedStories.length === 0 ? (
-        <Section withPaddingY>
-          <Typography style={text['Corps de texte'].MD.Regular}>{emptyMessage}</Typography>
+      <Box display="flex" gap={24} p="150">
+        <Section withPaddingY={false}>
+          <PageHeader title={title} />
         </Section>
-      ) : (
-        groupedStories.map(([tag, taggedStories]) => (
-          <Section key={tag} withPaddingY>
-            <Box display="flex" gap={16}>
-              <Typography style={text.Titres['H4 - SM']}>{tag}</Typography>
-              <Box display="flex" flexDirection="row" flexWrap="wrap" gap={16}>
-                {taggedStories.map(story => (
-                  <Box key={story.default.title} style={{ alignSelf: 'stretch', width: columnStyle.width }}>
-                    <StoryCard story={story} onPress={onSelectStory} />
-                  </Box>
-                ))}
-              </Box>
+        <Section withPaddingY={false}>
+          <ScrollView
+            horizontal
+            nestedScrollEnabled
+            directionalLockEnabled={Platform.OS === 'ios'}
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{ flexDirection: 'row', gap: 8, alignItems: 'center' }}
+          >
+            <Box style={{ minWidth: 200 }}>
+              <SearchField placeholder="Button, Tabs, Card..." value={query} onChangeText={setQuery} size="sm" />
             </Box>
+
+            <ActionMenu
+              placement="bottom-start"
+              scrollable={false}
+              open={openFilter === 'tags'}
+              setOpen={open => setOpenFilter(open ? 'tags' : null)}
+              renderTrigger={() => (
+                <Button
+                  variant="secondary"
+                  title="Tags"
+                  endIcon="ChevronDown"
+                  size="sm"
+                  selected={selectedTag !== null}
+                  active={openFilter === 'tags'}
+                />
+              )}
+            >
+              {allTags.map(tag => (
+                <ActionMenu.Item
+                  key={tag}
+                  title={tag}
+                  selected={selectedTag === tag}
+                  onPress={() => {
+                    setSelectedTag(prev => (prev === tag ? null : tag));
+                    setOpenFilter(null);
+                  }}
+                />
+              ))}
+            </ActionMenu>
+
+            <ActionMenu
+              placement="bottom-start"
+              scrollable={false}
+              open={openFilter === 'indicateurs'}
+              setOpen={open => setOpenFilter(open ? 'indicateurs' : null)}
+              renderTrigger={() => (
+                <Button
+                  variant="secondary"
+                  title="Indicateurs"
+                  endIcon="ChevronDown"
+                  size="sm"
+                  selected={selectedFlag !== null}
+                  active={openFilter === 'indicateurs'}
+                />
+              )}
+            >
+              {AVAILABLE_FLAGS.map(flag => (
+                <ActionMenu.Item
+                  key={flag.key}
+                  title={flag.label}
+                  selected={selectedFlag === flag.key}
+                  onPress={() => {
+                    setSelectedFlag(prev => (prev === flag.key ? null : flag.key));
+                    setOpenFilter(null);
+                  }}
+                />
+              ))}
+            </ActionMenu>
+          </ScrollView>
+        </Section>
+
+        {groupedStories.length === 0 ? (
+          <Section withPaddingY={false}>
+            <Typography style={text['Corps de texte'].MD.Regular}>{emptyMessage}</Typography>
           </Section>
-        ))
-      )}
+        ) : (
+          groupedStories.map(([tag, taggedStories]) => (
+            <Section key={tag} withPaddingY={false}>
+              <Box display="flex" gap={16}>
+                <Typography style={text.Titres['H4 - SM']}>{tag}</Typography>
+                <Box display="flex" flexDirection="row" flexWrap="wrap" gap={16}>
+                  {taggedStories.map(story => (
+                    <Box key={story.default.title} style={{ alignSelf: 'stretch', width: columnStyle.width }}>
+                      <StoryCard story={story} onPress={onSelectStory} />
+                    </Box>
+                  ))}
+                </Box>
+              </Box>
+            </Section>
+          ))
+        )}
+      </Box>
       {footerContent}
     </Page>
   );

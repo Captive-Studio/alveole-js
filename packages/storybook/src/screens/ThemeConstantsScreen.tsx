@@ -1,4 +1,4 @@
-import { Box, Card, Page, Section, Typography } from '@alveole/components';
+import { Box, Card, Page, PageHeader, Section, Typography } from '@alveole/components';
 import { useTheme } from '@alveole/theme';
 import React from 'react';
 import { Pressable, useWindowDimensions } from 'react-native';
@@ -40,21 +40,26 @@ export const ThemeConstantsScreen = ({
       beforeContent={beforeContent}
       footerContent={footerContent}
     >
-      <Section withPaddingY>
-        <Box display="flex" flexDirection="row" flexWrap="wrap" gap={16}>
-          {entries.map(([name, value]) => (
-            <Box key={name} width={columns === 1 ? '100%' : columns === 2 ? '48%' : '31%'}>
-              <Pressable onPress={onSelectConstant ? () => onSelectConstant({ name, value }) : undefined}>
-                <Card>
-                  <Box p={'100'}>
-                    <Typography style={text.Titres['H5 - XS']}>{name}</Typography>
-                  </Box>
-                </Card>
-              </Pressable>
-            </Box>
-          ))}
-        </Box>
-      </Section>
+      <Box display="flex" gap={24} p="150">
+        <Section withPaddingY={false}>
+          <PageHeader title={title} />
+        </Section>
+        <Section withPaddingY={false}>
+          <Box display="flex" flexDirection="row" flexWrap="wrap" gap={16}>
+            {entries.map(([name, value]) => (
+              <Box key={name} width={columns === 1 ? '100%' : columns === 2 ? '48%' : '31%'}>
+                <Pressable onPress={onSelectConstant ? () => onSelectConstant({ name, value }) : undefined}>
+                  <Card>
+                    <Box p={'100'}>
+                      <Typography style={text.Titres['H5 - XS']}>{name}</Typography>
+                    </Box>
+                  </Card>
+                </Pressable>
+              </Box>
+            ))}
+          </Box>
+        </Section>
+      </Box>
     </Page>
   );
 };

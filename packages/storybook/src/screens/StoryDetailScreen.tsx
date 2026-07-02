@@ -1,4 +1,4 @@
-import { AnchorHeading, Box, Button, Divider, Page, Section, Typography } from '@alveole/components';
+import { AnchorHeading, Box, Button, Divider, Page, PageHeader, Section, Typography } from '@alveole/components';
 import { useTheme } from '@alveole/theme';
 import React from 'react';
 import { Linking, ScrollView } from 'react-native';
@@ -220,92 +220,97 @@ export const StoryDetailScreen = ({
       beforeContent={beforeContent}
       footerContent={footerContent}
     >
-      <Section withPaddingY>
-        <Box display="flex" gap={20}>
-          <Box
-            borderColor={color.light.border['default-grey']}
-            borderRadius={radius('lg')}
-            borderWidth={1}
-            display="flex"
-            gap={16}
-            p={'150'}
-            style={{ backgroundColor: color.light.background['alt-grey'] }}
-          >
+      <Box display="flex" gap={24} p="150">
+        <Section withPaddingY={false}>
+          <PageHeader title={meta.title} />
+        </Section>
+        <Section withPaddingY={false}>
+          <Box display="flex" gap={20}>
             <Box
+              borderColor={color.light.border['default-grey']}
+              borderRadius={radius('lg')}
+              borderWidth={1}
               display="flex"
-              gap={12}
-              style={{
-                alignItems: 'flex-start',
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-              }}
+              gap={16}
+              p={'150'}
+              style={{ backgroundColor: color.light.background['alt-grey'] }}
             >
-              <Box display="flex" gap={6} style={{ flex: 1 }}>
-                <Typography style={text.Titres['H3 - MD']}>{meta.title}</Typography>
-                <Typography style={text['Corps de texte'].MD.Regular}>{meta.description}</Typography>
+              <Box
+                display="flex"
+                gap={12}
+                style={{
+                  alignItems: 'flex-start',
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                }}
+              >
+                <Box display="flex" gap={6} style={{ flex: 1 }}>
+                  <Typography style={text.Titres['H3 - MD']}>{meta.title}</Typography>
+                  <Typography style={text['Corps de texte'].MD.Regular}>{meta.description}</Typography>
+                </Box>
+
+                {meta.figmaURL ? (
+                  <Button title="Ouvrir Figma" variant="primary" onPress={() => Linking.openURL(meta.figmaURL!)} />
+                ) : null}
               </Box>
 
-              {meta.figmaURL ? (
-                <Button title="Ouvrir Figma" variant="primary" onPress={() => Linking.openURL(meta.figmaURL!)} />
-              ) : null}
-            </Box>
-
-            <Box display="flex" gap={10}>
-              <Typography style={text['Corps de texte'].XS.CapsBold}>Tags</Typography>
-              <Box display="flex" flexDirection="row" flexWrap="wrap" gap={8}>
-                {meta.tags.map(tag => (
-                  <DetailPill key={tag} label={tag} tone="tag" />
-                ))}
-              </Box>
-            </Box>
-
-            {flags.length > 0 ? (
               <Box display="flex" gap={10}>
-                <Typography style={text['Corps de texte'].XS.CapsBold}>Informations</Typography>
+                <Typography style={text['Corps de texte'].XS.CapsBold}>Tags</Typography>
                 <Box display="flex" flexDirection="row" flexWrap="wrap" gap={8}>
-                  {flags.map(flag => (
-                    <DetailPill key={flag.key} label={flag.label} />
+                  {meta.tags.map(tag => (
+                    <DetailPill key={tag} label={tag} tone="tag" />
                   ))}
                 </Box>
               </Box>
-            ) : null}
 
-            <Box display="flex" flexDirection="row" flexWrap="wrap" gap={12}>
-              <MetaCard label="Exemples" value={String(examples.length)} />
-              <MetaCard label="Styles" value="Disponibles" />
-              {meta.props != null ? <MetaCard label="Props" value="Documentées" /> : null}
+              {flags.length > 0 ? (
+                <Box display="flex" gap={10}>
+                  <Typography style={text['Corps de texte'].XS.CapsBold}>Informations</Typography>
+                  <Box display="flex" flexDirection="row" flexWrap="wrap" gap={8}>
+                    {flags.map(flag => (
+                      <DetailPill key={flag.key} label={flag.label} />
+                    ))}
+                  </Box>
+                </Box>
+              ) : null}
+
+              <Box display="flex" flexDirection="row" flexWrap="wrap" gap={12}>
+                <MetaCard label="Exemples" value={String(examples.length)} />
+                <MetaCard label="Styles" value="Disponibles" />
+                {meta.props != null ? <MetaCard label="Props" value="Documentées" /> : null}
+              </Box>
             </Box>
-          </Box>
 
-          <DetailTabs
-            defaultValue="examples"
-            tabs={[
-              {
-                value: 'examples',
-                label: 'Examples',
-                content: examplesContent,
-                scrollable: true,
-              },
-              {
-                value: 'styles',
-                label: 'Styles',
-                content: <JsonBlock value={meta.styleFn()} />,
-                scrollable: true,
-              },
-              ...(meta.props != null
-                ? [
-                    {
-                      value: 'props',
-                      label: 'Props',
-                      content: <JsonBlock value={meta.props} />,
-                      scrollable: true,
-                    },
-                  ]
-                : []),
-            ]}
-          />
-        </Box>
-      </Section>
+            <DetailTabs
+              defaultValue="examples"
+              tabs={[
+                {
+                  value: 'examples',
+                  label: 'Examples',
+                  content: examplesContent,
+                  scrollable: true,
+                },
+                {
+                  value: 'styles',
+                  label: 'Styles',
+                  content: <JsonBlock value={meta.styleFn()} />,
+                  scrollable: true,
+                },
+                ...(meta.props != null
+                  ? [
+                      {
+                        value: 'props',
+                        label: 'Props',
+                        content: <JsonBlock value={meta.props} />,
+                        scrollable: true,
+                      },
+                    ]
+                  : []),
+              ]}
+            />
+          </Box>
+        </Section>
+      </Box>
     </Page>
   );
 };
