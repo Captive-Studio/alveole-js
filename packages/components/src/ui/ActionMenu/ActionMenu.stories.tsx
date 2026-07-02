@@ -99,7 +99,7 @@ export const Filters = () => {
             renderTrigger={() => (
               <Button
                 variant="secondary"
-                title={filter.title}
+                title={filter.multi ? filter.title : (singleSelected[filter.id] ?? filter.title)}
                 endIcon="ChevronDown"
                 size="sm"
                 selected={hasSelection}
