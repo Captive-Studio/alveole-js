@@ -8,7 +8,7 @@ export default {
   title: 'PageHeader',
   tags: ['ui'],
   experimental: false,
-  description: 'En-tête de page : fil d’Ariane, puis titre à gauche et actions à droite.',
+  description: 'En-tête de page : fil d’Ariane, puis titre à gauche et actions à droite. Le titre est est H1.',
   component: PageHeader,
   styleFn: useStyles,
 } satisfies Story;
