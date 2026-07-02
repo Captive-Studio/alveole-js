@@ -20,7 +20,7 @@ export const PageHeader = (props: PageHeaderProps) => {
   const styles = useStyles();
 
   return (
-    <Box style={styles.container}>
+    <Box tag="page-header" style={styles.container}>
       <Breadcrumbs {...breadcrumbsProps} />
       <Box style={styles.row}>
         <Typography tag="h1" style={styles.title}>
