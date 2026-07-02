@@ -70,7 +70,7 @@ export const Breadcrumbs = (props: BreadcrumbsProps) => {
   ];
 
   return (
-    <Box style={styles.container}>
+    <Box tag="breadcrumbs" style={styles.container}>
       {items.map((item, index) => (
         <Box key={`${item.href}-${index}`} style={{ flexDirection: 'row', alignItems: 'center' }}>
           {index > 0 && <Typography style={styles.separator}> &gt; </Typography>}

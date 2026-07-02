@@ -22,7 +22,7 @@ export const PageHeader = (props: PageHeaderProps) => {
   return (
     <Box tag="page-header" style={styles.container}>
       <Breadcrumbs {...breadcrumbsProps} />
-      <Box style={styles.row}>
+      <Box tag="page-header-contenu" style={styles.row}>
         <Typography tag="h1" style={styles.title}>
           {title}
         </Typography>
