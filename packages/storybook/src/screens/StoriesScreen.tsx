@@ -107,7 +107,7 @@ export const StoriesScreen = ({
               renderTrigger={() => (
                 <Button
                   variant="secondary"
-                  title="Tags"
+                  title={selectedTag ?? 'Tags'}
                   endIcon="ChevronDown"
                   size="sm"
                   selected={selectedTag !== null}
@@ -136,7 +136,7 @@ export const StoriesScreen = ({
               renderTrigger={() => (
                 <Button
                   variant="secondary"
-                  title="Indicateurs"
+                  title={AVAILABLE_FLAGS.find(f => f.key === selectedFlag)?.label ?? 'Indicateurs'}
                   endIcon="ChevronDown"
                   size="sm"
                   selected={selectedFlag !== null}

@@ -21,7 +21,6 @@ export const useStyles = makeStyles(({ text, color, spacing, radius }) => ({
   },
   title: {
     cursor: 'pointer',
-    minWidth: spacing('200'),
     textAlign: 'center',
   },
 
