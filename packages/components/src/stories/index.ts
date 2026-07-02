@@ -15,6 +15,7 @@ export * as VersionStory from '../core/Version/Version.stories';
 
 // UI
 export * as FormStory from '../core/Form/Form.stories';
+export * as AccordionStory from '../ui/Accordion/Accordion.stories';
 export * as ActionMenuStory from '../ui/ActionMenu/ActionMenu.stories';
 export * as AvatarStory from '../ui/Avatar/Avatar.stories';
 export * as BadgeStory from '../ui/Badge/Badge.stories';
