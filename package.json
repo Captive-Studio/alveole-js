@@ -15,9 +15,12 @@
     "start:ui-kit": "npm run start --workspace=apps/docs -- --clear",
     "doctor": "npm run doctor --workspace=apps/docs",
     "publish:local": "scripts/publish-local",
-    "publish:package": "scripts/publish-package"
+    "publish:package": "scripts/publish-package",
+    "test:visual": "playwright test",
+    "test:visual:update": "playwright test --update-snapshots"
   },
   "devDependencies": {
+    "@playwright/test": "1.61.1",
     "@swc/core": "1.15.43",
     "@swc/jest": "0.2.39",
     "@types/jest": "29.5.14",

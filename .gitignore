@@ -1,5 +1,7 @@
 node_modules
 .expo/
+playwright-report/
+test-results/
 packages/*/dist
 .DS_Store
 packages/**/.jest-cache/*

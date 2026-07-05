@@ -20,34 +20,23 @@ config.resolver.alias = {
   '@': projectRoot,
 };
 
-// Force une copie unique de chaque paquet sensible à la duplication à travers le monorepo.
-// Plusieurs workspaces (packages/components, packages/storybook...) déclarent leurs propres
-// copies de ces paquets (pour leur typecheck/tests), avec parfois des versions différentes.
-// Metro résout par défaut via sa recherche hiérarchique normale, qui trouve la copie locale
-// au fichier important (ex: packages/components/node_modules/expo-router), pas celle d'apps/docs.
-// Avec des copies dupliquées, React crée des instances de contexte distinctes (Provider et
-// Consumer ne se voient plus) ou refuse carrément de démarrer ("Incompatible React versions").
-// disableHierarchicalLookup casserait la résolution de paquets légitimement nichés plus
-// profondément (ex: expo-router/node_modules/@expo/metro-runtime), donc on intercepte
-// uniquement ces paquets précis via resolveRequest, en laissant tout le reste passer par
-// la résolution par défaut.
-// react-native/react-native-web restent gérés via extraNodeModules (pas resolveRequest) :
-// Expo substitue automatiquement 'react-native' -> 'react-native-web' pour la plateforme web
-// via son resolveRequest par défaut, et court-circuiter cette étape casserait le build web.
+// Force single copies of React and React Native across the monorepo.
+// extraNodeModules acts as a hard override: any import of these modules from
+// anywhere in the bundle (including node_modules packages) resolves to the
+// same physical path, eliminating the "two React instances" crash.
 const localNodeModules = path.resolve(projectRoot, 'node_modules');
-const canonicalPackages = ['react', 'react-dom', 'expo-router'];
+const monorepoNodeModules = path.resolve(monorepoRoot, 'node_modules');
 config.resolver.extraNodeModules = {
   ...config.resolver.extraNodeModules,
   canvas: path.resolve(projectRoot, 'shims/canvas.js'),
+  react: path.resolve(localNodeModules, 'react'),
+  'react-dom': path.resolve(localNodeModules, 'react-dom'),
   'react-native': path.resolve(localNodeModules, 'react-native'),
   'react-native-web': path.resolve(localNodeModules, 'react-native-web'),
-};
-config.resolver.resolveRequest = (context, moduleName, platform) => {
-  const isCanonical = canonicalPackages.some(pkg => moduleName === pkg || moduleName.startsWith(`${pkg}/`));
-  if (isCanonical) {
-    return { type: 'sourceFile', filePath: require.resolve(moduleName, { paths: [projectRoot] }) };
-  }
-  return context.resolveRequest(context, moduleName, platform);
+  'react/jsx-runtime': path.resolve(localNodeModules, 'react/jsx-runtime'),
+  'react/jsx-dev-runtime': path.resolve(localNodeModules, 'react/jsx-dev-runtime'),
+  // expo-asset est niché dans expo/node_modules, pas à la racine du monorepo
+  'expo-asset': path.resolve(monorepoNodeModules, 'expo/node_modules/expo-asset'),
 };
 
 // Désactiver watchman (macOS Full Disk Access requis) — utiliser le watcher Node
