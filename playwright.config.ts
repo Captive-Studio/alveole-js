@@ -8,6 +8,7 @@ export default defineConfig({
   use: {
     baseURL: 'http://localhost:8081',
     animations: 'disabled',
+    screenshot: 'only-on-failure',
   },
   projects: [
     {
