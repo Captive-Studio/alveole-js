@@ -14,7 +14,6 @@ for (const { moduleName, exportName } of stories) {
     await page.goto(`/test/${moduleName}/${exportName}`);
 
     await page.waitForSelector('#root > *', { timeout: 10_000 }).catch(() => {
-      const body = page.locator('body');
       throw new Error(`#root > * never appeared. Console errors: ${errors.join(' | ')}`);
     });
     await page.waitForLoadState('networkidle');
