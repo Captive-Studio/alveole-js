@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Génère les snapshots visuels Playwright dans le même container Docker que la CI.
+# Les node_modules sont isolés dans un volume anonyme pour ne pas polluer le host macOS.
+
+PLAYWRIGHT_VERSION="1.61.1"
+IMAGE="mcr.microsoft.com/playwright:v${PLAYWRIGHT_VERSION}-noble"
+
+echo "🐳 Lancement dans $IMAGE …"
+
+docker run --rm \
+  --ipc=host \
+  -v "$(pwd):/work" \
+  -v "/work/node_modules" \
+  -w /work \
+  "$IMAGE" \
+  bash -c "npm ci --silent && CI=true EXPO_NO_WATCHMAN=true npx playwright test --update-snapshots"
+
+echo "✅ Snapshots mis à jour — git add e2e/snapshots/ puis commit."

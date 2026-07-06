@@ -17,7 +17,8 @@
     "publish:local": "scripts/publish-local",
     "publish:package": "scripts/publish-package",
     "test:visual": "playwright test",
-    "test:visual:update": "playwright test --update-snapshots"
+    "test:visual:update": "playwright test --update-snapshots",
+    "test:visual:update:docker": "scripts/update-visual-snapshots"
   },
   "devDependencies": {
     "@playwright/test": "1.61.1",
