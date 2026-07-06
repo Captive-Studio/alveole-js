@@ -26,24 +26,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Debug Metro bundle
-        if: inputs.update_snapshots != true
-        env:
-          CI: true
-          EXPO_NO_WATCHMAN: 'true'
-        run: |
-          npm run start:test --workspace=apps/docs &
-          SERVER_PID=$!
-          echo "Waiting for Metro..."
-          for i in $(seq 1 30); do
-            if curl -s http://localhost:8081 > /dev/null 2>&1; then break; fi
-            sleep 2
-          done
-          echo "=== Bundle response ==="
-          curl -s "http://localhost:8081/node_modules/expo-router/entry.bundle?platform=web&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.routerRoot=app&unstable_transformProfile=hermes-stable" | head -50
-          echo "=== HTTP status ==="
-          curl -o /dev/null -w "%{http_code}" "http://localhost:8081/node_modules/expo-router/entry.bundle?platform=web&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.routerRoot=app&unstable_transformProfile=hermes-stable"
-          kill $SERVER_PID || true
+      - name: Build packages
+        run: npm run build --workspace=packages/components
 
       - name: Run visual tests
         if: inputs.update_snapshots != true
