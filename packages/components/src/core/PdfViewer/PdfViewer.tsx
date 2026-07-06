@@ -8,7 +8,7 @@ export const PdfViewer = (props: PdfViewerProps) => {
   const { source, headers } = props;
 
   return (
-    <Box flex={1}>
+    <Box tag="pdf-viewer" flex={1}>
       <WebView
         source={{ uri: source, headers }}
         startInLoadingState
