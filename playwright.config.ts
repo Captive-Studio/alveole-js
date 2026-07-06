@@ -4,6 +4,7 @@ export default defineConfig({
   testDir: './e2e',
   snapshotDir: './e2e/snapshots',
   snapshotPathTemplate: '{snapshotDir}/{testFileName}-snapshots/{arg}.png',
+  workers: process.env.CI ? 4 : undefined,
   reporter: process.env.CI ? [['github'], ['html', { open: 'never' }]] : 'list',
   use: {
     baseURL: 'http://localhost:8081',

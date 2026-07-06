@@ -16,9 +16,9 @@ for (const { moduleName, exportName } of stories) {
     await page.waitForSelector('#root > *', { timeout: 10_000 }).catch(() => {
       throw new Error(`#root > * never appeared. Console errors: ${errors.join(' | ')}`);
     });
-    await page.waitForLoadState('networkidle');
-    await page.waitForFunction(() =>
-      [...document.querySelectorAll('img')].every(img => img.complete && img.naturalWidth > 0),
+    await page.waitForFunction(
+      () => [...document.querySelectorAll('img')].every(img => img.complete && img.naturalWidth > 0),
+      { timeout: 5_000 },
     );
     await expect(page).toHaveScreenshot([moduleName, `${exportName}.png`]);
   });
