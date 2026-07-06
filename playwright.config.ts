@@ -3,7 +3,7 @@ import { defineConfig, devices } from '@playwright/test';
 export default defineConfig({
   testDir: './e2e',
   snapshotDir: './e2e/snapshots',
-  snapshotPathTemplate: '{snapshotDir}/{testFileName}-snapshots/{arg}-{projectName}.png',
+  snapshotPathTemplate: '{snapshotDir}/{testFileName}-snapshots/{arg}.png',
   reporter: process.env.CI ? [['github'], ['html', { open: 'never' }]] : 'list',
   use: {
     baseURL: 'http://localhost:8081',
