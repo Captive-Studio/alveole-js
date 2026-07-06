@@ -10,9 +10,7 @@ for (const { moduleName, exportName } of stories) {
     await page.waitForLoadState('networkidle');
     // Attendre que toutes les images soient chargées (ex: picsum.photos avec redirect 302)
     await page.waitForFunction(() =>
-      [...document.querySelectorAll('img')].every(
-        (img) => img.complete && img.naturalWidth > 0
-      )
+      [...document.querySelectorAll('img')].every(img => img.complete && img.naturalWidth > 0),
     );
     await expect(page).toHaveScreenshot([moduleName, `${exportName}.png`]);
   });

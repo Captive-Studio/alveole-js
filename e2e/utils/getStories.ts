@@ -14,18 +14,15 @@ export function getStories(): StoryCase[] {
 
   return modules.flatMap(([, moduleName, relativePath]) => {
     // relativePath est relatif à src/stories/, ex : '../ui/Button/Button.stories'
-    const filePath = path.resolve(
-      'packages/components/src/stories',
-      relativePath + '.tsx'
-    );
+    const filePath = path.resolve('packages/components/src/stories', relativePath + '.tsx');
 
     if (!fs.existsSync(filePath)) return [];
 
     const content = fs.readFileSync(filePath, 'utf-8');
     const exports = [...content.matchAll(/^export const (\w+)/gm)]
       .map(([, name]) => name)
-      .filter((name) => name !== 'Sources');
+      .filter(name => name !== 'Sources');
 
-    return exports.map((exportName) => ({ moduleName, exportName }));
+    return exports.map(exportName => ({ moduleName, exportName }));
   });
 }
