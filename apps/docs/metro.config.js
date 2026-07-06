@@ -1,4 +1,5 @@
 const { getDefaultConfig } = require('expo/metro-config');
+const fs = require('fs');
 const path = require('path');
 
 const projectRoot = __dirname;
@@ -35,8 +36,12 @@ config.resolver.extraNodeModules = {
   'react-native-web': path.resolve(localNodeModules, 'react-native-web'),
   'react/jsx-runtime': path.resolve(localNodeModules, 'react/jsx-runtime'),
   'react/jsx-dev-runtime': path.resolve(localNodeModules, 'react/jsx-dev-runtime'),
-  // expo-asset est niché dans expo/node_modules, pas à la racine du monorepo
-  'expo-asset': path.resolve(monorepoNodeModules, 'expo/node_modules/expo-asset'),
+  // expo-asset peut être niché dans expo/node_modules ou à la racine selon npm dedup
+  'expo-asset': (() => {
+    const nested = path.resolve(monorepoNodeModules, 'expo/node_modules/expo-asset');
+    const root = path.resolve(monorepoNodeModules, 'expo-asset');
+    return fs.existsSync(nested) ? nested : root;
+  })(),
 };
 
 // Désactiver watchman (macOS Full Disk Access requis) — utiliser le watcher Node
