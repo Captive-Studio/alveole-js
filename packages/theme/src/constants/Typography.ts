@@ -106,8 +106,8 @@ export const CustomTypography = {
         letterSpacing: 0,
         textTransform: 'uppercase',
       },
-      ...fontStyle('Inter-Bold'),
       CapsBold: {
+        ...fontStyle('Inter-Bold'),
         fontSize: 12,
         lineHeight: 20,
         letterSpacing: 0,
