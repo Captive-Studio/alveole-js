@@ -83,7 +83,7 @@ export const StoriesScreen = ({
         </>
       }
     >
-      <Box display="flex" gap={24} p="150">
+      <Box display="flex" gap={24} pt="150" pb="150">
         <Section withPaddingY={false}>
           <PageHeader title={title} />
         </Section>
