@@ -1,6 +1,7 @@
 import { Box, Page, PageHeader, Section, Typography } from '@alveole/components';
 import { useTheme } from '@alveole/theme';
 import React from 'react';
+import { screenContent } from '../styles';
 
 type PhilosophySectionProps = {
   title: string;
@@ -34,7 +35,7 @@ export const PhilosophyPage = ({ beforeContent, footerContent }: PhilosophyPageP
       beforeContent={beforeContent}
       footerContent={footerContent}
     >
-      <Box display="flex" gap={24} pt="150" pb="150">
+      <Box {...screenContent}>
         <Section withPaddingY={false}>
           <PageHeader title="Philosophie" />
         </Section>

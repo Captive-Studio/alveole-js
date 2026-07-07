@@ -1,6 +1,7 @@
 import { Box, Card, Page, PageHeader, Section, Typography } from '@alveole/components';
 import { useTheme } from '@alveole/theme';
 import { TextStyle, View } from 'react-native';
+import { screenContent } from '../styles';
 
 export type ThemeTypographyScreenProps = {
   typography: Record<string, unknown>;
@@ -137,7 +138,7 @@ export const ThemeTypographyScreen = ({
       beforeContent={beforeContent}
       footerContent={footerContent}
     >
-      <Box display="flex" gap={24} pt="150" pb="150">
+      <Box {...screenContent}>
         <Section withPaddingY={false}>
           <PageHeader
             title={title}

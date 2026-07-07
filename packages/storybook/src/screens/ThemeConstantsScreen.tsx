@@ -2,6 +2,7 @@ import { Box, Card, Page, PageHeader, Section, Typography } from '@alveole/compo
 import { useTheme } from '@alveole/theme';
 import React from 'react';
 import { Pressable, useWindowDimensions } from 'react-native';
+import { screenContent } from '../styles';
 
 export type ThemeConstantsScreenProps = {
   constants: Record<string, unknown>;
@@ -40,7 +41,7 @@ export const ThemeConstantsScreen = ({
       beforeContent={beforeContent}
       footerContent={footerContent}
     >
-      <Box display="flex" gap={24} pt="150" pb="150">
+      <Box {...screenContent}>
         <Section withPaddingY={false}>
           <PageHeader title={title} />
         </Section>

@@ -2,6 +2,7 @@ import { Box, Page, PageHeader, Section, Typography } from '@alveole/components'
 import { useTheme } from '@alveole/theme';
 import React from 'react';
 import { JsonBlock } from '../components/JsonBlock';
+import { screenContent } from '../styles';
 
 export type ThemeConstantDetailScreenProps = {
   name: string;
@@ -21,7 +22,7 @@ export const ThemeConstantDetailScreen = ({
 
   return (
     <Page scrollable title={name} description={name} beforeContent={beforeContent} footerContent={footerContent}>
-      <Box display="flex" gap={24} pt="150" pb="150">
+      <Box {...screenContent}>
         <Section withPaddingY={false}>
           <PageHeader title={name} />
         </Section>

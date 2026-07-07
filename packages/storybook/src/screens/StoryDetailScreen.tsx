@@ -3,6 +3,7 @@ import { useTheme } from '@alveole/theme';
 import React from 'react';
 import { Linking, ScrollView } from 'react-native';
 import { JsonBlock } from '../components/JsonBlock';
+import { screenContent } from '../styles';
 import { StorybookModule } from '../types';
 import { getStoryExamples, getStoryFlags } from '../utils';
 
@@ -220,7 +221,7 @@ export const StoryDetailScreen = ({
       beforeContent={beforeContent}
       footerContent={footerContent}
     >
-      <Box display="flex" gap={24} pt="150" pb="150">
+      <Box {...screenContent}>
         <Section withPaddingY={false}>
           <PageHeader title={meta.title} />
         </Section>

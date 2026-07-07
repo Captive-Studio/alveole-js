@@ -4,6 +4,7 @@ import React from 'react';
 import { Platform, ScrollView, useWindowDimensions } from 'react-native';
 import { SearchField } from '../components/SearchField';
 import { StoryCard } from '../components/StoryCard';
+import { screenContent } from '../styles';
 import { StorybookFlag, StorybookModule } from '../types';
 import { filterStories, getAllStoryTags, groupStoriesByTag } from '../utils';
 
@@ -83,7 +84,7 @@ export const StoriesScreen = ({
         </>
       }
     >
-      <Box display="flex" gap={24} pt="150" pb="150">
+      <Box {...screenContent}>
         <Section withPaddingY={false}>
           <PageHeader title={title} />
         </Section>
