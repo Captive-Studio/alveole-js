@@ -2,6 +2,7 @@ import { Box, Page, PageHeader, Section, Typography, useToast } from '@alveole/c
 import { useTheme } from '@alveole/theme';
 import React from 'react';
 import { Pressable } from 'react-native';
+import { screenContent } from '../styles';
 
 type ColorEntry = { path: string; value: string };
 type ColorSection = { title: string; entries: ColorEntry[]; deprecated?: boolean };
@@ -201,7 +202,7 @@ export const ThemePaletteScreen = ({
       beforeContent={beforeContent}
       footerContent={footerContent}
     >
-      <Box display="flex" gap={24} pt="150" pb="150">
+      <Box {...screenContent}>
         <Section withPaddingY={false}>
           <PageHeader
             title={title}
