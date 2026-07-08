@@ -17,14 +17,14 @@
     "publish:package": "scripts/publish-package"
   },
   "devDependencies": {
-    "@swc/core": "^1.15.41",
-    "@swc/jest": "^0.2.39",
-    "@types/jest": "^30.0.0",
-    "@types/react": "^19.2.9",
-    "eslint": "^9.39.2",
-    "jest": "^30.3.0",
-    "prettier": "^3.8.1",
-    "prettier-plugin-organize-imports": "^4.3.0",
-    "typescript": "^5.3.3"
+    "@swc/core": "1.15.43",
+    "@swc/jest": "0.2.39",
+    "@types/jest": "30.0.0",
+    "@types/react": "19.2.17",
+    "eslint": "9.39.4",
+    "jest": "30.3.0",
+    "prettier": "3.8.4",
+    "prettier-plugin-organize-imports": "4.3.0",
+    "typescript": "5.9.3"
   }
 }
