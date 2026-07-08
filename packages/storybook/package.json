@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "@alveole/eslint-config": "file:../eslint-config",
-    "eslint": "^9.39.2"
+    "eslint": "9.39.4"
   },
   "peerDependencies": {
     "@alveole/components": "*",
