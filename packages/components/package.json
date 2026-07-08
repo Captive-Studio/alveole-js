@@ -102,6 +102,7 @@
     "react-native-safe-area-context": "*",
     "react-native-signature-canvas": "*",
     "react-native-svg": "^15.0.0",
+    "react-native-keyboard-controller": ">=1.21.0",
     "react-native-webview": ">=13",
     "react-select": ">=5",
     "react-syntax-highlighter": "*",

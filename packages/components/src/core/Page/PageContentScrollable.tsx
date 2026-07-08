@@ -1,5 +1,6 @@
 import React, { useImperativeHandle, useRef } from 'react';
-import { NativeScrollEvent, NativeSyntheticEvent, ScrollView } from 'react-native';
+import { NativeScrollEvent, NativeSyntheticEvent } from 'react-native';
+import { KeyboardAwareScrollView, KeyboardAwareScrollViewRef } from 'react-native-keyboard-controller';
 import { Box } from '../../core/Box';
 import type { PageProps } from './Page';
 
@@ -35,7 +36,7 @@ export const PageContentScrollable = React.forwardRef<PageContentScrollableHandl
       ...boxProps
     } = pageProps;
 
-    const scrollRef = useRef<ScrollView>(null);
+    const scrollRef = useRef<KeyboardAwareScrollViewRef>(null);
     useImperativeHandle(ref, () => ({
       scrollToTop: () => scrollRef.current?.scrollTo({ y: 0, animated: true }),
     }));
@@ -48,7 +49,7 @@ export const PageContentScrollable = React.forwardRef<PageContentScrollableHandl
     };
 
     return (
-      <ScrollView
+      <KeyboardAwareScrollView
         ref={scrollRef}
         contentContainerStyle={{ minHeight: '100%', width: '100%', flexGrow: 1 }}
         style={{ backgroundColor: defaultBackgroundColor ?? 'transparent' }}
@@ -63,7 +64,7 @@ export const PageContentScrollable = React.forwardRef<PageContentScrollableHandl
           {children}
           {footerContent}
         </Box>
-      </ScrollView>
+      </KeyboardAwareScrollView>
     );
   },
 );
