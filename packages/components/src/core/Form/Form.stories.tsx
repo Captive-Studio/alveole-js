@@ -1,4 +1,4 @@
-import { KeyboardAvoidingView, Platform, TextInput as RNTextInput } from 'react-native';
+import { TextInput as RNTextInput } from 'react-native';
 import { Story } from '../../type';
 import { Box } from '../Box';
 import { Typography } from '../Typography';
@@ -10,7 +10,7 @@ export default {
   tags: ['core'],
   experimental: false,
   description:
-    "Empêche le clavier de cacher les TextInput sur iOS et permet de quitter le clavier au clique sur l'écran. Doit être utilisé pour contenir tous les fomulaires (pas de <form> en React Native).",
+    "Ferme le clavier au clic en dehors d'un champ. Doit être utilisé pour contenir tous les formulaires (pas de <form> en React Native). Le scroll au-dessus du clavier est géré par KeyboardAwareScrollView.",
   component: Form,
   styleFn: useStyles,
 } satisfies Story;
@@ -25,20 +25,6 @@ export const WithKeyboardAware = () => (
       <RNTextInput placeholder="Email" keyboardType="email-address" style={inputStyle} />
     </Box>
   </Form>
-);
-
-export const DisabledOverflow = () => (
-  <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-    <Form disabledKeyboardOverflow>
-      <Box display="flex" flexDirection="column" gap={12}>
-        <Typography>
-          disabledKeyboardOverflow — clavier géré par KeyboardAvoidingView. Form ne rajoute pas de padding et ne ferme
-          pas le clavier au tap.
-        </Typography>
-        <RNTextInput placeholder="Champ texte" style={inputStyle} />
-      </Box>
-    </Form>
-  </KeyboardAvoidingView>
 );
 
 export * as Sources from './Form.stories.sources';
