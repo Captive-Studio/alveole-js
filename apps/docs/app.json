@@ -9,6 +9,7 @@
     },
     "experiments": {
       "baseUrl": "/alveole-js/"
-    }
+    },
+    "plugins": ["expo-font", "expo-image", "expo-router"]
   }
 }

@@ -1,7 +1,6 @@
 import * as Stories from '@alveole/components/stories';
 import { DocFooter, UIKitTopBar, toStoryModules, type StorybookModule } from '@alveole/storybook';
 import { useRouter } from 'expo-router';
-import React from 'react';
 
 export { DocFooter };
 export const storyList = toStoryModules(Stories) as StorybookModule[];
