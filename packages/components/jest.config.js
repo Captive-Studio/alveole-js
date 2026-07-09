@@ -1,5 +1,5 @@
 const path = require('path');
-const expoPreset = require('../../node_modules/jest-expo/ios/jest-preset');
+const expoPreset = require('jest-expo/ios/jest-preset');
 
 /** @type {import('jest').Config} */
 module.exports = {
