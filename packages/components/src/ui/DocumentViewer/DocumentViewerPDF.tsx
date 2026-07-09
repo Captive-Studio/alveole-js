@@ -45,11 +45,8 @@ export const DocumentViewerPDF = (props: DocumentViewerPDFProps) => {
   }, [onReady]);
 
   const onPdfLoadedSuccess = React.useCallback((documentPdf: PDFDocumentProxy, active: boolean) => {
-    if (!active) return void documentPdf.destroy?.();
-    setPdf(currentPdf => {
-      void currentPdf?.destroy?.();
-      return documentPdf;
-    });
+    if (!active) return;
+    setPdf(documentPdf);
     onReadyRef.current?.(documentPdf);
   }, []);
 
@@ -92,7 +89,7 @@ export const DocumentViewerPDF = (props: DocumentViewerPDFProps) => {
 
   React.useEffect(() => {
     let isActive = true;
-    const loadingTask = pdfjs.getDocument(source);
+    const loadingTask = pdfjs.getDocument({ url: source });
 
     loadingTask.promise
       .then(nextPdf => onPdfLoadedSuccess(nextPdf, isActive))
@@ -149,8 +146,6 @@ export const DocumentViewerPDF = (props: DocumentViewerPDFProps) => {
     const y = ((event.clientY - rect.top) / rect.height) * 100;
     setTransformOrigin(`${Math.max(0, Math.min(100, x))}% ${Math.max(0, Math.min(100, y))}%`);
   }, []);
-
-  React.useEffect(() => () => void pdf?.destroy?.(), [pdf]);
 
   return (
     <Box
