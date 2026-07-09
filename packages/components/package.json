@@ -55,7 +55,7 @@
     "react-native-otp-entry": "1.8.6",
     "react-syntax-highlighter": "16.1.1",
     "tamagui": "1.144.4",
-    "test-renderer": "1.1.0"
+    "test-renderer": "1.2.0"
   },
   "dependencies": {
     "zod": "4.4.3"
