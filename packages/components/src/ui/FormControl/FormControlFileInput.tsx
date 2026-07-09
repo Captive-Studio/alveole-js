@@ -5,9 +5,7 @@ import { Box, Typography } from '../../core';
 import { useStyles } from './FormControlFileInput.styles';
 
 export type FormControlFileInputValue =
-  | DocumentPicker.DocumentPickerAsset
-  | DocumentPicker.DocumentPickerAsset[]
-  | null;
+  DocumentPicker.DocumentPickerAsset | DocumentPicker.DocumentPickerAsset[] | null;
 
 export type FormControlFileInputProps = {
   value: FormControlFileInputValue;
