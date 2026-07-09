@@ -9,7 +9,7 @@ export type ProgressBarLoopProps = BoxProps;
 export const ProgressBarLoop = (props: ProgressBarLoopProps) => {
   const { style, onLayout, ...boxProps } = props;
 
-  const progress = React.useRef(new Animated.Value(0)).current;
+  const [progress] = React.useState(() => new Animated.Value(0));
 
   const styles = useStyles();
 

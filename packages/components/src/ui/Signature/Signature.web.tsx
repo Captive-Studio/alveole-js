@@ -20,6 +20,7 @@ export const Signature = (props: SignatureProps) => {
 
   const styles = useStyles();
   const signatureRef = React.useRef<SignatureRef | null>(null);
+  const [signatureInstanceVersion, setSignatureInstanceVersion] = React.useState(0);
 
   const serializeSvgToBase64 = (svg: SVGSVGElement): Promise<string> => {
     return new Promise(resolve => {
@@ -51,7 +52,7 @@ export const Signature = (props: SignatureProps) => {
     return () => {
       svgEl.removeEventListener('pointerup', handlePointerUp);
     };
-  }, [signatureRef.current?.svg, onChange]);
+  }, [signatureInstanceVersion, onChange]);
 
   const handleClear = () => {
     signatureRef.current?.clear();
@@ -71,7 +72,10 @@ export const Signature = (props: SignatureProps) => {
       <Box style={{ ...styles.signatureWeb, height }}>
         <ReactSignature
           ref={(inst: SignatureRef | null) => {
-            if (inst) signatureRef.current = inst;
+            if (inst) {
+              signatureRef.current = inst;
+              setSignatureInstanceVersion(version => version + 1);
+            }
           }}
           style={styles.signatureWeb}
           fill={styles.pen.color}

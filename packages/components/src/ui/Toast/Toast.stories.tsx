@@ -19,8 +19,6 @@ export default {
 export const All = () => {
   const toast = useToast();
 
-  defaultDuration;
-
   const defaultToast = () => toast.present('Default', 'Message');
   const successToast = () => toast.present('Success', 'Message', { variant: 'success' });
   const errorToast = () => toast.present('Error', 'Message beaucoup plus long', { variant: 'error' });

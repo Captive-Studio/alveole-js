@@ -9,7 +9,7 @@ export type ProgressBarIndeterminateProps = BoxProps;
 export const ProgressBarIndeterminate = (props: ProgressBarIndeterminateProps) => {
   const { style, ...boxProps } = props;
 
-  const progress = React.useRef(new Animated.Value(0)).current;
+  const [progress] = React.useState(() => new Animated.Value(0));
 
   const styles = useStyles();
 
