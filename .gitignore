@@ -1,4 +1,5 @@
 node_modules
+.expo/
 packages/*/dist
 .DS_Store
 packages/**/.jest-cache/*

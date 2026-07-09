@@ -9,8 +9,8 @@ on:
   pull_request:
 
 jobs:
-  lint:
-    name: Lint workspaces
+  install:
+    name: Install dependencies
     if: github.event_name != 'push' || !startsWith(github.ref, 'refs/tags/')
     runs-on: [self-hosted]
     container: node:lts@sha256:392e1e23f34da768d8d1f4e502b64f200d3be3465934d4b7930f57d7e2fc1989
@@ -18,8 +18,41 @@ jobs:
       - name: Checkout
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
+      - name: Cache node_modules
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        id: npm-cache
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+            apps/*/node_modules
+          key: npm-deps-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+
       - name: Install dependencies
+        if: steps.npm-cache.outputs.cache-hit != 'true'
         run: npm ci
+
+      - name: Validate install
+        run: npm list --depth=0
+
+  lint:
+    name: Lint workspaces
+    if: github.event_name != 'push' || !startsWith(github.ref, 'refs/tags/')
+    needs: install
+    runs-on: [self-hosted]
+    container: node:lts@sha256:392e1e23f34da768d8d1f4e502b64f200d3be3465934d4b7930f57d7e2fc1989
+    steps:
+      - name: Checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+
+      - name: Restore node_modules
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+            apps/*/node_modules
+          key: npm-deps-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
 
       - name: Run lint
         run: npm run lint
@@ -27,14 +60,21 @@ jobs:
   format-check:
     name: Check formatting
     if: github.event_name != 'push' || !startsWith(github.ref, 'refs/tags/')
+    needs: install
     runs-on: [self-hosted]
     container: node:lts@sha256:392e1e23f34da768d8d1f4e502b64f200d3be3465934d4b7930f57d7e2fc1989
     steps:
       - name: Checkout
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Restore node_modules
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+            apps/*/node_modules
+          key: npm-deps-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
 
       - name: Run format check
         run: npm run format:check
@@ -42,14 +82,21 @@ jobs:
   typecheck:
     name: Typecheck workspaces
     if: github.event_name != 'push' || !startsWith(github.ref, 'refs/tags/')
+    needs: install
     runs-on: [self-hosted]
     container: node:lts@sha256:392e1e23f34da768d8d1f4e502b64f200d3be3465934d4b7930f57d7e2fc1989
     steps:
       - name: Checkout
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Restore node_modules
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+            apps/*/node_modules
+          key: npm-deps-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
 
       - name: Run typecheck
         run: npm run typecheck
@@ -57,17 +104,93 @@ jobs:
   test-unit:
     name: Test Unit workspaces
     if: github.event_name != 'push' || !startsWith(github.ref, 'refs/tags/')
+    needs: install
     runs-on: [self-hosted]
     container: node:lts@sha256:392e1e23f34da768d8d1f4e502b64f200d3be3465934d4b7930f57d7e2fc1989
     steps:
       - name: Checkout
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Restore node_modules
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+            apps/*/node_modules
+          key: npm-deps-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+
+      - name: Restore Jest cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: packages/components/.jest-cache
+          key: jest-cache-${{ runner.os }}-${{ github.sha }}
+          restore-keys: |
+            jest-cache-${{ runner.os }}-
 
       - name: Unit tests (Jest)
         run: npm run test:unit
+
+  health:
+    name: Health (Expo doctor + Web smoke test)
+    if: github.event_name != 'push' || !startsWith(github.ref, 'refs/tags/')
+    needs: install
+    runs-on: [self-hosted]
+    container: node:lts@sha256:392e1e23f34da768d8d1f4e502b64f200d3be3465934d4b7930f57d7e2fc1989
+    steps:
+      - name: Checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+
+      - name: Restore node_modules
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+            apps/*/node_modules
+          key: npm-deps-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+
+      - name: Expo doctor
+        working-directory: apps/docs
+        run: npx expo-doctor
+
+      - name: Web smoke test
+        working-directory: apps/docs
+        run: |
+          set -e
+          CI=1 npm run start -- --web > /tmp/web-smoke-test.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID 2>/dev/null || true' EXIT
+
+          # Le serveur Metro répond immédiatement sur "/" (coquille HTML statique) sans
+          # jamais déclencher le vrai bundling : il faut requêter le bundle JS lui-même,
+          # extrait du <script src="..."> de la page, pour forcer et valider la compilation.
+          html=""
+          for i in $(seq 1 30); do
+            html=$(curl -sf http://localhost:8081 2>/dev/null) && [ -n "$html" ] && break
+            sleep 2
+          done
+          if [ -z "$html" ]; then
+            echo "::error::Le serveur web ne répond pas après 60s"
+            cat /tmp/web-smoke-test.log
+            exit 1
+          fi
+
+          bundle_path=$(echo "$html" | grep -o 'src="[^"]*entry.bundle[^"]*"' | head -1 | sed 's/src="//; s/"$//')
+          if [ -z "$bundle_path" ]; then
+            echo "::error::Impossible de trouver l'URL du bundle dans la page HTML"
+            echo "$html"
+            exit 1
+          fi
+
+          http_code=$(curl -s -o /tmp/bundle-response.body -w "%{http_code}" "http://localhost:8081${bundle_path}")
+          if [ "$http_code" != "200" ]; then
+            echo "::error::Le bundling a échoué (HTTP $http_code)"
+            cat /tmp/bundle-response.body
+            exit 1
+          fi
+
+          echo "Bundle web compilé avec succès (HTTP 200)."
 
   publish-packages:
     name: Publish packages to npm
