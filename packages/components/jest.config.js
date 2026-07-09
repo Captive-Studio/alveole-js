@@ -18,10 +18,14 @@ module.exports = {
     ...(expoPreset.moduleNameMapper ?? {}),
     '^@alveole/theme$': '<rootDir>/../theme/src/index.ts',
     '^@/(.*)$': '<rootDir>/$1',
-    '^react-native$': '<rootDir>/node_modules/react-native',
-    '^react-native/(.*)$': '<rootDir>/node_modules/react-native/$1',
-    '^react$': '<rootDir>/node_modules/react',
-    '^react-dom$': '<rootDir>/node_modules/react-dom',
-    '^test-renderer$': '<rootDir>/node_modules/test-renderer',
+    // Canonicalise ces paquets sur la copie résolue depuis ce package, quel que soit
+    // l'endroit où npm les hoiste (racine ou ici) : plusieurs workspaces déclarent leurs
+    // propres copies pour leur typecheck/tests, et des instances dupliquées cassent React
+    // ("Incompatible React versions", hooks invalides) ou la config Jest elle-même.
+    '^react-native$': require.resolve('react-native'),
+    '^react-native/(.*)$': path.join(path.dirname(require.resolve('react-native/package.json')), '$1'),
+    '^react$': require.resolve('react'),
+    '^react-dom$': require.resolve('react-dom'),
+    '^test-renderer$': require.resolve('test-renderer'),
   },
 };
