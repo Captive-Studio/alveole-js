@@ -9,8 +9,8 @@ describe('Version', () => {
     expect(displayVersion(version, build)).toBe(expected);
   });
 
-  it('rend la version Expo avec le build natif', () => {
-    const { getByText } = render(<Version />);
+  it('rend la version Expo avec le build natif', async () => {
+    const { getByText } = await render(<Version />);
 
     expect(getByText('App version 1.2.3 (build 42)')).toBeTruthy();
   });
