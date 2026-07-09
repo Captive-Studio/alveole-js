@@ -38,7 +38,7 @@
     "@tamagui/core": "1.144.4",
     "@testing-library/react-native": "13.3.3",
     "@types/react-syntax-highlighter": "15.5.13",
-    "babel-preset-expo": "55.0.23",
+    "babel-preset-expo": "56.0.16",
     "eslint": "9.39.4",
     "expo": "55.0.27",
     "expo-asset": "55.0.17",
