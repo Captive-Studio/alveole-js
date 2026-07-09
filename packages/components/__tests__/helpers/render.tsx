@@ -9,21 +9,8 @@ const TestProvider = ({ children }: PropsWithChildren) => {
   return <TamaguiProvider config={tamaguiConfig}>{children}</TamaguiProvider>;
 };
 
-const customRender = (ui: ReactElement, options?: Omit<RenderOptions, 'wrapper'>) => {
-  const renderer = render(ui, { wrapper: TestProvider, ...options });
-  return {
-    ...renderer,
-    getAllByProps: renderer.UNSAFE_getAllByProps,
-    getAllByType: renderer.UNSAFE_getAllByType,
-    queryAllByProps: renderer.UNSAFE_queryAllByProps,
-    queryAllByType: renderer.UNSAFE_queryAllByType,
-
-    getByProps: renderer.UNSAFE_getByProps,
-    getByType: renderer.UNSAFE_getByType,
-    queryByProps: renderer.UNSAFE_queryByProps,
-    queryByType: renderer.UNSAFE_queryByType,
-  };
-};
+const customRender = (ui: ReactElement, options?: Omit<RenderOptions, 'wrapper'>) =>
+  render(ui, { wrapper: TestProvider, ...options });
 
 export * from '@testing-library/react-native';
 export { customRender as render };

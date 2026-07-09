@@ -38,7 +38,7 @@ export const Badge = (props: BadgeProps) => {
   if (icon) {
     const iconSize = size === 'sm' ? 'xs' : 'sm';
     return (
-      <Box tag="badge" style={[styles.badge, badgeVariant(), badgeSize, style]}>
+      <Box tag="badge" testID="badge" style={[styles.badge, badgeVariant(), badgeSize, style]}>
         <LucideIcon name={icon} size={iconSize} />
         <Typography tag="badge-text" {...badgeProps} />
       </Box>
