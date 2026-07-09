@@ -81,6 +81,7 @@ export const DocumentViewerPDF = (props: DocumentViewerPDFProps) => {
       context.clearRect(0, 0, canvas.width, canvas.height);
 
       return pagePdf.render({
+        canvas,
         canvasContext: context,
         viewport,
         transform: pixelRatio === 1 ? undefined : [pixelRatio, 0, 0, pixelRatio, 0, 0],
