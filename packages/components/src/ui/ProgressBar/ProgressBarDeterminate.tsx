@@ -15,7 +15,7 @@ export const ProgressBarDeterminate = (props: ProgressBarDeterminateProps) => {
   const { clamped, indicator, indicatorPrecision = 3, style, onLayout, ...boxProps } = props;
 
   const styles = useStyles();
-  const animatedProgress = React.useRef(new Animated.Value(clamped)).current;
+  const [animatedProgress] = React.useState(() => new Animated.Value(clamped));
   const remaining = React.useMemo(() => Animated.subtract(1, animatedProgress), [animatedProgress]);
   const animatedGap = React.useMemo(
     () =>

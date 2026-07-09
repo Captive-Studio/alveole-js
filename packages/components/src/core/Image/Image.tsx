@@ -1,5 +1,5 @@
 import { Image as ExpoImage, ImageProps as ExpoImageProps, ImageLoadEventData } from 'expo-image';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { LucideIcon } from '../../ui';
 import { Box } from '../Box';
 import { useStyles } from './Image.style';
@@ -88,11 +88,6 @@ export const Image = (props: ImageProps) => {
 
   const handleLoad = (event: ImageLoadEventData) => setDimensions(event.source);
   const handleError = () => setError(true);
-
-  useEffect(() => {
-    setDimensions(null);
-    setError(false);
-  }, []);
 
   return error ? (
     <Box>

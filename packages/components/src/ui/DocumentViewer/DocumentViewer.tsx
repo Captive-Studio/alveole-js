@@ -53,12 +53,9 @@ export const DocumentViewer = (props: DocumentViewerProps) => {
     setPage(currentPage => Math.max(currentPage - 1, 1));
   }, []);
 
-  React.useEffect(() => {
-    setPage(currentPage => Math.min(currentPage, totalPages));
-  }, [totalPages]);
-
   const handlePdfReady = React.useCallback((proxy: { numPages: number }) => {
     setTotalPages(proxy.numPages);
+    setPage(currentPage => Math.min(currentPage, proxy.numPages));
   }, []);
 
   return (

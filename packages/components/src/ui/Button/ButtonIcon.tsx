@@ -31,8 +31,8 @@ export type ButtonIconProps = Omit<PressableProps, 'children' | 'style'> & {
 } & { icon: IconProps['name'] | number };
 
 export const ButtonIcon = (props: ButtonIconProps) => {
-  const { size, variant, disabled, style, ...buttonProps } = props;
-  let { iconSize } = props;
+  const { size, variant, disabled, style, iconSize: iconSizeProp, ...buttonProps } = props;
+  const iconSize = iconSizeProp ?? (size === 'lg' ? 'lg' : size === 'sm' ? 'sm' : 'md');
 
   const styles = useStyles();
 
@@ -64,10 +64,6 @@ export const ButtonIcon = (props: ButtonIconProps) => {
   };
 
   const iconStyle = (state: { hovered: boolean }): Omit<IconProps, 'name'> => {
-    if (!iconSize) {
-      iconSize = size === 'lg' ? 'lg' : size === 'sm' ? 'sm' : 'md';
-    }
-
     if (variant === 'primary') {
       if (disabled) return { size: iconSize, color: styles.primaryIconDisabled.color };
       else if (state.hovered) return { size: iconSize, color: styles.primaryIconHover.color };

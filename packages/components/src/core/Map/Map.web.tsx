@@ -55,54 +55,7 @@ export const Map = (props: MapProps) => {
   const mapRef = React.useRef<any>(null);
   const gMarkersRef = React.useRef<any[]>([]);
 
-  const initMap = async (cancelled: boolean) => {
-    try {
-      await loadGoogleMaps();
-
-      if (cancelled) return;
-      if (!containerRef.current) return;
-      const google = window.google;
-      if (!google?.maps) throw new Error('Google Maps not available on window');
-
-      const initialCenter: LatLng = center ?? markers[0]?.position ?? { lat: 48.8566, lng: 2.3522 };
-      mapRef.current = new google.maps.Map(containerRef.current, {
-        center: initialCenter,
-        zoom,
-        clickableIcons: false,
-        streetViewControl: false,
-        mapTypeControl: false,
-        fullscreenControl: false,
-        ...mapOptions,
-      });
-
-      refreshMarkers();
-      fitBoundsIfNeeded();
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
-  // Init map
-  React.useEffect(() => {
-    let cancelled = false;
-    initMap(cancelled);
-    return () => {
-      cancelled = true;
-      gMarkersRef.current.forEach(m => m.setMap(null));
-      gMarkersRef.current = [];
-      mapRef.current = null;
-    };
-  }, []);
-
-  // Au changement d'options, on refresh markers et zoom
-  React.useEffect(() => {
-    if (!mapRef.current || !window.google?.maps) return;
-    if (mapOptions) mapRef.current.setOptions(mapOptions);
-    refreshMarkers();
-    fitBoundsIfNeeded();
-  }, [JSON.stringify(markers), JSON.stringify(center), zoom, fitToMarkers, JSON.stringify(mapOptions)]);
-
-  function refreshMarkers() {
+  const refreshMarkers = React.useCallback(() => {
     if (!mapRef.current) return;
     const g = window.google;
     if (!g?.maps) return;
@@ -119,9 +72,9 @@ export const Map = (props: MapProps) => {
       if (onMarkerClick) marker.addListener('click', () => onMarkerClick(mk));
       return marker;
     });
-  }
+  }, [markers, onMarkerClick]);
 
-  function fitBoundsIfNeeded() {
+  const fitBoundsIfNeeded = React.useCallback(() => {
     const shouldFit = (fitToMarkers ?? !center) && markers.length > 0 && mapRef.current;
 
     if (!shouldFit || !mapRef.current) {
@@ -137,7 +90,57 @@ export const Map = (props: MapProps) => {
     const bounds = new g.maps.LatLngBounds();
     markers.forEach(m => bounds.extend(m.position));
     if (!bounds.isEmpty()) mapRef.current.fitBounds(bounds, 24);
-  }
+  }, [fitToMarkers, center, markers, zoom]);
+
+  const initMap = React.useCallback(
+    async (cancelled: boolean) => {
+      try {
+        await loadGoogleMaps();
+
+        if (cancelled) return;
+        if (!containerRef.current) return;
+        const google = window.google;
+        if (!google?.maps) throw new Error('Google Maps not available on window');
+
+        const initialCenter: LatLng = center ?? markers[0]?.position ?? { lat: 48.8566, lng: 2.3522 };
+        mapRef.current = new google.maps.Map(containerRef.current, {
+          center: initialCenter,
+          zoom,
+          clickableIcons: false,
+          streetViewControl: false,
+          mapTypeControl: false,
+          fullscreenControl: false,
+          ...mapOptions,
+        });
+
+        refreshMarkers();
+        fitBoundsIfNeeded();
+      } catch (e) {
+        console.error(e);
+      }
+    },
+    [center, markers, zoom, mapOptions, refreshMarkers, fitBoundsIfNeeded],
+  );
+
+  // Init map
+  React.useEffect(() => {
+    let cancelled = false;
+    initMap(cancelled);
+    return () => {
+      cancelled = true;
+      gMarkersRef.current.forEach(m => m.setMap(null));
+      gMarkersRef.current = [];
+      mapRef.current = null;
+    };
+  }, [initMap]);
+
+  // Au changement d'options, on refresh markers et zoom
+  React.useEffect(() => {
+    if (!mapRef.current || !window.google?.maps) return;
+    if (mapOptions) mapRef.current.setOptions(mapOptions);
+    refreshMarkers();
+    fitBoundsIfNeeded();
+  }, [mapOptions, refreshMarkers, fitBoundsIfNeeded]);
 
   return (
     <Box

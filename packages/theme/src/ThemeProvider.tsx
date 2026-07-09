@@ -34,7 +34,7 @@ export const ThemeProvider = (props: ThemeProviderProps) => {
       injectFontSmoothingCSS();
       injectFontFaceCSS();
     }
-  }, []);
+  }, [theme]);
 
   React.useEffect(() => {
     if (onReady && theme.isReady) onReady();
