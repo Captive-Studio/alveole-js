@@ -1,20 +1,17 @@
 import { useTheme } from '@alveole/theme';
 import React from 'react';
 import {
+  BlurEvent,
+  FocusEvent,
   Keyboard,
-  NativeSyntheticEvent,
   Platform,
   Pressable,
   TextInput as ReactNativeTextInput,
   TextInputProps as ReactNativeTextInputProps,
-  TextInputFocusEventData,
 } from 'react-native';
 import { Box } from '../../core';
 import { useStyles } from './FormControl.styles';
 import { FormControlModal } from './FormControlModal';
-
-type FocusEvent = NativeSyntheticEvent<TextInputFocusEventData>;
-type BlurEvent = NativeSyntheticEvent<TextInputFocusEventData>;
 
 export type TextInputElement = ReactNativeTextInput;
 export type TextInputProps = Omit<ReactNativeTextInputProps, 'style'> & {
