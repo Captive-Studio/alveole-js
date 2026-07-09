@@ -18,5 +18,10 @@ module.exports = {
     ...(expoPreset.moduleNameMapper ?? {}),
     '^@alveole/theme$': '<rootDir>/../theme/src/index.ts',
     '^@/(.*)$': '<rootDir>/$1',
+    '^react-native$': '<rootDir>/node_modules/react-native',
+    '^react-native/(.*)$': '<rootDir>/node_modules/react-native/$1',
+    '^react$': '<rootDir>/node_modules/react',
+    '^react-dom$': '<rootDir>/node_modules/react-dom',
+    '^react-test-renderer$': '<rootDir>/node_modules/react-test-renderer',
   },
 };
