@@ -1,6 +1,5 @@
 import { ThemePaletteScreen } from '@alveole/storybook';
 import { CustomPalette } from '@alveole/theme';
-import React from 'react';
 import { DocFooter, useUIKitTopBar } from '../../components/uiKitNavigation';
 
 export default function ThemeColorsRoute() {
