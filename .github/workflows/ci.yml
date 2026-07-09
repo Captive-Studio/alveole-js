@@ -13,7 +13,7 @@ jobs:
     name: Lint workspaces
     if: github.event_name != 'push' || !startsWith(github.ref, 'refs/tags/')
     runs-on: [self-hosted]
-    container: node:lts@sha256:fdddfb3e688158251943d52eba361de991548f6814007acba4917ae6b512d6be
+    container: node:lts@sha256:392e1e23f34da768d8d1f4e502b64f200d3be3465934d4b7930f57d7e2fc1989
     steps:
       - name: Checkout
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
@@ -28,7 +28,7 @@ jobs:
     name: Check formatting
     if: github.event_name != 'push' || !startsWith(github.ref, 'refs/tags/')
     runs-on: [self-hosted]
-    container: node:lts@sha256:fdddfb3e688158251943d52eba361de991548f6814007acba4917ae6b512d6be
+    container: node:lts@sha256:392e1e23f34da768d8d1f4e502b64f200d3be3465934d4b7930f57d7e2fc1989
     steps:
       - name: Checkout
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
@@ -43,7 +43,7 @@ jobs:
     name: Typecheck workspaces
     if: github.event_name != 'push' || !startsWith(github.ref, 'refs/tags/')
     runs-on: [self-hosted]
-    container: node:lts@sha256:fdddfb3e688158251943d52eba361de991548f6814007acba4917ae6b512d6be
+    container: node:lts@sha256:392e1e23f34da768d8d1f4e502b64f200d3be3465934d4b7930f57d7e2fc1989
     steps:
       - name: Checkout
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
@@ -58,7 +58,7 @@ jobs:
     name: Test Unit workspaces
     if: github.event_name != 'push' || !startsWith(github.ref, 'refs/tags/')
     runs-on: [self-hosted]
-    container: node:lts@sha256:fdddfb3e688158251943d52eba361de991548f6814007acba4917ae6b512d6be
+    container: node:lts@sha256:392e1e23f34da768d8d1f4e502b64f200d3be3465934d4b7930f57d7e2fc1989
     steps:
       - name: Checkout
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
@@ -73,7 +73,7 @@ jobs:
     name: Publish packages to npm
     if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
     runs-on: [self-hosted]
-    container: node:lts@sha256:fdddfb3e688158251943d52eba361de991548f6814007acba4917ae6b512d6be
+    container: node:lts@sha256:392e1e23f34da768d8d1f4e502b64f200d3be3465934d4b7930f57d7e2fc1989
     permissions:
       contents: read
     steps:
