@@ -54,6 +54,12 @@ jobs:
             apps/*/node_modules
           key: npm-deps-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
 
+      # Le cache peut se dire "hit" alors que le téléchargement s'est interrompu en cours de
+      # route (ex: "Premature close" côté runner self-hosted) : on vérifie qu'un binaire
+      # attendu existe réellement avant de faire confiance au cache, sinon on réinstalle.
+      - name: Ensure dependencies (cache fallback)
+        run: test -x node_modules/.bin/eslint || npm ci
+
       - name: Run lint
         run: npm run lint
 
@@ -75,6 +81,12 @@ jobs:
             packages/*/node_modules
             apps/*/node_modules
           key: npm-deps-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+
+      # Le cache peut se dire "hit" alors que le téléchargement s'est interrompu en cours de
+      # route (ex: "Premature close" côté runner self-hosted) : on vérifie qu'un binaire
+      # attendu existe réellement avant de faire confiance au cache, sinon on réinstalle.
+      - name: Ensure dependencies (cache fallback)
+        run: test -x node_modules/.bin/prettier || npm ci
 
       - name: Run format check
         run: npm run format:check
@@ -98,6 +110,12 @@ jobs:
             apps/*/node_modules
           key: npm-deps-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
 
+      # Le cache peut se dire "hit" alors que le téléchargement s'est interrompu en cours de
+      # route (ex: "Premature close" côté runner self-hosted) : on vérifie qu'un binaire
+      # attendu existe réellement avant de faire confiance au cache, sinon on réinstalle.
+      - name: Ensure dependencies (cache fallback)
+        run: test -x node_modules/.bin/tsc || npm ci
+
       - name: Run typecheck
         run: npm run typecheck
 
@@ -119,6 +137,12 @@ jobs:
             packages/*/node_modules
             apps/*/node_modules
           key: npm-deps-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+
+      # Le cache peut se dire "hit" alors que le téléchargement s'est interrompu en cours de
+      # route (ex: "Premature close" côté runner self-hosted) : on vérifie qu'un binaire
+      # attendu existe réellement avant de faire confiance au cache, sinon on réinstalle.
+      - name: Ensure dependencies (cache fallback)
+        run: test -x node_modules/.bin/jest || npm ci
 
       - name: Restore Jest cache
         uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
@@ -149,6 +173,21 @@ jobs:
             packages/*/node_modules
             apps/*/node_modules
           key: npm-deps-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+
+      # Le cache peut se dire "hit" alors que le téléchargement s'est interrompu en cours de
+      # route (ex: "Premature close" côté runner self-hosted) : on vérifie qu'un binaire
+      # attendu existe réellement avant de faire confiance au cache, sinon on réinstalle.
+      - name: Ensure dependencies (cache fallback)
+        run: test -x node_modules/.bin/tsc || npm ci
+
+      # apps/docs consomme les packages du monorepo via leur `main` compilé (dist/), jamais
+      # généré automatiquement à l'install : sans ce build, Metro échoue à résoudre
+      # @alveole/components, @alveole/storybook, etc. au premier import.
+      # On cible uniquement packages/* : `npm run build` sans filtre lancerait aussi le
+      # build "build" d'apps/docs (expo export complet, ~100s), inutile ici puisqu'on
+      # démarre un serveur de dev juste après.
+      - name: Build workspace packages
+        run: npm run build --workspace=packages/core --workspace=packages/theme --workspace=packages/components --workspace=packages/storybook
 
       - name: Expo doctor
         working-directory: apps/docs
