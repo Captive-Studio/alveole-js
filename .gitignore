@@ -8,3 +8,4 @@ apps/**/public/**/*.mjs
 apps/**/dist/*
 *.d.ts
 *.d.map.ts
+*.stories.sources.ts
