@@ -4,7 +4,7 @@ import { LucideIconProps } from '../LucideIcon';
 export type ToastAPIOptions = {
   icon?: LucideIconProps['name'];
   duration?: number;
-  variant?: 'default' | 'success' | 'error' | 'info';
+  variant?: 'default' | 'success' | 'error' | 'info' | 'warning';
 };
 
 export type ToastAPI = {

@@ -1,9 +1,10 @@
 import { Button } from '@alveole/components';
 import { Box, Highlight, Typography } from '../../core';
 import { Story } from '../../type';
-import { Toast } from './Toast';
+import { Toast, ToastView } from './Toast';
 import { useStyles } from './Toast.styles';
 import { defaultDuration } from './ToastBridge';
+import { ToastType } from './ToastType';
 import { useToast } from './index';
 
 export default {
@@ -27,6 +28,7 @@ export const All = () => {
     toast.present('Information', 'Message beaucoup plus long avec retour à la ligne.\nDeuxième ligne', {
       variant: 'info',
     });
+  const warningToast = () => toast.present('Attention', 'Message', { variant: 'warning' });
   const withoutMessageToast = () => toast.present('Sans message');
   const withoutMessageToastError = () => toast.present('Sans message', undefined, { variant: 'error' });
   const withCustomIcon = () => toast.present('Avec icon custom', undefined, { icon: 'Worm' });
@@ -38,6 +40,7 @@ export const All = () => {
         <Button title="Success toast" variant="secondary" onPress={successToast} />
         <Button title="Error toast" variant="secondary" onPress={errorToast} />
         <Button title="Info toast" variant="secondary" onPress={infoToast} />
+        <Button title="Warning toast" variant="secondary" onPress={warningToast} />
         <Button title="Message long" variant="secondary" onPress={infoToastMultiLine} />
         <Button title="Without message toast" variant="secondary" onPress={withoutMessageToast} />
         <Button title="Without message toast error" variant="secondary" onPress={withoutMessageToastError} />
@@ -71,5 +74,40 @@ export const All = () => {
     </Box>
   );
 };
+
+export const PreviewInfo = () => (
+  <ToastView variant="info" title="Information" message="Description additionnelle du toast." />
+);
+
+export const PreviewSuccess = () => (
+  <ToastView variant="success" title="Succès" message="Description additionnelle du toast." />
+);
+
+export const PreviewError = () => (
+  <ToastView variant="error" title="Erreur" message="Description additionnelle du toast." />
+);
+
+export const PreviewDefault = () => (
+  <ToastView variant="default" title="Default" message="Description additionnelle du toast." />
+);
+
+export const PreviewWarning = () => (
+  <ToastView variant="warning" title="Attention" message="Description additionnelle du toast." />
+);
+
+export const PreviewInfoSansDescription = () => <ToastView variant="info" title="Message seul sans description" />;
+
+export const PreviewSuccessSansDescription = () => (
+  <ToastView variant="success" title="Message seul sans description" />
+);
+
+export const ToastsTypes = () => (
+  <Box display="flex" flexDirection="row" gap={8}>
+    <ToastType variant="info" />
+    <ToastType variant="success" />
+    <ToastType variant="error" />
+    <ToastType variant="warning" />
+  </Box>
+);
 
 export * as Sources from './Toast.stories.sources';
