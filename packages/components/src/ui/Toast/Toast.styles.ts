@@ -3,14 +3,14 @@ import { makeStyles } from '@alveole/theme';
 export const useStyles = makeStyles(({ text, color, radius, spacing, shadows }) => ({
   // Container
   container: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: color.light.background['default-grey'],
     width: 384,
-    padding: spacing('100'),
     borderRadius: radius('sm'),
     display: 'flex',
     flexDirection: 'row',
-    gap: spacing('050'),
-    alignItems: 'flex-start',
+    gap: spacing('1W'),
+    overflow: 'hidden',
+    padding: 0,
 
     ...shadows(3),
   },
@@ -19,7 +19,8 @@ export const useStyles = makeStyles(({ text, color, radius, spacing, shadows }) 
     display: 'flex',
     flex: 1,
     flexDirection: 'column',
-    gap: spacing('050'),
+    gap: spacing('1W'),
+    padding: spacing('100'),
   },
 
   titleContainer: {
@@ -27,34 +28,44 @@ export const useStyles = makeStyles(({ text, color, radius, spacing, shadows }) 
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    minHeight: spacing('150'),
   },
+
   // Titre
   title: {
     ...text['Corps de texte'].SM.Bold,
-    color: color.text['title-grey'],
+    color: color.light.text['default-grey'],
   },
 
-  // Icon
-  icon: {
-    paddingTop: spacing('025'),
+  // Bloc icône (panel coloré pleine hauteur)
+  iconBlock: {
+    display: 'flex',
+    alignSelf: 'stretch',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    paddingLeft: spacing('3V'),
+    paddingRight: spacing('3V'),
+    paddingTop: spacing('2W'),
+    paddingBottom: spacing('2W'),
   },
-  iconDefault: {
-    color: color.text['default-grey'],
+  iconBlockDefault: {
+    backgroundColor: color.light.background['flat-info'],
   },
-  iconInfo: {
-    color: color.text['default-grey'],
+  iconBlockInfo: {
+    backgroundColor: color.light.background['flat-info'],
   },
-  iconSuccess: {
-    color: color.text['default-success'],
+  iconBlockSuccess: {
+    backgroundColor: color.light.background['flat-success'],
   },
-  iconError: {
-    color: color.text['default-error'],
+  iconBlockError: {
+    backgroundColor: color.light.background['flat-error'],
+  },
+  iconBlockWarning: {
+    backgroundColor: color.light.background['flat-warning'],
   },
 
   // Message
   message: {
     ...text['Corps de texte'].SM.Regular,
-    color: color.text['default-grey'],
+    color: color.light.text['default-grey'],
   },
 }));
