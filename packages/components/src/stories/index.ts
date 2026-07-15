@@ -22,6 +22,7 @@ export * as BadgeStory from '../ui/Badge/Badge.stories';
 export * as BreadcrumbsStory from '../ui/Breadcrumbs/Breadcrumbs.stories';
 export * as ButtonStory from '../ui/Button/Button.stories';
 export * as CardStory from '../ui/Card/Card.stories';
+export * as CounterStory from '../ui/Counter/Counter.stories';
 export * as DividerStory from '../ui/Divider/Divider.stories';
 export * as DocumentViewerStory from '../ui/DocumentViewer/DocumentViewer.stories';
 export * as EmptyStateStory from '../ui/EmptyState/EmptyState.stories';

@@ -43,14 +43,6 @@ export const useStyles = makeStyles(({ color, spacing, text, radius }) => ({
     borderBottomColor: color.light.border['default-primary'],
     borderBottomWidth: 2,
   },
-  tabsCounter: {
-    paddingRight: spacing('1W'),
-    paddingLeft: spacing('1W'),
-    backgroundColor: color.light.background['disabled-grey'],
-    borderRadius: radius('full'),
-    ...text['Corps de texte'].XS.Bold,
-  },
-  tabsCounterActive: {},
   wrapperHover: {
     display: 'flex',
     flexDirection: 'row',
