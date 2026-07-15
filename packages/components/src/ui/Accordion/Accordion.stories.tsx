@@ -24,3 +24,5 @@ export const Default = () => (
     </Accordion.Item>
   </Accordion>
 );
+
+export * as Sources from './Accordion.stories.sources';
