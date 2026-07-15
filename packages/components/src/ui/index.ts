@@ -5,6 +5,7 @@ export * from './Badge';
 export * from './Breadcrumbs';
 export * from './Button';
 export * from './Card';
+export * from './Counter';
 export * from './Divider';
 export * from './DocumentViewer';
 export * from './EmptyState';

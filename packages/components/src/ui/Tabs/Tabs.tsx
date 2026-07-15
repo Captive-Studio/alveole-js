@@ -1,4 +1,4 @@
-import { Box, BoxProps, LucideIcon, LucideIconProps, Typography } from '@alveole/components';
+import { Box, BoxProps, Counter, LucideIcon, LucideIconProps, Typography } from '@alveole/components';
 import React from 'react';
 import { ScrollView } from 'react-native';
 import { TabLayout, TabsTabProps, Tabs as TamaguiTabs } from 'tamagui';
@@ -135,11 +135,7 @@ export const Tabs = (props: TabsProps) => {
                     {tab.label}
                   </Typography>
                   {tab.counter !== undefined && tab.counter > 0 && (
-                    <Typography
-                      style={{ ...styles.tabsCounter, ...(isCurrentTab(tab.value) ? styles.tabsCounterActive : {}) }}
-                    >
-                      {tab.counter}
-                    </Typography>
+                    <Counter variant={isCurrentTab(tab.value) ? 'primary' : 'default'} count={tab.counter} />
                   )}
                 </Box>
               </TamaguiTabs.Tab>
