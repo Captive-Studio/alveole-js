@@ -10,11 +10,14 @@ export type PageStatusBarProps = {
   backgroundColor?: string;
 };
 
+export type MetaTagProps = React.ComponentPropsWithoutRef<'meta'>;
+
 export type PageProps = BoxProps & {
   title: string;
   description?: string;
   defaultBackgroundColor?: string;
   og?: { title?: string; description?: string };
+  meta?: MetaTagProps[];
   scrollable?: boolean | 'mobile-only' | 'desktop-only';
   sidebar?: React.ReactNode;
   beforeContent?: React.ReactNode;
