@@ -1,4 +1,5 @@
 export * from './A';
+export * from './Alert';
 export * from './AnchorHeading';
 export * from './Box';
 export * from './Form';

@@ -23,7 +23,7 @@
   ],
   "sideEffects": false,
   "scripts": {
-    "build": "npm run generate:sources && node ./scripts/generate-version.mjs && tsc -p tsconfig.build.json && node ./scripts/prepare-pdfjs-web-assets.mjs",
+    "build": "npm run generate:sources && node ./scripts/generate-version.mjs && tsc -p tsconfig.build.json && node ./scripts/copy-assets.mjs && node ./scripts/prepare-pdfjs-web-assets.mjs",
     "lint": "npm run generate:sources && eslint .",
     "postinstall": "node ./scripts/postinstall.mjs",
     "test:unit": "NODE_OPTIONS=--max-old-space-size=4096 npx jest --maxWorkers=2 --ci",
@@ -33,6 +33,7 @@
   "devDependencies": {
     "@alveole/eslint-config": "file:../eslint-config",
     "@lucide/lab": "0.1.2",
+    "@react-native-picker/picker": "2.11.4",
     "@react-native/jest-preset": "0.85.3",
     "@shopify/flash-list": "2.3.2",
     "@tamagui/config": "1.144.4",
@@ -55,6 +56,7 @@
     "react-native": "0.85.3",
     "react-native-code-highlighter": "1.3.0",
     "react-native-otp-entry": "1.8.6",
+    "react-select": "5.10.2",
     "react-syntax-highlighter": "16.1.1",
     "tamagui": "1.144.4",
     "test-renderer": "1.2.0"
@@ -67,6 +69,7 @@
     "@alveole/theme": "*",
     "@lottiefiles/dotlottie-react": "*",
     "@lucide/lab": "*",
+    "@react-native-picker/picker": ">=2",
     "@shopify/flash-list": ">=2",
     "@tamagui/accordion": "^1.129.0 <2.0.0",
     "@tamagui/animations-css": "^1.129.0 <2.0.0",
@@ -84,8 +87,8 @@
     "@uiw/react-signature": "*",
     "expo-application": "*",
     "expo-asset": "*",
-    "expo-document-picker": "*",
     "expo-constants": "*",
+    "expo-document-picker": "*",
     "expo-image": "*",
     "expo-linear-gradient": "*",
     "expo-router": "*",
@@ -100,6 +103,7 @@
     "react-native-signature-canvas": "*",
     "react-native-svg": "^15.0.0",
     "react-native-webview": ">=13",
+    "react-select": ">=5",
     "react-syntax-highlighter": "*",
     "tamagui": "^1.129.0 <2.0.0"
   },
