@@ -9,6 +9,7 @@ export * from './screens/StoriesScreen';
 export * from './screens/StoryDetailScreen';
 export * from './screens/ThemeConstantDetailScreen';
 export * from './screens/ThemeConstantsScreen';
+export * from './screens/ThemeCSSVariablesScreen';
 export * from './screens/ThemePaletteScreen';
 export * from './screens/ThemeTypographyScreen';
 export * from './types';
