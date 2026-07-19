@@ -28,10 +28,6 @@ export type CustomBuilder = {
   color?: DeepPartial<Palette>;
 };
 
-const WEB_SPACING_VARS = Object.fromEntries(
-  Object.keys(Spacings).map(k => [k, `var(--spacing-${sanitizeCSSKey(k)})`]),
-) as Record<keyof typeof Spacings, string>;
-
 const toCSSVarPalette = (palette: typeof CustomPalette): typeof CustomPalette => {
   if (Platform.OS !== 'web') return palette;
 
