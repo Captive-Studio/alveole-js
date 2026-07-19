@@ -10,8 +10,7 @@ const isElevationKey = (key: ElevationKey): key is keyof typeof Elevations =>
  * @returns
  */
 export const elevationStyle = (level: ElevationKey) => {
-  const value = isElevationKey(level) ? Elevations[level] : undefined;
-  if (value == null) return;
-  if (Platform.OS === 'web') return { boxShadow: value.web };
-  return value.mobile;
+  if (!isElevationKey(level)) return;
+  if (Platform.OS === 'web') return { boxShadow: `var(--elevation-${level})` };
+  return Elevations[level].mobile;
 };
