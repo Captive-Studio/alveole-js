@@ -420,6 +420,12 @@ export const CustomPalette = {
 
 export type LeafStrings<T> = T extends string ? string : { [K in keyof T]: LeafStrings<T[K]> };
 
+export type LeafFlexible<T> = T extends string
+  ? string
+  : T extends number
+    ? number | string
+    : { [K in keyof T]: LeafFlexible<T[K]> };
+
 export type Palette = LeafStrings<typeof CustomPalette>;
 export type DeepPartial<T> = {
   [K in keyof T]?: T[K] extends object ? DeepPartial<T[K]> : T[K];

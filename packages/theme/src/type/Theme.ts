@@ -1,13 +1,4 @@
-import type {
-  Colors,
-  CustomPalette,
-  CustomTypography,
-  Fonts,
-  Grilles,
-  Spacing,
-  SpacingKey,
-  Variant,
-} from '../constants';
+import type { Colors, CustomTypography, Fonts, Grilles, Palette, Spacing, SpacingKey, Variant } from '../constants';
 import { Radius, RadiusKey } from '../constants/Radius';
 import { alpha } from '../helpers/alphaColor';
 import { elevationStyle } from '../helpers/elevationStyle';
@@ -42,7 +33,9 @@ export interface Theme {
   color: {
     /** @deprecated Utiliser la palette */
     _constants: typeof Colors;
-  } & typeof CustomPalette & {
+    /** Palette light avec valeurs hex brutes, utilisée par injectVariableCSS */
+    _rawLight: Palette['light'];
+  } & Palette & {
       alpha: typeof alpha;
     };
 }
