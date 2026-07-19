@@ -5,12 +5,13 @@ import { useRouter } from 'expo-router';
 export { DocFooter };
 export const storyList = toStoryModules(Stories) as StorybookModule[];
 
-type ActiveKey = 'components' | 'colors' | 'typography' | 'constants' | 'philosophy';
+type ActiveKey = 'components' | 'colors' | 'typography' | 'css-variables' | 'constants' | 'philosophy';
 
 const NAV_ITEMS: { key: ActiveKey; label: string; path: string }[] = [
   { key: 'components', label: 'Composants', path: '/' },
   { key: 'colors', label: 'Couleurs', path: '/theme/colors' },
   { key: 'typography', label: 'Typographies', path: '/theme/typographies' },
+  { key: 'css-variables', label: 'Variables CSS', path: '/theme/css-variables' },
   { key: 'constants', label: 'Constantes', path: '/constants' },
   { key: 'philosophy', label: 'Philosophie', path: '/philosophy' },
 ];
