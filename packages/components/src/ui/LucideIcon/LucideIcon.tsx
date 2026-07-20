@@ -25,11 +25,11 @@ export const resolveShareIconName = (platform: typeof Platform.OS): LucideIconNa
 };
 
 export const LucideIcon = (props: IconProps) => {
-  const { style, size, color } = props;
+  const { style, size, color, _platformOverride } = props;
   let { name } = props;
 
   if (name === 'Share') {
-    name = resolveShareIconName(Platform.OS);
+    name = resolveShareIconName(_platformOverride ?? Platform.OS);
   }
 
   const iconMap = LucideIcons as unknown as Record<LucideIconName, Icon>;

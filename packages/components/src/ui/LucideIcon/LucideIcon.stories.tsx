@@ -27,18 +27,25 @@ export const Default = () => (
 export const Colored = () => <LucideIcon name="AArrowDown" size="md" color="green" />;
 
 export const SharePerPlatform = () => (
-  <Box style={{ flexDirection: 'row', gap: 24 }}>
-    <Box style={{ alignItems: 'center', gap: 8 }}>
-      <Typography>Web</Typography>
-      <LucideIcon name="Forward" size="md" />
-    </Box>
-    <Box style={{ alignItems: 'center', gap: 8 }}>
-      <Typography>Android</Typography>
-      <LucideIcon name="Share2" size="md" />
-    </Box>
-    <Box style={{ alignItems: 'center', gap: 8 }}>
-      <Typography>iOS</Typography>
-      <LucideIcon name="Share" size="md" />
+  <Box style={{ gap: 24 }}>
+    <Typography>
+      En passant name=&quot;Share&quot;, le composant sélectionne automatiquement l&apos;icône adaptée à la plateforme
+      courante. La prop _platformOverride est utilisée ici uniquement pour forcer l&apos;affichage de chaque variante
+      dans la story.
+    </Typography>
+    <Box style={{ flexDirection: 'row', gap: 24 }}>
+      <Box style={{ alignItems: 'center', gap: 8 }}>
+        <Typography>Web</Typography>
+        <LucideIcon name="Share" size="md" _platformOverride="web" />
+      </Box>
+      <Box style={{ alignItems: 'center', gap: 8 }}>
+        <Typography>Android</Typography>
+        <LucideIcon name="Share" size="md" _platformOverride="android" />
+      </Box>
+      <Box style={{ alignItems: 'center', gap: 8 }}>
+        <Typography>iOS</Typography>
+        <LucideIcon name="Share" size="md" _platformOverride="ios" />
+      </Box>
     </Box>
   </Box>
 );
