@@ -19,6 +19,7 @@ const PublicPropsSchema = z.object({
 type PrivateProps = {
   style?: StyleValue;
   color?: Color;
+  _platformOverride?: 'ios' | 'android' | 'web' | 'windows' | 'macos';
 };
 
 // Exports
