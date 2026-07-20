@@ -1,4 +1,4 @@
-import { Box, Page, PageHeader, Section, Typography, useToast } from '@alveole/components';
+import { Accordion, Box, Page, PageHeader, Section, Typography, useToast } from '@alveole/components';
 import { Colors, CustomPalette, Spacings, useTheme } from '@alveole/theme';
 import { Elevations } from '@alveole/theme/src/constants/Elevation';
 import { FontWeightMap } from '@alveole/theme/src/constants/Font';
@@ -253,56 +253,6 @@ const VarRow = ({ entry }: { entry: CSSVarEntry }) => {
   );
 };
 
-// ─── Group ────────────────────────────────────────────────────────────────────
-
-const VarGroup = ({ group }: { group: CSSVarGroup }) => {
-  const [collapsed, setCollapsed] = React.useState(
-    group.title.startsWith('Typographies') ||
-      group.title.startsWith('Fonts') ||
-      group.title.startsWith('Couleurs palette'),
-  );
-  const { color, radius } = useTheme();
-
-  return (
-    <Box style={{ marginBottom: 16 }}>
-      <Pressable onPress={() => setCollapsed(c => !c)}>
-        <Box
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            paddingVertical: 10,
-            paddingHorizontal: 16,
-            backgroundColor: color.light.background['alt-grey'],
-            borderRadius: radius('md'),
-            borderWidth: 1,
-            borderColor: color.light.border['default-grey'],
-            marginBottom: collapsed ? 0 : 4,
-          }}
-        >
-          <Typography
-            style={{
-              flex: 1,
-              fontSize: 13,
-              fontWeight: '700',
-              color: color.light.text['title-grey'],
-              fontFamily: 'monospace',
-            }}
-          >
-            {group.title}
-          </Typography>
-          <Typography style={{ fontSize: 11, color: color.light.text['mention-grey'], marginRight: 8 }}>
-            {`${group.vars.length} var${group.vars.length > 1 ? 's' : ''}`}
-          </Typography>
-          <Typography style={{ fontSize: 12, color: color.light.text['mention-grey'] }}>
-            {collapsed ? '▸' : '▾'}
-          </Typography>
-        </Box>
-      </Pressable>
-      {!collapsed && group.vars.map(v => <VarRow key={v.name} entry={v} />)}
-    </Box>
-  );
-};
-
 // ─── Screen ───────────────────────────────────────────────────────────────────
 
 export type ThemeCSSVariablesScreenProps = {
@@ -310,10 +260,18 @@ export type ThemeCSSVariablesScreenProps = {
   footerContent?: React.ReactNode;
 };
 
+const COLLAPSED_BY_DEFAULT = ['Typographies', 'Fonts', 'Couleurs palette'];
+
 export const ThemeCSSVariablesScreen = ({ beforeContent, footerContent }: ThemeCSSVariablesScreenProps) => {
   const { color } = useTheme();
   const groups = React.useMemo(() => buildGroups(), []);
   const total = groups.reduce((sum, g) => sum + g.vars.length, 0);
+
+  const initialOpen = React.useMemo(
+    () => groups.filter(g => !COLLAPSED_BY_DEFAULT.some(prefix => g.title.startsWith(prefix))).map(g => g.title),
+    [groups],
+  );
+  const [openGroups, setOpenGroups] = React.useState<string[]>(initialOpen);
 
   return (
     <Page
@@ -343,9 +301,26 @@ export const ThemeCSSVariablesScreen = ({ beforeContent, footerContent }: ThemeC
           >
             {'color: var(--background-action-high-primary);'}
           </Typography>
-          {groups.map(g => (
-            <VarGroup key={g.title} group={g} />
-          ))}
+          <Accordion type="multiple" value={openGroups} onValueChange={setOpenGroups}>
+            {groups.map(g => (
+              <Accordion.Item
+                key={g.title}
+                value={g.title}
+                label={g.title}
+                variant="alt"
+                labelChildren={
+                  <Typography style={{ fontSize: 11, color: color.light.text['mention-grey'] }}>
+                    {`${g.vars.length} var${g.vars.length > 1 ? 's' : ''}`}
+                  </Typography>
+                }
+                noPadding
+              >
+                {g.vars.map(v => (
+                  <VarRow key={v.name} entry={v} />
+                ))}
+              </Accordion.Item>
+            ))}
+          </Accordion>
         </Section>
       </Box>
     </Page>

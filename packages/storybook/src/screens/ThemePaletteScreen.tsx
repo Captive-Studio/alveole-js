@@ -1,4 +1,4 @@
-import { Box, Page, PageHeader, Section, Typography, useToast } from '@alveole/components';
+import { Accordion, Box, Page, PageHeader, Section, Typography, useToast } from '@alveole/components';
 import { useTheme } from '@alveole/theme';
 import React from 'react';
 import { Pressable } from 'react-native';
@@ -126,56 +126,6 @@ const ColorSwatch = ({ entry }: { entry: ColorEntry }) => {
   );
 };
 
-const ColorSectionView = ({ section }: { section: ColorSection }) => {
-  const [collapsed, setCollapsed] = React.useState(section.deprecated === true);
-  const { color, radius } = useTheme();
-
-  return (
-    <Box style={{ marginBottom: 24 }}>
-      <Pressable onPress={() => setCollapsed(c => !c)}>
-        <Box
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            paddingVertical: 10,
-            paddingHorizontal: 16,
-            backgroundColor: color.light.background['alt-grey'],
-            borderRadius: radius('md'),
-            borderWidth: 1,
-            borderColor: color.light.border['default-grey'],
-            marginBottom: collapsed ? 0 : 12,
-          }}
-        >
-          <Typography
-            style={{
-              fontSize: 13,
-              fontWeight: '700',
-              color: section.deprecated ? color.light.text['mention-grey'] : color.light.text['title-grey'],
-              flex: 1,
-              fontFamily: 'monospace',
-            }}
-          >
-            {section.title}
-          </Typography>
-          <Typography style={{ fontSize: 11, color: color.light.text['mention-grey'], marginRight: 8 }}>
-            {section.entries.length} token{section.entries.length > 1 ? 's' : ''}
-          </Typography>
-          <Typography style={{ fontSize: 12, color: color.light.text['mention-grey'] }}>
-            {collapsed ? '▸' : '▾'}
-          </Typography>
-        </Box>
-      </Pressable>
-      {!collapsed && (
-        <Box style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8, paddingHorizontal: 4 }}>
-          {section.entries.map(entry => (
-            <ColorSwatch key={entry.path} entry={entry} />
-          ))}
-        </Box>
-      )}
-    </Box>
-  );
-};
-
 export type ThemePaletteScreenProps = {
   palette: Record<string, unknown>;
   title?: string;
@@ -193,6 +143,9 @@ export const ThemePaletteScreen = ({
 }: ThemePaletteScreenProps) => {
   const { color } = useTheme();
   const sections = React.useMemo(() => buildSections(palette), [palette]);
+
+  const initialOpen = React.useMemo(() => sections.filter(s => !s.deprecated).map(s => s.title), [sections]);
+  const [openSections, setOpenSections] = React.useState<string[]>(initialOpen);
 
   return (
     <Page
@@ -213,9 +166,28 @@ export const ThemePaletteScreen = ({
           <Typography style={{ fontSize: 14, color: color.light.text['mention-grey'], marginBottom: 24 }}>
             {'Cliquez sur un swatch pour copier sa valeur dans le presse-papiers.'}
           </Typography>
-          {sections.map(section => (
-            <ColorSectionView key={section.title} section={section} />
-          ))}
+          <Accordion type="multiple" value={openSections} onValueChange={setOpenSections}>
+            {sections.map(section => (
+              <Accordion.Item
+                key={section.title}
+                value={section.title}
+                label={section.title}
+                variant="alt"
+                labelChildren={
+                  <Typography style={{ fontSize: 11, color: color.light.text['mention-grey'] }}>
+                    {`${section.entries.length} token${section.entries.length > 1 ? 's' : ''}`}
+                  </Typography>
+                }
+                noPadding
+              >
+                <Box style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8, padding: 8 }}>
+                  {section.entries.map(entry => (
+                    <ColorSwatch key={entry.path} entry={entry} />
+                  ))}
+                </Box>
+              </Accordion.Item>
+            ))}
+          </Accordion>
         </Section>
       </Box>
     </Page>
