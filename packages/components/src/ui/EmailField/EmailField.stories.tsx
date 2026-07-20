@@ -12,7 +12,7 @@ export default {
 } satisfies Story;
 
 export const Default = () => (
-  <Box display="flex" flexDirection="column" gap={8}>
+  <Box display="flex" flexDirection="column" gap={24}>
     <EmailField label="Email" placeholder="jean@exemple.fr" />
     <EmailField label="Avec erreur" placeholder="jean@exemple.fr" error="Format invalide" />
     <EmailField label="Avec succès" value="jean@exemple.fr" success="Email valide" />

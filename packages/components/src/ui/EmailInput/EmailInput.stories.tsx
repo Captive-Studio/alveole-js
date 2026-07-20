@@ -12,7 +12,7 @@ export default {
 } satisfies Story;
 
 export const Default = () => (
-  <Box display="flex" flexDirection="column" gap={8}>
+  <Box display="flex" flexDirection="column" gap={24}>
     <EmailInput placeholder="jean@exemple.fr" />
     <EmailInput placeholder="jean@exemple.fr" value="jean@exemple.fr" />
     <EmailInput placeholder="jean@exemple.fr" editable={false} />

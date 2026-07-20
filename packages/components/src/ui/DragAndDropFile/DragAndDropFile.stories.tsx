@@ -14,7 +14,7 @@ export default {
 } satisfies Story;
 
 export const Default = () => (
-  <Box display="flex" flexDirection="column" gap={8}>
+  <Box display="flex" flexDirection="column" gap={24}>
     <DragAndDropFile label="Document" value={null} onChange={() => {}} />
     <DragAndDropFile label="Image uniquement" type="image/*" value={null} onChange={() => {}} />
   </Box>

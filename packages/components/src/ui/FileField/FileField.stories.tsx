@@ -13,7 +13,7 @@ export default {
 } satisfies Story;
 
 export const Default = () => (
-  <Box display="flex" flexDirection="column" gap={8}>
+  <Box display="flex" flexDirection="column" gap={24}>
     <FileField label="Document" value={null} onChange={() => {}} />
     <FileField label="Image uniquement" type="image/*" value={null} onChange={() => {}} />
     <FileField label="Avec erreur" value={null} error="Ce champ est requis" onChange={() => {}} />
