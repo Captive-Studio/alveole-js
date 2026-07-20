@@ -83,7 +83,7 @@ export const MultilineWithModal = () => {
 };
 
 export const Label = () => (
-  <Box display="flex" flexDirection="column" gap={8}>
+  <Box display="flex" flexDirection="column" gap={24}>
     <FormControlLabel label="Label par defaut" />
     <FormControlLabel label="Desactive" disabled />
     <FormControlLabel label="Erreur" error="Message erreur" />
@@ -93,14 +93,14 @@ export const Label = () => (
 );
 
 export const Caption = () => (
-  <Box display="flex" flexDirection="column" gap={8}>
+  <Box display="flex" flexDirection="column" gap={24}>
     <FormControlCaption error="Champ requis" />
     <FormControlCaption success="Valeur correcte" />
   </Box>
 );
 
 export const Hint = () => (
-  <Box display="flex" flexDirection="column" gap={8}>
+  <Box display="flex" flexDirection="column" gap={24}>
     <FormControlHint hint="Texte descriptif du champ" />
     <FormControlHint hint="Texte desactive" disabled />
   </Box>
