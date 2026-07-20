@@ -5,7 +5,7 @@
   "main": "expo-router/entry",
   "scripts": {
     "start": "node ./scripts/sync-pdfjs-web-assets.mjs && expo start --web",
-    "start:test": "node ./scripts/sync-pdfjs-web-assets.mjs && expo start --web --non-interactive",
+    "start:test": "node ./scripts/sync-pdfjs-web-assets.mjs && expo start --web",
     "build": "node ./scripts/sync-pdfjs-web-assets.mjs && expo export --platform web",
     "doctor": "expo-doctor"
   },
