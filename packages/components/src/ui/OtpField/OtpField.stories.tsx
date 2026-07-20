@@ -13,7 +13,7 @@ export default {
 } satisfies Story;
 
 export const Default = () => (
-  <Box display="flex" flexDirection="column" gap={8}>
+  <Box display="flex" flexDirection="column" gap={24}>
     <OtpField label="Code de vérification" onChange={() => {}} />
     <OtpField label="Avec erreur" onChange={() => {}} error="Code invalide" />
     <OtpField label="Désactivé" onChange={() => {}} disabled />

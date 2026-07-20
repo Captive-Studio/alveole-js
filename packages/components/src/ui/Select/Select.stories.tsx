@@ -22,14 +22,14 @@ const OPTIONS = [
 export const Default = () => {
   const [value, setValue] = useState<string | null>(null);
   return (
-    <Box display="flex" flexDirection="column" gap={8}>
+    <Box display="flex" flexDirection="column" gap={24}>
       <Select label="Sélection" placeholder="Choisir..." options={OPTIONS} value={value} onChange={setValue} />
     </Box>
   );
 };
 
 export const States = () => (
-  <Box display="flex" flexDirection="column" gap={8}>
+  <Box display="flex" flexDirection="column" gap={24}>
     <Select label="Avec valeur" options={OPTIONS} value="b" />
     <Select label="Erreur" options={OPTIONS} value={null} error="Ce champ est requis" />
     <Select label="Succès" options={OPTIONS} value="a" success="Valide" />

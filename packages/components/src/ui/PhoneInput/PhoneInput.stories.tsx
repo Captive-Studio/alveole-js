@@ -12,7 +12,7 @@ export default {
 } satisfies Story;
 
 export const Default = () => (
-  <Box display="flex" flexDirection="column" gap={8}>
+  <Box display="flex" flexDirection="column" gap={24}>
     <PhoneInput placeholder="06 12 34 56 78" />
     <PhoneInput placeholder="06 12 34 56 78" value="06 12 34 56 78" />
     <PhoneInput placeholder="06 12 34 56 78" editable={false} />

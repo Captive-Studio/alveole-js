@@ -12,7 +12,7 @@ export default {
 } satisfies Story;
 
 export const Default = () => (
-  <Box display="flex" flexDirection="column" gap={8}>
+  <Box display="flex" flexDirection="column" gap={24}>
     <PhoneField label="Téléphone" placeholder="06 12 34 56 78" />
     <PhoneField label="Avec erreur" placeholder="06 12 34 56 78" error="Numéro invalide" />
     <PhoneField label="Désactivé" value="06 12 34 56 78" disabled />

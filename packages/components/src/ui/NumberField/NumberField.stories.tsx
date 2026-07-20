@@ -16,7 +16,7 @@ export default {
 export const Default = () => {
   const [value, setValue] = useState<number | null>(null);
   return (
-    <Box display="flex" flexDirection="column" gap={8}>
+    <Box display="flex" flexDirection="column" gap={24}>
       <NumberField label="Quantité" value={value} onChange={setValue} placeholder="0" />
       <NumberField label="Avec erreur" value={0} onChange={() => {}} error="Valeur invalide" />
       <NumberField label="Désactivé" value={42} onChange={() => {}} disabled />

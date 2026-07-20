@@ -17,7 +17,7 @@ export default {
 export const Default = () => {
   const [value, setValue] = useState<number | null>(null);
   return (
-    <Box display="flex" flexDirection="column" gap={8}>
+    <Box display="flex" flexDirection="column" gap={24}>
       <PriceInput value={value} onChange={setValue} />
       <PriceInput value={1250} onChange={() => {}} />
     </Box>

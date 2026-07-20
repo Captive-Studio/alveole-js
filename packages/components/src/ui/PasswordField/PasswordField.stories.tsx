@@ -13,7 +13,7 @@ export default {
 } satisfies Story;
 
 export const Default = () => (
-  <Box display="flex" flexDirection="column" gap={8}>
+  <Box display="flex" flexDirection="column" gap={24}>
     <PasswordField label="Mot de passe" placeholder="••••••••" />
     <PasswordField label="Avec erreur" placeholder="••••••••" error="Mot de passe incorrect" />
     <PasswordField label="Désactivé" value="monMotDePasse" disabled />

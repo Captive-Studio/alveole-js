@@ -35,7 +35,7 @@ export const Cards = () => {
 };
 
 export const WithError = () => (
-  <Box display="flex" flexDirection="column" gap={8}>
+  <Box display="flex" flexDirection="column" gap={24}>
     <RadioGroup value="a" label="Avec erreur" error="Veuillez faire un choix">
       <RadioGroup.Item value="a">Option A</RadioGroup.Item>
       <RadioGroup.Item value="b">Option B</RadioGroup.Item>

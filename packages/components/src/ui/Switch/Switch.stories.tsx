@@ -14,7 +14,7 @@ export default {
 } satisfies Story;
 
 export const Default = () => (
-  <Box display="flex" flexDirection="column" gap={8}>
+  <Box display="flex" flexDirection="column" gap={24}>
     <Switch label="Non activé" />
     <Switch label="Activé" checked />
     <Switch label="Désactivé" disabled />

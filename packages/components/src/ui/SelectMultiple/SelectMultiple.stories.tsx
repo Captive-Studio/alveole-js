@@ -23,14 +23,14 @@ const OPTIONS = [
 export const Default = () => {
   const [value, setValue] = useState<string[]>([]);
   return (
-    <Box display="flex" flexDirection="column" gap={8}>
+    <Box display="flex" flexDirection="column" gap={24}>
       <SelectMultiple label="Sélection" options={OPTIONS} value={value} onChange={setValue} />
     </Box>
   );
 };
 
 export const States = () => (
-  <Box display="flex" flexDirection="column" gap={8}>
+  <Box display="flex" flexDirection="column" gap={24}>
     <SelectMultiple label="Avec valeurs" options={OPTIONS} value={['a', 'c']} />
     <SelectMultiple label="Erreur" options={OPTIONS} value={[]} error="Ce champ est requis" />
     <SelectMultiple label="Désactivé" options={OPTIONS} value={['b']} disabled />
