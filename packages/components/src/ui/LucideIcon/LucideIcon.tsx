@@ -1,15 +1,36 @@
 import * as LabIcons from '@lucide/lab';
 import * as LucideIcons from 'lucide-react-native';
 import { Icon as BaseIcon, LucideIcon as Icon } from 'lucide-react-native';
-import { StyleProp, ViewStyle } from 'react-native';
+import { Platform, StyleProp, ViewStyle } from 'react-native';
 import { isLucideIconName, LucideIconName, LucideIconProps } from './LucideIcon.props';
 
 export const strokeWidth = 1.5;
 
 export type IconProps = LucideIconProps;
 
+// Chaque plateforme a une convention visuelle différente pour le partage :
+// iOS utilise la flèche vers le haut (Share), Android le symbole à trois points (Share2),
+// et le web la flèche vers l'avant (Forward).
+export const resolveShareIconName = (platform: typeof Platform.OS): LucideIconName => {
+  switch (platform) {
+    case 'ios':
+      return 'Share';
+    case 'android':
+      return 'Share2';
+    case 'web':
+      return 'Forward';
+    default:
+      return 'Share';
+  }
+};
+
 export const LucideIcon = (props: IconProps) => {
   const { style, size, color } = props;
+  let { name } = props;
+
+  if (name === 'Share') {
+    name = resolveShareIconName(Platform.OS);
+  }
 
   const iconMap = LucideIcons as unknown as Record<LucideIconName, Icon>;
 
@@ -24,8 +45,8 @@ export const LucideIcon = (props: IconProps) => {
   const defaultStyle = { stroke: color ?? 'currentColor' };
   const mergedStyle = [defaultStyle, style];
 
-  if (isLucideIconName(props.name)) {
-    const IconComponent = iconMap[props.name];
+  if (isLucideIconName(name)) {
+    const IconComponent = iconMap[name];
     return (
       <IconComponent
         style={mergedStyle as StyleProp<ViewStyle>}
@@ -38,7 +59,7 @@ export const LucideIcon = (props: IconProps) => {
 
   return (
     <BaseIcon
-      iconNode={(LabIcons as any)?.[props.name]}
+      iconNode={(LabIcons as any)?.[name]}
       style={mergedStyle as StyleProp<ViewStyle>}
       strokeWidth={strokeWidth}
       color={color}

@@ -1,4 +1,5 @@
 import { Box } from '../../core';
+import { Typography } from '../../core/Typography';
 import { Story } from '../../type';
 import { LucideIcon } from './LucideIcon';
 import { LucideIconPropsJSON } from './LucideIcon.props';
@@ -24,5 +25,22 @@ export const Default = () => (
 );
 
 export const Colored = () => <LucideIcon name="AArrowDown" size="md" color="green" />;
+
+export const SharePerPlatform = () => (
+  <Box style={{ flexDirection: 'row', gap: 24 }}>
+    <Box style={{ alignItems: 'center', gap: 8 }}>
+      <Typography>Web</Typography>
+      <LucideIcon name="Forward" size="md" />
+    </Box>
+    <Box style={{ alignItems: 'center', gap: 8 }}>
+      <Typography>Android</Typography>
+      <LucideIcon name="Share2" size="md" />
+    </Box>
+    <Box style={{ alignItems: 'center', gap: 8 }}>
+      <Typography>iOS</Typography>
+      <LucideIcon name="Share" size="md" />
+    </Box>
+  </Box>
+);
 
 export * as Sources from './LucideIcon.stories.sources';
