@@ -9,6 +9,7 @@ export const useStyles = makeStyles(({ color, text, spacing, isVariant, shadows 
     position: 'sticky',
     top: 0,
     zIndex: 100,
+    width: '100%',
   },
   inner: {
     display: 'flex',
