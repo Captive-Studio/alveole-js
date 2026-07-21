@@ -1,10 +1,9 @@
 import * as SystemUI from 'expo-system-ui';
 import React, { createContext, useContext, type PropsWithChildren } from 'react';
-import { Platform } from 'react-native';
-import { injectFontFaceCSS, injectFontSmoothingCSS, injectVariableCSS } from './helpers/injectVariableCSS';
 import { CustomBuilder, useThemeBuilder } from './helpers/useThemeBuilder';
 import { ThemeProviderLoader } from './ThemeProviderLoader';
 import type { Theme } from './type';
+import { WebThemeStyles } from './WebThemeStyles';
 
 const ThemeContext = createContext<Theme | null>(null);
 const MIN_LOADING_DELAY = 0;
@@ -29,19 +28,27 @@ export const ThemeProvider = (props: ThemeProviderProps) => {
 
   React.useEffect(() => {
     void SystemUI.setBackgroundColorAsync('white');
-    if (Platform.OS === 'web') {
-      injectVariableCSS(theme);
-      injectFontSmoothingCSS();
-      injectFontFaceCSS();
-    }
-  }, [theme]);
+  }, []);
 
   React.useEffect(() => {
     if (onReady && theme.isReady) onReady();
   }, [onReady, theme.isReady]);
 
-  if ((!theme.isReady || showLoader) && loader !== false) return <ThemeProviderLoader />;
-  return <ThemeContext.Provider value={theme}>{props.children}</ThemeContext.Provider>;
+  if ((!theme.isReady || showLoader) && loader !== false) {
+    return (
+      <>
+        <WebThemeStyles theme={theme} />
+        <ThemeProviderLoader />
+      </>
+    );
+  }
+
+  return (
+    <ThemeContext.Provider value={theme}>
+      <WebThemeStyles theme={theme} />
+      {props.children}
+    </ThemeContext.Provider>
+  );
 };
 
 export const useTheme = (): Theme => {
