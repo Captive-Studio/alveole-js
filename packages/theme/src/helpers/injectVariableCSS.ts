@@ -1,4 +1,4 @@
-import { Spacings } from '../constants';
+import { Colors, CustomPalette, Spacings } from '../constants';
 import { Elevations } from '../constants/Elevation';
 import { Font, FontWeightMap, FontsMap } from '../constants/Font';
 import { RadiusList } from '../constants/Radius';
@@ -32,7 +32,7 @@ const generateSemanticTokenLines = (
   return lines;
 };
 
-const generateCSSVariables = (theme: Theme): string => {
+export const generateCSSVariables = (theme: Theme): string => {
   const lines: string[] = [];
   const colorVarMap = buildColorVarMap(theme.color._constants);
 
@@ -183,3 +183,23 @@ export const injectVariableCSS = (theme: Theme) => {
 
   document.head.appendChild(styleTag);
 };
+
+export const generateFontFaceCSS = (): string =>
+  Object.entries(FontsMap)
+    .map(([key, src]) => {
+      const { family, weight } = FontWeightMap[key as Font];
+      return `@font-face {\n  font-family: '${family}';\n  src: url('${src}') format('truetype');\n  font-weight: ${weight};\n  font-style: normal;\n}`;
+    })
+    .join('\n');
+
+export const generateFontSmoothingCSS = (): string =>
+  'body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }';
+
+export const generateDefaultThemeCSS = (): string =>
+  generateCSSVariables({
+    color: {
+      _constants: Colors,
+      _rawLight: CustomPalette.light,
+      dark: CustomPalette.dark,
+    },
+  } as Theme);
