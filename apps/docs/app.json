@@ -5,7 +5,7 @@
     "scheme": "alveole-docs",
     "web": {
       "bundler": "metro",
-      "output": "single"
+      "output": "static"
     },
     "experiments": {
       "baseUrl": "/alveole-js/"
