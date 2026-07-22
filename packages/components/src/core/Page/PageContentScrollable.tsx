@@ -58,6 +58,7 @@ export const PageContentScrollable = React.forwardRef<PageContentScrollableHandl
         alwaysBounceVertical={onScrollToBottom != null}
         bounces={onScrollToBottom != null}
         overScrollMode={onScrollToBottom != null ? 'always' : 'never'}
+        bottomOffset={24}
       >
         <Box tag="page" {...boxProps} height="100%">
           {beforeContent}
