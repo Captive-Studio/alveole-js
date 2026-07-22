@@ -36,8 +36,6 @@ stage_release_files() {
       -path '*/src/generated/version.ts' \
       -o -name '*.stories.ts' \
       -o -name '*.stories.tsx' \
-      -o -name '*.stories.sources.ts' \
-      -o -name '*.stories.sources.tsx' \
     \) -print0
   )
 
