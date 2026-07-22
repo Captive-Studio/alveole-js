@@ -8,7 +8,7 @@
       "output": "static"
     },
     "experiments": {
-      "baseUrl": "/alveole-js/"
+      "baseUrl": ""
     },
     "plugins": ["expo-font", "expo-image", "expo-router"]
   }
