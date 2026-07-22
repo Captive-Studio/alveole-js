@@ -45,6 +45,28 @@ export const WithMultipleMeta = () => (
   </Page>
 );
 
+export const WithPageMetaProvider = () => (
+  <Box>
+    <Typography>
+      {`// Dans app/_layout.tsx — configure des meta globales pour toutes les pages
+// Les meta du provider sont injectées en premier ;
+// la prop \`meta\` de chaque <Page> les complète ou les écrase.
+import { PageMetaProvider } from '@alveole/components';
+
+export default function RootLayout() {
+  return (
+    <PageMetaProvider meta={[{ name: 'robots', content: 'noindex, nofollow' }]}>
+      <Stack />
+    </PageMetaProvider>
+  );
+}
+
+// Une page peut surcharger ou ajouter des meta sans répéter le noindex :
+<Page title="Ma page" meta={[{ name: 'author', content: 'Alvéole' }]} />`}
+    </Typography>
+  </Box>
+);
+
 export const WithSidebar = () => (
   <Box>
     <Typography>
