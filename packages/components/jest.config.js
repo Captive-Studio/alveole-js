@@ -27,5 +27,7 @@ module.exports = {
     '^react$': require.resolve('react'),
     '^react-dom$': require.resolve('react-dom'),
     '^test-renderer$': require.resolve('test-renderer'),
+    '^expo-modules-core$': require.resolve('expo-modules-core'),
+    '^expo-modules-core/(.*)$': path.join(path.dirname(require.resolve('expo-modules-core/package.json')), '$1'),
   },
 };
