@@ -6,9 +6,12 @@ import type { Typography } from './Typography';
 
 export interface Theme {
   // Spacing
-  spacing: (key: SpacingKey) => Spacing;
+  /** Retourne une CSS variable sur web, un nombre sur native. Ne pas utiliser dans des expressions arithmétiques. */
+  spacing: (key: SpacingKey) => string | number;
+  /** Retourne toujours la valeur numérique en pixels, indépendamment de la plateforme. À utiliser pour l'arithmétique. */
+  spacingValue: (key: SpacingKey) => Spacing;
   /** Padding externe responsive : 100 sur mobile, 150 sur desktop */
-  externalPadding: () => Spacing;
+  externalPadding: () => string | number;
 
   // Breakpoints
   variant: Variant;

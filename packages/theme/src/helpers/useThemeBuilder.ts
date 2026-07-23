@@ -95,11 +95,11 @@ export function useThemeBuilder(params: CustomBuilder): Theme & { isReady: boole
 
   const externalPadding = useCallback(
     () =>
-      (Platform.OS === 'web'
+      Platform.OS === 'web'
         ? `var(--spacing-${sanitizeCSSKey(variant === 'mobile' ? '2W' : '3W')})`
         : variant === 'mobile'
           ? Spacings['2W']
-          : Spacings['3W']) as Spacing,
+          : Spacings['3W'],
     [variant],
   );
 
@@ -113,7 +113,8 @@ export function useThemeBuilder(params: CustomBuilder): Theme & { isReady: boole
 
   return {
     // Spacings
-    spacing: key => (Platform.OS === 'web' ? `var(--spacing-${sanitizeCSSKey(key)})` : Spacings[key]) as Spacing,
+    spacing: key => Platform.OS === 'web' ? `var(--spacing-${sanitizeCSSKey(key)})` : Spacings[key],
+    spacingValue: key => Spacings[key],
     externalPadding,
 
     // Radius
