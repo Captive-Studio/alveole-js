@@ -267,7 +267,6 @@ export const StoryDetailScreen = ({
                 }}
               >
                 <Box display="flex" gap={6} style={{ flex: 1 }}>
-                  <Typography style={text.Titres['H3 - MD']}>{meta.title}</Typography>
                   <MarkdownDescription>{meta.description}</MarkdownDescription>
                 </Box>
 
