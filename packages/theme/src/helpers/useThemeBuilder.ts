@@ -15,7 +15,6 @@ import {
   Heights,
   Palette,
   Sizes,
-  Spacing,
   Spacings,
 } from '../constants';
 import { Radius, RadiusList } from '../constants/Radius';
@@ -113,7 +112,7 @@ export function useThemeBuilder(params: CustomBuilder): Theme & { isReady: boole
 
   return {
     // Spacings
-    spacing: key => Platform.OS === 'web' ? `var(--spacing-${sanitizeCSSKey(key)})` : Spacings[key],
+    spacing: key => (Platform.OS === 'web' ? `var(--spacing-${sanitizeCSSKey(key)})` : Spacings[key]),
     spacingValue: key => Spacings[key],
     externalPadding,
 
