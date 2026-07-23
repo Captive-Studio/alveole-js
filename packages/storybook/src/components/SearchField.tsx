@@ -12,7 +12,7 @@ export type SearchFieldProps = {
 };
 
 export const SearchField = ({ label, placeholder, value, onChangeText, size = 'md' }: SearchFieldProps) => {
-  const { text, color, radius, spacing, spacingValue } = useTheme();
+  const { text, color, radius, spacingValue } = useTheme();
   const inputRef = React.useRef<RNTextInput>(null);
 
   React.useEffect(() => {

@@ -6,9 +6,9 @@ import {
   Keyboard,
   Platform,
   Pressable,
-  StyleProp,
   TextInput as ReactNativeTextInput,
   TextInputProps as ReactNativeTextInputProps,
+  StyleProp,
   TextStyle,
 } from 'react-native';
 import { Box } from '../../core';
@@ -138,10 +138,12 @@ export const TextInput = React.forwardRef<TextInputElement, TextInputProps>(func
 
           <ReactNativeTextInput
             ref={inputRef}
-            style={{
-              ...styles.input,
-              ...(startAdornment && endAdornment ? { textAlign: 'center' } : {}),
-            } as StyleProp<TextStyle>}
+            style={
+              {
+                ...styles.input,
+                ...(startAdornment && endAdornment ? { textAlign: 'center' } : {}),
+              } as StyleProp<TextStyle>
+            }
             readOnly
             editable={false}
             focusable={false}
@@ -173,10 +175,12 @@ export const TextInput = React.forwardRef<TextInputElement, TextInputProps>(func
 
           <ReactNativeTextInput
             ref={inputRef}
-            style={{
-              ...styles.input,
-              ...(startAdornment && endAdornment ? { textAlign: 'center' } : {}),
-            } as StyleProp<TextStyle>}
+            style={
+              {
+                ...styles.input,
+                ...(startAdornment && endAdornment ? { textAlign: 'center' } : {}),
+              } as StyleProp<TextStyle>
+            }
             readOnly={disabled === true || readOnly === true}
             editable={inputProps.editable}
             onFocus={handleFocus}
