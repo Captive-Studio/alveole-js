@@ -1,5 +1,4 @@
 import { router } from 'expo-router';
-import { Typography } from '../../core';
 import { Story } from '../../type/Story';
 import { ButtonIcon } from '../Button/ButtonIcon';
 import { ToolbarTop } from './ToolbarTop';
@@ -76,15 +75,11 @@ export const AvecTitreEtSansSousTitre = () => (
   />
 );
 
-export const AvecBorder = () => (
-  <>
-    <Typography>
-      En règle général, on applique la propriété `withBorder` sur la ToolbarTop pour ajouter une bordure seulement quand
-      on a scroll dans la page. Si on retourne en haut de la page, la bordure disparaît.
-    </Typography>
-    <ToolbarTop title="Titre" sousTitre="Sous-titre" withBorder />
-  </>
-);
+/**
+ * En règle générale, `withBorder` est appliqué dynamiquement au scroll :
+ * la bordure apparaît quand on a scrollé et disparaît en haut de la page.
+ */
+export const AvecBorder = () => <ToolbarTop title="Titre" sousTitre="Sous-titre" withBorder />;
 
 export const CompactLarge = () => <ToolbarTop title="Titre compact large" variant="compactLarge" />;
 

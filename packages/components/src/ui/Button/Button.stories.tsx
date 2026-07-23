@@ -1,4 +1,4 @@
-import { Box, Typography } from '../../core';
+import { Box } from '../../core';
 import { Story } from '../../type';
 import { Button } from './Button';
 import { useStyles } from './Button.styles';
@@ -50,14 +50,12 @@ export const Danger = () => (
   </Box>
 );
 
+/** @deprecated Préférer les variants `primary`, `secondary` ou `tertiary`. */
 export const Link = () => (
-  <Box display="flex" flexDirection="column" gap={8}>
-    <Typography>Deprecated</Typography>
-    <Box display="flex" flexDirection="row" gap={4}>
-      <Button variant="link" title="Bouton link" />
-      <Button variant="link" title="Disabled" disabled />
-      <Button variant="link" title="Disabled" disabled startIcon="Pen" />
-    </Box>
+  <Box display="flex" flexDirection="row" gap={4}>
+    <Button variant="link" title="Bouton link" />
+    <Button variant="link" title="Disabled" disabled />
+    <Button variant="link" title="Disabled" disabled startIcon="Pen" />
   </Box>
 );
 
@@ -79,12 +77,10 @@ export const Selected = () => (
   </Box>
 );
 
+/** Utilisé quand le bouton est actif (ex : quand un menu est ouvert). */
 export const Active = () => (
-  <Box display="flex" flexDirection="column" gap={4}>
-    <Typography>Utilisé quand le bouton est actif (ex: quand un menu est ouvert)</Typography>
-    <Box display="block">
-      <Button variant="secondary" title="Active" active />
-    </Box>
+  <Box display="block">
+    <Button variant="secondary" title="Active" active />
   </Box>
 );
 

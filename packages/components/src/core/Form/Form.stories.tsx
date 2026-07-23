@@ -1,7 +1,6 @@
 import { TextInput as RNTextInput } from 'react-native';
 import { Story } from '../../type';
 import { Box } from '../Box';
-import { Typography } from '../Typography';
 import { Form } from './Form';
 import { useStyles } from './Form.styles';
 
@@ -17,10 +16,10 @@ export default {
 
 const inputStyle = { borderWidth: 1, borderColor: '#ccc', borderRadius: 4, padding: 8 };
 
+/** Taper dans le champ — cliquer en dehors ferme le clavier. */
 export const WithKeyboardAware = () => (
   <Form>
     <Box display="flex" flexDirection="column" gap={12}>
-      <Typography>Taper dans le champ — cliquer en dehors ferme le clavier.</Typography>
       <RNTextInput placeholder="Prénom" style={inputStyle} />
       <RNTextInput placeholder="Email" keyboardType="email-address" style={inputStyle} />
     </Box>

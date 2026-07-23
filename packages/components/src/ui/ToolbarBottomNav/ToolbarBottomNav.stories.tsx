@@ -13,13 +13,22 @@ export default {
   styleFn: useStyles,
 } satisfies Story;
 
-const codeExample = `<ToolbarBottomNav>
-  // Vers index.tsx
-  <ToolbarBottomNav.Screen name="home" options={{ tabBarLabel: 'Home', tabBarIcon: ToolbarBottomNav.Icon('home') }} />
-  // Vers list.tsx
-  <ToolbarBottomNav.Screen name="list" options={{ tabBarLabel: 'Liste', tabBarIcon: ToolbarBottomNav.Icon('all-inbox') }} />
-</ToolbarBottomNav>`;
-
-export const ExampleUsage = () => codeExample;
+/**
+ * Exemple d'intégration dans un fichier `_layout.tsx`.
+ *
+ * ```tsx
+ * <ToolbarBottomNav>
+ *   <ToolbarBottomNav.Screen
+ *     name="home"
+ *     options={{ tabBarLabel: 'Home', tabBarIcon: ToolbarBottomNav.Icon('home') }}
+ *   />
+ *   <ToolbarBottomNav.Screen
+ *     name="list"
+ *     options={{ tabBarLabel: 'Liste', tabBarIcon: ToolbarBottomNav.Icon('all-inbox') }}
+ *   />
+ * </ToolbarBottomNav>
+ * ```
+ */
+export const ExampleUsage = () => null;
 
 export * as Sources from './ToolbarBottomNav.stories.sources';
