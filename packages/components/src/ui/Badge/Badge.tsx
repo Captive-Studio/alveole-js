@@ -1,4 +1,3 @@
-import { TextStyle } from 'react-native';
 import { Box } from '../../core/Box';
 import { Typography, TypographyProps } from '../../core/Typography';
 import { LucideIcon, LucideIconProps } from '../LucideIcon';
@@ -13,9 +12,9 @@ export const Badge = (props: BadgeProps) => {
   const { variant, style, size, icon, ...badgeProps } = props;
 
   const styles = useStyles();
-  const badgeSize: TextStyle = size === 'sm' ? styles.badgeSm : styles.badgeMd;
+  const badgeSize = size === 'sm' ? styles.badgeSm : styles.badgeMd;
 
-  const badgeVariant = (): TextStyle => {
+  const badgeVariant = () => {
     switch (variant) {
       case 'default':
         return styles.badgeDefault;

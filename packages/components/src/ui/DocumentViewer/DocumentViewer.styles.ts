@@ -32,7 +32,7 @@ export const useStyles = makeStyles(({ text, color, spacing, radius, isVariant }
     ...text['Corps de texte'].SM.Regular,
     color: color.light.text['mention-grey'],
     userSelect: 'none',
-    fontVariant: ['tabular-nums'],
+    fontVariant: 'tabular-nums',
   },
   toolbarDivider: {
     width: 1,

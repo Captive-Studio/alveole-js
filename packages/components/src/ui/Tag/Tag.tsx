@@ -1,5 +1,4 @@
 import React, { CSSProperties } from 'react';
-import { TextStyle } from 'react-native';
 import { Box, Typography } from '../../core';
 import { useStyles } from './Tag.styles';
 
@@ -15,9 +14,9 @@ export const Tag = (props: TagProps) => {
   const { size, color, children, style, ...tagProps } = props;
 
   const styles = useStyles();
-  const tagSize: TextStyle = size === 'sm' ? styles.tagSm : styles.tagMd;
+  const tagSize = size === 'sm' ? styles.tagSm : styles.tagMd;
 
-  const tagVariant = (): TextStyle => {
+  const tagVariant = () => {
     switch (color) {
       case 'action':
         return styles.tagAction;

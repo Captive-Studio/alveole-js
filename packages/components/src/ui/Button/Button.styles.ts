@@ -1,6 +1,6 @@
 import { makeStyles } from '@alveole/theme';
 
-export const useStyles = makeStyles(({ text, color, spacing, radius }) => ({
+export const useStyles = makeStyles(({ text, color, spacing, spacingValue, radius }) => ({
   container: {
     borderTopLeftRadius: radius('md'),
     borderBottomLeftRadius: radius('md'),
@@ -17,7 +17,7 @@ export const useStyles = makeStyles(({ text, color, spacing, radius }) => ({
   },
   buttonLoader: {
     position: 'absolute',
-    right: spacing('075'),
+    right: spacingValue('075'),
   },
   title: {
     cursor: 'pointer',

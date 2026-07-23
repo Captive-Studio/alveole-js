@@ -12,7 +12,7 @@ export type SearchFieldProps = {
 };
 
 export const SearchField = ({ label, placeholder, value, onChangeText, size = 'md' }: SearchFieldProps) => {
-  const { text, color, radius, spacing } = useTheme();
+  const { text, color, radius, spacing, spacingValue } = useTheme();
   const inputRef = React.useRef<RNTextInput>(null);
 
   React.useEffect(() => {
@@ -44,8 +44,8 @@ export const SearchField = ({ label, placeholder, value, onChangeText, size = 'm
           borderWidth: 1,
           borderColor: color.light.border['default-grey'],
           borderRadius: radius('md'),
-          paddingVertical: size === 'sm' ? spacing('1,5V') : spacing('1W'),
-          paddingHorizontal: spacing('2W'),
+          paddingVertical: size === 'sm' ? spacingValue('1,5V') : spacingValue('1W'),
+          paddingHorizontal: spacingValue('2W'),
           backgroundColor: color.light.background['default-grey'],
           color: color.light.text['default-grey'],
           ...(size === 'sm' ? text['Corps de texte'].SM.Regular : text['Corps de texte'].MD.Regular),
