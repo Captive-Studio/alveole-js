@@ -46,6 +46,18 @@ function isExportedConstStatement(statement) {
   return isConst;
 }
 
+function extractJSDocComment(statement, sourceFile) {
+  const trivia = sourceFile.text.slice(statement.pos, statement.getStart(sourceFile));
+  const match = /\/\*\*\s*([\s\S]*?)\s*\*\/\s*$/.exec(trivia);
+  if (!match) return null;
+  const text = match[1]
+    .split('\n')
+    .map(line => line.replace(/^\s*\*\s?/, ''))
+    .join('\n')
+    .trim();
+  return text || null;
+}
+
 function extractStorySources(filePath, code) {
   const sourceFile = ts.createSourceFile(
     filePath,
@@ -73,14 +85,16 @@ function extractStorySources(filePath, code) {
       let source;
 
       if (statement.declarationList.declarations.length === 1) {
-        source = statement.getFullText(sourceFile).trim();
+        source = statement.getText(sourceFile);
       } else {
         // Cas rare : export const A = ..., B = ...
         // On reconstruit une déclaration par export.
         source = `export const ${declaration.getText(sourceFile)};`;
       }
 
-      stories.push({ name, source });
+      const description = extractJSDocComment(statement, sourceFile);
+
+      stories.push({ name, source, description });
     }
   }
 
@@ -98,6 +112,19 @@ function buildOutput(stories, inputFilePath) {
 
   const objectEntries = stories.map(({ name }) => `  ${name},`).join('\n');
 
+  const storiesWithDescriptions = stories.filter(s => s.description != null);
+  const descriptionsSection =
+    storiesWithDescriptions.length > 0
+      ? [
+          '',
+          'export const storyDescriptions: Partial<Record<StorySourceName, string>> = {',
+          storiesWithDescriptions
+            .map(({ name, description }) => `  ${name}: ${JSON.stringify(description)},`)
+            .join('\n'),
+          '};',
+        ].join('\n')
+      : '';
+
   return [
     '// This file is generated. Do not edit manually.',
     `// Source: ${relativeInputPath}`,
@@ -109,6 +136,7 @@ function buildOutput(stories, inputFilePath) {
     '} as const;',
     '',
     'export type StorySourceName = keyof typeof storySources;',
+    descriptionsSection,
     '',
   ].join('\n');
 }
