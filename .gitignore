@@ -4,6 +4,7 @@ packages/*/dist
 .DS_Store
 packages/**/.jest-cache/*
 public/**/*.mjs
+packages/**/public/**/*.mjs
 apps/**/public/**/*.mjs
 apps/**/dist/*
 *.d.ts
