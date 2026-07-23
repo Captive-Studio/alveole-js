@@ -24,15 +24,15 @@ export const Avatar = (props: AvatarProps) => {
 
   const initials = getInitials(fallbackText ?? '');
 
-  const { spacing } = useTheme();
+  const { spacingValue } = useTheme();
   const styles = useStyles();
 
   const avatarSize: Record<typeof size, number> = {
     xs: 20,
-    sm: spacing('3W'),
-    md: spacing('4W'),
-    lg: spacing('5W'),
-    xl: spacing('8W'),
+    sm: spacingValue('3W'),
+    md: spacingValue('4W'),
+    lg: spacingValue('5W'),
+    xl: spacingValue('8W'),
   };
 
   return (
