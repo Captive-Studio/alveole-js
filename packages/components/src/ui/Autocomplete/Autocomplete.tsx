@@ -16,7 +16,15 @@ import {
 } from '@alveole/components';
 import { FlashList } from '@shopify/flash-list';
 import React, { useCallback, useMemo, useRef, useState } from 'react';
-import { KeyboardAvoidingView, Modal, Platform, Pressable, StyleProp, useWindowDimensions, ViewStyle } from 'react-native';
+import {
+  KeyboardAvoidingView,
+  Modal,
+  Platform,
+  Pressable,
+  StyleProp,
+  useWindowDimensions,
+  ViewStyle,
+} from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { TextField } from '../TextField';
 import { useStyles } from './Autocomplete.styles';
