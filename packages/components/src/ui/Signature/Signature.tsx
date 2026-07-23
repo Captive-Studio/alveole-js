@@ -20,7 +20,7 @@ export type SignatureProps = Omit<BoxProps, 'children'> & {
 export const Signature = (props: SignatureProps) => {
   const { height, date = new Date(), dateLabel = 'Le', clearButtonLabel = 'Effacer', onChange, onBegin, onEnd } = props;
 
-  const { color, spacing } = useTheme();
+  const { color, spacing, spacingValue } = useTheme();
   const styles = useStyles();
 
   const ref = React.useRef<SignatureViewRef>(null);
@@ -54,7 +54,7 @@ export const Signature = (props: SignatureProps) => {
 
   const dateFormat = isValidDate(date) ? displayDate(date, { format: DateFormats.DateSlash }) : String(date);
 
-  const webviewHeightWithBorders = height + spacing('200') + spacing('100') + 3;
+  const webviewHeightWithBorders = height + spacingValue('200') + spacingValue('100') + 3;
   const webviewStyle = `
     .m-signature-pad {
       box-shadow: none;

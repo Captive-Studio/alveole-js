@@ -12,6 +12,7 @@ import {
   InputHeading,
 } from '@alveole/components';
 import React from 'react';
+import { ViewStyle } from 'react-native';
 import { useStyles } from './OtpField.styles';
 
 export type OtpFieldProps = FormControlOtpInputProps &
@@ -44,7 +45,7 @@ export const OtpField = React.forwardRef<FormControlOtpInputElement, OtpFieldPro
             ...(disabled ? styles.pinCodeContainerStyleDisabled : {}),
           },
           focusedPinCodeContainerStyle: styles.focusedPinCodeContainerStyle,
-          focusStickStyle: styles.focusStickStyle,
+          focusStickStyle: styles.focusStickStyle as ViewStyle,
           pinCodeTextStyle: styles.pinCodeTextStyle,
         }}
         onTextChange={onChange}

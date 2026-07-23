@@ -1,6 +1,6 @@
 import { makeStyles } from '@alveole/theme';
 
-export const useStyles = makeStyles(({ color, spacing }) => ({
+export const useStyles = makeStyles(({ color, spacing, spacingValue }) => ({
   container: {
     borderWidth: 1,
     borderStyle: 'dashed',
@@ -34,8 +34,8 @@ export const useStyles = makeStyles(({ color, spacing }) => ({
     backgroundColor: color.background['alt-grey'],
     padding: spacing('100'),
     borderRadius: 12,
-    width: spacing('200'),
-    height: spacing('200'),
+    width: spacingValue('200'),
+    height: spacingValue('200'),
     marginBottom: spacing('100'),
   },
   filesListContainer: {

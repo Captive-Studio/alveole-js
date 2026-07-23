@@ -12,14 +12,14 @@ export const Checkbox = React.forwardRef<CheckboxElement, CheckboxProps>(functio
   const { variant, label, error, success, disabled, onCheckedChange } = props;
   const baseProps = { variant, label, error, success, disabled, onCheckedChange };
 
-  const { spacing } = useTheme();
+  const { spacingValue } = useTheme();
   const styles = useStyles();
 
   const uniqId = useId();
   const id = `checkbox--${variant}--${uniqId}`;
 
   return (
-    <Box tag="check-box-container" gap={error || success ? spacing('050') : 0} style={styles.checkboxContainer}>
+    <Box tag="check-box-container" gap={error || success ? spacingValue('050') : 0} style={styles.checkboxContainer}>
       <Box tag="check-box" style={styles.container}>
         <CheckboxContainer id={id} ref={ref} {...props}>
           <CheckboxIndicator {...baseProps} indeterminate={props.checked === 'indeterminate'} />

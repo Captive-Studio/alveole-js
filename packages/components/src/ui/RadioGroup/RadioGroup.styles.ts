@@ -1,7 +1,7 @@
 import { makeStyles } from '@alveole/theme';
 import { Platform } from 'react-native';
 
-export const useStyles = makeStyles(({ text, color, spacing, radius }) => ({
+export const useStyles = makeStyles(({ text, color, spacing, spacingValue, radius }) => ({
   container: {
     width: '100%',
     display: 'flex',
@@ -67,16 +67,16 @@ export const useStyles = makeStyles(({ text, color, spacing, radius }) => ({
     borderColor: color.light.border['action-high-primary'],
   },
   itemContainerSm: {
-    height: spacing('100'),
-    width: spacing('100'),
+    height: spacingValue('100'),
+    width: spacingValue('100'),
   },
   itemContainerMd: {
-    height: spacing('150'),
-    width: spacing('150'),
+    height: spacingValue('150'),
+    width: spacingValue('150'),
   },
   itemCardContainer: {
-    height: spacing('100'),
-    width: spacing('100'),
+    height: spacingValue('100'),
+    width: spacingValue('100'),
     backgroundColor: '#FFFFFF',
   },
   itemContainerActive: {

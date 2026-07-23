@@ -1,6 +1,6 @@
 import { Colors, makeStyles } from '@alveole/theme';
 
-export const useStyles = makeStyles(({ text, color, spacing, isVariant, radius }) => ({
+export const useStyles = makeStyles(({ text, color, spacing, spacingValue, isVariant, radius }) => ({
   sidebar: {
     backgroundColor: '#FFFFFF',
     borderRightWidth: 1,
@@ -14,7 +14,7 @@ export const useStyles = makeStyles(({ text, color, spacing, isVariant, radius }
   headerContent: {
     display: 'flex',
     flexDirection: 'row',
-    padding: spacing('050'),
+    padding: spacingValue('050'),
   },
   logo: {
     marginLeft: isVariant('mobile') || isVariant('tablet') ? spacing('150') : 0,
@@ -134,7 +134,7 @@ export const useStyles = makeStyles(({ text, color, spacing, isVariant, radius }
   },
   sidebarItemSelectedIndicator: {
     height: '100%',
-    width: spacing('025'),
+    width: spacingValue('025'),
     position: 'absolute',
     left: 0,
   },

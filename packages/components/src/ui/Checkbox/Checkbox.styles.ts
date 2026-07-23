@@ -1,6 +1,6 @@
 import { makeStyles } from '@alveole/theme';
 
-export const useStyles = makeStyles(({ text, color, spacing }) => ({
+export const useStyles = makeStyles(({ text, color, spacing, spacingValue }) => ({
   checkboxContainer: {
     display: 'flex',
     flexDirection: 'column',
@@ -11,15 +11,15 @@ export const useStyles = makeStyles(({ text, color, spacing }) => ({
     gap: spacing('050'),
   },
   checkbox: {
-    height: spacing('150'),
-    width: spacing('150'),
+    height: spacingValue('150'),
+    width: spacingValue('150'),
     backgroundColor: 'transparent',
     borderColor: color.light.border['action-high-primary'],
     borderRadius: 6,
   },
   checkboxSm: {
-    height: spacing('100'),
-    width: spacing('100'),
+    height: spacingValue('100'),
+    width: spacingValue('100'),
     borderRadius: 4,
   },
   checkboxDisabled: {
@@ -33,8 +33,8 @@ export const useStyles = makeStyles(({ text, color, spacing }) => ({
     borderColor: color.border['plain-success'],
   },
   indicator: {
-    height: spacing('150'),
-    width: spacing('150'),
+    height: spacingValue('150'),
+    width: spacingValue('150'),
     backgroundColor: color.light.background['action-high-primary'],
     borderRadius: 6,
   },

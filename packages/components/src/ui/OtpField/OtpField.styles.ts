@@ -1,6 +1,6 @@
 import { makeStyles } from '@alveole/theme';
 
-export const useStyles = makeStyles(({ text, color, spacing }) => ({
+export const useStyles = makeStyles(({ text, color, spacing, spacingValue }) => ({
   inputHeading: {},
   containerStyle: {
     justifyContent: 'center',
@@ -12,8 +12,8 @@ export const useStyles = makeStyles(({ text, color, spacing }) => ({
     borderColor: color.border['default-grey'],
     backgroundColor: '#FFFFFF',
     overflow: 'hidden',
-    height: spacing('300'),
-    width: spacing('300'),
+    height: spacingValue('300'),
+    width: spacingValue('300'),
     justifyContent: 'center',
     alignItems: 'center',
   },

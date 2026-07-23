@@ -12,7 +12,7 @@ import {
 } from '@alveole/components';
 import { Picker, PickerProps } from '@react-native-picker/picker';
 import React from 'react';
-import { NativeSyntheticEvent, Platform } from 'react-native';
+import { NativeSyntheticEvent, Platform, StyleProp, TextStyle } from 'react-native';
 import { useStyles } from './Select.styles';
 import { SelectInput } from './SelectInput';
 
@@ -75,7 +75,7 @@ export const Select = React.forwardRef<Picker<string | number | object>, SelectP
             disabled={disabled}
             onFocus={handleFocus}
             onBlur={handleBlur}
-            style={styles.picker}
+            style={styles.picker as StyleProp<TextStyle>}
           />
 
           {Platform.OS === 'web' && (

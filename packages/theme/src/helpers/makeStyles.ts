@@ -1,12 +1,10 @@
-import { TextProps } from '@tamagui/core';
 import { CSSProperties } from 'react';
 import { useTheme } from '../ThemeProvider';
 import { removeUnsupportedCSSProperties } from './removeUnsupportedCSSProperties';
 
-export type StyleValue = Omit<CSSProperties, 'fontVariant'> & {
+export type StyleValue = CSSProperties & {
   width?: number | `${string}%`;
   height?: number | `${string}%`;
-  fontVariant?: TextProps['fontVariant'];
 };
 
 /**

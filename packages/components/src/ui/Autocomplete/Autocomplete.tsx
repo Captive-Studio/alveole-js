@@ -16,7 +16,7 @@ import {
 } from '@alveole/components';
 import { FlashList } from '@shopify/flash-list';
 import React, { useCallback, useMemo, useRef, useState } from 'react';
-import { KeyboardAvoidingView, Modal, Platform, Pressable, useWindowDimensions } from 'react-native';
+import { KeyboardAvoidingView, Modal, Platform, Pressable, StyleProp, useWindowDimensions, ViewStyle } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { TextField } from '../TextField';
 import { useStyles } from './Autocomplete.styles';
@@ -304,7 +304,7 @@ export const Autocomplete = (props: AutocompleteProps) => {
             )}
 
             {allowCreate && query.trim().length > 0 && !hasExactLabel && (
-              <Pressable onPress={handleCreateFromQuery} style={styles.nativeItem}>
+              <Pressable onPress={handleCreateFromQuery} style={styles.nativeItem as StyleProp<ViewStyle>}>
                 <Box display="flex" flexDirection="row" gap={'050'}>
                   <LucideIcon name="Plus" size="md" />
                   <Typography style={styles.nativeItemTextNew}>{createOptionLabel(query.trim())}</Typography>
@@ -337,7 +337,7 @@ export const Autocomplete = (props: AutocompleteProps) => {
                       <Pressable
                         onPress={() => toggleOption(item)}
                         style={{
-                          ...styles.nativeItem,
+                          ...(styles.nativeItem as ViewStyle),
                           backgroundColor: isSelected
                             ? styles.nativeItemSelected.backgroundColor
                             : styles.nativeItem.backgroundColor,

@@ -22,7 +22,7 @@ export const Switch = React.forwardRef<SwitchElement, SwitchProps>(function Swit
   const [model, setModel] = React.useState(Boolean(checked));
   const value = isControlled ? checked : model;
 
-  const { spacing } = useTheme();
+  const { spacingValue } = useTheme();
   const styles = useStyles();
 
   const uniqId = useId();
@@ -87,7 +87,7 @@ export const Switch = React.forwardRef<SwitchElement, SwitchProps>(function Swit
   );
 
   return (
-    <Box tag="switch" gap={error || success ? spacing('050') : 0} style={styles.switchContainer}>
+    <Box tag="switch" gap={error || success ? spacingValue('050') : 0} style={styles.switchContainer}>
       {!label ? Toggle : ToggleWithLabel}
     </Box>
   );
