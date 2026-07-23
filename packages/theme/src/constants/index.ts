@@ -4,6 +4,7 @@ export * from './Elevation';
 export * from './Font';
 export * from './Grille';
 export * from './Palette';
+export * from './Radius';
 export * from './Sizes';
 export * from './Spacing';
 export * from './Typography';

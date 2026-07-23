@@ -3,5 +3,6 @@ export * from './helpers/deepMerge';
 export * from './helpers/injectVariableCSS';
 export * from './helpers/isSpacingKey';
 export * from './helpers/makeStyles';
+export * from './helpers/sanitizeCSSKey';
 export * from './ThemeProvider';
 export * from './type';

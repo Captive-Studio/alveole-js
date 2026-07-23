@@ -1,10 +1,15 @@
 import { Accordion, Box, Page, PageHeader, Section, Typography, useToast } from '@alveole/components';
-import { Colors, CustomPalette, Spacings, useTheme } from '@alveole/theme';
-import { Elevations } from '@alveole/theme/src/constants/Elevation';
-import { FontWeightMap } from '@alveole/theme/src/constants/Font';
-import { RadiusList } from '@alveole/theme/src/constants/Radius';
-import { CustomTypography } from '@alveole/theme/src/constants/Typography';
-import { sanitizeCSSKey } from '@alveole/theme/src/helpers/sanitizeCSSKey';
+import {
+  Colors,
+  CustomPalette,
+  CustomTypography,
+  Elevations,
+  FontWeightMap,
+  RadiusList,
+  Spacings,
+  sanitizeCSSKey,
+  useTheme,
+} from '@alveole/theme';
 import React from 'react';
 import { Platform, Pressable } from 'react-native';
 import { screenContent } from '../styles';
