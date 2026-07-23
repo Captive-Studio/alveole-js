@@ -2,7 +2,7 @@ import { Badge, Box, Card, Typography } from '@alveole/components';
 import { useTheme } from '@alveole/theme';
 import { Pressable } from 'react-native';
 import { StorybookModule } from '../types';
-import { getStoryFlags } from '../utils';
+import { getStoryFlags, stripMarkdown } from '../utils';
 
 export type StoryCardProps = {
   story: StorybookModule;
@@ -34,7 +34,7 @@ export const StoryCard = ({ story, onPress }: StoryCardProps) => {
             ))}
           </Box>
           <Typography style={text.Titres['H5 - XS']}>{meta.title}</Typography>
-          <Typography style={text['Corps de texte'].SM.Regular}>{meta.description}</Typography>
+          <Typography style={text['Corps de texte'].SM.Regular}>{stripMarkdown(meta.description)}</Typography>
         </Box>
       </Card>
     </Pressable>

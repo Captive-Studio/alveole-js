@@ -74,3 +74,16 @@ export const findStoryByTitle = (stories: StorybookModule[], title: string | und
 
 export const findConstantByName = (constants: Record<string, unknown>, name: string | undefined | null) =>
   Object.entries(constants).find(([key]) => key === name) ?? null;
+
+export const stripMarkdown = (markdown: string): string =>
+  markdown
+    .replace(/#{1,6}\s*/g, '')
+    .replace(/\*\*([^*]+)\*\*/g, '$1')
+    .replace(/__([^_]+)__/g, '$1')
+    .replace(/\*([^*]+)\*/g, '$1')
+    .replace(/_([^_]+)_/g, '$1')
+    .replace(/`([^`]+)`/g, '$1')
+    .replace(/^\s*[-*+]\s+/gm, '')
+    .replace(/^\s*\d+\.\s+/gm, '')
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .trim();

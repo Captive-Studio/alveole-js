@@ -1,4 +1,14 @@
-import { AnchorHeading, Box, Button, Divider, Page, PageHeader, Section, Typography } from '@alveole/components';
+import {
+  AnchorHeading,
+  Box,
+  Button,
+  Divider,
+  MarkdownDescription,
+  Page,
+  PageHeader,
+  Section,
+  Typography,
+} from '@alveole/components';
 import { useTheme } from '@alveole/theme';
 import React from 'react';
 import { Linking, ScrollView } from 'react-native';
@@ -85,10 +95,14 @@ type StorySourceValue = string | (() => string);
 
 type StorySourcesExport = {
   storySources?: Record<string, StorySourceValue>;
+  storyDescriptions?: Record<string, string>;
 } & Record<string, unknown>;
 
+const getSources = (story: StorybookModule): StorySourcesExport | undefined =>
+  (story as unknown as { Sources?: StorySourcesExport }).Sources;
+
 const getStoryExampleSource = (story: StorybookModule, exampleName: string): string | null => {
-  const sources = (story as unknown as { Sources?: StorySourcesExport }).Sources;
+  const sources = getSources(story);
   const source = sources?.storySources?.[exampleName] ?? sources?.[exampleName];
 
   if (typeof source === 'string') return source;
@@ -98,6 +112,11 @@ const getStoryExampleSource = (story: StorybookModule, exampleName: string): str
   }
 
   return null;
+};
+
+const getStoryExampleDescription = (story: StorybookModule, exampleName: string): string | null => {
+  const description = getSources(story)?.storyDescriptions?.[exampleName];
+  return typeof description === 'string' ? description : null;
 };
 
 type DetailTabsProps = {
@@ -173,6 +192,7 @@ export const StoryDetailScreen = ({
     <Box display="flex" gap={24} mt={'1,5V'}>
       {examples.map(([key, Example]) => {
         const source = getStoryExampleSource(story, key);
+        const description = getStoryExampleDescription(story, key);
 
         return (
           <Box
@@ -188,6 +208,7 @@ export const StoryDetailScreen = ({
             {!isTemplate ? (
               <Box display="flex" gap={6}>
                 <AnchorHeading style={text.Titres['H5 - XS']}>{key}</AnchorHeading>
+                {description ? <MarkdownDescription>{description}</MarkdownDescription> : null}
               </Box>
             ) : null}
 
@@ -247,7 +268,7 @@ export const StoryDetailScreen = ({
               >
                 <Box display="flex" gap={6} style={{ flex: 1 }}>
                   <Typography style={text.Titres['H3 - MD']}>{meta.title}</Typography>
-                  <Typography style={text['Corps de texte'].MD.Regular}>{meta.description}</Typography>
+                  <MarkdownDescription>{meta.description}</MarkdownDescription>
                 </Box>
 
                 {meta.figmaURL ? (
