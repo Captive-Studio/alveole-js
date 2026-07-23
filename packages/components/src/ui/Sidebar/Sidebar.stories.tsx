@@ -1,4 +1,3 @@
-import { Typography } from '../../core';
 import { Story } from '../../type';
 import { Sidebar } from './Sidebar';
 import { useStyles } from './Sidebar.styles';
@@ -14,20 +13,25 @@ export default {
   styleFn: useStyles,
 } satisfies Story;
 
-const codeExample = `<Sidebar
-  controller={sidebarController}
-  logo={<Image source={require('../../assets/logo.png')} />}
-  footer={<Button borderNone variant="tertiary" title="Se déconnecter" onPress={onLogout} />}
->
-  <SidebarItem title="Item 1" href="/admin/item-1" routeName="item-1" />
-  <SidebarItem title="Item 2" href="/admin/item-2" routeName="item-2" />
- 
-  <SidebarGroup title="Groupe">
-    <SidebarItem title="Item group 1" href="/admin/gp-item-2" routeName="gp-item-1" />
-    <SidebarItem title="Item group 2" href="/admin/gp-item-2" routeName="gp-item-2" />
-  </SidebarGroup>
-</Sidebar>`;
-
-export const ExampleUsage = () => <Typography>{codeExample}</Typography>;
+/**
+ * Exemple d'intégration complète du composant avec un contrôleur, un logo et un footer.
+ *
+ * ```tsx
+ * <Sidebar
+ *   controller={sidebarController}
+ *   logo={<Image source={require('../../assets/logo.png')} />}
+ *   footer={<Button borderNone variant="tertiary" title="Se déconnecter" onPress={onLogout} />}
+ * >
+ *   <SidebarItem title="Item 1" href="/admin/item-1" routeName="item-1" />
+ *   <SidebarItem title="Item 2" href="/admin/item-2" routeName="item-2" />
+ *
+ *   <SidebarGroup title="Groupe">
+ *     <SidebarItem title="Item group 1" href="/admin/gp-item-2" routeName="gp-item-1" />
+ *     <SidebarItem title="Item group 2" href="/admin/gp-item-2" routeName="gp-item-2" />
+ *   </SidebarGroup>
+ * </Sidebar>
+ * ```
+ */
+export const ExampleUsage = () => null;
 
 export * as Sources from './Sidebar.stories.sources';

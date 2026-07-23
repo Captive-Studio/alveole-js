@@ -1,5 +1,5 @@
 import { Button } from '@alveole/components';
-import { Box, Highlight, Typography } from '../../core';
+import { Box } from '../../core';
 import { Story } from '../../type';
 import { Toast, ToastView } from './Toast';
 import { useStyles } from './Toast.styles';
@@ -17,6 +17,29 @@ export default {
   styleFn: useStyles,
 } satisfies Story;
 
+/**
+ * Le fichier `_layout.tsx` doit inclure la balise `<Toasts>` pour fonctionner.
+ *
+ * ```tsx
+ * import { Toasts } from '@alveole/components';
+ * import { ThemeProvider } from '@alveole/theme';
+ * import { Stack } from 'expo-router';
+ * import { TamaguiProvider } from 'tamagui';
+ * import { tamaguiConfig } from '../tamagui.config';
+ *
+ * export default function RootLayout() {
+ *   return (
+ *     <TamaguiProvider config={tamaguiConfig} defaultTheme="light">
+ *       <ThemeProvider loader={false}>
+ *         <Toasts>
+ *           <Stack screenOptions={{ headerShown: false }} />
+ *         </Toasts>
+ *       </ThemeProvider>
+ *     </TamaguiProvider>
+ *   );
+ * }
+ * ```
+ */
 export const All = () => {
   const toast = useToast();
 
@@ -45,31 +68,6 @@ export const All = () => {
         <Button title="Without message toast" variant="secondary" onPress={withoutMessageToast} />
         <Button title="Without message toast error" variant="secondary" onPress={withoutMessageToastError} />
         <Button title="WithCustomIcon" variant="secondary" onPress={withCustomIcon} />
-      </Box>
-      <Box display="flex" flexDirection="column" gap={4}>
-        <Typography>{`Le fichier _layout.tsx doit inclure la balise <Toasts> pour fonctionner`}</Typography>
-        <Highlight language="tsx">
-          {`
-            import { Toasts } from '@alveole/components';
-            import { ThemeProvider } from '@alveole/theme';
-            import { Stack } from 'expo-router';
-            import React from 'react';
-            import { TamaguiProvider } from 'tamagui';
-            import { tamaguiConfig } from '../tamagui.config';
-
-            export default function RootLayout() {
-              return (
-                <TamaguiProvider config={tamaguiConfig} defaultTheme="light">
-                  <ThemeProvider loader={false}>
-                    <Toasts>
-                      <Stack screenOptions={{ headerShown: false }} />
-                    </Toasts>
-                  </ThemeProvider>
-                </TamaguiProvider>
-              );
-            }
-          `}
-        </Highlight>
       </Box>
     </Box>
   );

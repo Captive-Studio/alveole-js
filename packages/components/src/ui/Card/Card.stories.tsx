@@ -1,4 +1,4 @@
-import { Box, Typography } from '../../core';
+import { Box } from '../../core';
 import { Story } from '../../type';
 import { Avatar } from '../Avatar';
 import { Button } from '../Button';
@@ -115,17 +115,13 @@ export const cardHeaderDisabled = () => {
   );
 };
 
+/** Privilégier l'utilisation de bouton en taille SM, avec le bouton primary toujours à droite. */
 export const cardActions = () => {
   return (
-    <Box display="flex" flexDirection="column" gap="100">
-      <Typography>
-        Privilégier l&apos;utilisation de bouton en taille SM, avec le bouton primary toujours à droite.
-      </Typography>
-      <Card.Actions>
-        <Button variant="secondary" title="Action" size="sm" />
-        <Button variant="primary" title="Action" size="sm" />
-      </Card.Actions>
-    </Box>
+    <Card.Actions>
+      <Button variant="secondary" title="Action" size="sm" />
+      <Button variant="primary" title="Action" size="sm" />
+    </Card.Actions>
   );
 };
 

@@ -1,4 +1,3 @@
-import { Box, Typography } from '../../core';
 import { Story } from '../../type/Story';
 import { ButtonIcon } from '../Button';
 import { ListItem } from './ListItem';
@@ -93,11 +92,7 @@ export const WithPreviewImage = () => (
   />
 );
 
-export const withoutHover = () => (
-  <Box display="flex" flexDirection="column" gap={8}>
-    <Typography>Sans props openPress, l’effet de Hover n’apparait pas</Typography>
-    <ListItem title="Titre" description="Description" />
-  </Box>
-);
+/** Sans prop `onPress`, l’effet de hover n’apparaît pas. */
+export const withoutHover = () => <ListItem title="Titre" description="Description" />;
 
 export * as Sources from './ListItem.stories.sources';

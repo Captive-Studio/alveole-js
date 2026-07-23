@@ -1,5 +1,4 @@
 import { Story } from '../../type';
-import { Box } from '../Box';
 import { Typography } from '../Typography';
 import { Page } from './Page';
 
@@ -45,43 +44,43 @@ export const WithMultipleMeta = () => (
   </Page>
 );
 
-export const WithPageMetaProvider = () => (
-  <Box>
-    <Typography>
-      {`// Dans app/_layout.tsx — configure des meta globales pour toutes les pages
-// Les meta du provider sont injectées en premier ;
-// la prop \`meta\` de chaque <Page> les complète ou les écrase.
-import { PageMetaProvider } from '@alveole/components';
+/**
+ * Configure des meta globales pour toutes les pages via `PageMetaProvider` dans `app/_layout.tsx`.
+ * Les meta du provider sont injectées en premier ; la prop `meta` de chaque `<Page>` les complète ou les écrase.
+ *
+ * ```tsx
+ * import { PageMetaProvider } from '@alveole/components';
+ *
+ * export default function RootLayout() {
+ *   return (
+ *     <PageMetaProvider meta={[{ name: 'robots', content: 'noindex, nofollow' }]}>
+ *       <Stack />
+ *     </PageMetaProvider>
+ *   );
+ * }
+ *
+ * // Une page peut surcharger ou ajouter des meta sans répéter le noindex :
+ * <Page title="Ma page" meta={[{ name: 'author', content: 'Alvéole' }]} />
+ * ```
+ */
+export const WithPageMetaProvider = () => null;
 
-export default function RootLayout() {
-  return (
-    <PageMetaProvider meta={[{ name: 'robots', content: 'noindex, nofollow' }]}>
-      <Stack />
-    </PageMetaProvider>
-  );
-}
-
-// Une page peut surcharger ou ajouter des meta sans répéter le noindex :
-<Page title="Ma page" meta={[{ name: 'author', content: 'Alvéole' }]} />`}
-    </Typography>
-  </Box>
-);
-
-export const WithSidebar = () => (
-  <Box>
-    <Typography>
-      {`const sidebarController = useSidebar();
-return (
-  <Page
-    sideBarController={sidebarController}
-    sidebar={<AdminNavigation sidebarController={sidebarController} />}
-    title="Mon titre"
-  >
-    {/* ... */}
-  </Page>
-);`}
-    </Typography>
-  </Box>
-);
+/**
+ * Intégration avec un contrôleur de sidebar via `useSidebar()`.
+ *
+ * ```tsx
+ * const sidebarController = useSidebar();
+ * return (
+ *   <Page
+ *     sideBarController={sidebarController}
+ *     sidebar={<AdminNavigation sidebarController={sidebarController} />}
+ *     title="Mon titre"
+ *   >
+ *     ...
+ *   </Page>
+ * );
+ * ```
+ */
+export const WithSidebar = () => null;
 
 export * as Sources from './Page.stories.sources';

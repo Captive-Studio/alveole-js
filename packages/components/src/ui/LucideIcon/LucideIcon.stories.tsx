@@ -1,5 +1,4 @@
-import { Box } from '../../core';
-import { Typography } from '../../core/Typography';
+import { Box, Typography } from '../../core';
 import { Story } from '../../type';
 import { LucideIcon } from './LucideIcon';
 import { LucideIconPropsJSON } from './LucideIcon.props';
@@ -9,7 +8,7 @@ export default {
   tags: ['ui'],
   experimental: false,
   figmaURL: 'https://www.figma.com/design/DSMuo6EvJHYYuU9nHmj90J/Captive.fr?node-id=3740-4789&t=AGgcv4H3Z7WE4pOo-4',
-  description: 'Icon de la librairie Lucide',
+  description: 'Icon de la librairie [Lucide](https://lucide.dev/icons/)',
   props: LucideIconPropsJSON,
   component: LucideIcon,
   styleFn: () => 'Aucun style appliqué',
@@ -26,13 +25,12 @@ export const Default = () => (
 
 export const Colored = () => <LucideIcon name="AArrowDown" size="md" color="green" />;
 
+/**
+ * En passant `name="Share"`, le composant sélectionne automatiquement l'icône adaptée à la plateforme courante.
+ * La prop `_platformOverride` est utilisée ici uniquement pour forcer l'affichage de chaque variante dans la story.
+ */
 export const SharePerPlatform = () => (
   <Box style={{ gap: 24 }}>
-    <Typography>
-      En passant name=&quot;Share&quot;, le composant sélectionne automatiquement l&apos;icône adaptée à la plateforme
-      courante. La prop _platformOverride est utilisée ici uniquement pour forcer l&apos;affichage de chaque variante
-      dans la story.
-    </Typography>
     <Box style={{ flexDirection: 'row', gap: 24 }}>
       <Box style={{ alignItems: 'center', gap: 8 }}>
         <Typography>Web</Typography>
