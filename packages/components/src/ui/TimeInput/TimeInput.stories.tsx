@@ -12,12 +12,12 @@ export default {
 
 À ne pas confondre avec **DurationInput**, qui représente une **durée écoulée** (ex. \`06:15\` pour 6 heures 15 minutes).
 
-| | TimeInput | DurationInput |
-|---|---|---|
-| Sémantique | Heure du jour | Durée écoulée |
-| Exemple | \`09:30\` (9h30 le matin) | \`06:15\` (6h15 de travail) |
-| Heures valides | 00–23 | 00–99 |
-| HTML web | \`<input type="time">\` | \`<input type="text">\` |`,
+| | TimeInput |
+|---|---|
+| Sémantique | Heure du jour |
+| Exemple | \`09:30\` (9h30 le matin) |
+| Heures valides | 00–23 |
+| HTML web | \`<input type="time">\` |`,
   component: TimeInput,
   styleFn: useStyles,
 } satisfies Story;

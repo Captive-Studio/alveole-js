@@ -13,12 +13,12 @@ export default {
 
 À ne pas confondre avec **TimeInput**, qui représente une **heure d'horloge** (ex. \`09:30\` du matin).
 
-| | DurationInput | TimeInput |
+| | DurationInput |
 |---|---|---|
-| Sémantique | Durée écoulée | Heure du jour |
-| Exemple | \`06:15\` (6h15 de travail) | \`09:30\` (9h30 le matin) |
-| Heures valides | 00–99 | 00–23 |
-| HTML web | \`<input type="text">\` | \`<input type="time">\` |
+| Sémantique | Durée écoulée |
+| Exemple | \`35:00\` (35h00 de travail) |
+| Heures valides | 00–99 |
+| HTML web | \`<input type="text">\` |
 
 > Il n'existe pas de \`<input type="duration">\` en HTML.
 > Voir [whatwg/html#5488](https://github.com/whatwg/html/issues/5488).`,
