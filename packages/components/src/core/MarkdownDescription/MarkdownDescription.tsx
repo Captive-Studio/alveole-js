@@ -103,41 +103,56 @@ export const MarkdownDescription = ({ children }: MarkdownDescriptionProps) => {
 
             return <Highlight language={extractLanguage(className)}>{String(c).replace(/\n$/, '')}</Highlight>;
           },
-          table: ({ children: c }: { children: React.ReactNode }) =>
-            React.createElement(
-              'div',
-              { style: { border: `1px solid ${borderColor}`, borderRadius: 8, overflow: 'hidden' } },
-              React.createElement('table', { style: { borderCollapse: 'collapse', width: '100%' } }, c),
-            ),
-          thead: ({ children: c }: { children: React.ReactNode }) => React.createElement('thead', null, c),
-          tbody: ({ children: c }: { children: React.ReactNode }) => React.createElement('tbody', null, c),
-          tr: ({ children: c }: { children: React.ReactNode }) => React.createElement('tr', null, c),
-          th: ({ children: c }: { children: React.ReactNode }) =>
-            React.createElement(
-              'th',
-              {
-                style: {
-                  padding: '8px 12px',
-                  backgroundColor: headerBg,
-                  border: `1px solid ${borderColor}`,
-                  textAlign: 'left',
-                  ...boldStyle,
-                },
-              },
-              c,
-            ),
-          td: ({ children: c }: { children: React.ReactNode }) =>
-            React.createElement(
-              'td',
-              {
-                style: {
-                  padding: '8px 12px',
-                  border: `1px solid ${borderColor}`,
-                  ...bodyStyle,
-                },
-              },
-              c,
-            ),
+          table: ({ children: c }: { children: React.ReactNode }) => (
+            <Box tag="div" borderWidth={1} borderColor={borderColor} borderRadius={8} overflow="hidden">
+              <Box tag="table" style={{ display: 'table', borderCollapse: 'collapse', width: '100%' } as any}>
+                {c}
+              </Box>
+            </Box>
+          ),
+          thead: ({ children: c }: { children: React.ReactNode }) => (
+            <Box tag="thead" style={{ display: 'table-header-group' } as any}>
+              {c}
+            </Box>
+          ),
+          tbody: ({ children: c }: { children: React.ReactNode }) => (
+            <Box tag="tbody" style={{ display: 'table-row-group' } as any}>
+              {c}
+            </Box>
+          ),
+          tr: ({ children: c }: { children: React.ReactNode }) => (
+            <Box tag="tr" style={{ display: 'table-row' } as any}>
+              {c}
+            </Box>
+          ),
+          th: ({ children: c }: { children: React.ReactNode }) => (
+            <Box
+              tag="th"
+              borderWidth={1}
+              borderColor={borderColor}
+              pt={8}
+              pb={8}
+              pl={12}
+              pr={12}
+              style={{ display: 'table-cell', textAlign: 'left', backgroundColor: headerBg, ...boldStyle } as any}
+            >
+              {c}
+            </Box>
+          ),
+          td: ({ children: c }: { children: React.ReactNode }) => (
+            <Box
+              tag="td"
+              borderWidth={1}
+              borderColor={borderColor}
+              pt={8}
+              pb={8}
+              pl={12}
+              pr={12}
+              style={{ display: 'table-cell', ...bodyStyle } as any}
+            >
+              {c}
+            </Box>
+          ),
         }}
       >
         {children}
