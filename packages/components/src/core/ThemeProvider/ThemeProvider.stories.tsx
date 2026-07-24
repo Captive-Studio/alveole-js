@@ -153,7 +153,7 @@ export default function RootLayout() {
           Limitation : incompatible avec color custom
         </Typography>
         <Typography style={{ ...text['Corps de texte'].SM.Regular, color: color.light.text['action-high-error'] }}>
-          Si l'app passe un prop `color` au ThemeProvider, les variables overridées ne seront pas injectées. Dans ce
+          Si l&apos;app passe un prop `color` au ThemeProvider, les variables overridées ne seront pas injectées. Dans ce
           cas, retirer `staticCSS`.
         </Typography>
       </Box>
