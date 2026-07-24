@@ -32,7 +32,17 @@ export const TimeInput = React.forwardRef<any, TimeInputProps>(function TimeInpu
 
   const handleChangeText = (text: string) => {
     const digits = text.replace(/\D/g, '').slice(0, 4);
-    const formatted = digits.length <= 2 ? digits : `${digits.slice(0, 2)}:${digits.slice(2)}`;
+
+    let formatted: string;
+    if (digits.length === 1 && parseInt(digits) >= 3) {
+      // Premier chiffre ≥ 3 : les heures ne peuvent pas dépasser 23, donc on préfixe '0'
+      formatted = `0${digits}:`;
+    } else if (digits.length <= 2) {
+      formatted = digits;
+    } else {
+      formatted = `${digits.slice(0, 2)}:${digits.slice(2)}`;
+    }
+
     setLocalValue(formatted);
     if (digits.length === 0 || digits.length === 4) {
       onChange?.(formatted);
