@@ -103,39 +103,41 @@ export const MarkdownDescription = ({ children }: MarkdownDescriptionProps) => {
 
             return <Highlight language={extractLanguage(className)}>{String(c).replace(/\n$/, '')}</Highlight>;
           },
-          table: ({ children: c }: { children: React.ReactNode }) => (
-            <Box
-              display="flex"
-              flexDirection="column"
-              borderWidth={1}
-              borderColor={borderColor}
-              borderRadius={8}
-              overflow="hidden"
-            >
-              {c}
-            </Box>
-          ),
-          thead: ({ children: c }: { children: React.ReactNode }) => <>{c}</>,
-          tbody: ({ children: c }: { children: React.ReactNode }) => <>{c}</>,
-          tr: ({ children: c }: { children: React.ReactNode }) => (
-            <Box display="flex" flexDirection="row" style={{ borderBottomWidth: 1, borderBottomColor: borderColor }}>
-              {c}
-            </Box>
-          ),
-          th: ({ children: c }: { children: React.ReactNode }) => (
-            <Box
-              flex={1}
-              p={12}
-              style={{ backgroundColor: headerBg, borderRightWidth: 1, borderRightColor: borderColor }}
-            >
-              <Typography style={boldStyle}>{c}</Typography>
-            </Box>
-          ),
-          td: ({ children: c }: { children: React.ReactNode }) => (
-            <Box flex={1} p={12} style={{ borderRightWidth: 1, borderRightColor: borderColor }}>
-              <Typography style={bodyStyle}>{c}</Typography>
-            </Box>
-          ),
+          table: ({ children: c }: { children: React.ReactNode }) =>
+            React.createElement(
+              'div',
+              { style: { border: `1px solid ${borderColor}`, borderRadius: 8, overflow: 'hidden' } },
+              React.createElement('table', { style: { borderCollapse: 'collapse', width: '100%' } }, c),
+            ),
+          thead: ({ children: c }: { children: React.ReactNode }) => React.createElement('thead', null, c),
+          tbody: ({ children: c }: { children: React.ReactNode }) => React.createElement('tbody', null, c),
+          tr: ({ children: c }: { children: React.ReactNode }) => React.createElement('tr', null, c),
+          th: ({ children: c }: { children: React.ReactNode }) =>
+            React.createElement(
+              'th',
+              {
+                style: {
+                  padding: '8px 12px',
+                  backgroundColor: headerBg,
+                  border: `1px solid ${borderColor}`,
+                  textAlign: 'left',
+                  ...boldStyle,
+                },
+              },
+              c,
+            ),
+          td: ({ children: c }: { children: React.ReactNode }) =>
+            React.createElement(
+              'td',
+              {
+                style: {
+                  padding: '8px 12px',
+                  border: `1px solid ${borderColor}`,
+                  ...bodyStyle,
+                },
+              },
+              c,
+            ),
         }}
       >
         {children}
