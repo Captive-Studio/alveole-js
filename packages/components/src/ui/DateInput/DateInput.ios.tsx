@@ -72,7 +72,7 @@ export const DateInput = React.forwardRef<any, DateInputProps>(function DateInpu
       }
       return '';
     },
-    [value, date, type],
+    [type],
   );
 
   return (
