@@ -12,11 +12,12 @@ export type ThemeProviderProps = PropsWithChildren<
   CustomBuilder & {
     loader?: boolean;
     onReady?: () => void;
+    staticCSS?: boolean;
   }
 >;
 
 export const ThemeProvider = (props: ThemeProviderProps) => {
-  const { loader = true, onReady, ...builder } = props;
+  const { loader = true, onReady, staticCSS = false, ...builder } = props;
   const theme = useThemeBuilder(builder);
 
   const [showLoader, setShowLoader] = React.useState(true);
@@ -37,7 +38,7 @@ export const ThemeProvider = (props: ThemeProviderProps) => {
   if ((!theme.isReady || showLoader) && loader !== false) {
     return (
       <>
-        <WebThemeStyles theme={theme} />
+        {!staticCSS && <WebThemeStyles theme={theme} />}
         <ThemeProviderLoader />
       </>
     );
