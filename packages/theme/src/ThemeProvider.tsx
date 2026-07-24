@@ -46,7 +46,7 @@ export const ThemeProvider = (props: ThemeProviderProps) => {
 
   return (
     <ThemeContext.Provider value={theme}>
-      <WebThemeStyles theme={theme} />
+      {!staticCSS && <WebThemeStyles theme={theme} />}
       {props.children}
     </ThemeContext.Provider>
   );
