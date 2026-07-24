@@ -26,7 +26,7 @@ const extractLanguage = (className?: string): HighlightProps['language'] => {
 };
 
 export const MarkdownDescription = ({ children }: MarkdownDescriptionProps) => {
-  const { text } = useTheme();
+  const { text, color } = useTheme();
 
   const bodyStyle = text['Corps de texte'].MD.Regular;
   const boldStyle = text['Corps de texte'].MD.Bold;
@@ -39,12 +39,20 @@ export const MarkdownDescription = ({ children }: MarkdownDescriptionProps) => {
   const ReactMarkdown = require('react-markdown').default as React.ComponentType<{
     children: string;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    remarkPlugins: unknown[];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     components: Record<string, React.ComponentType<any>>;
   }>;
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const remarkGfm = require('remark-gfm').default;
+
+  const borderColor = color.light.border['default-grey'];
+  const headerBg = color.light.background['alt-grey'];
 
   return (
     <Box tag="markdown-description" display="flex" gap={8}>
       <ReactMarkdown
+        remarkPlugins={[remarkGfm]}
         components={{
           p: ({ children: c }: { children: React.ReactNode }) => <Typography style={bodyStyle}>{c}</Typography>,
           strong: ({ children: c }: { children: React.ReactNode }) => <Text style={boldStyle}>{c}</Text>,
@@ -95,6 +103,39 @@ export const MarkdownDescription = ({ children }: MarkdownDescriptionProps) => {
 
             return <Highlight language={extractLanguage(className)}>{String(c).replace(/\n$/, '')}</Highlight>;
           },
+          table: ({ children: c }: { children: React.ReactNode }) => (
+            <Box
+              display="flex"
+              flexDirection="column"
+              borderWidth={1}
+              borderColor={borderColor}
+              borderRadius={8}
+              overflow="hidden"
+            >
+              {c}
+            </Box>
+          ),
+          thead: ({ children: c }: { children: React.ReactNode }) => <>{c}</>,
+          tbody: ({ children: c }: { children: React.ReactNode }) => <>{c}</>,
+          tr: ({ children: c }: { children: React.ReactNode }) => (
+            <Box display="flex" flexDirection="row" style={{ borderBottomWidth: 1, borderBottomColor: borderColor }}>
+              {c}
+            </Box>
+          ),
+          th: ({ children: c }: { children: React.ReactNode }) => (
+            <Box
+              flex={1}
+              p={12}
+              style={{ backgroundColor: headerBg, borderRightWidth: 1, borderRightColor: borderColor }}
+            >
+              <Typography style={boldStyle}>{c}</Typography>
+            </Box>
+          ),
+          td: ({ children: c }: { children: React.ReactNode }) => (
+            <Box flex={1} p={12} style={{ borderRightWidth: 1, borderRightColor: borderColor }}>
+              <Typography style={bodyStyle}>{c}</Typography>
+            </Box>
+          ),
         }}
       >
         {children}
