@@ -14,6 +14,8 @@ export const StoryCard = ({ story, onPress }: StoryCardProps) => {
   const meta = story.default;
   const flags = getStoryFlags(meta);
 
+  const description = meta.shortDescription ?? stripMarkdown(meta.description);
+
   return (
     <Pressable
       onPress={onPress ? () => onPress(story) : undefined}
@@ -34,7 +36,7 @@ export const StoryCard = ({ story, onPress }: StoryCardProps) => {
             ))}
           </Box>
           <Typography style={text.Titres['H5 - XS']}>{meta.title}</Typography>
-          <Typography style={text['Corps de texte'].SM.Regular}>{stripMarkdown(meta.description)}</Typography>
+          <Typography style={text['Corps de texte'].SM.Regular}>{description}</Typography>
         </Box>
       </Card>
     </Pressable>
