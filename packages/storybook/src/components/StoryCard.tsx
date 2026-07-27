@@ -1,15 +1,14 @@
-import { Badge, Box, Card, Typography } from '@alveole/components';
+import { A, Badge, Box, Card, Typography } from '@alveole/components';
 import { useTheme } from '@alveole/theme';
-import { Pressable } from 'react-native';
 import { StorybookModule } from '../types';
 import { getStoryFlags, stripMarkdown } from '../utils';
 
 export type StoryCardProps = {
   story: StorybookModule;
-  onPress?: (story: StorybookModule) => void;
+  href: string;
 };
 
-export const StoryCard = ({ story, onPress }: StoryCardProps) => {
+export const StoryCard = ({ story, href }: StoryCardProps) => {
   const { text, isVariant } = useTheme();
   const meta = story.default;
   const flags = getStoryFlags(meta);
@@ -17,10 +16,7 @@ export const StoryCard = ({ story, onPress }: StoryCardProps) => {
   const description = meta.shortDescription ?? stripMarkdown(meta.description);
 
   return (
-    <Pressable
-      onPress={onPress ? () => onPress(story) : undefined}
-      style={{ height: isVariant('mobile') ? undefined : '100%' }}
-    >
+    <A href={href} style={{ height: isVariant('mobile') ? undefined : '100%' }}>
       <Card height={isVariant('mobile') ? undefined : '100%'}>
         <Box display="flex" gap={12} p={'100'} style={{ height: isVariant('mobile') ? undefined : '100%' }}>
           <Box display="flex" flexDirection="row" flexWrap="wrap" gap={8}>
@@ -39,6 +35,6 @@ export const StoryCard = ({ story, onPress }: StoryCardProps) => {
           <Typography style={text['Corps de texte'].SM.Regular}>{description}</Typography>
         </Box>
       </Card>
-    </Pressable>
+    </A>
   );
 };

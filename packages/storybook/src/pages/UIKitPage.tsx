@@ -190,7 +190,7 @@ export const UIKitPage = ({
         description="Catalogue des composants"
         createLabel={blankPage ? (blankPage.title ?? 'Page vierge') : undefined}
         onCreatePress={blankPage ? () => push({ name: 'blank' }) : undefined}
-        onSelectStory={story => push({ name: 'component-detail', story })}
+        getStoryHref={story => `/components/${encodeURIComponent(story.default.title)}`}
       />
     );
   }

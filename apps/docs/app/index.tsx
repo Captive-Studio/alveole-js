@@ -1,5 +1,4 @@
 import { StoriesScreen } from '@alveole/storybook';
-import { router } from 'expo-router';
 import { DocFooter, storyList, useUIKitTopBar } from '../components/uiKitNavigation';
 
 export default function IndexRoute() {
@@ -12,9 +11,7 @@ export default function IndexRoute() {
       stories={storyList}
       title="UI Kit - Composants"
       description="Catalogue des composants partagés"
-      onSelectStory={story => {
-        router.push(`/components/${encodeURIComponent(story.default.title)}`);
-      }}
+      getStoryHref={story => `/components/${encodeURIComponent(story.default.title)}`}
     />
   );
 }
