@@ -9,6 +9,7 @@ export default {
   experimental: false,
   description:
     "Permet d'afficher une image de manière responsive que ce soit sur mobile ou desktop. Actuellement l'image ne peut que être fill, il faudrait développer les autres en se basant sur l'élément `<img>` HTML. https://www.w3schools.com/csS/css3_object-fit.asp",
+  shortDescription: 'Affiche une image de manière responsive sur mobile et desktop.',
   component: Image,
   styleFn: () => 'Aucun style appliqué',
 } satisfies Story;

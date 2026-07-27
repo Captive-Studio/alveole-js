@@ -69,6 +69,16 @@ export const BoxPadded = () => (
 
 Le `default` porte les metadonnees de la story. Les autres exports sont les variantes affichees par `StoryDetailScreen`.
 
+### Champ `shortDescription`
+
+Optionnel. A renseigner quand `description` contient du Markdown ou depasse 160 caracteres.
+
+- Max 160 caracteres
+- Texte brut uniquement (pas de Markdown)
+- Utilise pour `<meta name="description">` sur la page de detail du composant
+
+Si absent, la meta description est calculee automatiquement en retirant le Markdown de `description`.
+
 Concretement, `@alveole/storybook` n'introduit pas un nouveau format de story. Il reutilise celui que tu ecris deja dans `packages/components/src/**/*.stories.tsx`.
 
 ## Structure attendue par le package

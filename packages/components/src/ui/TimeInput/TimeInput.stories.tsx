@@ -8,6 +8,7 @@ export default {
   title: 'TimeInput',
   tags: ['ui'],
   experimental: false,
+  shortDescription: "Saisie d'une heure d'horloge au format HH:MM (ex. 09:30 pour 9h30 du matin).",
   description: `Saisie d'une **heure d'horloge** au format HH:MM (ex. \`09:30\` pour 9h30 du matin).
 
 À ne pas confondre avec **DurationInput**, qui représente une **durée écoulée** (ex. \`06:15\` pour 6 heures 15 minutes).

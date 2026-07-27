@@ -15,7 +15,7 @@ import { Linking, ScrollView } from 'react-native';
 import { JsonBlock } from '../components/JsonBlock';
 import { screenContent } from '../styles';
 import { StorybookModule } from '../types';
-import { getStoryExamples, getStoryFlags } from '../utils';
+import { getStoryExamples, getStoryFlags, stripMarkdown } from '../utils';
 
 export type StoryDetailScreenProps = {
   story?: StorybookModule | null;
@@ -238,7 +238,7 @@ export const StoryDetailScreen = ({
     <Page
       scrollable
       title={meta.title}
-      description={meta.description}
+      description={meta.shortDescription ?? stripMarkdown(meta.description)}
       beforeContent={beforeContent}
       footerContent={footerContent}
     >

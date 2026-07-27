@@ -8,6 +8,8 @@ export default {
   experimental: false,
   description:
     "Permet de définir les valeurs de la balise <head> via Expo router. Doit englober toutes les pages. Permet aussi de rendre la page scrollable via l'attribut `scrollable`. Principalement pour le web.",
+  shortDescription:
+    'Définit les valeurs de la balise head via Expo Router. Rend la page scrollable. Principalement pour le web.',
   component: Page,
   styleFn: () => 'Aucun style appliqué',
 } satisfies Story;
