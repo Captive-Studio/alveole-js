@@ -1,6 +1,6 @@
 {
   "name": "@alveole/eslint-config",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "ESLint flat config pour les projets Alveole",
   "main": "index.js",
   "scripts": {
