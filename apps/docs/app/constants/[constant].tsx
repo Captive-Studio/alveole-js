@@ -3,6 +3,10 @@ import * as ThemeConstants from '@alveole/theme';
 import { useLocalSearchParams } from 'expo-router';
 import { DocFooter, useUIKitTopBar } from '../../components/uiKitNavigation';
 
+export function generateStaticParams(): { constant: string }[] {
+  return Object.keys(ThemeConstants).map(constant => ({ constant }));
+}
+
 export default function ConstantDetailRoute() {
   const { constant } = useLocalSearchParams<{ constant: string }>();
   const constantEntry = findConstantByName(ThemeConstants, constant);
