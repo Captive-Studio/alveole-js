@@ -25,7 +25,7 @@ export type StoriesScreenProps = {
   footerContent?: React.ReactNode;
   createLabel?: string;
   onCreatePress?: () => void;
-  onSelectStory?: (story: StorybookModule) => void;
+  getStoryHref: (story: StorybookModule) => string;
 };
 
 export const StoriesScreen = ({
@@ -37,7 +37,7 @@ export const StoriesScreen = ({
   footerContent,
   createLabel,
   onCreatePress,
-  onSelectStory,
+  getStoryHref,
 }: StoriesScreenProps) => {
   const { text } = useTheme();
   const { width } = useWindowDimensions();
@@ -172,7 +172,7 @@ export const StoriesScreen = ({
                 <Box display="flex" flexDirection="row" flexWrap="wrap" gap={16}>
                   {taggedStories.map(story => (
                     <Box key={story.default.title} style={{ alignSelf: 'stretch', width: columnStyle.width }}>
-                      <StoryCard story={story} onPress={onSelectStory} />
+                      <StoryCard story={story} href={getStoryHref(story)} />
                     </Box>
                   ))}
                 </Box>
