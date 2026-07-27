@@ -2,6 +2,9 @@ import { makeStyles } from '@alveole/theme';
 
 export const useStyles = makeStyles(() => ({
   container: {},
+  link: {
+    color: 'inherit',
+  },
   pressable: {
     cursor: 'pointer',
     color: 'inherit',
