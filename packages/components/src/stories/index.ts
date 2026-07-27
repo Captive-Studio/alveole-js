@@ -7,6 +7,7 @@ export * as Highlight from '../core/Highlight/Highlight.stories';
 export * as ImageStory from '../core/Image/Image.stories';
 export * as LottieStory from '../core/Lottie/Lottie.stories';
 export * as MapStory from '../core/Map/Map.stories';
+export * as MarkdownDescriptionStory from '../core/MarkdownDescription/MarkdownDescription.stories';
 export * as MetabaseStory from '../core/Metabase/Metabase.stories';
 export * as PageStory from '../core/Page/Page.stories';
 export * as PdfViewerStory from '../core/PdfViewer/PdfViewer.stories';
