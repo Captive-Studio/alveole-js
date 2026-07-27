@@ -34,7 +34,7 @@ export const A = (props: AProps) => {
       push={direction === 'push'}
       dismissTo={direction === 'dismiss'}
     >
-      <Pressable>
+      <Pressable style={styles.link as any}>
         <Box tag="a-pressable" style={{ ...styles.pressable, ...style }} hoverStyle={hoverStyle}>
           {children}
         </Box>
