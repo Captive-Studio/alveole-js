@@ -19,7 +19,7 @@ const innerBoxColor = '#88b2bd';
 export const Default = () => (
   <Section>
     <Box>
-      <Typography>Section avec background</Typography>
+      <Typography>Section</Typography>
     </Box>
   </Section>
 );
