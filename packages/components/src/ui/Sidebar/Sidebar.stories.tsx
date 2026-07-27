@@ -8,7 +8,7 @@ export default {
   experimental: false,
   figmaURL: 'https://www.figma.com/design/xJz8Z6vfrnZPKTtRbuT2W8/Alveole---Composants?node-id=1328-725',
   description:
-    'SideNav est un composant de navigation primaire qui permet d’accéder aux principales sections d’une application. Navigation coté droit, se transformant en menu burger sur mobile. Uitliser <SidebarItem> et <SidebarGroup>.',
+    'SideNav est un composant de navigation primaire qui permet d’accéder aux principales sections d’une application. Navigation coté droit, se transformant en menu burger sur mobile. Uitliser `<SidebarItem>` et `<SidebarGroup>`.',
   component: Sidebar,
   styleFn: useStyles,
 } satisfies Story;

@@ -7,7 +7,7 @@ export default {
   tags: ['ui'],
   experimental: false,
   figmaURL: 'https://www.figma.com/design/xJz8Z6vfrnZPKTtRbuT2W8/Composants?node-id=1002-15729',
-  description: 'Sérateur. Composant de type Box - Equivalent <hr/>.',
+  description: 'Sérateur. Composant de type Box - Equivalent `<hr/>`.',
   component: Divider,
   styleFn: useStyles,
 } satisfies Story;

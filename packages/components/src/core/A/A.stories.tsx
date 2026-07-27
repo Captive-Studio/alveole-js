@@ -8,7 +8,7 @@ export default {
   title: 'A',
   tags: ['core'],
   experimental: false,
-  description: 'Equivalent d’une balise <a>. Envelopper le texte dans une balise <Typography>.',
+  description: 'Equivalent d’une balise `<a>`. Envelopper le texte dans une balise `<Typography>`.',
   component: A,
   styleFn: useStyles,
 } satisfies Story;

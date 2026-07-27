@@ -9,7 +9,7 @@ export default {
   tags: ['core'],
   experimental: false,
   description:
-    "Ferme le clavier au clic en dehors d'un champ. Doit être utilisé pour contenir tous les formulaires (pas de <form> en React Native). Le scroll au-dessus du clavier est géré par KeyboardAwareScrollView.",
+    "Ferme le clavier au clic en dehors d'un champ. Doit être utilisé pour contenir tous les formulaires (pas de `<form>` en React Native). Le scroll au-dessus du clavier est géré par [KeyboardAwareScrollView](https://docs.expo.dev/guides/keyboard-handling).",
   component: Form,
   styleFn: useStyles,
 } satisfies Story;

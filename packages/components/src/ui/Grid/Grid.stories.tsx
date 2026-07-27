@@ -8,7 +8,7 @@ export default {
   tags: ['ui'],
   experimental: false,
   description:
-    'Grille basique sur 12 colonnes (mobile et sur web). Composant de type Box à utiliser avec <Grid.Column>.',
+    'Grille basique sur 12 colonnes (mobile et sur web). Composant de type Box à utiliser avec `<Grid.Column>`.',
   component: Grid,
   styleFn: useStyles,
 } satisfies Story;
