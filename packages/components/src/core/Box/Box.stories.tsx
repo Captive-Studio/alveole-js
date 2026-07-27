@@ -7,7 +7,8 @@ export default {
   tags: ['core'],
   experimental: false,
   description:
-    'La Box doit être utilisé pour tout contenir, à la manière d‘une <div>. De type View (tamagui), elle permet de définir le tag rendu en web.',
+    "La Box doit être utilisé pour tout contenir, à la manière d'une <div>. De type View (tamagui), elle permet de définir le tag rendu en web.",
+  shortDescription: "Composant de base pour tout contenir, à la manière d'une div. De type View (Tamagui).",
   component: Box,
   styleFn: () => 'Aucun style appliqué',
 } satisfies Story;

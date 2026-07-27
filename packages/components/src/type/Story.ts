@@ -10,6 +10,7 @@ export type StoryMeta = {
   mobileOnly?: boolean;
   webOnly?: boolean;
   description: string;
+  shortDescription?: string;
   component?: ComponentType<any>;
   config?: object;
   props?: unknown;

@@ -13,6 +13,7 @@ export default {
   experimental: false,
   figmaURL: 'https://www.figma.com/design/xJz8Z6vfrnZPKTtRbuT2W8/Alveole---Composants?node-id=2084-1372',
   description: `Toaster Tamagui. Contient le provider global et le hook \`useToast\`. Par défaut un toast reste affiché pendant ${defaultDuration / 1000} secondes`,
+  shortDescription: 'Toaster Tamagui. Fournit le provider global et le hook useToast.',
   component: Toast,
   styleFn: useStyles,
 } satisfies Story;
