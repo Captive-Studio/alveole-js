@@ -25,7 +25,7 @@
   "devDependencies": {
     "@alveole/eslint-config": "file:../eslint-config",
     "date-fns": "4.4.0",
-    "eslint": "9.39.4"
+    "eslint": "9.39.5"
   },
   "peerDependencies": {
     "date-fns": "*"

@@ -43,7 +43,7 @@
     "@testing-library/react-native": "14.0.1",
     "@types/react-syntax-highlighter": "15.5.13",
     "babel-preset-expo": "56.0.17",
-    "eslint": "9.39.4",
+    "eslint": "9.39.5",
     "expo": "56.0.17",
     "expo-asset": "56.0.21",
     "expo-document-picker": "56.0.4",
