@@ -39,7 +39,7 @@ jobs:
     name: Lint workspaces
     if: github.event_name != 'push' || !startsWith(github.ref, 'refs/tags/')
     needs: install
-    runs-on: [self-hosted]
+    runs-on: [captive-small]
     container: node:lts@sha256:5711a0d445a1af54af9589066c646df387d1831a608226f4cd694fc59e745059
     steps:
       - name: Checkout
@@ -67,7 +67,7 @@ jobs:
     name: Check formatting
     if: github.event_name != 'push' || !startsWith(github.ref, 'refs/tags/')
     needs: install
-    runs-on: [self-hosted]
+    runs-on: [captive-small]
     container: node:lts@sha256:5711a0d445a1af54af9589066c646df387d1831a608226f4cd694fc59e745059
     steps:
       - name: Checkout
@@ -95,7 +95,7 @@ jobs:
     name: Typecheck workspaces
     if: github.event_name != 'push' || !startsWith(github.ref, 'refs/tags/')
     needs: install
-    runs-on: [self-hosted]
+    runs-on: [captive-small]
     container: node:lts@sha256:5711a0d445a1af54af9589066c646df387d1831a608226f4cd694fc59e745059
     steps:
       - name: Checkout
