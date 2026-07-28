@@ -7,6 +7,7 @@ import {
   Page,
   PageHeader,
   Section,
+  Tag,
   Typography,
 } from '@alveole/components';
 import { useTheme } from '@alveole/theme';
@@ -22,42 +23,6 @@ export type StoryDetailScreenProps = {
   notFoundMessage?: string;
   beforeContent?: React.ReactNode;
   footerContent?: React.ReactNode;
-};
-
-type DetailPillProps = {
-  label: string;
-  tone?: 'tag' | 'info';
-};
-
-const DetailPill = ({ label, tone = 'info' }: DetailPillProps) => {
-  const { color, radius, text, spacing } = useTheme();
-
-  return (
-    <Box
-      borderColor={tone === 'tag' ? color.light.border['action-low-primary'] : color.light.border['default-grey']}
-      borderRadius={radius('full')}
-      borderWidth={1}
-      style={{
-        backgroundColor:
-          tone === 'tag' ? color.light.background['contrast-info'] : color.light.background['default-grey'],
-        paddingLeft: spacing('1W'),
-        paddingRight: spacing('1W'),
-        paddingTop: spacing('0,5V'),
-        paddingBottom: spacing('0,5V'),
-      }}
-    >
-      <Typography
-        style={[
-          text['Corps de texte'].XS.CapsBold,
-          {
-            color: tone === 'tag' ? color.light.text['default-info'] : color.light.text['default-grey'],
-          },
-        ]}
-      >
-        {label}
-      </Typography>
-    </Box>
-  );
 };
 
 type MetaCardProps = {
@@ -279,7 +244,9 @@ export const StoryDetailScreen = ({
                 <Typography style={text['Corps de texte'].XS.CapsBold}>Tags</Typography>
                 <Box display="flex" flexDirection="row" flexWrap="wrap" gap={8}>
                   {meta.tags.map(tag => (
-                    <DetailPill key={tag} label={tag} tone="tag" />
+                    <Tag key={tag} color="action" size="sm">
+                      {tag}
+                    </Tag>
                   ))}
                 </Box>
               </Box>
@@ -289,7 +256,9 @@ export const StoryDetailScreen = ({
                   <Typography style={text['Corps de texte'].XS.CapsBold}>Informations</Typography>
                   <Box display="flex" flexDirection="row" flexWrap="wrap" gap={8}>
                     {flags.map(flag => (
-                      <DetailPill key={flag.key} label={flag.label} />
+                      <Tag key={flag.key} color="default" size="sm">
+                        {flag.label}
+                      </Tag>
                     ))}
                   </Box>
                 </Box>
