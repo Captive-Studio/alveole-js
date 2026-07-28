@@ -244,7 +244,7 @@ export const StoryDetailScreen = ({
                 <Typography style={text['Corps de texte'].XS.CapsBold}>Tags</Typography>
                 <Box display="flex" flexDirection="row" flexWrap="wrap" gap={8}>
                   {meta.tags.map(tag => (
-                    <Tag key={tag} color="action" size="sm">
+                    <Tag key={tag} color="action" size="md">
                       {tag}
                     </Tag>
                   ))}
@@ -256,7 +256,7 @@ export const StoryDetailScreen = ({
                   <Typography style={text['Corps de texte'].XS.CapsBold}>Informations</Typography>
                   <Box display="flex" flexDirection="row" flexWrap="wrap" gap={8}>
                     {flags.map(flag => (
-                      <Tag key={flag.key} color="default" size="sm">
+                      <Tag key={flag.key} color="default" size="md">
                         {flag.label}
                       </Tag>
                     ))}
