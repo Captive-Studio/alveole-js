@@ -2,7 +2,10 @@ import { CSSProperties } from 'react';
 import { useTheme } from '../ThemeProvider';
 import { removeUnsupportedCSSProperties } from './removeUnsupportedCSSProperties';
 
-export type StyleValue = CSSProperties;
+export type StyleValue = CSSProperties & {
+  width?: number | `${string}%`;
+  height?: number | `${string}%`;
+};
 
 /**
  * Génère les styles pour les composants en injectant le theme
