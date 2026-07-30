@@ -50,20 +50,28 @@ export const FormControlFileInput = (props: FormControlFileInputProps) => {
     return '1 fichier';
   }, [placeholder, value, forcePlaceholder]);
 
+  const isPickingRef = React.useRef(false);
+
   const handlePickFile = React.useCallback(async () => {
+    if (isPickingRef.current) return;
     onPickStart?.();
     if (disabled) return;
-    const result = await DocumentPicker.getDocumentAsync({
-      copyToCacheDirectory: true,
-      multiple: multiple ?? false,
-      type: type,
-    });
-    if (multiple) {
-      const newValue = result.assets && result.assets.length > 0 ? result.assets : null;
-      onChange?.(newValue);
-    } else {
-      const newValue = result.assets?.[0] ?? null;
-      onChange?.(newValue);
+    isPickingRef.current = true;
+    try {
+      const result = await DocumentPicker.getDocumentAsync({
+        copyToCacheDirectory: true,
+        multiple: multiple ?? false,
+        type: type,
+      });
+      if (multiple) {
+        const newValue = result.assets && result.assets.length > 0 ? result.assets : null;
+        onChange?.(newValue);
+      } else {
+        const newValue = result.assets?.[0] ?? null;
+        onChange?.(newValue);
+      }
+    } finally {
+      isPickingRef.current = false;
     }
   }, [onPickStart, disabled, multiple, type, onChange]);
 
