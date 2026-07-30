@@ -40,6 +40,7 @@ export * from './Select';
 export * from './SelectMultiple';
 export * from './Sidebar';
 export * from './Signature';
+export * from './Spinner';
 export * from './Switch';
 export * from './Tabs';
 export * from './Tag';
