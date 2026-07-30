@@ -1,7 +1,7 @@
 import { FlashList, FlashListProps } from '@shopify/flash-list';
 import React from 'react';
-import { ActivityIndicator } from 'react-native';
 import { Box, Typography } from '../../core';
+import { Spinner } from '../Spinner';
 import { useStyles } from './ResourceList.styles';
 
 export type ResourceListProps<Item> = FlashListProps<Item> & {
@@ -32,7 +32,7 @@ export const ResourceList = <Item,>(props: ResourceListProps<Item>) => {
   if (isLoading) {
     return (
       <Box tag="resource-list-loader" style={styles.loader}>
-        <ActivityIndicator size="large" style={{ margin: 'auto' }} />
+        <Spinner size="lg" />
       </Box>
     );
   }

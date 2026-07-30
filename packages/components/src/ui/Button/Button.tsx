@@ -1,7 +1,8 @@
 import React, { CSSProperties } from 'react';
-import { ActivityIndicator, Pressable, PressableProps, PressableStateCallbackType, View } from 'react-native';
+import { Pressable, PressableProps, PressableStateCallbackType, View } from 'react-native';
 import { Box, BoxProps, Typography } from '../../core';
 import { IconProps, LucideIcon } from '../LucideIcon';
+import { Spinner } from '../Spinner';
 import { useStyles } from './Button.styles';
 
 type CustomPressableState = PressableStateCallbackType & {
@@ -255,7 +256,7 @@ export const Button = React.forwardRef<View, ButtonProps>(function Button(props,
             {title}
           </Typography>
           {isLoading ? (
-            <ActivityIndicator size="small" style={styles.buttonLoader} />
+            <Spinner size="sm" delay="long" style={styles.buttonLoader} />
           ) : (
             endIcon && <LucideIcon name={endIcon} {...iconStyle({ hovered: !!state.hovered })} />
           )}

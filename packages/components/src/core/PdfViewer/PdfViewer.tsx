@@ -1,5 +1,5 @@
-import { ActivityIndicator } from 'react-native';
 import WebView from 'react-native-webview';
+import { Spinner } from '../../ui/Spinner';
 import { Box } from '../Box';
 
 import type { PdfViewerProps } from './PdfViewer.props';
@@ -14,7 +14,7 @@ export const PdfViewer = (props: PdfViewerProps) => {
         startInLoadingState
         renderLoading={() => (
           <Box flex={1} style={{ alignItems: 'center', justifyContent: 'center' }}>
-            <ActivityIndicator size="large" />
+            <Spinner size="lg" />
           </Box>
         )}
         style={{ flex: 1 }}
