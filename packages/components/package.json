@@ -28,7 +28,8 @@
     "postinstall": "node ./scripts/postinstall.mjs",
     "test:unit": "NODE_OPTIONS=--max-old-space-size=4096 npx jest --maxWorkers=2 --ci",
     "typecheck": "npm run generate:sources && tsc -p tsconfig.typecheck.json --noEmit",
-    "generate:sources": "node scripts/generate-stories-sources.mjs"
+    "generate:sources": "node scripts/generate-stories-sources.mjs",
+    "doctor:fix": "npx expo install --check"
   },
   "devDependencies": {
     "@alveole/eslint-config": "file:../eslint-config",
