@@ -9,32 +9,38 @@ on:
   pull_request:
 
 jobs:
-  ci:
-    if: github.event_name != 'push' || !startsWith(github.ref, 'refs/tags/')
-    uses: captive-studio/captive-ci/.github/workflows/expo-ci.yml@main
-    secrets:
-      slack-webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
-    with:
-      # renovate: datasource=docker depName=node
-      node-image: node:lts@sha256:5711a0d445a1af54af9589066c646df387d1831a608226f4cd694fc59e745059
-      lint-command: npm run lint
-      typecheck-command: npm run typecheck
-      format-check-command: npm run format:check
-      test-command: npm run test:unit
-      jest-cache-path: packages/components/.jest-cache
-      extra-cache-paths: |
-        packages/*/node_modules
-        apps/*/node_modules
-      install-command: npm ci
-      health-command: ""
-      audit-command: ""
-
-  health:
-    name: Health (Expo doctor + Web smoke test)
+  install:
+    name: Install dependencies
     if: github.event_name != 'push' || !startsWith(github.ref, 'refs/tags/')
     runs-on: [self-hosted]
     container: node:lts@sha256:5711a0d445a1af54af9589066c646df387d1831a608226f4cd694fc59e745059
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
+      - name: Cache node_modules
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        id: npm-cache
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+            apps/*/node_modules
+          key: npm-deps-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+
+      - name: Install dependencies
+        if: steps.npm-cache.outputs.cache-hit != 'true'
+        run: npm ci
+
+      - name: Validate install
+        run: npm list --depth=0
+
+  lint:
+    name: Lint workspaces
+    if: github.event_name != 'push' || !startsWith(github.ref, 'refs/tags/')
+    needs: install
+    runs-on: [captive-small]
+    container: node:lts@sha256:5711a0d445a1af54af9589066c646df387d1831a608226f4cd694fc59e745059
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -48,9 +54,138 @@ jobs:
             apps/*/node_modules
           key: npm-deps-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
 
+      # Le cache peut se dire "hit" alors que le téléchargement s'est interrompu en cours de
+      # route (ex: "Premature close" côté runner self-hosted) : on vérifie qu'un binaire
+      # attendu existe réellement avant de faire confiance au cache, sinon on réinstalle.
+      - name: Ensure dependencies (cache fallback)
+        run: test -x node_modules/.bin/eslint || npm ci
+
+      - name: Run lint
+        run: npm run lint
+
+  format-check:
+    name: Check formatting
+    if: github.event_name != 'push' || !startsWith(github.ref, 'refs/tags/')
+    needs: install
+    runs-on: [captive-small]
+    container: node:lts@sha256:5711a0d445a1af54af9589066c646df387d1831a608226f4cd694fc59e745059
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Restore node_modules
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+            apps/*/node_modules
+          key: npm-deps-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+
+      # Le cache peut se dire "hit" alors que le téléchargement s'est interrompu en cours de
+      # route (ex: "Premature close" côté runner self-hosted) : on vérifie qu'un binaire
+      # attendu existe réellement avant de faire confiance au cache, sinon on réinstalle.
+      - name: Ensure dependencies (cache fallback)
+        run: test -x node_modules/.bin/prettier || npm ci
+
+      - name: Run format check
+        run: npm run format:check
+
+  typecheck:
+    name: Typecheck workspaces
+    if: github.event_name != 'push' || !startsWith(github.ref, 'refs/tags/')
+    needs: install
+    runs-on: [captive-small]
+    container: node:lts@sha256:5711a0d445a1af54af9589066c646df387d1831a608226f4cd694fc59e745059
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Restore node_modules
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+            apps/*/node_modules
+          key: npm-deps-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+
+      # Le cache peut se dire "hit" alors que le téléchargement s'est interrompu en cours de
+      # route (ex: "Premature close" côté runner self-hosted) : on vérifie qu'un binaire
+      # attendu existe réellement avant de faire confiance au cache, sinon on réinstalle.
       - name: Ensure dependencies (cache fallback)
         run: test -x node_modules/.bin/tsc || npm ci
 
+      - name: Run typecheck
+        run: npm run typecheck
+
+  test-unit:
+    name: Test Unit workspaces
+    if: github.event_name != 'push' || !startsWith(github.ref, 'refs/tags/')
+    needs: install
+    runs-on: [self-hosted]
+    container: node:lts@sha256:5711a0d445a1af54af9589066c646df387d1831a608226f4cd694fc59e745059
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Restore node_modules
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+            apps/*/node_modules
+          key: npm-deps-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+
+      # Le cache peut se dire "hit" alors que le téléchargement s'est interrompu en cours de
+      # route (ex: "Premature close" côté runner self-hosted) : on vérifie qu'un binaire
+      # attendu existe réellement avant de faire confiance au cache, sinon on réinstalle.
+      - name: Ensure dependencies (cache fallback)
+        run: test -x node_modules/.bin/jest || npm ci
+
+      - name: Restore Jest cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: packages/components/.jest-cache
+          key: jest-cache-${{ runner.os }}-${{ github.sha }}
+          restore-keys: |
+            jest-cache-${{ runner.os }}-
+
+      - name: Unit tests (Jest)
+        run: npm run test:unit
+
+  health:
+    name: Health (Expo doctor + Web smoke test)
+    if: github.event_name != 'push' || !startsWith(github.ref, 'refs/tags/')
+    needs: install
+    runs-on: [self-hosted]
+    container: node:lts@sha256:5711a0d445a1af54af9589066c646df387d1831a608226f4cd694fc59e745059
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Restore node_modules
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+            apps/*/node_modules
+          key: npm-deps-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+
+      # Le cache peut se dire "hit" alors que le téléchargement s'est interrompu en cours de
+      # route (ex: "Premature close" côté runner self-hosted) : on vérifie qu'un binaire
+      # attendu existe réellement avant de faire confiance au cache, sinon on réinstalle.
+      - name: Ensure dependencies (cache fallback)
+        run: test -x node_modules/.bin/tsc || npm ci
+
+      # apps/docs consomme les packages du monorepo via leur `main` compilé (dist/), jamais
+      # généré automatiquement à l'install : sans ce build, Metro échoue à résoudre
+      # @alveole/components, @alveole/storybook, etc. au premier import.
+      # On cible uniquement packages/* : `npm run build` sans filtre lancerait aussi le
+      # build "build" d'apps/docs (expo export complet, ~100s), inutile ici puisqu'on
+      # démarre un serveur de dev juste après.
       - name: Build workspace packages
         run: npm run build --workspace=packages/core --workspace=packages/theme --workspace=packages/components --workspace=packages/storybook
 
@@ -66,6 +201,9 @@ jobs:
           SERVER_PID=$!
           trap 'kill $SERVER_PID 2>/dev/null || true' EXIT
 
+          # Le serveur Metro répond immédiatement sur "/" (coquille HTML statique) sans
+          # jamais déclencher le vrai bundling : il faut requêter le bundle JS lui-même,
+          # extrait du <script src="..."> de la page, pour forcer et valider la compilation.
           html=""
           for i in $(seq 1 30); do
             html=$(curl -sf http://localhost:8081 2>/dev/null) && [ -n "$html" ] && break
@@ -100,7 +238,6 @@ jobs:
     container: node:lts@sha256:5711a0d445a1af54af9589066c646df387d1831a608226f4cd694fc59e745059
     permissions:
       contents: read
-
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
