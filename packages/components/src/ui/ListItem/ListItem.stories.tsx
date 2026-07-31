@@ -34,6 +34,11 @@ export const WithTrailing = () => (
   />
 );
 
+/**
+ * Le spinner remplace l'icône de trailing et s'affiche immédiatement
+ * (pas de délai) car le chargement porte sur l'item lui-même, pas sur
+ * une action utilisateur déclenchée par un bouton.
+ */
 export const WithLoading = () => (
   <ListItem
     title="Titre"

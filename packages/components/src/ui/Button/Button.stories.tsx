@@ -1,3 +1,4 @@
+import React from 'react';
 import { Box } from '../../core';
 import { Story } from '../../type';
 import { Button } from './Button';
@@ -83,5 +84,25 @@ export const Active = () => (
     <Button variant="secondary" title="Active" active />
   </Box>
 );
+
+/**
+ * Le spinner n'apparaît qu'après **1 000 ms** (`delay="long"`).
+ *
+ * Ce délai évite un clignotement visuel quand l'opération se termine rapidement :
+ * si le serveur répond en moins d'une seconde, l'utilisateur ne voit jamais le spinner.
+ * Au-delà, le spinner s'affiche pour signaler que l'attente va durer.
+ *
+ * Appuyez sur le bouton pour simuler une opération de 3 secondes.
+ */
+export const Loading = () => {
+  const [isLoading, setIsLoading] = React.useState(false);
+
+  const handlePress = () => {
+    setIsLoading(true);
+    setTimeout(() => setIsLoading(false), 3000);
+  };
+
+  return <Button variant="primary" title="Enregistrer" isLoading={isLoading} onPress={handlePress} />;
+};
 
 export * as Sources from './Button.stories.sources';
