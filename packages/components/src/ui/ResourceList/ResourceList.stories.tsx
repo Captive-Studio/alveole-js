@@ -100,6 +100,22 @@ export const WithPreviewImageAndTrailing = () => (
   />
 );
 
+/**
+ * Quand `isLoading` est `true`, la liste entière est remplacée par un
+ * spinner centré. Aucun délai n'est appliqué ici : le chargement initial
+ * d'une liste vide n'a rien à afficher, le spinner apparaît donc
+ * immédiatement pour éviter un écran blanc sans feedback.
+ */
+export const IsLoading = () => (
+  <ResourceList
+    data={[] as typeof exampleData}
+    isLoading={true}
+    keyExtractor={item => item.id}
+    renderItem={() => null}
+    renderNoContent={() => null}
+  />
+);
+
 export const WithNoContent = () => (
   <ResourceList
     data={[] as typeof exampleData}
