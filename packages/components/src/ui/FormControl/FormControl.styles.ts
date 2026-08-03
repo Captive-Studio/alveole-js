@@ -188,4 +188,8 @@ export const useStyles = makeStyles(({ text, color, spacing }) => ({
   successText: {
     color: color.success,
   },
+  optionalText: {
+    ...text['Corps de texte'].SM.Medium,
+    color: color.light.text['mention-grey'],
+  },
 }));

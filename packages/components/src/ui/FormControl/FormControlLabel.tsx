@@ -1,3 +1,4 @@
+import React from 'react';
 import { Box, Typography } from '../../core';
 import { useStyles } from './FormControl.styles';
 import { FormControlCaptionProps } from './FormControlCaption';
@@ -5,11 +6,13 @@ import { FormControlCaptionProps } from './FormControlCaption';
 export type FormControlLabelProps = {
   label: string;
   labelRight?: React.ReactNode;
+  optional?: boolean;
+  optionalText?: string;
   disabled?: boolean;
 } & FormControlCaptionProps;
 
 export const FormControlLabel = (props: FormControlLabelProps) => {
-  const { label, labelRight = false, disabled = false, error, success } = props;
+  const { label, labelRight, optional = false, optionalText = 'Optionnel', disabled, error, success } = props;
 
   const styles = useStyles();
 
@@ -25,6 +28,7 @@ export const FormControlLabel = (props: FormControlLabelProps) => {
       >
         {label}
       </Typography>
+      {optional && <Typography style={styles.optionalText}>{optionalText}</Typography>}
       {label && (
         <Box mt={'auto'} mb={'auto'} ml={'auto'}>
           {labelRight}
