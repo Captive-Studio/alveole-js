@@ -49,7 +49,7 @@ export const Spinner = ({ size = 'md', delay, style }: SpinnerProps) => {
   if (!visible) return null;
 
   return (
-    <Animated.View style={[{ transform: [{ rotate: spin }] }, style]}>
+    <Animated.View style={[{ width: px, height: px, transform: [{ rotate: spin }] }, style]}>
       <Svg width={px} height={px} viewBox={`0 0 ${px} ${px}`}>
         <Circle cx={cx} cy={cx} r={r} fill="none" strokeWidth={strokeWidth} stroke={styles.track.color} />
         <Circle
