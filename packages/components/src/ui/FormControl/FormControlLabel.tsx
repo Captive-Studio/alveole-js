@@ -12,7 +12,7 @@ export type FormControlLabelProps = {
 } & FormControlCaptionProps;
 
 export const FormControlLabel = (props: FormControlLabelProps) => {
-  const { label, labelRight, optional = false, optionalText = 'Optionnel', disabled, error, success } = props;
+  const { label, labelRight, optional = false, optionalText = '(optionnel)', disabled, error, success } = props;
 
   const styles = useStyles();
 
