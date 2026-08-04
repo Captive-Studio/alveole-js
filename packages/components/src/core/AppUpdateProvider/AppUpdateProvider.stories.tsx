@@ -66,3 +66,5 @@ export const EcranMiseAJour = () => (
  * ```
  */
 export const Integration = () => null;
+
+export * as Sources from './AppUpdateProvider.stories.sources';
