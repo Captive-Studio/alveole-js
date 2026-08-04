@@ -1,6 +1,7 @@
 // Core
 export * as AStory from '../core/A/A.stories';
 export * as AnchorHeadingStory from '../core/AnchorHeading/AnchorHeading.stories';
+export * as AppUpdateProviderStories from '../core/AppUpdateProvider/AppUpdateProvider.stories';
 export * as BoxStory from '../core/Box/Box.stories';
 export * as CodeStory from '../core/Code/Code.stories';
 export * as Highlight from '../core/Highlight/Highlight.stories';
