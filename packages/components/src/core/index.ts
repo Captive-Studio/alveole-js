@@ -1,6 +1,7 @@
 export * from './A';
 export * from './Alert';
 export * from './AnchorHeading';
+export * from './AppUpdateProvider';
 export * from './Box';
 export * from './Code';
 export * from './Form';
@@ -14,4 +15,5 @@ export * from './Page';
 export * from './PdfViewer';
 export * from './Section';
 export * from './Typography';
+export * from './UpdateRequired';
 export * from './Version';

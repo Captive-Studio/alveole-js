@@ -7,7 +7,7 @@ module.exports = {
   testMatch: ['**/?(*.)+(spec|test).[tj]s?(x)'],
   setupFilesAfterEnv: [...(expoPreset.setupFilesAfterEnv ?? []), '<rootDir>/__tests__/setup.js'],
   transformIgnorePatterns: [
-    'node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@testing-library/react-native|@tamagui/.*|tamagui|react-native-svg)',
+    'node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@testing-library/react-native|@tamagui/.*|tamagui|react-native-svg|standard-navigation)',
   ],
   testPathIgnorePatterns: [...(expoPreset.testPathIgnorePatterns ?? []), '/dist/', '/build/', '/.expo/', '/coverage/'],
   // eslint-disable-next-line no-undef

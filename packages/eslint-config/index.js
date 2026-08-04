@@ -5,6 +5,12 @@ const styleRules = require('./rules/styles');
 const serviceRules = require('./rules/services');
 
 /** @type {import('eslint').Linter.Config[]} */
-const config = defineConfig([expoConfig, { ignores: ['dist/**'] }, sharedRules, styleRules, serviceRules]);
+const config = defineConfig([
+  expoConfig,
+  { ignores: ['dist/**', '**/public/pdf.*.mjs'] },
+  sharedRules,
+  styleRules,
+  serviceRules,
+]);
 
 module.exports = config;
