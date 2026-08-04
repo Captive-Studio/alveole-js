@@ -48,6 +48,31 @@ export const EcranMiseAJour = () => (
  * Le check est effectué au démarrage de l'app, puis à chaque retour en foreground,
  * mais au maximum une fois toutes les 12h pour éviter des appels réseau inutiles.
  *
+ * ## Configuration de iosAppId
+ *
+ * L'`iosAppId` est l'identifiant numérique App Store Connect. Le configurer dans
+ * `app.config.js` pour différencier staging et production au moment du build :
+ *
+ * ```js
+ * // app.config.js
+ * const isStaging = process.env.EXPO_PUBLIC_APP_ENV === 'staging';
+ * const appStoreID = isStaging ? '<staging_id>' : '<production_id>';
+ *
+ * export default {
+ *   expo: {
+ *     extra: { IOS_STORE_ID: appStoreID },
+ *   },
+ * };
+ * ```
+ *
+ * Puis dans `constants/ConstantExtra.ts` pour le lire à runtime :
+ *
+ * ```ts
+ * export const constantExtras = {
+ *   IOS_STORE_ID: Constants.expoConfig?.extra?.IOS_STORE_ID,
+ * };
+ * ```
+ *
  * ```tsx
  * // app/_layout.tsx
  * const AppGate = () => {
