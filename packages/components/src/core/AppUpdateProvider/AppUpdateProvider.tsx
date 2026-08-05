@@ -1,6 +1,5 @@
 import * as Application from 'expo-application';
 import Constants from 'expo-constants';
-import { checkForUpdate, startUpdate } from 'expo-in-app-updates';
 import React from 'react';
 import { AppState, Linking, Platform } from 'react-native';
 import { UpdateRequired } from '../UpdateRequired';
@@ -81,6 +80,7 @@ export const AppUpdateProvider = (props: AppUpdateProviderProps) => {
       lastCheckedAt.current = now;
 
       try {
+        const { checkForUpdate, startUpdate } = await import('expo-in-app-updates');
         const { updateAvailable } = await checkForUpdate();
         if (updateAvailable) {
           if (Platform.OS === 'android') {
