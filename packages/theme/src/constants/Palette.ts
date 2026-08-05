@@ -87,12 +87,16 @@ export const CustomPalette = {
     },
   },
 
+  /** @deprecated Ne pas utiliser pour de nouveaux usages */
   dark: {
     text: {
+      /** @deprecated Ne pas utiliser pour de nouveaux usages */
       'default-grey': Colors['Neutre']['850'],
     },
     background: {
+      /** @deprecated Ne pas utiliser pour de nouveaux usages */
       'alt-primary': Colors.BleuCaptive['75'],
+      /** @deprecated Ne pas utiliser pour de nouveaux usages */
       'contrast-grey': Colors.Neutre['100'],
     },
   },

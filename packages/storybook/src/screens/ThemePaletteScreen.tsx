@@ -38,7 +38,7 @@ function buildSections(palette: Record<string, unknown>): ColorSection[] {
   const sections: ColorSection[] = [];
 
   for (const [modeKey, modeVal] of Object.entries(palette)) {
-    if (modeKey === 'light' || modeKey === 'dark') {
+    if (modeKey === 'light') {
       if (modeVal && typeof modeVal === 'object') {
         for (const [groupKey, groupVal] of Object.entries(modeVal as Record<string, unknown>)) {
           const entries = flattenColors({ [groupKey]: groupVal }, modeKey);

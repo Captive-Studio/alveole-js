@@ -78,19 +78,7 @@ export const generateCSSVariables = (theme: Theme): string => {
 
   const rootBlock = `:root {\n${lines.join('\n')}\n}`;
 
-  // Overrides dark mode
-  const darkLines: string[] = [];
-  const dark = theme.color.dark as Record<string, Record<string, unknown>>;
-  Object.entries(dark).forEach(([category, tokens]) => {
-    if (typeof tokens !== 'object' || tokens === null) return;
-    darkLines.push(...generateSemanticTokenLines(category, tokens, colorVarMap));
-  });
-
-  if (darkLines.length === 0) return rootBlock;
-
-  const darkBlock = `@media (prefers-color-scheme: dark) {\n  :root {\n${darkLines.map(l => '  ' + l).join('\n')}\n  }\n}`;
-
-  return `${rootBlock}\n\n${darkBlock}`;
+  return rootBlock;
 };
 
 const collectTypographyLines = (
@@ -200,6 +188,5 @@ export const generateDefaultThemeCSS = (): string =>
     color: {
       _constants: Colors,
       _rawLight: CustomPalette.light,
-      dark: CustomPalette.dark,
     },
   } as Theme);
