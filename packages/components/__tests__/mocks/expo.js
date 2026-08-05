@@ -10,5 +10,6 @@ jest.mock('expo-constants', () => ({
     expoConfig: {
       version: '1.2.3',
     },
+    executionEnvironment: 'standalone',
   },
 }));

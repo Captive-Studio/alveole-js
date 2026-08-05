@@ -1,4 +1,5 @@
 import * as Application from 'expo-application';
+import Constants from 'expo-constants';
 import { checkForUpdate, startUpdate } from 'expo-in-app-updates';
 import React from 'react';
 import { AppState, Linking, Platform } from 'react-native';
@@ -55,9 +56,11 @@ export const AppUpdateProvider = (props: AppUpdateProviderProps) => {
     androidPackageId,
   } = props;
 
+  // expo-in-app-updates requires a real store client — skip in Expo Go and web
+  const isNativeStoreClient = Platform.OS !== 'web' && Constants.executionEnvironment !== 'storeClient';
+
   const [{ isChecking, isUpdateRequired }, dispatch] = React.useReducer(reducer, {
-    // On web, in-app updates are not supported — skip the check entirely
-    isChecking: Platform.OS !== 'web',
+    isChecking: isNativeStoreClient,
     isUpdateRequired: false,
   });
   const lastCheckedAt = React.useRef<number>(0);
@@ -96,17 +99,17 @@ export const AppUpdateProvider = (props: AppUpdateProviderProps) => {
   );
 
   React.useEffect(() => {
-    if (Platform.OS === 'web') return;
+    if (!isNativeStoreClient) return;
     runCheck(true);
-  }, [runCheck]);
+  }, [runCheck, isNativeStoreClient]);
 
   React.useEffect(() => {
-    if (Platform.OS === 'web') return;
+    if (!isNativeStoreClient) return;
     const subscription = AppState.addEventListener('change', state => {
       if (state === 'active') runCheck(false);
     });
     return () => subscription.remove();
-  }, [runCheck]);
+  }, [runCheck, isNativeStoreClient]);
 
   return (
     <AppUpdateContext.Provider value={{ isChecking }}>
