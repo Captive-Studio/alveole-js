@@ -5,26 +5,39 @@ import { resolve } from 'node:path';
 const root = resolve(import.meta.dirname, '../../..');
 const BASE_URL = 'https://alveole.captive.fr';
 const TITLE_RE = /title:\s*['"]([^'"]+)['"]/;
+const CONSTANT_RE = /^export const ([A-Za-z][A-Za-z0-9_]*)/gm;
 
 const storyFiles = await Array.fromAsync(glob('packages/components/src/**/*.stories.tsx', { cwd: root }));
+const themeConstantFiles = await Array.fromAsync(glob('packages/theme/src/constants/*.ts', { cwd: root }));
 
-const titles = storyFiles
-  .map(file => {
-    const content = readFileSync(resolve(root, file), 'utf8');
-    const match = content.match(TITLE_RE);
-    return match?.[1] ?? null;
-  })
+const componentTitles = storyFiles
+  .map(file => readFileSync(resolve(root, file), 'utf8').match(TITLE_RE)?.[1] ?? null)
   .filter(Boolean)
-  .sort();
+  .sort((a, b) => a.localeCompare(b));
+
+const themeConstants = themeConstantFiles
+  .flatMap(file => [...readFileSync(resolve(root, file), 'utf8').matchAll(CONSTANT_RE)].map(m => m[1]))
+  .sort((a, b) => a.localeCompare(b));
+
+const staticPages = [
+  '/philosophy',
+  '/components',
+  '/constants',
+  '/theme/colors',
+  '/theme/css-variables',
+  '/theme/typographies',
+];
 
 const lastmod = new Date().toISOString();
 
+const makeUrl = (path, changefreq = 'monthly', priority = '0.8000') =>
+  `  <url>\n    <loc>${BASE_URL}${path}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>${changefreq}</changefreq>\n    <priority>${priority}</priority>\n  </url>`;
+
 const urls = [
-  `  <url>\n    <loc>${BASE_URL}/</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>daily</changefreq>\n    <priority>1.0000</priority>\n  </url>`,
-  ...titles.map(
-    title =>
-      `  <url>\n    <loc>${BASE_URL}/components/${encodeURIComponent(title)}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.8000</priority>\n  </url>`,
-  ),
+  makeUrl('/', 'daily', '1.0000'),
+  ...staticPages.map(p => makeUrl(p)),
+  ...componentTitles.map(title => makeUrl(`/components/${encodeURIComponent(title)}`)),
+  ...themeConstants.map(name => makeUrl(`/constants/${encodeURIComponent(name)}`)),
 ];
 
 const xml = `<?xml version="1.0" encoding="UTF-8"?>
@@ -34,4 +47,4 @@ ${urls.join('\n')}
 
 const outputPath = resolve(import.meta.dirname, '../public/sitemap.xml');
 writeFileSync(outputPath, xml);
-console.log(`generated sitemap.xml with ${titles.length} components`);
+console.log(`generated sitemap.xml with ${componentTitles.length} components and ${themeConstants.length} constants`);
