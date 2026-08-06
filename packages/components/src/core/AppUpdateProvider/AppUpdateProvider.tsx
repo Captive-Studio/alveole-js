@@ -80,7 +80,8 @@ export const AppUpdateProvider = (props: AppUpdateProviderProps) => {
       lastCheckedAt.current = now;
 
       try {
-        const { checkForUpdate, startUpdate } = await import('expo-in-app-updates');
+        // eslint-disable-next-line @typescript-eslint/no-require-imports
+        const { checkForUpdate, startUpdate } = require('expo-in-app-updates') as typeof import('expo-in-app-updates');
         const { updateAvailable } = await checkForUpdate();
         if (updateAvailable) {
           if (Platform.OS === 'android') {
