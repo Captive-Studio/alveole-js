@@ -9,6 +9,15 @@
     "doctor": "expo-doctor",
     "doctor:fix": "npx expo install --check"
   },
+  "expo": {
+    "install": {
+      "exclude": [
+        "expo",
+        "expo-constants",
+        "expo-router"
+      ]
+    }
+  },
   "dependencies": {
     "@alveole/components": "*",
     "@alveole/core": "*",
