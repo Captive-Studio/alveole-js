@@ -1,5 +1,6 @@
 import * as Application from 'expo-application';
 import Constants from 'expo-constants';
+import * as ExpoInAppUpdates from 'expo-in-app-updates';
 import React from 'react';
 import { AppState, Linking, Platform } from 'react-native';
 import { UpdateRequired } from '../UpdateRequired';
@@ -80,12 +81,10 @@ export const AppUpdateProvider = (props: AppUpdateProviderProps) => {
       lastCheckedAt.current = now;
 
       try {
-        // eslint-disable-next-line @typescript-eslint/no-require-imports
-        const { checkForUpdate, startUpdate } = require('expo-in-app-updates') as typeof import('expo-in-app-updates');
-        const { updateAvailable } = await checkForUpdate();
+        const { updateAvailable } = await ExpoInAppUpdates.checkForUpdate();
         if (updateAvailable) {
           if (Platform.OS === 'android') {
-            await startUpdate(true);
+            await ExpoInAppUpdates.startUpdate(true);
             // If we reach here the immediate update was cancelled or failed → fallback to screen
           }
           dispatch({ type: 'UPDATE_REQUIRED' });
