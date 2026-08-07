@@ -1,9 +1,16 @@
 import * as Application from 'expo-application';
 import Constants from 'expo-constants';
-import * as ExpoInAppUpdates from 'expo-in-app-updates';
 import React from 'react';
 import { AppState, Linking, Platform } from 'react-native';
 import { UpdateRequired } from '../UpdateRequired';
+
+const importExpoInAppUpdates = async () => {
+  try {
+    return await import('expo-in-app-updates');
+  } catch {
+    return null;
+  }
+};
 
 type AppUpdateState = { isChecking: boolean };
 
@@ -81,6 +88,11 @@ export const AppUpdateProvider = (props: AppUpdateProviderProps) => {
       lastCheckedAt.current = now;
 
       try {
+        const ExpoInAppUpdates = await importExpoInAppUpdates();
+        if (!ExpoInAppUpdates) {
+          dispatch({ type: 'CHECK_COMPLETE' });
+          return;
+        }
         const { updateAvailable } = await ExpoInAppUpdates.checkForUpdate();
         if (updateAvailable) {
           if (Platform.OS === 'android') {
