@@ -14,6 +14,7 @@ export default {
   figmaURL: 'https://www.figma.com/design/xJz8Z6vfrnZPKTtRbuT2W8/Composants?node-id=1002-547',
   description: "Menu contextuel affichant une liste d'actions sous forme de liste de liens.",
   component: ActionMenu,
+  webOnly: true,
   styleFn: () => '',
 } satisfies Story;
 
