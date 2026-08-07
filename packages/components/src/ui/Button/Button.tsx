@@ -114,11 +114,11 @@ export const Button = React.forwardRef<View, ButtonProps>(function Button(props,
       borderStyle: undefined,
       ...(borderNone
         ? {
-          borderTopLeftRadius: 0,
-          borderTopRightRadius: 0,
-          borderBottomLeftRadius: 0,
-          borderBottomRightRadius: 0,
-        }
+            borderTopLeftRadius: 0,
+            borderTopRightRadius: 0,
+            borderBottomLeftRadius: 0,
+            borderBottomRightRadius: 0,
+          }
         : {}),
     };
   };
@@ -197,17 +197,17 @@ export const Button = React.forwardRef<View, ButtonProps>(function Button(props,
     const sizeRadii =
       size === 'xs' || size === 'sm'
         ? {
-          borderTopLeftRadius: styles.xsContainer.borderTopLeftRadius,
-          borderBottomLeftRadius: styles.xsContainer.borderBottomLeftRadius,
-          borderTopRightRadius: styles.xsContainer.borderTopRightRadius,
-          borderBottomRightRadius: styles.xsContainer.borderBottomRightRadius,
-        }
+            borderTopLeftRadius: styles.xsContainer.borderTopLeftRadius,
+            borderBottomLeftRadius: styles.xsContainer.borderBottomLeftRadius,
+            borderTopRightRadius: styles.xsContainer.borderTopRightRadius,
+            borderBottomRightRadius: styles.xsContainer.borderBottomRightRadius,
+          }
         : {
-          borderTopLeftRadius: styles.container.borderTopLeftRadius,
-          borderBottomLeftRadius: styles.container.borderBottomLeftRadius,
-          borderTopRightRadius: styles.container.borderTopRightRadius,
-          borderBottomRightRadius: styles.container.borderBottomRightRadius,
-        };
+            borderTopLeftRadius: styles.container.borderTopLeftRadius,
+            borderBottomLeftRadius: styles.container.borderBottomLeftRadius,
+            borderTopRightRadius: styles.container.borderTopRightRadius,
+            borderBottomRightRadius: styles.container.borderBottomRightRadius,
+          };
 
     const radiusStyle = borderNone
       ? { borderTopLeftRadius: 0, borderBottomLeftRadius: 0, borderTopRightRadius: 0, borderBottomRightRadius: 0 }
