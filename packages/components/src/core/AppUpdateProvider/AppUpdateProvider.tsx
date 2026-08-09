@@ -4,9 +4,10 @@ import React from 'react';
 import { AppState, Linking, Platform } from 'react-native';
 import { UpdateRequired } from '../UpdateRequired';
 
-const importExpoInAppUpdates = async () => {
+const importExpoInAppUpdates = () => {
   try {
-    return await import('expo-in-app-updates');
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    return require('expo-in-app-updates') as typeof import('expo-in-app-updates');
   } catch {
     return null;
   }
@@ -88,7 +89,7 @@ export const AppUpdateProvider = (props: AppUpdateProviderProps) => {
       lastCheckedAt.current = now;
 
       try {
-        const ExpoInAppUpdates = await importExpoInAppUpdates();
+        const ExpoInAppUpdates = importExpoInAppUpdates();
         if (!ExpoInAppUpdates) {
           dispatch({ type: 'CHECK_COMPLETE' });
           return;
