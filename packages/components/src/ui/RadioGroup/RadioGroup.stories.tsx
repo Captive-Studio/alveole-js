@@ -43,4 +43,15 @@ export const WithError = () => (
   </Box>
 );
 
+export const RadioInput = () => {
+  const [value, setValue] = useState('tutu');
+
+  return (
+    <Box display="flex" flexDirection="column" gap={24}>
+      <RadioGroup.Input id="exemple-input" size="sm" value="tutu" checked={value === 'tutu'} onChange={setValue} />
+      <RadioGroup.Input id="exemple-input-md" size="md" value="toto" checked={value === 'toto'} onChange={setValue} />
+    </Box>
+  );
+};
+
 export * as Sources from './RadioGroup.stories.sources';

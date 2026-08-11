@@ -6,20 +6,27 @@ export type RadioInputProps = {
   value: string;
   id: string;
   size: 'sm' | 'md';
+  checked?: boolean;
+  onChange?: (value: string) => void;
 };
 
 export const RadioInput = (props: RadioInputProps) => {
-  const { value, id, size = 'md' } = props;
+  const { value, id, size = 'md', checked, onChange: onInputChange } = props;
 
-  const { value: selectedValue, onChange } = useRadioGroup();
-  const isSelected = selectedValue === value;
+  const { value: selectedValue, onChange: onGroupChange } = useRadioGroup();
+  const isSelected = checked ?? selectedValue === value;
 
   const styles = useStyles();
 
   const itemStyles = { ...styles.itemContainer, ...(size === 'sm' ? styles.itemContainerSm : styles.itemContainerMd) };
   const indicatorStyle = { ...styles.itemContainer, ...(isSelected ? styles.itemContainerActive : {}) };
 
-  return (
+  const handleChange = () => {
+    onInputChange?.(value);
+    onGroupChange?.(value);
+  };
+
+  const input = (
     <TamaguiRadioGroup.Item
       value={value}
       id={id}
@@ -27,9 +34,19 @@ export const RadioInput = (props: RadioInputProps) => {
       focusStyle={styles.itemContainerActive}
       hoverStyle={indicatorStyle as any}
       pressStyle={styles.itemContainerActive}
-      onPress={() => onChange?.(value)}
+      onPress={checked == null ? handleChange : undefined}
     >
       <TamaguiRadioGroup.Indicator style={styles.itemIndicator} />
     </TamaguiRadioGroup.Item>
+  );
+
+  if (checked == null) {
+    return input;
+  }
+
+  return (
+    <TamaguiRadioGroup value={isSelected ? value : ''} onValueChange={() => handleChange()}>
+      {input}
+    </TamaguiRadioGroup>
   );
 };
