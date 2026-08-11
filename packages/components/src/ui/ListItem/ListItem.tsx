@@ -67,7 +67,13 @@ export const ListItem = (props: ListItemProps) => {
         ) : (
           <Box display="flex" flexDirection="row" gap={'3V'}>
             {RadioProps && (
-              <Box mt={'auto'} mb={'auto'}>
+              <Box
+                mt={'auto'}
+                mb={'auto'}
+                onPress={event => {
+                  event.stopPropagation();
+                }}
+              >
                 <RadioGroup.Input id={`${title}--radio`} size="md" {...RadioProps} />
               </Box>
             )}

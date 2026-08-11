@@ -34,7 +34,7 @@ export const RadioInput = (props: RadioInputProps) => {
       focusStyle={styles.itemContainerActive}
       hoverStyle={indicatorStyle as any}
       pressStyle={styles.itemContainerActive}
-      onPress={checked == null ? handleChange : undefined}
+      onPress={handleChange}
     >
       <TamaguiRadioGroup.Indicator style={styles.itemIndicator} />
     </TamaguiRadioGroup.Item>
@@ -44,9 +44,5 @@ export const RadioInput = (props: RadioInputProps) => {
     return input;
   }
 
-  return (
-    <TamaguiRadioGroup value={isSelected ? value : ''} onValueChange={() => handleChange()}>
-      {input}
-    </TamaguiRadioGroup>
-  );
+  return <TamaguiRadioGroup value={isSelected ? value : ''}>{input}</TamaguiRadioGroup>;
 };

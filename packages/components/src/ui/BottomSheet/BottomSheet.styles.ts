@@ -3,7 +3,7 @@ import { makeStyles } from '@alveole/theme';
 export const useStyles = makeStyles(({ spacing, text, color }) => ({
   container: {},
   content: {
-    backgroundColor: color.light.background['alt-grey'],
+    backgroundColor: '#FFFFFF',
     marginTop: spacing('2W'),
   },
   contentFull: {
