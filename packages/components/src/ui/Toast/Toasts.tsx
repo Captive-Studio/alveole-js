@@ -10,7 +10,7 @@ export function Toasts(props: ToastsProps) {
   const { children } = props;
 
   return (
-    <ToastProvider swipeDirection="horizontal" native={['ios', 'android']}>
+    <ToastProvider swipeDirection="horizontal">
       <ToastBridge>
         <Toast />
         <ToastViewport name="app-toasts" multipleToasts bottom={32} left={0} right={0} />

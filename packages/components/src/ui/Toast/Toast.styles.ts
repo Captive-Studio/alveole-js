@@ -1,17 +1,23 @@
 import { makeStyles } from '@alveole/theme';
+import { Platform } from 'react-native';
 
 export const useStyles = makeStyles(({ text, color, radius, spacing, shadows }) => ({
   // Container
+  dualContainer: {
+    padding: 0,
+    width: Platform.select({ web: 384, default: '100%' }),
+  },
+  tamaguiToastContainer: {
+    backgroundColor: "transparent",
+    borderRadius: 0,
+  },
   container: {
     backgroundColor: color.light.background['default-grey'],
-    width: '100%',
-    maxWidth: 384,
     borderRadius: radius('sm'),
     display: 'flex',
     flexDirection: 'row',
     gap: spacing('1W'),
     overflow: 'hidden',
-    padding: 0,
 
     ...shadows(3),
   },

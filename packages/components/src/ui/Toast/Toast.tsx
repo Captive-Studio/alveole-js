@@ -20,7 +20,7 @@ export function ToastView({ title, message, variant = 'default', icon, onClose }
   const styles = useStyles();
 
   return (
-    <Box style={styles.container}>
+    <Box style={[styles.dualContainer, styles.container]}>
       <ToastType variant={variant} icon={icon} />
       <Box style={styles.contenu}>
         <Box style={styles.titleContainer}>
@@ -55,7 +55,7 @@ export function Toast() {
       enterStyle={{ opacity: 0, y: 10, scale: 0.98 }}
       exitStyle={{ opacity: 0, y: 10, scale: 0.98 }}
       viewportName="app-toasts"
-      style={styles.container}
+      style={[styles.dualContainer, styles.tamaguiToastContainer]}
     >
       <ToastView
         title={toast.title}
