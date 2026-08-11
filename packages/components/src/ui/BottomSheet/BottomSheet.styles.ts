@@ -27,7 +27,7 @@ export const useStyles = makeStyles(({ spacing, text, color }) => ({
     backgroundColor: color.alpha(color.background.inverse, 0.5),
   },
   title: {
-    ...text['Corps de texte'].LG.SemiBold,
+    ...text['Corps de texte'].LG.Medium,
     color: color.light.text['title-grey'],
     marginTop: 'auto',
     marginBottom: 'auto',

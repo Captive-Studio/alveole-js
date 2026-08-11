@@ -10,7 +10,7 @@ import { useStyles } from './BottomSheet.styles';
 export type BottomSheetProps = React.PropsWithChildren<{
   open: TamaguiSheetProps['open'];
   title: string;
-  points: TamaguiSheetProps['snapPoints'];
+  points?: TamaguiSheetProps['snapPoints'];
   action?: React.ReactNode | undefined;
   setOpen: (value: boolean) => void;
 }>;
@@ -45,7 +45,7 @@ export const BottomSheet = (props: BottomSheetProps) => {
 
           <Box tag="sheet-header" style={styles.header}>
             <Box>
-              <ButtonIcon icon="X" variant="tertiary" size="lg" onPress={() => setOpen(false)} />
+              <ButtonIcon icon="X" variant="tertiary" size="md" onPress={() => setOpen(false)} />
             </Box>
 
             <Box flex={1}>
