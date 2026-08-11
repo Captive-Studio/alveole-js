@@ -23,4 +23,8 @@ export const useStyles = makeStyles(({ spacing, color, text }) => ({
   disabledText: {
     color: color.light.text['disabled-grey'],
   },
+  trailing: {
+    display: 'flex',
+    alignItems: 'flex-start',
+  },
 }));

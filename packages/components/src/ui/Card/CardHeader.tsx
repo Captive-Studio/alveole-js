@@ -26,7 +26,11 @@ export const CardHeader = (props: CardHeaderProps) => {
         <Typography style={[styles.titre, disabledTextStyle]}>{titre}</Typography>
         {sousTitre && <Typography style={[styles.sousTitre, disabledTextStyle]}>{sousTitre}</Typography>}
       </Box>
-      {badge}
+      {badge && (
+        <Box tag="card-trailing" style={styles.trailing}>
+          {badge}
+        </Box>
+      )}
     </Box>
   );
 };
