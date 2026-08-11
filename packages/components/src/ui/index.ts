@@ -38,6 +38,7 @@ export * from './RadioGroup';
 export * from './ResourceList';
 export * from './Select';
 export * from './SelectMultiple';
+export * from './Sheet';
 export * from './Sidebar';
 export * from './Signature';
 export * from './Spinner';
