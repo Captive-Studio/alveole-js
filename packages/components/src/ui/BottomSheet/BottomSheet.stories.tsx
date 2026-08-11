@@ -50,4 +50,20 @@ export const WithAction = () => {
   );
 };
 
+export const FitContent = () => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <Box display="flex" flexDirection="row">
+        <Button title="Ouvrir la modal" variant="primary" onPress={() => setOpen(true)} />
+      </Box>
+
+      <BottomSheet fitContent open={open} setOpen={setOpen} title="Titre">
+        <Typography height={100}>Children</Typography>
+      </BottomSheet>
+    </>
+  );
+};
+
 export * as Sources from './BottomSheet.stories.sources';

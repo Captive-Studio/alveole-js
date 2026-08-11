@@ -3,9 +3,11 @@ import { makeStyles } from '@alveole/theme';
 export const useStyles = makeStyles(({ spacing, text, color }) => ({
   container: {},
   content: {
-    height: '100%',
     backgroundColor: color.light.background['alt-grey'],
     marginTop: spacing('2W'),
+  },
+  contentFull: {
+    height: '100%',
   },
   header: {
     paddingLeft: spacing('2W'),
