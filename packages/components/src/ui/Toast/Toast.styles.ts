@@ -1,11 +1,11 @@
-import { makeStyles, StyleValue } from '@alveole/theme';
-import { Platform } from 'react-native';
+import { makeStyles } from '@alveole/theme';
+import { Dimensions, Platform } from 'react-native';
 
 export const useStyles = makeStyles(({ text, color, radius, spacing, shadows }) => ({
   // Container
   dualContainer: {
     padding: 0,
-    width: Platform.select<StyleValue['width']>({ web: 384, default: '100%' }),
+    width: Platform.OS === 'web' ? 384 : Dimensions.get('window').width,
   },
   tamaguiToastContainer: {
     backgroundColor: 'transparent',
