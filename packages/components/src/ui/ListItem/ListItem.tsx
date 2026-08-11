@@ -10,6 +10,7 @@ export type ListItemProps = BoxProps & {
   description?: string;
   IconProps?: Pick<IconProps, 'color' | 'name'>;
   AvatarProps?: Pick<AvatarProps, 'fallbackText' | 'src'>;
+  iconComponent?: React.ReactNode;
   preview_url?: string;
   trailing?: () => React.ReactNode;
   loading?: boolean;
@@ -28,6 +29,7 @@ export const ListItem = (props: ListItemProps) => {
     trailing,
     loading = false,
     showSeparateur = true,
+    iconComponent,
     ...itemProps
   } = props;
 
@@ -54,6 +56,7 @@ export const ListItem = (props: ListItemProps) => {
           <>
             {IconProps && <LucideIcon size="sm" color={styles.defaultIcon.color} {...IconProps} />}
             {AvatarProps && <Avatar size="xs" {...AvatarProps} />}
+            {iconComponent}
           </>
         )}
 
