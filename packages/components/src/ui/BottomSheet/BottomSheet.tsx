@@ -7,22 +7,34 @@ import { ButtonIcon } from '../Button';
 import { Divider } from '../Divider';
 import { useStyles } from './BottomSheet.styles';
 
-export type BottomSheetProps = React.PropsWithChildren<{
-  open: TamaguiSheetProps['open'];
-  title: string;
-  points?: TamaguiSheetProps['snapPoints'];
-  action?: React.ReactNode | undefined;
-  setOpen: (value: boolean) => void;
-}>;
+type BottomSheetWithPoints = {
+  points: TamaguiSheetProps['snapPoints'];
+  fitContent?: false;
+};
+
+type BottomSheetWithoutPoints = {
+  points?: undefined;
+  fitContent: true;
+};
+
+export type BottomSheetProps = React.PropsWithChildren<
+  {
+    open: TamaguiSheetProps['open'];
+    title: string;
+    action?: React.ReactNode | undefined;
+    setOpen: (value: boolean) => void;
+  } & (BottomSheetWithoutPoints | BottomSheetWithPoints)
+>;
 
 export const BottomSheet = (props: BottomSheetProps) => {
-  const { children, open, title, points, action, setOpen } = props;
+  const { children, open, title, points, fitContent, action, setOpen } = props;
 
   const [position, setPosition] = React.useState(0);
 
   const styles = useStyles();
 
   const { bottom } = useSafeAreaInsets();
+  const snapPointsMode: TamaguiSheetProps['snapPointsMode'] = fitContent ? 'fit' : 'percent';
 
   return (
     <Box tag="sheet" style={styles.container}>
@@ -31,8 +43,8 @@ export const BottomSheet = (props: BottomSheetProps) => {
         forceRemoveScrollEnabled={open}
         open={open}
         onOpenChange={setOpen}
-        snapPoints={points}
-        snapPointsMode={'percent'}
+        snapPoints={fitContent ? undefined : points}
+        snapPointsMode={snapPointsMode}
         dismissOnSnapToBottom
         position={position}
         onPositionChange={setPosition}
@@ -61,7 +73,7 @@ export const BottomSheet = (props: BottomSheetProps) => {
 
           <Divider ml={'2W'} mr={'2W'} />
 
-          <Box tag="sheet-content" style={styles.content} pb={bottom}>
+          <Box tag="sheet-content" style={[styles.content, !fitContent && styles.contentFull]} pb={bottom}>
             {children}
           </Box>
         </TamaguiSheet.Frame>
