@@ -35,6 +35,10 @@ export const useStyles = makeStyles(({ radius, text, color, spacing }) => ({
     color: color.light.text['default-grey'],
     backgroundColor: color.light.background['contrast-grey'],
   },
+  badgeDisabled: {
+    color: color.light.text['disabled-grey'],
+    backgroundColor: color.light.background['disabled-grey'],
+  },
 
   // Sizes
   badgeSm: {
