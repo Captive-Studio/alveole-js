@@ -1,11 +1,11 @@
 import React from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Sheet as TamaguiSheet, SheetProps as TamaguiSheetProps } from 'tamagui';
+import { Box } from '../../core/Box';
+import { Typography } from '../../core/Typography';
 import { ButtonIcon } from '../Button';
 import { Divider } from '../Divider';
 import { useStyles } from './Sheet.styles';
-import { Box } from '../../core/Box';
-import { Typography } from '../../core/Typography';
 
 export type SheetProps = React.PropsWithChildren<{
   open: TamaguiSheetProps['open'];
