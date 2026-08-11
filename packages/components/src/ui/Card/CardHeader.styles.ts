@@ -1,4 +1,4 @@
-import { makeStyles } from '@alveole/theme';
+import { grayscaleStyle, makeStyles } from '@alveole/theme';
 
 export const useStyles = makeStyles(({ spacing, color, text }) => ({
   cardHeader: {
@@ -27,7 +27,5 @@ export const useStyles = makeStyles(({ spacing, color, text }) => ({
     display: 'flex',
     alignItems: 'flex-start',
   },
-  imageDisabled: {
-    filter: 'grayscale(1)',
-  },
+  imageDisabled: grayscaleStyle,
 }));

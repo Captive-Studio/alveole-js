@@ -1,5 +1,6 @@
 export * from './constants';
 export * from './helpers/deepMerge';
+export * from './helpers/grayscaleStyle';
 export * from './helpers/injectVariableCSS';
 export * from './helpers/isSpacingKey';
 export * from './helpers/makeStyles';
