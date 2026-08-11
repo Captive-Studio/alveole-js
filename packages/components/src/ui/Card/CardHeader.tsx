@@ -17,11 +17,16 @@ export const CardHeader = (props: CardHeaderProps) => {
 
   const styles = useStyles();
 
-  const disabledTextStyle = variant === 'disabled' ? styles.disabledText : {};
+  const isDisabled = variant === 'disabled';
+  const disabledTextStyle = isDisabled ? styles.disabledText : {};
 
   return (
     <Box tag="card-header" style={[styles.cardHeader, disabledTextStyle, style]} {...boxProps}>
-      {image}
+      {image && (
+        <Box tag="card-image" style={[isDisabled ? styles.imageDisabled : {}]}>
+          {image}
+        </Box>
+      )}
       <Box tag="card-header-texte" style={styles.texte}>
         <Typography style={[styles.titre, disabledTextStyle]}>{titre}</Typography>
         {sousTitre && <Typography style={[styles.sousTitre, disabledTextStyle]}>{sousTitre}</Typography>}

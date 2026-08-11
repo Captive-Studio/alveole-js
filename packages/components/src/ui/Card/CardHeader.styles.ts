@@ -27,4 +27,7 @@ export const useStyles = makeStyles(({ spacing, color, text }) => ({
     display: 'flex',
     alignItems: 'flex-start',
   },
+  imageDisabled: {
+    filter: 'grayscale(1)',
+  },
 }));

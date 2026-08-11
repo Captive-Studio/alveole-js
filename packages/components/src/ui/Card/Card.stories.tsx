@@ -50,7 +50,7 @@ export const cardDisabled = () => {
           variant="disabled"
           titre="Titre lorem"
           sousTitre="Sous-titre"
-          image={<Avatar size="md" fallbackText="M" />}
+          image={<Avatar size="md" src="https://picsum.photos/100/100" fallbackText="M" />}
           badge={
             <Badge variant="disabled" size="sm">
               PRÉSENT
