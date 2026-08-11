@@ -5,9 +5,9 @@ import { Box } from '../../core/Box';
 import { Typography } from '../../core/Typography';
 import { ButtonIcon } from '../Button';
 import { Divider } from '../Divider';
-import { useStyles } from './Sheet.styles';
+import { useStyles } from './BottomSheet.styles';
 
-export type SheetProps = React.PropsWithChildren<{
+export type BottomSheetProps = React.PropsWithChildren<{
   open: TamaguiSheetProps['open'];
   title: string;
   points: TamaguiSheetProps['snapPoints'];
@@ -15,7 +15,7 @@ export type SheetProps = React.PropsWithChildren<{
   setOpen: (value: boolean) => void;
 }>;
 
-export const Sheet = (props: SheetProps) => {
+export const BottomSheet = (props: BottomSheetProps) => {
   const { children, open, title, points, action, setOpen } = props;
 
   const [position, setPosition] = React.useState(0);

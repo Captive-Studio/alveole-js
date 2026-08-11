@@ -1,14 +1,14 @@
 import { Box, Button, Story, Typography } from '@alveole/components';
 import { useState } from 'react';
-import { Sheet } from './Sheet';
-import { useStyles } from './Sheet.styles';
+import { BottomSheet } from './BottomSheet';
+import { useStyles } from './BottomSheet.styles';
 
 export default {
-  title: 'Sheet',
+  title: 'BottomSheet',
   tags: ['ui'],
   experimental: true,
   description: 'Bottom sheet modal',
-  component: Sheet,
+  component: BottomSheet,
   styleFn: useStyles,
 } satisfies Story;
 
@@ -21,9 +21,9 @@ export const Default = () => {
         <Button title="Ouvrir la modal" variant="primary" onPress={() => setOpen(true)} />
       </Box>
 
-      <Sheet open={open} setOpen={setOpen} points={[80, 25]} title="Titre">
+      <BottomSheet open={open} setOpen={setOpen} points={[80, 25]} title="Titre">
         <Typography>Children</Typography>
-      </Sheet>
+      </BottomSheet>
     </>
   );
 };
@@ -37,7 +37,7 @@ export const WithAction = () => {
         <Button title="Ouvrir la modal" variant="primary" onPress={() => setOpen(true)} />
       </Box>
 
-      <Sheet
+      <BottomSheet
         open={open}
         setOpen={setOpen}
         points={[50]}
@@ -45,9 +45,9 @@ export const WithAction = () => {
         action={<Button title="Action" variant="tertiary" size="sm" />}
       >
         <Typography>Children</Typography>
-      </Sheet>
+      </BottomSheet>
     </>
   );
 };
 
-export * as Sources from './Sheet.stories.sources';
+export * as Sources from './BottomSheet.stories.sources';
