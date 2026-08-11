@@ -3,11 +3,9 @@ import { Dimensions, Platform } from 'react-native';
 
 export const useStyles = makeStyles(({ text, color, radius, spacing, shadows }) => ({
   // Container
-  dualContainer: {
-    padding: 0,
-    width: Platform.OS === 'web' ? 384 : Dimensions.get('window').width,
-  },
   tamaguiToastContainer: {
+    padding: 0,
+    width: Platform.OS === 'web' ? 384 : Dimensions.get('window').width - 32,
     backgroundColor: 'transparent',
     borderRadius: 0,
   },
@@ -18,6 +16,9 @@ export const useStyles = makeStyles(({ text, color, radius, spacing, shadows }) 
     flexDirection: 'row',
     gap: spacing('1W'),
     overflow: 'hidden',
+    width: '100%',
+    maxWidth: 384,
+    padding: 0,
 
     ...shadows(3),
   },
