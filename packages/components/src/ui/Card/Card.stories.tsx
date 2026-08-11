@@ -1,6 +1,7 @@
 import { Box } from '../../core';
 import { Story } from '../../type';
 import { Avatar } from '../Avatar';
+import { Badge } from '../Badge';
 import { Button } from '../Button';
 import { LucideIcon } from '../LucideIcon';
 import { Card } from './Card';
@@ -18,48 +19,109 @@ export default {
 
 export const card = () => {
   return (
-    <Card>
-      <Card.Header
-        titre="Titre de la carte"
-        sousTitre="Sous-titre de la carte"
-        image={<Avatar size="md" fallbackText="M" />}
-      />
-      <Card.Section titre="Titre de la carte" titreIcone="Calendar" description="Description de la carte" />
-      <Card.Section titre="Titre de la carte" titreIcone="Calendar" description="Description de la carte" />
-      <Card.Actions>
-        <Button variant="secondary" title="Action" size="sm" />
-        <Button variant="primary" title="Action" size="sm" />
-      </Card.Actions>
-    </Card>
+    <Box style={{ width: '100%', maxWidth: 400 }}>
+      <Card>
+        <Card.Header
+          titre="Titre lorem"
+          sousTitre="Sous-titre"
+          image={<Avatar size="md" fallbackText="M" />}
+          badge={
+            <Badge variant="success" size="sm">
+              PRÉSENT
+            </Badge>
+          }
+        />
+        <Card.Section titre="Titre section" titreIcone="Calendar" description="Description" />
+        <Card.Section titre="Titre section" titreIcone="Calendar" description="Description" />
+        <Card.Actions>
+          <Button variant="secondary" title="Libellé" size="sm" />
+          <Button variant="primary" title="Libellé" size="sm" />
+        </Card.Actions>
+      </Card>
+    </Box>
   );
 };
 
 export const cardDisabled = () => {
   return (
-    <Card>
-      <Card.Header
-        variant="disabled"
-        titre="Titre de la carte"
-        sousTitre="Sous-titre de la carte"
-        image={<LucideIcon name="Settings" size="md" />}
-      />
-      <Card.Section
-        variant="disabled"
-        titre="Titre de la carte"
-        titreIcone="Calendar"
-        description="Description de la carte"
-      />
-      <Card.Section
-        variant="disabled"
-        titre="Titre de la carte"
-        titreIcone="Calendar"
-        description="Description de la carte"
-      />
-      <Card.Actions>
-        <Button variant="secondary" title="Action" size="sm" disabled />
-        <Button variant="primary" title="Action" size="sm" disabled />
-      </Card.Actions>
-    </Card>
+    <Box style={{ width: '100%', maxWidth: 400 }}>
+      <Card>
+        <Card.Header
+          variant="disabled"
+          titre="Titre lorem"
+          sousTitre="Sous-titre"
+          image={<Avatar size="md" fallbackText="M" />}
+          badge={
+            <Badge variant="disabled" size="sm">
+              PRÉSENT
+            </Badge>
+          }
+        />
+        <Card.Section variant="disabled" titre="Titre section" titreIcone="Calendar" description="Description" />
+        <Card.Section variant="disabled" titre="Titre section" titreIcone="Calendar" description="Description" />
+        <Card.Actions>
+          <Button variant="secondary" title="Libellé" size="sm" disabled />
+          <Button variant="primary" title="Libellé" size="sm" disabled />
+        </Card.Actions>
+      </Card>
+    </Box>
+  );
+};
+
+export const cardWithMedia = () => {
+  return (
+    <Box style={{ width: '100%', maxWidth: 400 }}>
+      <Card>
+        <Card.Media>
+          <img src="https://picsum.photos/400/200" alt="" style={{ width: '100%', display: 'block' }} />
+        </Card.Media>
+        <Card.Header
+          titre="Titre lorem"
+          sousTitre="Sous-titre"
+          image={<Avatar size="md" fallbackText="M" />}
+          badge={
+            <Badge variant="success" size="sm">
+              PRÉSENT
+            </Badge>
+          }
+        />
+        <Card.Section titre="Titre section" titreIcone="Calendar" description="Description" />
+        <Card.Section titre="Titre section" titreIcone="Calendar" description="Description" />
+        <Card.Actions>
+          <Button variant="secondary" title="Libellé" size="sm" />
+          <Button variant="primary" title="Libellé" size="sm" />
+        </Card.Actions>
+      </Card>
+    </Box>
+  );
+};
+
+export const cardWithMediaDisabled = () => {
+  return (
+    <Box style={{ width: '100%', maxWidth: 400 }}>
+      <Card>
+        <Card.Media variant="disabled">
+          <img src="https://picsum.photos/400/200" alt="" style={{ width: '100%', display: 'block' }} />
+        </Card.Media>
+        <Card.Header
+          variant="disabled"
+          titre="Titre lorem"
+          sousTitre="Sous-titre"
+          image={<Avatar size="md" fallbackText="M" />}
+          badge={
+            <Badge variant="disabled" size="sm">
+              PRÉSENT
+            </Badge>
+          }
+        />
+        <Card.Section variant="disabled" titre="Titre section" titreIcone="Calendar" description="Description" />
+        <Card.Section variant="disabled" titre="Titre section" titreIcone="Calendar" description="Description" />
+        <Card.Actions>
+          <Button variant="secondary" title="Libellé" size="sm" disabled />
+          <Button variant="primary" title="Libellé" size="sm" disabled />
+        </Card.Actions>
+      </Card>
+    </Box>
   );
 };
 
@@ -90,16 +152,17 @@ export const cardHeader = () => {
   return (
     <Box display="flex" flexDirection="column" gap="100">
       <Card.Header
-        titre="Titre de la carte"
-        sousTitre="Sous-titre de la carte"
+        titre="Titre lorem"
+        sousTitre="Sous-titre"
         image={<Avatar size="md" fallbackText="M" />}
+        badge={
+          <Badge variant="success" size="sm">
+            PRÉSENT
+          </Badge>
+        }
       />
 
-      <Card.Header
-        titre="Titre de la carte"
-        sousTitre="Sous-titre de la carte"
-        image={<LucideIcon name="Image" size="md" />}
-      />
+      <Card.Header titre="Titre lorem" sousTitre="Sous-titre" image={<LucideIcon name="Image" size="md" />} />
     </Box>
   );
 };
@@ -108,9 +171,14 @@ export const cardHeaderDisabled = () => {
   return (
     <Card.Header
       variant="disabled"
-      titre="Titre de la carte"
-      sousTitre="Sous-titre de la carte"
+      titre="Titre lorem"
+      sousTitre="Sous-titre"
       image={<Avatar size="md" fallbackText="M" />}
+      badge={
+        <Badge variant="disabled" size="sm">
+          PRÉSENT
+        </Badge>
+      }
     />
   );
 };
