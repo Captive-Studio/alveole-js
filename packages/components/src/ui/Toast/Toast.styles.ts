@@ -8,7 +8,7 @@ export const useStyles = makeStyles(({ text, color, radius, spacing, shadows }) 
     width: Platform.select({ web: 384, default: '100%' }),
   },
   tamaguiToastContainer: {
-    backgroundColor: "transparent",
+    backgroundColor: 'transparent',
     borderRadius: 0,
   },
   container: {
