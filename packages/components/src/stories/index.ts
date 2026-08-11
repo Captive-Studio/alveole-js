@@ -59,6 +59,7 @@ export * as RadioGroupStory from '../ui/RadioGroup/RadioGroup.stories';
 export * as ResourceListStory from '../ui/ResourceList/ResourceList.stories';
 export * as SelectStory from '../ui/Select/Select.stories';
 export * as SelectMultipleStory from '../ui/SelectMultiple/SelectMultiple.stories';
+export * as SheetStory from '../ui/Sheet/Sheet.stories';
 export * as SidebarStory from '../ui/Sidebar/Sidebar.stories';
 export * as SignatureStory from '../ui/Signature/Signature.stories';
 export * as SpinnerStory from '../ui/Spinner/Spinner.stories';
