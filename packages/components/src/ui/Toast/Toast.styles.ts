@@ -4,7 +4,8 @@ export const useStyles = makeStyles(({ text, color, radius, spacing, shadows }) 
   // Container
   container: {
     backgroundColor: color.light.background['default-grey'],
-    width: 384,
+    width: '100%',
+    maxWidth: 384,
     borderRadius: radius('sm'),
     display: 'flex',
     flexDirection: 'row',
