@@ -1,7 +1,9 @@
 import React from 'react';
+import { GestureResponderEvent } from 'react-native';
 import { Box, BoxProps, Image, Typography } from '../../core';
 import { Avatar, AvatarProps } from '../Avatar';
 import { IconProps, LucideIcon } from '../LucideIcon';
+import { RadioGroup, RadioInputProps } from '../RadioGroup';
 import { Spinner } from '../Spinner';
 import { useStyles } from './ListItem.styles';
 
@@ -10,7 +12,7 @@ export type ListItemProps = BoxProps & {
   description?: string;
   IconProps?: Pick<IconProps, 'color' | 'name'>;
   AvatarProps?: Pick<AvatarProps, 'fallbackText' | 'src'>;
-  iconComponent?: React.ReactNode;
+  RadioProps?: Pick<RadioInputProps, 'checked' | 'onChange' | 'value'>;
   preview_url?: string;
   trailing?: () => React.ReactNode;
   loading?: boolean;
@@ -25,13 +27,22 @@ export const ListItem = (props: ListItemProps) => {
     style,
     AvatarProps,
     IconProps,
+    RadioProps,
     preview_url,
     trailing,
     loading = false,
     showSeparateur = true,
-    iconComponent,
+    onPress,
     ...itemProps
   } = props;
+
+  const handlePress = React.useCallback(
+    (event: GestureResponderEvent) => {
+      if (RadioProps) RadioProps.onChange?.(RadioProps.value);
+      onPress?.(event);
+    },
+    [RadioProps, onPress],
+  );
 
   const styles = useStyles();
 
@@ -40,7 +51,8 @@ export const ListItem = (props: ListItemProps) => {
       <Box
         tag="resource-item"
         style={[styles.item, style]}
-        hoverStyle={itemProps['onPress'] ? styles.itemHover : {}}
+        hoverStyle={onPress || RadioProps ? styles.itemHover : {}}
+        onPress={handlePress}
         {...itemProps}
       >
         {preview_url ? (
@@ -53,11 +65,23 @@ export const ListItem = (props: ListItemProps) => {
             />
           </Box>
         ) : (
-          <>
-            {IconProps && <LucideIcon size="sm" color={styles.defaultIcon.color} {...IconProps} />}
-            {AvatarProps && <Avatar size="xs" {...AvatarProps} />}
-            {iconComponent}
-          </>
+          <Box display="flex" flexDirection="row" gap={'3V'}>
+            {RadioProps && (
+              <Box mt={'auto'} mb={'auto'}>
+                <RadioGroup.Input id={`${title}--radio`} size="md" {...RadioProps} />
+              </Box>
+            )}
+            {IconProps && (
+              <Box mt={'auto'} mb={'auto'}>
+                <LucideIcon size="sm" color={styles.defaultIcon.color} {...IconProps} />
+              </Box>
+            )}
+            {AvatarProps && (
+              <Box mt={'auto'} mb={'auto'}>
+                <Avatar size="xs" {...AvatarProps} />
+              </Box>
+            )}
+          </Box>
         )}
 
         <Box style={styles.detail}>

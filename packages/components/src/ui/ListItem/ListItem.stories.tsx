@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Story } from '../../type/Story';
 import { ButtonIcon } from '../Button';
 import { ListItem } from './ListItem';
@@ -96,6 +97,39 @@ export const WithPreviewImage = () => (
     }}
   />
 );
+
+export const ItemRadio = () => {
+  const [value, setValue] = useState<string>();
+
+  return (
+    <ListItem
+      title="Titre"
+      description="Description"
+      RadioProps={{
+        value: 'tutu',
+        checked: value === 'tutu',
+        onChange: v => setValue(v),
+      }}
+    />
+  );
+};
+
+export const ItemRadioWithIcon = () => {
+  const [value, setValue] = useState<string>();
+
+  return (
+    <ListItem
+      title="Titre"
+      description="Description"
+      IconProps={{ name: 'Settings' }}
+      RadioProps={{
+        value: 'tutu',
+        checked: value === 'tutu',
+        onChange: v => setValue(v),
+      }}
+    />
+  );
+};
 
 /** Sans prop `onPress`, l’effet de hover n’apparaît pas. */
 export const withoutHover = () => <ListItem title="Titre" description="Description" />;
