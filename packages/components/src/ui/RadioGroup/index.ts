@@ -7,6 +7,7 @@ export { RadioGroupElement, RadioGroupProps } from './RadioGroup';
 export { RadioGroupCardProps } from './RadioGroupCard';
 export { RadioGroupCtx } from './RadioGroupContext';
 export { RadioGroupItemProps } from './RadioGroupItem';
+export { RadioInputProps } from './RadioInput';
 
 export const RadioGroup = Object.assign(RadioGroupComponent, {
   Item: RadioGroupItem,
