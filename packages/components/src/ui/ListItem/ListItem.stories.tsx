@@ -114,6 +114,23 @@ export const ItemRadio = () => {
   );
 };
 
+export const ItemRadioMultiple = () => {
+  const [value, setValue] = useState<string>();
+
+  return (
+    <ListItem
+      title="Titre"
+      description="Description"
+      RadioProps={{
+        value: 'tutu',
+        checked: value === 'tutu',
+        onChange: v => setValue(v),
+        multiple: true,
+      }}
+    />
+  );
+};
+
 export const ItemRadioWithIcon = () => {
   const [value, setValue] = useState<string>();
 

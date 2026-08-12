@@ -2,6 +2,7 @@ import React from 'react';
 import { GestureResponderEvent } from 'react-native';
 import { Box, BoxProps, Image, Typography } from '../../core';
 import { Avatar, AvatarProps } from '../Avatar';
+import { CheckboxContainer, CheckboxIndicator } from '../Checkbox';
 import { IconProps, LucideIcon } from '../LucideIcon';
 import { RadioGroup, RadioInputProps } from '../RadioGroup';
 import { Spinner } from '../Spinner';
@@ -12,7 +13,7 @@ export type ListItemProps = BoxProps & {
   description?: string;
   IconProps?: Pick<IconProps, 'color' | 'name'>;
   AvatarProps?: Pick<AvatarProps, 'fallbackText' | 'src'>;
-  RadioProps?: Pick<RadioInputProps, 'checked' | 'onChange' | 'value'>;
+  RadioProps?: Pick<RadioInputProps, 'checked' | 'onChange' | 'value'> & { multiple?: boolean };
   preview_url?: string;
   trailing?: () => React.ReactNode;
   loading?: boolean;
@@ -66,7 +67,7 @@ export const ListItem = (props: ListItemProps) => {
           </Box>
         ) : (
           <Box display="flex" flexDirection="row" gap={'3V'}>
-            {RadioProps && (
+            {RadioProps && RadioProps.multiple !== true && (
               <Box
                 mt={'auto'}
                 mb={'auto'}
@@ -75,6 +76,23 @@ export const ListItem = (props: ListItemProps) => {
                 }}
               >
                 <RadioGroup.Input id={`${title}--radio`} size="md" {...RadioProps} />
+              </Box>
+            )}
+            {RadioProps && RadioProps.multiple === true && (
+              <Box
+                mt={'auto'}
+                mb={'auto'}
+                onPress={event => {
+                  event.stopPropagation();
+                }}
+              >
+                <CheckboxContainer
+                  id={`${title}--checkbox`}
+                  checked={RadioProps.checked}
+                  onCheckedChange={() => RadioProps.onChange?.(RadioProps.value)}
+                >
+                  <CheckboxIndicator />
+                </CheckboxContainer>
               </Box>
             )}
             {IconProps && (
