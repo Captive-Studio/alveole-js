@@ -71,7 +71,9 @@ export const BottomSheet = (props: BottomSheetProps) => {
             )}
           </Box>
 
-          <Divider ml={'2W'} mr={'2W'} />
+          <Box pl={'2W'} pr={'2W'}>
+            <Divider />
+          </Box>
 
           <Box tag="sheet-content" style={[styles.content, !fitContent && styles.contentFull]} pb={bottom}>
             {children}
