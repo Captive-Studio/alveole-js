@@ -40,6 +40,7 @@ export * as EmailFieldStory from '../ui/EmailField/EmailField.stories';
 export * as EmailInputStory from '../ui/EmailInput/EmailInput.stories';
 export * as EmptyStateStory from '../ui/EmptyState/EmptyState.stories';
 export * as FileFieldStory from '../ui/FileField/FileField.stories';
+export * as FilterDateStory from '../ui/FilterDate/FilterDate.stories';
 export * as FormControlStory from '../ui/FormControl/FormControl.stories';
 export * as GridStory from '../ui/Grid/Grid.stories';
 export * as HeaderStory from '../ui/Header/Header.stories';
