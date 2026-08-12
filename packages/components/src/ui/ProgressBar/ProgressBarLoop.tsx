@@ -4,14 +4,17 @@ import { Box, BoxProps } from '../../core';
 import { PROGRESS_BAR_GAP, PROGRESS_BAR_HEIGHT, PROGRESS_DURATION } from './ProgressBar.constants';
 import { useStyles } from './ProgressBar.styles';
 
-export type ProgressBarLoopProps = BoxProps;
+export type ProgressBarLoopProps = BoxProps & {
+  noRadius?: boolean;
+};
 
 export const ProgressBarLoop = (props: ProgressBarLoopProps) => {
-  const { style, onLayout, ...boxProps } = props;
+  const { noRadius, style, onLayout, ...boxProps } = props;
 
   const [progress] = React.useState(() => new Animated.Value(0));
 
   const styles = useStyles();
+  const radiusStyle = noRadius ? styles.noRadius : undefined;
 
   const [width, setWidth] = React.useState(0);
 
@@ -61,8 +64,8 @@ export const ProgressBarLoop = (props: ProgressBarLoopProps) => {
 
   return (
     <Box style={[styles.progressTrack, { height: PROGRESS_BAR_HEIGHT }, style]} onLayout={handleLayout} {...boxProps}>
-      <Animated.View style={[styles.progressedAbsolute, { width: loopFillWidth }]} />
-      <Animated.View style={[styles.remainingAbsolute, { left: loopRemainingLeft }]} />
+      <Animated.View style={[styles.progressedAbsolute, radiusStyle, { width: loopFillWidth }]} />
+      <Animated.View style={[styles.remainingAbsolute, radiusStyle, { left: loopRemainingLeft }]} />
     </Box>
   );
 };

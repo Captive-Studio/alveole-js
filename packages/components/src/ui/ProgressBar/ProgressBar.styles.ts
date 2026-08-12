@@ -51,6 +51,9 @@ export const useStyles = makeStyles(({ text, color, spacing, radius }) => ({
     borderRadius: radius('sm'),
     backgroundColor: color.light.border['default-grey'],
   },
+  noRadius: {
+    borderRadius: 0,
+  },
   indicator: {
     ...text['Corps de texte'].XS.Regular,
     color: color.light.artwork['major-primary'],

@@ -4,14 +4,17 @@ import { Box, BoxProps } from '../../core';
 import { PROGRESS_BAR_HEIGHT, PROGRESS_DURATION } from './ProgressBar.constants';
 import { useStyles } from './ProgressBar.styles';
 
-export type ProgressBarIndeterminateProps = BoxProps;
+export type ProgressBarIndeterminateProps = BoxProps & {
+  noRadius?: boolean;
+};
 
 export const ProgressBarIndeterminate = (props: ProgressBarIndeterminateProps) => {
-  const { style, ...boxProps } = props;
+  const { noRadius, style, ...boxProps } = props;
 
   const [progress] = React.useState(() => new Animated.Value(0));
 
   const styles = useStyles();
+  const radiusStyle = noRadius ? styles.noRadius : undefined;
 
   const translateRange = React.useMemo(
     () =>
@@ -54,7 +57,7 @@ export const ProgressBarIndeterminate = (props: ProgressBarIndeterminateProps) =
 
   return (
     <Box
-      style={[styles.progress, { height: PROGRESS_BAR_HEIGHT, marginTop: -PROGRESS_BAR_HEIGHT }, style]}
+      style={[styles.progress, radiusStyle, { height: PROGRESS_BAR_HEIGHT, marginTop: -PROGRESS_BAR_HEIGHT }, style]}
       {...boxProps}
     >
       <Animated.View
@@ -63,6 +66,7 @@ export const ProgressBarIndeterminate = (props: ProgressBarIndeterminateProps) =
             transform: [{ translateX: translateRange }, { scaleX: scaleRange }],
           },
           styles.bar,
+          radiusStyle,
         ]}
       />
     </Box>

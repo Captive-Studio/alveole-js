@@ -21,6 +21,8 @@ export const Indeterminate = () => <ProgressBar mode="indeterminate" />;
 
 export const WithIndicator = () => <ProgressBar mode="determinate" indicator value={0.25} />;
 
+export const NoRadius = () => <ProgressBar mode="determinate" noRadius value={0.25} />;
+
 export const Usage = () => {
   const [value, setValue] = React.useState(0.25);
 

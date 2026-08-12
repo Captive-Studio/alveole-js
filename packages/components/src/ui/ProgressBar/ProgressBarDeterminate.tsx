@@ -9,12 +9,14 @@ export type ProgressBarDeterminateProps = BoxProps & {
   indicator?: boolean;
   indicatorPrecision?: 0 | 1 | 2 | 3;
   clamped: number;
+  noRadius?: boolean;
 };
 
 export const ProgressBarDeterminate = (props: ProgressBarDeterminateProps) => {
-  const { clamped, indicator, indicatorPrecision = 3, style, onLayout, ...boxProps } = props;
+  const { clamped, indicator, indicatorPrecision = 3, noRadius, style, onLayout, ...boxProps } = props;
 
   const styles = useStyles();
+  const radiusStyle = noRadius ? styles.noRadius : undefined;
   const [animatedProgress] = React.useState(() => new Animated.Value(clamped));
   const remaining = React.useMemo(() => Animated.subtract(1, animatedProgress), [animatedProgress]);
   const animatedGap = React.useMemo(
@@ -43,9 +45,9 @@ export const ProgressBarDeterminate = (props: ProgressBarDeterminateProps) => {
   return (
     <Box>
       <Box style={[styles.determinate, { height: PROGRESS_BAR_HEIGHT }, style]} {...boxProps}>
-        <Animated.View style={[styles.progressed, { flex: animatedProgress }]} />
+        <Animated.View style={[styles.progressed, radiusStyle, { flex: animatedProgress }]} />
         <Animated.View style={{ width: animatedGap }} />
-        <Animated.View style={[styles.remaining, { flex: remaining }]} />
+        <Animated.View style={[styles.remaining, radiusStyle, { flex: remaining }]} />
       </Box>
       {indicator && (
         <Box>

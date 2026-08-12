@@ -11,6 +11,7 @@ export type ProgressBarProps = BoxProps & {
   indicator?: boolean;
   indicatorPrecision?: 0 | 1 | 2 | 3;
   mode?: ProgressBarMode;
+  noRadius?: boolean;
 };
 
 export const ProgressBar = (props: ProgressBarProps) => {
