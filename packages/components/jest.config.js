@@ -7,7 +7,7 @@ module.exports = {
   testMatch: ['**/?(*.)+(spec|test).[tj]s?(x)'],
   setupFilesAfterEnv: [...(expoPreset.setupFilesAfterEnv ?? []), '<rootDir>/__tests__/setup.js'],
   transformIgnorePatterns: [
-    'node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@testing-library/react-native|@tamagui/.*|tamagui|react-native-svg|standard-navigation)',
+    'node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@testing-library/react-native|@tamagui/.*|tamagui|lucide-react-native|react-native-svg|standard-navigation)',
   ],
   testPathIgnorePatterns: [...(expoPreset.testPathIgnorePatterns ?? []), '/dist/', '/build/', '/.expo/', '/coverage/'],
   // eslint-disable-next-line no-undef
@@ -27,6 +27,7 @@ module.exports = {
     '^react$': require.resolve('react'),
     '^react-dom$': require.resolve('react-dom'),
     '^test-renderer$': require.resolve('test-renderer'),
+    '^lucide-react-native$': require.resolve('lucide-react-native'),
     '^expo-modules-core$': require.resolve('expo-modules-core'),
     '^expo-modules-core/(.*)$': path.join(path.dirname(require.resolve('expo-modules-core/package.json')), '$1'),
   },
