@@ -5,9 +5,11 @@ export const useStyles = makeStyles(({ text, color, radius, spacing, shadows }) 
   // Container
   tamaguiToastContainer: {
     padding: 0,
-    width: Platform.OS === 'web' ? 384 : Dimensions.get('window').width - 32,
+    width: Platform.OS === 'web' ? 384 : Dimensions.get('window').width,
     backgroundColor: 'transparent',
     borderRadius: 0,
+    // Sur mobile, overflow:hidden sur container clippe le shadow iOS — on le pose ici
+    ...(Platform.OS !== 'web' ? { borderRadius: radius('sm'), ...shadows(3) } : {}),
   },
   container: {
     backgroundColor: color.light.background['default-grey'],
@@ -19,8 +21,8 @@ export const useStyles = makeStyles(({ text, color, radius, spacing, shadows }) 
     width: '100%',
     maxWidth: 384,
     padding: 0,
-
-    ...shadows(3),
+    // Sur web, overflow:hidden ne clippe pas le shadow — on le pose ici pour avoir le bon borderRadius
+    ...(Platform.OS === 'web' ? shadows(3) : {}),
   },
 
   contenu: {
