@@ -5,6 +5,8 @@ export const useStyles = makeStyles(({ spacing, spacingValue, color, text }) => 
     display: 'flex',
     flexDirection: 'column',
     gap: spacing('3W'),
+    paddingTop: spacing('3V'),
+    paddingBottom: spacing('3V'),
   },
   partContainer: {
     display: 'flex',
@@ -16,7 +18,7 @@ export const useStyles = makeStyles(({ spacing, spacingValue, color, text }) => 
   partTitle: {
     paddingLeft: spacing('2W'),
     paddingRight: spacing('2W'),
-    ...text['Corps de texte'].XS.Bold,
+    ...text['Corps de texte'].SM.Medium,
     color: color.light.text['mention-grey'],
   },
   filtersHorizontalScroll: {
