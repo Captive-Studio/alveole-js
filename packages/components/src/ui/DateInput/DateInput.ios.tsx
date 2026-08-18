@@ -96,7 +96,7 @@ export const DateInput = React.forwardRef<any, DateInputProps>(function DateInpu
 
       <FormControl>
         <InputHeading>
-          {label && (
+          {!!label && (
             <FormControlLabel
               labelRight={labelRight}
               label={label}
@@ -105,7 +105,7 @@ export const DateInput = React.forwardRef<any, DateInputProps>(function DateInpu
               success={success}
             />
           )}
-          {hint && <FormControlHint hint={hint} disabled={disabled} />}
+          {!!hint && <FormControlHint hint={hint} disabled={disabled} />}
         </InputHeading>
 
         <TextInput

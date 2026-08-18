@@ -145,10 +145,10 @@ export const Autocomplete = React.forwardRef<any, AutocompleteProps>(function Se
   return (
     <FormControl style={styles.select}>
       <InputHeading>
-        {label && (
+        {!!label && (
           <FormControlLabel labelRight={labelRight} label={label} disabled={disabled} error={error} success={success} />
         )}
-        {hint && <FormControlHint hint={hint} disabled={disabled} />}
+        {!!hint && <FormControlHint hint={hint} disabled={disabled} />}
       </InputHeading>
 
       <Box tag="form-control-select-input" style={styles.inputContainer}>

@@ -36,10 +36,10 @@ export const TextField = React.forwardRef<TextInputElement, TextFieldProps>(func
   return (
     <FormControl style={styles.textField}>
       <InputHeading>
-        {label && (
+        {!!label && (
           <FormControlLabel labelRight={labelRight} label={label} disabled={disabled} error={error} success={success} />
         )}
-        {hint && <FormControlHint hint={hint} disabled={disabled} />}
+        {!!hint && <FormControlHint hint={hint} disabled={disabled} />}
       </InputHeading>
 
       <TextInput

@@ -49,10 +49,10 @@ export const Select = React.forwardRef<Picker<string | number | object>, SelectP
   return (
     <FormControl style={styles.pickerContainer}>
       <InputHeading>
-        {label && (
+        {!!label && (
           <FormControlLabel labelRight={labelRight} label={label} disabled={disabled} error={error} success={success} />
         )}
-        {hint && <FormControlHint hint={hint} disabled={disabled} />}
+        {!!hint && <FormControlHint hint={hint} disabled={disabled} />}
       </InputHeading>
 
       <Box tag="form-control-text-input" style={styles.inputContainer}>

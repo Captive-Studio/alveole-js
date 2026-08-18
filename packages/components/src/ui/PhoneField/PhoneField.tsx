@@ -26,10 +26,10 @@ export const PhoneField = React.forwardRef<TextInputElement, PhoneFieldProps>(fu
   return (
     <FormControl>
       <InputHeading>
-        {label && (
+        {!!label && (
           <FormControlLabel labelRight={labelRight} label={label} disabled={disabled} error={error} success={success} />
         )}
-        {hint && <FormControlHint hint={hint} disabled={disabled} />}
+        {!!hint && <FormControlHint hint={hint} disabled={disabled} />}
       </InputHeading>
 
       <PhoneInput ref={ref} onChangeText={onChange} {...props} />

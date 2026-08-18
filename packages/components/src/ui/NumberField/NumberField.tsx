@@ -39,10 +39,10 @@ export const NumberField = React.forwardRef<TextInputElement, NumberFieldProps>(
   return (
     <FormControl style={styles.textInput}>
       <InputHeading>
-        {label && (
+        {!!label && (
           <FormControlLabel labelRight={labelRight} label={label} disabled={disabled} error={error} success={success} />
         )}
-        {hint && <FormControlHint hint={hint} disabled={disabled} />}
+        {!!hint && <FormControlHint hint={hint} disabled={disabled} />}
       </InputHeading>
 
       <TextInput

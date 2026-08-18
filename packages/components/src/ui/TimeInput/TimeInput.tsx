@@ -57,10 +57,10 @@ export const TimeInput = React.forwardRef<any, TimeInputProps>(function TimeInpu
   return (
     <FormControl>
       <InputHeading>
-        {label && (
+        {!!label && (
           <FormControlLabel labelRight={labelRight} label={label} disabled={disabled} error={error} success={success} />
         )}
-        {hint && <FormControlHint hint={hint} disabled={disabled} />}
+        {!!hint && <FormControlHint hint={hint} disabled={disabled} />}
       </InputHeading>
 
       <TextInput

@@ -28,8 +28,8 @@ export const FormControlLabel = (props: FormControlLabelProps) => {
       >
         {label}
       </Typography>
-      {optional && <Typography style={styles.optionalText}>{optionalText}</Typography>}
-      {label && (
+      {!!optional && <Typography style={styles.optionalText}>{optionalText}</Typography>}
+      {!!label && (
         <Box mt={'auto'} mb={'auto'} ml={'auto'}>
           {labelRight}
         </Box>
