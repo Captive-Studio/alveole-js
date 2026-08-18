@@ -64,6 +64,7 @@ export const Autocomplete = React.forwardRef<any, AutocompleteProps>(function Se
       ...s,
       ...styles.control,
       ...(p.isDisabled ? styles.controlDisabled : {}),
+      ':hover': { borderColor: styles.control.borderColor },
     }),
     multiValue: (s, p) => ({
       ...s,
