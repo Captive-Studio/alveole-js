@@ -5,10 +5,11 @@ import {
   FormControlHint,
   FormControlLabel,
   InputHeading,
+  LucideIcon,
 } from '@alveole/components';
 import { useTheme } from '@alveole/theme';
 import React, { useEffect, useMemo, useState } from 'react';
-import ReactSelect, { GroupBase, StylesConfig } from 'react-select';
+import ReactSelect, { components, GroupBase, StylesConfig } from 'react-select';
 import { AutocompleteOption, AutocompleteProps } from './Autocomplete';
 import { useStyles } from './Autocomplete.styles';
 
@@ -105,6 +106,16 @@ export const Autocomplete = React.forwardRef<any, AutocompleteProps>(function Se
     }),
   };
 
+  const DropdownIndicator = (props: any) => (
+    <components.DropdownIndicator {...props}>
+      <LucideIcon
+        name="ChevronDown"
+        size="sm"
+        color={props.isDisabled ? color.light.text['disabled-grey'] : color.light.text['default-grey']}
+      />
+    </components.DropdownIndicator>
+  );
+
   const clearValues = () => {
     setSelectedOptions([]);
     onChange?.([]);
@@ -163,6 +174,7 @@ export const Autocomplete = React.forwardRef<any, AutocompleteProps>(function Se
               return clearValues();
             }}
             isDisabled={disabled}
+            components={{ DropdownIndicator }}
           />
         </Box>
       </Box>

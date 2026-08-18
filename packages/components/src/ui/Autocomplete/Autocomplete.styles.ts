@@ -68,12 +68,9 @@ export const useStyles = makeStyles(({ text, color, spacing, radius }) => ({
     display: 'none',
   },
   dropdownIndicator: {
-    color: color.light.text['default-grey'],
     padding: spacing('025'),
   },
-  dropdownIndicatorDisabled: {
-    color: color.light.text['disabled-grey'],
-  },
+  dropdownIndicatorDisabled: {},
   separatorIndicator: {
     color: color.text['default-grey'],
   },
