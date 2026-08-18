@@ -68,11 +68,11 @@ export const useStyles = makeStyles(({ text, color, spacing, radius }) => ({
     display: 'none',
   },
   dropdownIndicator: {
-    color: color.text['default-grey'],
+    color: color.light.text['default-grey'],
     padding: spacing('025'),
   },
   dropdownIndicatorDisabled: {
-    display: 'none',
+    color: color.light.text['disabled-grey'],
   },
   separatorIndicator: {
     color: color.text['default-grey'],
@@ -132,6 +132,7 @@ export const useStyles = makeStyles(({ text, color, spacing, radius }) => ({
     position: 'absolute',
     right: spacing('100'),
     top: '50%',
+    color: color.light.text['default-grey'],
   },
   modalOverlay: {
     flex: 1,
