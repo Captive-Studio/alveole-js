@@ -19,7 +19,7 @@ type PDFDocumentProxyLike = {
 
 type PdfJsModule = {
   GlobalWorkerOptions: { workerSrc: string };
-  getDocument: (source: string) => {
+  getDocument: (source: string | { url: string }) => {
     promise: Promise<PDFDocumentProxyLike>;
     destroy: () => void;
   };
@@ -79,17 +79,31 @@ const loadPdfJs = (() => {
 })();
 
 export const DocumentViewerPDF = (props: DocumentViewerPDFProps) => {
-  const { source, page, rotation, height = '100%', scale = 1, onReady, errorLabel = 'Le PDF ne peut pas être affiché' } = props;
+  const {
+    source,
+    page,
+    rotation,
+    height = '100%',
+    scale = 1,
+    onReady,
+    errorLabel = 'Le PDF ne peut pas être affiché',
+  } = props;
 
   const styles = useStyles();
 
   const [pdf, setPdf] = React.useState<PDFDocumentProxyLike | null>(null);
   const [hasError, setHasError] = React.useState(false);
+  const [prevSource, setPrevSource] = React.useState(source);
+  if (prevSource !== source) {
+    setPrevSource(source);
+    setHasError(false);
+  }
   const [viewerSize, setViewerSize] = React.useState({ width: 0, height: 0 });
   const [isHovered, setIsHovered] = React.useState(false);
   const [transformOrigin, setTransformOrigin] = React.useState('50% 50%');
   const [renderedPageSize, setRenderedPageSize] = React.useState({ width: 0, height: 0 });
   const canvasRef = React.useRef<HTMLCanvasElement | null>(null);
+  const measureRef = React.useRef<HTMLDivElement | null>(null);
   const onReadyRef = React.useRef(onReady);
   const hoveredScale = isHovered ? 2 : 1;
 
@@ -143,9 +157,30 @@ export const DocumentViewerPDF = (props: DocumentViewerPDFProps) => {
     [rotation, scale, viewerSize.height, viewerSize.width],
   );
 
+  // ResizeObserver pour mesurer le conteneur — onLayout React Native for Web
+  // ne fonctionne pas avec les custom HTML tags (tag="document-viewer-pdf").
   React.useEffect(() => {
-    setHasError(false);
-  }, [source]);
+    const el = measureRef.current;
+    if (!el) return;
+
+    const update = (width: number, height: number) => {
+      if (width > 0 && height > 0) {
+        setViewerSize({ width, height });
+      }
+    };
+
+    const observer = new ResizeObserver(entries => {
+      const entry = entries[0];
+      if (entry) update(entry.contentRect.width, entry.contentRect.height);
+    });
+
+    observer.observe(el);
+
+    const rect = el.getBoundingClientRect();
+    update(rect.width, rect.height);
+
+    return () => observer.disconnect();
+  }, []);
 
   React.useEffect(() => {
     let isActive = true;
@@ -155,7 +190,7 @@ export const DocumentViewerPDF = (props: DocumentViewerPDFProps) => {
       .then(pdfjs => {
         if (!isActive) return;
 
-        loadingTask = pdfjs.getDocument(source);
+        loadingTask = pdfjs.getDocument({ url: source });
 
         return loadingTask.promise
           .then(nextPdf => onPdfLoadedSuccess(nextPdf, isActive))
@@ -201,14 +236,6 @@ export const DocumentViewerPDF = (props: DocumentViewerPDFProps) => {
     };
   }, [pdf, page, rotation, scale, viewerSize, onPageLoadedSuccess, onPdfLoadedError]);
 
-  const handleLayout = React.useCallback((event: any) => {
-    const nextWidth = event?.nativeEvent?.layout?.width;
-    const nextHeight = event?.nativeEvent?.layout?.height;
-    if (typeof nextWidth === 'number' && nextWidth > 0 && typeof nextHeight === 'number' && nextHeight > 0) {
-      setViewerSize({ width: nextWidth, height: nextHeight });
-    }
-  }, []);
-
   const handlePointerMove = React.useCallback((event: any) => {
     const rect = event.currentTarget?.getBoundingClientRect?.();
     if (!rect) return;
@@ -225,14 +252,14 @@ export const DocumentViewerPDF = (props: DocumentViewerPDFProps) => {
       tag="document-viewer-pdf"
       width={'100%'}
       height={height}
-      onLayout={handleLayout}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onPointerEnter={() => setIsHovered(true)}
       onPointerLeave={() => setIsHovered(false)}
       onPointerMove={handlePointerMove}
-      style={styles.viewerPdfContent}
+      style={[styles.viewerPdfContent, { position: 'relative' }]}
     >
+      <div ref={measureRef} style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }} />
       <Box width={'100%'} height={'100%'} p={'1V'} style={styles.viewerPdfStage}>
         <Box
           style={[
