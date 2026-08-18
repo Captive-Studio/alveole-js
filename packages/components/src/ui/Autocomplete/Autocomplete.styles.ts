@@ -71,12 +71,7 @@ export const useStyles = makeStyles(({ text, color, spacing, radius }) => ({
     padding: spacing('025'),
   },
   dropdownIndicatorDisabled: {},
-  separatorIndicator: {
-    color: color.text['default-grey'],
-  },
-  indicatorSeparatorDisabled: {
-    display: 'none',
-  },
+
   clearIndicator: {
     color: color.text['default-grey'],
     padding: spacing('025'),
