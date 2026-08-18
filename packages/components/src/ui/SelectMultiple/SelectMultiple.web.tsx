@@ -47,6 +47,12 @@ export const SelectMultiple = React.forwardRef<any, SelectMultipleProps>(functio
     clearIndicator: s => ({ ...s, ...styles.clearIndicator }),
   };
 
+  const MultiValueRemove = (props: any) => (
+    <components.MultiValueRemove {...props}>
+      <LucideIcon name="X" size="xs" color={color.light.text['default-grey']} />
+    </components.MultiValueRemove>
+  );
+
   const DropdownIndicator = (props: any) => (
     <components.DropdownIndicator {...props}>
       <LucideIcon
@@ -89,7 +95,7 @@ export const SelectMultiple = React.forwardRef<any, SelectMultipleProps>(functio
               }
             }}
             isDisabled={disabled}
-            components={{ DropdownIndicator }}
+            components={{ DropdownIndicator, MultiValueRemove }}
           />
         </Box>
       </Box>

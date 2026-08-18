@@ -106,6 +106,12 @@ export const Autocomplete = React.forwardRef<any, AutocompleteProps>(function Se
     }),
   };
 
+  const MultiValueRemove = (props: any) => (
+    <components.MultiValueRemove {...props}>
+      <LucideIcon name="X" size="xs" color={color.light.text['default-grey']} />
+    </components.MultiValueRemove>
+  );
+
   const DropdownIndicator = (props: any) => (
     <components.DropdownIndicator {...props}>
       <LucideIcon
@@ -174,7 +180,7 @@ export const Autocomplete = React.forwardRef<any, AutocompleteProps>(function Se
               return clearValues();
             }}
             isDisabled={disabled}
-            components={{ DropdownIndicator }}
+            components={{ DropdownIndicator, MultiValueRemove }}
           />
         </Box>
       </Box>
