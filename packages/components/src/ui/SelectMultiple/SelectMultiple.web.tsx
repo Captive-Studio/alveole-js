@@ -5,9 +5,11 @@ import {
   FormControlHint,
   FormControlLabel,
   InputHeading,
+  LucideIcon,
 } from '@alveole/components';
+import { useTheme } from '@alveole/theme';
 import React from 'react';
-import ReactSelect, { StylesConfig } from 'react-select';
+import ReactSelect, { components, StylesConfig } from 'react-select';
 import type { SelectMultipleOption, SelectMultipleProps } from './SelectMultiple';
 import { useStyles } from './SelectMultiple.styles';
 
@@ -15,17 +17,21 @@ export const SelectMultiple = React.forwardRef<any, SelectMultipleProps>(functio
   const { value, label, labelRight, hint, error, success, placeholder = '', disabled, options, onChange } = props;
 
   const styles = useStyles();
+  const { color } = useTheme();
 
   const selectStyles: StylesConfig<SelectMultipleOption, true> = {
     control: (s, p) => ({
       ...s,
       ...styles.control,
       ...(p.isDisabled ? styles.controlDisabled : {}),
+      ':hover': { borderColor: styles.control.borderColor },
     }),
     valueContainer: s => ({
       ...s,
       ...styles.valueContainer,
+      padding: '0 8px',
     }),
+    placeholder: s => ({ ...s, color: color.light.text['mention-grey'] }),
     multiValue: (s, p) => ({
       ...s,
       ...styles.multiValue,
@@ -36,17 +42,20 @@ export const SelectMultiple = React.forwardRef<any, SelectMultipleProps>(functio
       ':hover': styles.multiValueRemoveHover,
       ...(p.isDisabled ? styles.multiValueRemoveDisabled : {}),
     }),
-    dropdownIndicator: (s, p) => ({
-      ...s,
-      ...styles.dropdownIndicator,
-      ...(p.isDisabled ? styles.dropdownIndicatorDisabled : {}),
-    }),
-    indicatorSeparator: (s, p) => ({
-      ...s,
-      ...(p.isDisabled ? styles.indicatorSeparatorDisabled : {}),
-    }),
+    dropdownIndicator: s => ({ ...s, ...styles.dropdownIndicator }),
+    indicatorSeparator: () => ({ display: 'none' }),
     clearIndicator: s => ({ ...s, ...styles.clearIndicator }),
   };
+
+  const DropdownIndicator = (props: any) => (
+    <components.DropdownIndicator {...props}>
+      <LucideIcon
+        name="ChevronDown"
+        size="sm"
+        color={props.isDisabled ? color.light.text['disabled-grey'] : color.light.text['default-grey']}
+      />
+    </components.DropdownIndicator>
+  );
 
   const displayValue = React.useMemo(
     () => options?.filter(option => Array.isArray(value) && value.some(v => `${v}` === `${option.value}`)),
@@ -80,6 +89,7 @@ export const SelectMultiple = React.forwardRef<any, SelectMultipleProps>(functio
               }
             }}
             isDisabled={disabled}
+            components={{ DropdownIndicator }}
           />
         </Box>
       </Box>
