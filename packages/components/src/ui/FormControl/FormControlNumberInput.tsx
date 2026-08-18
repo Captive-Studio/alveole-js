@@ -24,9 +24,9 @@ export const FormControlNumberInput = React.forwardRef<FormControlNumberInputEle
     const styles = useStyles();
 
     return (
-      <Box tag="form-control-text-input" style={styles.inputContainer}>
+      <Box tag="form-control-number-input" style={styles.inputContainer}>
         <Box
-          tag="form-control-text-input-inner"
+          tag="form-control-number-input-inner"
           style={{
             ...styles.inputInner,
             ...(props.disabled ? styles.inputDisabled : {}),

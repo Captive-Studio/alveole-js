@@ -42,9 +42,9 @@ export const FormControlDateInput = React.forwardRef<FormControlDateInputElement
     }, [type, value]);
 
     return (
-      <Box tag="form-control-text-input" style={styles.inputContainer}>
+      <Box tag="form-control-date-input" style={styles.inputContainer}>
         <Box
-          tag="form-control-text-input-inner"
+          tag="form-control-date-input-inner"
           style={{
             ...styles.inputInner,
             ...(props.disabled ? styles.inputDisabled : {}),
