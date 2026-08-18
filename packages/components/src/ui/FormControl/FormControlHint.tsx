@@ -12,7 +12,7 @@ export const FormControlHint = (props: FormControlHintProps) => {
   const styles = useStyles();
 
   return (
-    <Box style={styles.hintContainer}>
+    <Box tag="form-control-hint" style={styles.hintContainer}>
       <Typography style={{ ...styles.hint, ...(disabled ? styles.hintDisabled : {}) }}>{hint}</Typography>
     </Box>
   );

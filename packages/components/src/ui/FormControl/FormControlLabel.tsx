@@ -17,7 +17,7 @@ export const FormControlLabel = (props: FormControlLabelProps) => {
   const styles = useStyles();
 
   return (
-    <Box style={styles.labelContainer}>
+    <Box tag="form-control-label" style={styles.labelContainer}>
       <Typography
         style={{
           ...styles.label,
