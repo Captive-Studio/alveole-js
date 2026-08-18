@@ -55,12 +55,6 @@ export const useStyles = makeStyles(({ color, spacing }) => ({
   dropdownIndicator: {
     padding: spacing('025'),
   },
-  dropdownIndicatorDisabled: {
-    display: 'none',
-  },
-  indicatorSeparatorDisabled: {
-    display: 'none',
-  },
   clearIndicator: {
     padding: spacing('025'),
   },
