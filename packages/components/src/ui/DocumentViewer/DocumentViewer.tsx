@@ -15,10 +15,11 @@ export type DocumentViewerProps = BoxProps & {
   source: string;
   height?: BoxProps['height'];
   ChildrenProps?: Omit<BoxProps, 'children'>;
+  pdfErrorLabel?: string;
 };
 
 export const DocumentViewer = (props: DocumentViewerProps) => {
-  const { children, title, source, type, height = '100%', ChildrenProps, ...boxProps } = props;
+  const { children, title, source, type, height = '100%', ChildrenProps, pdfErrorLabel, ...boxProps } = props;
 
   const styles = useStyles();
 
@@ -87,6 +88,7 @@ export const DocumentViewer = (props: DocumentViewerProps) => {
                 rotation={rotation}
                 height={height}
                 onReady={handlePdfReady}
+                errorLabel={pdfErrorLabel}
               />
             )}
           </Box>

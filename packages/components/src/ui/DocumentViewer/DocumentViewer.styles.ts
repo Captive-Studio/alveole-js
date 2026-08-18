@@ -134,4 +134,10 @@ export const useStyles = makeStyles(({ text, color, spacing, radius, isVariant }
     justifyContent: 'center',
     backgroundColor: color.light.background['default-grey'],
   },
+  viewerPdfErrorLabel: {
+    ...text['Corps de texte'].SM.Regular,
+    color: color.light.text['default-error'],
+    userSelect: 'none',
+    textAlign: 'center',
+  },
 }));

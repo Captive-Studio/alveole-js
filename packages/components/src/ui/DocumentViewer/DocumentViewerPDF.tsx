@@ -1,4 +1,4 @@
-import { Box, BoxProps } from '@alveole/components';
+import { Box, BoxProps, Typography } from '@alveole/components';
 import type { PDFDocumentProxy } from 'pdfjs-dist';
 import * as pdfjs from 'pdfjs-dist';
 import 'pdfjs-dist/legacy/build/pdf.worker.min.mjs';
@@ -14,24 +14,26 @@ export type DocumentViewerPDFProps = {
   rotation: DocumentViewerRotation;
   scale?: number;
   onReady?: (state: PDFDocumentProxy) => void;
+  errorLabel?: string;
 };
 
 const isPdfCancellationError = (error: unknown) => {
   if (!(error instanceof Error)) return false;
 
   return (
-    ['RenderingCancelledException', 'AbortException', 'UnknownErrorException'].includes(error.name) ||
+    ['RenderingCancelledException', 'AbortException'].includes(error.name) ||
     error.message.includes('Worker was terminated') ||
     error.message.includes("Cannot read properties of null (reading 'sendWithPromise')")
   );
 };
 
 export const DocumentViewerPDF = (props: DocumentViewerPDFProps) => {
-  const { source, page, rotation, height = '100%', scale = 1, onReady } = props;
+  const { source, page, rotation, height = '100%', scale = 1, onReady, errorLabel = 'Le PDF ne peut pas être affiché' } = props;
 
   const styles = useStyles();
 
   const [pdf, setPdf] = React.useState<PDFDocumentProxy | null>(null);
+  const [hasError, setHasError] = React.useState(false);
   const [viewerSize, setViewerSize] = React.useState({ width: 0, height: 0 });
   const [isHovered, setIsHovered] = React.useState(false);
   const [transformOrigin, setTransformOrigin] = React.useState('50% 50%');
@@ -53,6 +55,7 @@ export const DocumentViewerPDF = (props: DocumentViewerPDFProps) => {
   const onPdfLoadedError = (active: boolean) => {
     if (!active) return;
     setPdf(null);
+    setHasError(true);
   };
 
   const onPageLoadedSuccess = React.useCallback(
@@ -86,6 +89,10 @@ export const DocumentViewerPDF = (props: DocumentViewerPDFProps) => {
     },
     [rotation, scale, viewerSize.height, viewerSize.width],
   );
+
+  React.useEffect(() => {
+    setHasError(false);
+  }, [source]);
 
   React.useEffect(() => {
     let isActive = true;
@@ -174,6 +181,11 @@ export const DocumentViewerPDF = (props: DocumentViewerPDFProps) => {
             ]}
           >
             <canvas ref={canvasRef} style={styles.viewerPdfCanvas} />
+          </Box>
+        )}
+        {hasError && (
+          <Box style={styles.viewerPdfOverlay}>
+            <Typography style={styles.viewerPdfErrorLabel}>{errorLabel}</Typography>
           </Box>
         )}
       </Box>

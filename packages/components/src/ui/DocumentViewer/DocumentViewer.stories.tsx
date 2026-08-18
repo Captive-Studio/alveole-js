@@ -23,7 +23,18 @@ export const DocumentPdf = () => (
     <DocumentViewer
       title="Document PDF"
       type="pdf"
-      source="https://ontheline.trincoll.edu/images/bookdown/sample-local-pdf.pdf"
+      source="https://upload.wikimedia.org/wikipedia/commons/4/4e/Wikip%C3%A9dia.pdf"
+      height="100%"
+    />
+  </Box>
+);
+
+export const DocumentPdfError = () => (
+  <Box height={400} maxW={500}>
+    <DocumentViewer
+      title="Document PDF en erreur"
+      type="pdf"
+      source="https://example.com/document-inexistant.pdf"
       height="100%"
     />
   </Box>
@@ -34,7 +45,7 @@ export const WithChildren = () => (
     <DocumentViewer
       title="Document PDF"
       type="pdf"
-      source="https://ontheline.trincoll.edu/images/bookdown/sample-local-pdf.pdf"
+      source="https://upload.wikimedia.org/wikipedia/commons/4/4e/Wikip%C3%A9dia.pdf"
       height="100%"
     >
       <Box p={'2W'} minW={600}>

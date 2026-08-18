@@ -9,6 +9,7 @@ export type DocumentViewerPDFProps = {
   rotation: DocumentViewerRotation;
   scale?: number;
   onReady?: (_state: { numPages: number }) => void;
+  errorLabel?: string;
 };
 
 export const DocumentViewerPDF = (props: DocumentViewerPDFProps) => {
