@@ -89,7 +89,10 @@ export const Autocomplete = React.forwardRef<any, AutocompleteProps>(function Se
     indicatorSeparator: () => ({ display: 'none' }),
     placeholder: s => ({ ...s, color: color.light.text['mention-grey'] }),
     clearIndicator: s => ({ ...s, ...styles.clearIndicator }),
-    valueContainer: s => ({ ...s }),
+    valueContainer: s => ({
+      ...s,
+      ...(isMulti !== false ? { padding: '0 8px' } : {}),
+    }),
     group: s => ({ ...s, paddingTop: 0, paddingBottom: 0 }),
     groupHeading: () => ({
       backgroundColor: color.light.background['disabled-grey'],
