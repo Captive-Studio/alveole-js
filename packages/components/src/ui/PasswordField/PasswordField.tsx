@@ -30,10 +30,10 @@ export const PasswordField = React.forwardRef<TextInputElement, PasswordFieldPro
 
   return (
     <FormControl style={styles.passwordInput}>
-      {label && (
+      {!!label && (
         <FormControlLabel label={label} labelRight={labelRight} disabled={disabled} error={error} success={success} />
       )}
-      {hint && <FormControlHint hint={hint} disabled={disabled} />}
+      {!!hint && <FormControlHint hint={hint} disabled={disabled} />}
 
       <TextInput
         ref={ref}

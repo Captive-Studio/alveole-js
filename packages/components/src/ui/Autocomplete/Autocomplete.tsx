@@ -230,10 +230,10 @@ export const Autocomplete = (props: AutocompleteProps) => {
   return (
     <FormControl>
       <InputHeading>
-        {label && (
+        {!!label && (
           <FormControlLabel labelRight={labelRight} label={label} disabled={disabled} error={error} success={success} />
         )}
-        {hint && <FormControlHint hint={hint} disabled={disabled} />}
+        {!!hint && <FormControlHint hint={hint} disabled={disabled} />}
       </InputHeading>
 
       <Pressable onPress={onPressInput} disabled={disabled} style={styles.input}>

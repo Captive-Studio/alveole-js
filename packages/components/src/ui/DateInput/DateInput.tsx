@@ -128,7 +128,7 @@ export const DateInput = React.forwardRef<any, DateInputProps>(function DateInpu
     <Box tag="date-input" onPress={handleOpen}>
       <FormControl>
         <InputHeading>
-          {label && (
+          {!!label && (
             <FormControlLabel
               labelRight={labelRight}
               label={label}
@@ -137,7 +137,7 @@ export const DateInput = React.forwardRef<any, DateInputProps>(function DateInpu
               success={success}
             />
           )}
-          {hint && <FormControlHint hint={hint} disabled={disabled} />}
+          {!!hint && <FormControlHint hint={hint} disabled={disabled} />}
         </InputHeading>
 
         <TextInput
@@ -151,7 +151,7 @@ export const DateInput = React.forwardRef<any, DateInputProps>(function DateInpu
           inputMode="none"
         />
 
-        {showPicker && (
+        {!!showPicker && (
           <DateTimePicker
             value={selectedDate}
             mode={mode}

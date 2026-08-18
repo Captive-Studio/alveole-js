@@ -45,7 +45,7 @@ export const RadioGroup = React.forwardRef<RadioGroupElement, RadioGroupProps>(f
     <RadioGroupContext.Provider value={{ value, onChange }}>
       <Box tag="radio-group" style={styles.container}>
         <Box tag="radio-group-heading">
-          {label && (
+          {!!label && (
             <FormControlLabel
               labelRight={labelRight}
               label={label}
@@ -54,7 +54,7 @@ export const RadioGroup = React.forwardRef<RadioGroupElement, RadioGroupProps>(f
               success={success}
             />
           )}
-          {hint && <FormControlHint hint={hint} disabled={disabled} />}
+          {!!hint && <FormControlHint hint={hint} disabled={disabled} />}
         </Box>
 
         <Box width={'100%'}>

@@ -19,10 +19,10 @@ export const TimeInput = React.forwardRef<FormControlDateInputElement, TimeInput
   return (
     <FormControl style={styles.timeInput}>
       <InputHeading>
-        {label && (
+        {!!label && (
           <FormControlLabel labelRight={labelRight} label={label} disabled={disabled} error={error} success={success} />
         )}
-        {hint && <FormControlHint hint={hint} disabled={disabled} />}
+        {!!hint && <FormControlHint hint={hint} disabled={disabled} />}
       </InputHeading>
 
       <FormControlDateInput ref={ref} {...props} type="time" />

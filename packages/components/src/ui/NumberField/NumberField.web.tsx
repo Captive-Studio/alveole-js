@@ -21,7 +21,7 @@ export const NumberField = React.forwardRef<FormControlNumberInputElement, Numbe
     return (
       <FormControl style={styles.textInput}>
         <InputHeading>
-          {label && (
+          {!!label && (
             <FormControlLabel
               labelRight={labelRight}
               label={label}
@@ -30,7 +30,7 @@ export const NumberField = React.forwardRef<FormControlNumberInputElement, Numbe
               success={success}
             />
           )}
-          {hint && <FormControlHint hint={hint} disabled={disabled} />}
+          {!!hint && <FormControlHint hint={hint} disabled={disabled} />}
         </InputHeading>
 
         <FormControlNumberInput

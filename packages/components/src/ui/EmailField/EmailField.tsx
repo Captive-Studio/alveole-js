@@ -26,10 +26,10 @@ export const EmailField = React.forwardRef<TextInputElement, EmailFieldProps>(fu
   return (
     <FormControl>
       <InputHeading>
-        {label && (
+        {!!label && (
           <FormControlLabel labelRight={labelRight} label={label} disabled={disabled} error={error} success={success} />
         )}
-        {hint && <FormControlHint hint={hint} disabled={disabled} />}
+        {!!hint && <FormControlHint hint={hint} disabled={disabled} />}
       </InputHeading>
 
       <EmailInput ref={ref} onChangeText={onChange} {...props} />

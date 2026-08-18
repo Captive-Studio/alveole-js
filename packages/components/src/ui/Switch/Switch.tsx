@@ -74,7 +74,7 @@ export const Switch = React.forwardRef<SwitchElement, SwitchProps>(function Swit
         <Box tag="switch" style={styles.switch}>
           {Toggle}
 
-          {label && (
+          {!!label && (
             <Typography htmlFor={id} style={switchLabelStyles}>
               {label}
             </Typography>

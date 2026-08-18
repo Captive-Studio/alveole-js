@@ -19,8 +19,8 @@ export const DateInput = React.forwardRef<FormControlDateInputElement, DateInput
   return (
     <FormControl style={styles.dateInput}>
       <InputHeading>
-        {label && <FormControlLabel label={label} disabled={disabled} error={error} success={success} />}
-        {hint && <FormControlHint hint={hint} disabled={disabled} />}
+        {!!label && <FormControlLabel label={label} disabled={disabled} error={error} success={success} />}
+        {!!hint && <FormControlHint hint={hint} disabled={disabled} />}
       </InputHeading>
 
       <FormControlDateInput ref={ref} {...props} />

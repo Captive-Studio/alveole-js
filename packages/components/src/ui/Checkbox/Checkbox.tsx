@@ -25,7 +25,7 @@ export const Checkbox = React.forwardRef<CheckboxElement, CheckboxProps>(functio
           <CheckboxIndicator {...baseProps} indeterminate={props.checked === 'indeterminate'} />
         </CheckboxContainer>
 
-        {label && <CheckboxLabel htmlFor={id} {...baseProps} />}
+        {!!label && <CheckboxLabel htmlFor={id} {...baseProps} />}
       </Box>
 
       {(error ?? success) && <FormControlCaption error={error} success={success} />}

@@ -49,10 +49,10 @@ export const FileField = (props: FileFieldProps) => {
   return (
     <FormControl style={styles.fileInput}>
       <InputHeading>
-        {label && (
+        {!!label && (
           <FormControlLabel labelRight={labelRight} label={label} disabled={disabled} error={error} success={success} />
         )}
-        {hint && <FormControlHint hint={hint} disabled={disabled} />}
+        {!!hint && <FormControlHint hint={hint} disabled={disabled} />}
       </InputHeading>
 
       <FormControlFileInput {...props} onChange={onValueChange} />
