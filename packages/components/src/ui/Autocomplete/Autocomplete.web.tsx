@@ -87,6 +87,7 @@ export const Autocomplete = React.forwardRef<any, AutocompleteProps>(function Se
       ...(p.isDisabled ? styles.dropdownIndicatorDisabled : {}),
     }),
     indicatorSeparator: () => ({ display: 'none' }),
+    placeholder: s => ({ ...s, color: color.light.text['mention-grey'] }),
     clearIndicator: s => ({ ...s, ...styles.clearIndicator }),
     valueContainer: s => ({ ...s }),
     group: s => ({ ...s, paddingTop: 0, paddingBottom: 0 }),
