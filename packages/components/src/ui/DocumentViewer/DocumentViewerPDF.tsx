@@ -28,12 +28,25 @@ const isPdfCancellationError = (error: unknown) => {
 };
 
 export const DocumentViewerPDF = (props: DocumentViewerPDFProps) => {
-  const { source, page, rotation, height = '100%', scale = 1, onReady, errorLabel = 'Le PDF ne peut pas être affiché' } = props;
+  const {
+    source,
+    page,
+    rotation,
+    height = '100%',
+    scale = 1,
+    onReady,
+    errorLabel = 'Le PDF ne peut pas être affiché',
+  } = props;
 
   const styles = useStyles();
 
   const [pdf, setPdf] = React.useState<PDFDocumentProxy | null>(null);
   const [hasError, setHasError] = React.useState(false);
+  const [prevSource, setPrevSource] = React.useState(source);
+  if (prevSource !== source) {
+    setPrevSource(source);
+    setHasError(false);
+  }
   const [viewerSize, setViewerSize] = React.useState({ width: 0, height: 0 });
   const [isHovered, setIsHovered] = React.useState(false);
   const [transformOrigin, setTransformOrigin] = React.useState('50% 50%');
@@ -89,10 +102,6 @@ export const DocumentViewerPDF = (props: DocumentViewerPDFProps) => {
     },
     [rotation, scale, viewerSize.height, viewerSize.width],
   );
-
-  React.useEffect(() => {
-    setHasError(false);
-  }, [source]);
 
   React.useEffect(() => {
     let isActive = true;
