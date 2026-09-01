@@ -1,16 +1,24 @@
+import { Barlow_300Light } from '@expo-google-fonts/barlow/300Light';
+import { Barlow_400Regular } from '@expo-google-fonts/barlow/400Regular';
+import { Barlow_500Medium } from '@expo-google-fonts/barlow/500Medium';
+import { Barlow_600SemiBold } from '@expo-google-fonts/barlow/600SemiBold';
+import { Inter_300Light } from '@expo-google-fonts/inter/300Light';
+import { Inter_400Regular } from '@expo-google-fonts/inter/400Regular';
+import { Inter_500Medium } from '@expo-google-fonts/inter/500Medium';
+import { Inter_600SemiBold } from '@expo-google-fonts/inter/600SemiBold';
 import { Platform, TextStyle } from 'react-native';
 
 export const FontsMap = {
   // Barlow
-  'Barlow-Light': require('../../assets/fonts/Barlow/Barlow-Light.ttf'),
-  'Barlow-Regular': require('../../assets/fonts/Barlow/Barlow-Regular.ttf'),
-  'Barlow-Medium': require('../../assets/fonts/Barlow/Barlow-Medium.ttf'),
-  'Barlow-Bold': require('../../assets/fonts/Barlow/Barlow-SemiBold.ttf'),
+  'Barlow-Light': Barlow_300Light,
+  'Barlow-Regular': Barlow_400Regular,
+  'Barlow-Medium': Barlow_500Medium,
+  'Barlow-Bold': Barlow_600SemiBold,
   // Inter
-  'Inter-Light': require('../../assets/fonts/Inter/Inter-Light.ttf'),
-  'Inter-Regular': require('../../assets/fonts/Inter/Inter-Regular.ttf'),
-  'Inter-Medium': require('../../assets/fonts/Inter/Inter-Medium.ttf'),
-  'Inter-Bold': require('../../assets/fonts/Inter/Inter-SemiBold.ttf'),
+  'Inter-Light': Inter_300Light,
+  'Inter-Regular': Inter_400Regular,
+  'Inter-Medium': Inter_500Medium,
+  'Inter-Bold': Inter_600SemiBold,
 } as const;
 
 // helpers

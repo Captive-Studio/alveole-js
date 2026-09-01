@@ -76,7 +76,9 @@ const toCSSVarTypography = (node: Record<string, unknown>, path: string[] = []):
 export function useThemeBuilder(params: CustomBuilder): Theme & { isReady: boolean } {
   const { width } = useWindowDimensions();
 
-  const [loadedFonts] = useFonts(FontsMap);
+  // Sur web, les fonts sont chargées via @font-face (generateFontFaceCSS), pas via expo-font,
+  // pour éviter une double source (fichiers locaux vs Google Fonts) et un chargement redondant.
+  const [loadedFonts] = useFonts(Platform.OS === 'web' ? {} : FontsMap);
 
   const variant = useMemo(() => breakpointToVariant(width), [width]);
 

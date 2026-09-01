@@ -1,6 +1,6 @@
 import { Colors, CustomPalette, Spacings } from '../constants';
 import { Elevations } from '../constants/Elevation';
-import { Font, FontWeightMap, FontsMap } from '../constants/Font';
+import { FontWeightMap } from '../constants/Font';
 import { RadiusList } from '../constants/Radius';
 import { CustomTypography } from '../constants/Typography';
 import { Theme } from '../type';
@@ -123,39 +123,6 @@ const collectTypographyLines = (
   Object.entries(obj).forEach(([key, value]) => {
     collectTypographyLines([...path, key], value, fontReverseMap, lines);
   });
-};
-
-export const injectFontFaceCSS = () => {
-  if (typeof document === 'undefined') return;
-
-  const styleId = 'theme-font-faces';
-  if (document.getElementById(styleId)) return;
-
-  const rules = Object.entries(FontsMap)
-    .map(([key, src]) => {
-      const { family, weight } = FontWeightMap[key as Font];
-      return `@font-face {\n  font-family: '${family}';\n  src: url('${src}') format('truetype');\n  font-weight: ${weight};\n  font-style: normal;\n}`;
-    })
-    .join('\n');
-
-  const styleTag = document.createElement('style');
-  styleTag.id = styleId;
-  styleTag.innerHTML = rules;
-  document.head.appendChild(styleTag);
-};
-
-export const injectFontSmoothingCSS = () => {
-  if (typeof document === 'undefined') return;
-
-  const styleId = 'theme-font-smoothing';
-  if (document.getElementById(styleId)) return;
-
-  const styleTag = document.createElement('style');
-  styleTag.id = styleId;
-  styleTag.innerHTML =
-    'body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }';
-
-  document.head.appendChild(styleTag);
 };
 
 export const injectVariableCSS = (theme: Theme) => {
