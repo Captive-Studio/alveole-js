@@ -2,6 +2,7 @@ import { Colors } from './Color';
 
 export const CustomPalette = {
   light: {
+    /** @deprecated Ancienne variable issue du DSFR */
     artwork: {
       'major-primary': Colors['BleuCaptive']['200'],
       'decorative-primary': Colors['BleuCaptive']['950'],
