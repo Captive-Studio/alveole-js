@@ -22,6 +22,14 @@ export const FormControlNumberInput = React.forwardRef<FormControlNumberInputEle
     const { value, onChange, startAdornment, endAdornment, ...inputProps } = props;
 
     const styles = useStyles();
+    const [focus, setFocus] = React.useState(false);
+
+    const handleFocus = () => {
+      if (!props.disabled && !props.readOnly) setFocus(true);
+    };
+    const handleBlur = () => {
+      if (!props.disabled && !props.readOnly) setFocus(false);
+    };
 
     return (
       <Box tag="form-control-number-input" style={styles.inputContainer}>
@@ -30,6 +38,7 @@ export const FormControlNumberInput = React.forwardRef<FormControlNumberInputEle
           style={{
             ...styles.inputInner,
             ...(props.disabled ? styles.inputDisabled : {}),
+            ...(focus ? styles.inputFocused : {}),
             ...(endAdornment ? { paddingRight: 0 } : {}),
             ...(startAdornment ? { paddingLeft: 0 } : {}),
           }}
@@ -51,6 +60,8 @@ export const FormControlNumberInput = React.forwardRef<FormControlNumberInputEle
               ...(endAdornment ? { minWidth: 0 } : {}),
             }}
             {...inputProps}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
           />
 
           {endAdornment}

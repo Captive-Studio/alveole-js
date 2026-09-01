@@ -27,6 +27,14 @@ export const FormControlDateInput = React.forwardRef<FormControlDateInputElement
     const { value, type, onChange, ...inputProps } = props;
 
     const styles = useStyles();
+    const [focus, setFocus] = React.useState(false);
+
+    const handleFocus = () => {
+      if (!props.disabled && !props.readOnly) setFocus(true);
+    };
+    const handleBlur = () => {
+      if (!props.disabled && !props.readOnly) setFocus(false);
+    };
 
     const parsed = React.useMemo(() => {
       if (value == null) return value;
@@ -48,6 +56,7 @@ export const FormControlDateInput = React.forwardRef<FormControlDateInputElement
           style={{
             ...styles.inputInner,
             ...(props.disabled ? styles.inputDisabled : {}),
+            ...(focus ? styles.inputFocused : {}),
           }}
         >
           <input
@@ -62,6 +71,8 @@ export const FormControlDateInput = React.forwardRef<FormControlDateInputElement
             type={type === 'datetime' ? 'datetime-local' : (type ?? 'date')}
             {...inputProps}
             value={parsed}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
           />
         </Box>
       </Box>

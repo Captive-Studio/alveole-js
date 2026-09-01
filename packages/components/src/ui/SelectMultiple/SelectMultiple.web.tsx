@@ -24,6 +24,9 @@ export const SelectMultiple = React.forwardRef<any, SelectMultipleProps>(functio
       ...s,
       ...styles.control,
       ...(p.isDisabled ? styles.controlDisabled : {}),
+      boxShadow: 'none',
+      outline: p.isFocused ? `2px solid ${color.light.system.focus}` : 'none',
+      outlineOffset: 2,
       ':hover': { borderColor: styles.control.borderColor },
     }),
     valueContainer: s => ({
