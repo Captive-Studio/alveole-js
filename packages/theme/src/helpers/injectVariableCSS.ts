@@ -172,13 +172,19 @@ export const injectVariableCSS = (theme: Theme) => {
   document.head.appendChild(styleTag);
 };
 
-export const generateFontFaceCSS = (): string =>
-  Object.entries(FontsMap)
-    .map(([key, src]) => {
-      const { family, weight } = FontWeightMap[key as Font];
-      return `@font-face {\n  font-family: '${family}';\n  src: url('${src}') format('truetype');\n  font-weight: ${weight};\n  font-style: normal;\n}`;
-    })
-    .join('\n');
+export const generateFontFaceCSS = (): string => {
+  const weightsByFamily = new Map<string, Set<string>>();
+  Object.values(FontWeightMap).forEach(({ family, weight }) => {
+    if (!weightsByFamily.has(family)) weightsByFamily.set(family, new Set());
+    weightsByFamily.get(family)?.add(String(weight));
+  });
+
+  const families = Array.from(weightsByFamily.entries())
+    .map(([family, weights]) => `family=${family.replace(/ /g, '+')}:wght@${Array.from(weights).sort().join(';')}`)
+    .join('&');
+
+  return `@import url('https://fonts.googleapis.com/css2?${families}&display=swap');`;
+};
 
 export const generateFontSmoothingCSS = (): string =>
   'body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }';
